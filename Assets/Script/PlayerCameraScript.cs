@@ -8,6 +8,8 @@ public class PlayerCameraScript : MonoBehaviour
     private Transform tf;
     private Transform playerPos;
 
+    private float rot;
+
     [SerializeField] private float cameraDeff;
 
     private void PlayerCameraController()
@@ -17,17 +19,64 @@ public class PlayerCameraScript : MonoBehaviour
     private void Move()
     {
         tf.localRotation=playerPos.localRotation;
+       
 
         Vector3 deff = Vector3.zero;
-        deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y));
-        deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y));
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (rot < 10)
+            {
+                rot+=0.25f;
+            }
+
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            if (rot > -10)
+            {
+                rot-=0.25f;
+            }
+
+        }
+        if(Input.GetKey(KeyCode.RightArrow)&& Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (rot > 0)
+            {
+                rot-=0.25f;
+            }
+            if(rot < 0)
+            {
+                rot += 0.25f;
+            }
+
+        }
+        if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (rot > 0)
+            {
+                rot -= 0.25f;
+            }
+            if (rot < 0)
+            {
+                rot += 0.25f;
+            }
+
+        }
+
+
+        deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y + rot));
+        deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y + rot));
 
         deff.x = deff.x * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
         deff.z = deff.z * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x ));
 
-        deff.y = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.x ))*-1;
+        deff.y = (cameraDeff+5) * (float)Math.Sin(ToRadian(playerPos.eulerAngles.x ))*-1;
 
-        tf.localPosition=new Vector3(playerPos.localPosition.x-deff.x,playerPos.localPosition.y-deff.y,playerPos.localPosition.z-deff.z);
+
+        tf.localPosition = new Vector3(playerPos.localPosition.x - deff.x, playerPos.localPosition.y - deff.y + 3, playerPos.localPosition.z - deff.z);
+
+       
     }
     public double ToRadian(double angle)
     {
