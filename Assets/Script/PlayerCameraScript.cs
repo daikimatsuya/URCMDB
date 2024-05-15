@@ -7,6 +7,9 @@ public class PlayerCameraScript : MonoBehaviour
 {
     private Transform tf;
     private Transform playerPos;
+    private PlayerScript ps;
+    private GameObject player;
+    
 
     private float rot;
 
@@ -25,49 +28,53 @@ public class PlayerCameraScript : MonoBehaviour
 
             Vector3 deff = Vector3.zero;
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (ps.GetControll())
             {
-                if (rot < 10)
+                if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    rot += 0.25f;
+                    if (rot < 10)
+                    {
+                        rot += 0.25f;
+                    }
+
+                }
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    if (rot > -10)
+                    {
+                        rot -= 0.25f;
+                    }
+
+                }
+                if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
+                {
+                    if (rot > 0)
+                    {
+                        rot -= 0.25f;
+                    }
+                    if (rot < 0)
+                    {
+                        rot += 0.25f;
+                    }
+
+                }
+                if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
+                {
+                    if (rot > 0)
+                    {
+                        rot -= 0.25f;
+                    }
+                    if (rot < 0)
+                    {
+                        rot += 0.25f;
+                    }
+
                 }
 
             }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                if (rot > -10)
-                {
-                    rot -= 0.25f;
-                }
-
-            }
-            if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
-            {
-                if (rot > 0)
-                {
-                    rot -= 0.25f;
-                }
-                if (rot < 0)
-                {
-                    rot += 0.25f;
-                }
-
-            }
-            if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
-            {
-                if (rot > 0)
-                {
-                    rot -= 0.25f;
-                }
-                if (rot < 0)
-                {
-                    rot += 0.25f;
-                }
-
-            }
-
-            deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y + rot));
-            deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y + rot));
+                deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y + rot));
+                deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y + rot));
+            
 
             deff.x = deff.x * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
             deff.z = deff.z * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
@@ -84,7 +91,10 @@ public class PlayerCameraScript : MonoBehaviour
         {
             if (GameObject.FindWithTag("Player"))
             {
-                playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
+                rot = 0;
+                player = GameObject.FindWithTag("Player");
+                playerPos = player.GetComponent<Transform>();
+                ps = player.GetComponent<PlayerScript>();
             }
         }
     }

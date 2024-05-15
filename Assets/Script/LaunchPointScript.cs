@@ -42,7 +42,11 @@ public class LaunchPointScript : MonoBehaviour
         {
             rowling.x = 0;
         }
-        tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
+        if(rowling.x >= 89)
+        {
+            rowling.x = 89;
+        }
+        tf.localEulerAngles = new Vector3(rowling.x, rowling.y,0);
     }
 
     public void Shoot()

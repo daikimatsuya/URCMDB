@@ -110,7 +110,7 @@ public class PlayerScript : MonoBehaviour
             rowling.x = -lp.GetRowling().x;
             rowling.y = lp.GetRowling().y+180;
           
-            if(Input.GetKeyDown(KeyCode.W))
+            if(Input.GetKeyDown(KeyCode.Space))
             {
                 isFire = true;
                 lp.Shoot();
@@ -122,11 +122,11 @@ public class PlayerScript : MonoBehaviour
     {
         if (isFire)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 burstSpeed = burst + playerSpeed / 3;
             }
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.Space))
             {
                 playerSpeed += accelerate;
             }
@@ -174,6 +174,10 @@ public class PlayerScript : MonoBehaviour
         {     
             isControl =true;
         }
+    }
+    public bool GetControll()
+    {
+        return isControl;
     }
     // Start is called before the first frame update
     void Start()
