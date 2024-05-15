@@ -110,7 +110,7 @@ public class PlayerScript : MonoBehaviour
             rowling.x = -lp.GetRowling().x;
             rowling.y = lp.GetRowling().y+180;
           
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.W))
             {
                 isFire = true;
                 lp.Shoot();

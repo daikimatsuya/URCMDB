@@ -38,6 +38,10 @@ public class LaunchPointScript : MonoBehaviour
             rowling.y += rowlingSpeedX;
         }
 
+        if(rowling.x <= 0)
+        {
+            rowling.x = 0;
+        }
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
     }
 
