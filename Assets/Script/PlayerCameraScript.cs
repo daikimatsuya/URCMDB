@@ -14,69 +14,79 @@ public class PlayerCameraScript : MonoBehaviour
 
     private void PlayerCameraController()
     {
+        SearchPlayer();       
         Move();
     }
     private void Move()
     {
-        tf.localRotation=playerPos.localRotation;
-       
-
-        Vector3 deff = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (playerPos != null)
         {
-            if (rot < 10)
+            tf.localRotation = playerPos.localRotation;
+
+            Vector3 deff = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                rot+=0.25f;
+                if (rot < 10)
+                {
+                    rot += 0.25f;
+                }
+
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                if (rot > -10)
+                {
+                    rot -= 0.25f;
+                }
+
+            }
+            if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
+            {
+                if (rot > 0)
+                {
+                    rot -= 0.25f;
+                }
+                if (rot < 0)
+                {
+                    rot += 0.25f;
+                }
+
+            }
+            if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
+            {
+                if (rot > 0)
+                {
+                    rot -= 0.25f;
+                }
+                if (rot < 0)
+                {
+                    rot += 0.25f;
+                }
+
             }
 
+            deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y + rot));
+            deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y + rot));
+
+            deff.x = deff.x * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
+            deff.z = deff.z * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
+
+            deff.y = (cameraDeff + 5) * (float)Math.Sin(ToRadian(playerPos.eulerAngles.x)) * -1;
+
+
+            tf.localPosition = new Vector3(playerPos.localPosition.x - deff.x, playerPos.localPosition.y - deff.y + 3, playerPos.localPosition.z - deff.z);
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+    }
+    private void SearchPlayer()
+    {
+        if (playerPos == null)
         {
-            if (rot > -10)
+            if (GameObject.FindWithTag("Player"))
             {
-                rot-=0.25f;
+                playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
             }
-
         }
-        if(Input.GetKey(KeyCode.RightArrow)&& Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (rot > 0)
-            {
-                rot-=0.25f;
-            }
-            if(rot < 0)
-            {
-                rot += 0.25f;
-            }
-
-        }
-        if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (rot > 0)
-            {
-                rot -= 0.25f;
-            }
-            if (rot < 0)
-            {
-                rot += 0.25f;
-            }
-
-        }
-
-
-        deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y + rot));
-        deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y + rot));
-
-        deff.x = deff.x * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
-        deff.z = deff.z * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x ));
-
-        deff.y = (cameraDeff+5) * (float)Math.Sin(ToRadian(playerPos.eulerAngles.x ))*-1;
-
-
-        tf.localPosition = new Vector3(playerPos.localPosition.x - deff.x, playerPos.localPosition.y - deff.y + 3, playerPos.localPosition.z - deff.z);
-
-       
     }
     public double ToRadian(double angle)
     {
@@ -86,7 +96,7 @@ public class PlayerCameraScript : MonoBehaviour
     void Start()
     {
         tf=GetComponent<Transform>();
-        playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
+        //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
