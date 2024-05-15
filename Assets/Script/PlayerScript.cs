@@ -9,6 +9,8 @@ public class PlayerScript : MonoBehaviour
     Rigidbody rb;
     Transform tf;
 
+    private LaunchPointScript lp;
+
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject flame;
     [SerializeField] private float speedBuff;
@@ -23,10 +25,15 @@ public class PlayerScript : MonoBehaviour
     private Vector3 playerMove;
     private float burstSpeed;
     private int effectTimer;
-
+    private bool isFire;
+    private bool isControl;
 
     private void PlayerController()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            isControl = true;
+        }
         Booooooomb();
         Operation();
         Acceleration();
@@ -35,80 +42,101 @@ public class PlayerScript : MonoBehaviour
     }
     private void Move()
     {
-        playerMove.x = speedBuff * (float)Math.Sin(ToRadian( tf.eulerAngles.y));
-        playerMove.z = speedBuff * (float)Math.Cos(ToRadian(tf.eulerAngles.y));
+        if (isFire)
+        {
+            playerMove.x = speedBuff * (float)Math.Sin(ToRadian(tf.eulerAngles.y));
+            playerMove.z = speedBuff * (float)Math.Cos(ToRadian(tf.eulerAngles.y));
 
-        playerMove.x = playerMove.x * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
-        playerMove.z = playerMove.z * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
+            playerMove.x = playerMove.x * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
+            playerMove.z = playerMove.z * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
 
-        playerMove.y = speedBuff * (float)Math.Sin(ToRadian(tf.eulerAngles.x ))*-1;
-       
+            playerMove.y = speedBuff * (float)Math.Sin(ToRadian(tf.eulerAngles.x)) * -1;
 
-        rb.velocity = playerMove;
+
+            rb.velocity = playerMove;
+        }
     }  
     private void Operation()
     {
-        if(Input.GetKey(KeyCode.UpArrow))
+        if (isControl)
         {
-            rowling.x -= rowlingSpeedY;          
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            rowling.x += rowlingSpeedY;         
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rowling.y -= rowlingSpeedX;           
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rowling.y += rowlingSpeedX;
-        }
-        if (rowling.x <= -90)
-        {
-            rowling.x = -89;
-        }
-        if (rowling.x >= 90)
-        {
-            rowling.x = 89;
-        }
-
-        if (rowling.x < 10&&rowling.x>0)
-        {
-            rowling.x -= fixRowling;
-            if(rowling.x <= 0)
+            if (Input.GetKey(KeyCode.UpArrow))
             {
-                rowling.x = 0;
+                rowling.x -= rowlingSpeedY;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                rowling.x += rowlingSpeedY;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                rowling.y -= rowlingSpeedX;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rowling.y += rowlingSpeedX;
+            }
+            if (rowling.x <= -90)
+            {
+                rowling.x = -89;
+            }
+            if (rowling.x >= 90)
+            {
+                rowling.x = 89;
+            }
+
+            if (rowling.x < 10 && rowling.x > 0)
+            {
+                rowling.x -= fixRowling;
+                if (rowling.x <= 0)
+                {
+                    rowling.x = 0;
+                }
+            }
+            if (rowling.x > -10 && rowling.x < 0)
+            {
+                rowling.x += fixRowling;
+                if (rowling.x >= 0)
+                {
+                    rowling.x = 0;
+                }
+            }
+
+
+           
+        }
+        else
+        {
+            rowling.x = -lp.GetRowling().x;
+            rowling.y = lp.GetRowling().y+180;
+          
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                isFire = true;
+                lp.Shoot();
             }
         }
-        if (rowling.x > -10 && rowling.x < 0)
-        {
-            rowling.x +=fixRowling;
-            if( rowling.x >= 0)
-            {
-                rowling.x = 0;
-            }
-        }
-
-
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
     }
     private void Acceleration()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if (isFire)
         {
-            burstSpeed = burst+playerSpeed/3;
-        }
-        if(Input.GetKey (KeyCode.W))
-        {
-            playerSpeed += accelerate;
-        }
-        speedBuff = playerSpeed + burstSpeed;
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                burstSpeed = burst + playerSpeed / 3;
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                playerSpeed += accelerate;
+            }
+            speedBuff = playerSpeed + burstSpeed;
 
-        burstSpeed-=0.1f;
-        if(burstSpeed <= 0)
-        {
-            burstSpeed = 0;
+            burstSpeed -= 0.1f;
+            if (burstSpeed <= 0)
+            {
+                burstSpeed = 0;
+            }
         }
     }
     private void FlameEffect()
@@ -127,6 +155,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (playerHp <= 0)
         {
+            lp.Bombed();
             Destroy(this.gameObject);
         }
     }
@@ -139,12 +168,23 @@ public class PlayerScript : MonoBehaviour
     {
         playerHp = 0;
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "LaunchPad")
+        {     
+            isControl =true;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
+        lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
         effectTimer = 0;
+        isFire = false;
+        isControl = false;
+        tf.position=lp.GetPos();
     }
 
     // Update is called once per frame

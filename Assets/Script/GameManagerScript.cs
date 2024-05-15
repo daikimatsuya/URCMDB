@@ -19,7 +19,7 @@ public class GameManagerScript : MonoBehaviour
             {
 
                 GameObject _ = Instantiate(player);
-                _.transform.position = new Vector3(0,0, 0);
+                
 
                 playerMissile--;
             }
