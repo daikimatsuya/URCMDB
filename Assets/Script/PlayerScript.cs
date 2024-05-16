@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject flame;
     [SerializeField] private float speedBuff;
+    [SerializeField] private float firstSpeed;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float accelerate;
     [SerializeField] private float burst;
@@ -107,6 +108,10 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            if(isFire)
+            {
+                speedBuff += firstSpeed;
+            }
             rowling.x = -lp.GetRowling().x;
             rowling.y = lp.GetRowling().y+180;
           
@@ -130,13 +135,17 @@ public class PlayerScript : MonoBehaviour
             {
                 playerSpeed += accelerate;
             }
-            speedBuff = playerSpeed + burstSpeed;
+         
 
             burstSpeed -= 0.1f;
             if (burstSpeed <= 0)
             {
                 burstSpeed = 0;
             }
+        }
+        if(isControl)
+        {
+            speedBuff = playerSpeed + burstSpeed;
         }
     }
     private void FlameEffect()
