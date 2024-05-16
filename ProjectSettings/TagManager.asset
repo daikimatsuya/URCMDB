@@ -6,6 +6,8 @@ TagManager:
   tags:
   - LaunchPoint
   - LaunchPad
+  - YawUILeft
+  - YawUIRight
   layers:
   - Default
   - TransparentFX
