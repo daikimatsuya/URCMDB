@@ -117,6 +117,7 @@ MonoBehaviour:
   speedBuff: 0
   firstSpeed: 0.1
   playerSpeed: 100
+  ringBust: 0.05
   accelerate: 0.01
   burst: 100
   rowlingSpeedX: 0.3

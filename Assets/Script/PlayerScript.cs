@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float speedBuff;
     [SerializeField] private float firstSpeed;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private float ringBust;
     [SerializeField] private float accelerate;
     [SerializeField] private float burst;
     [SerializeField] private float rowlingSpeedX;
@@ -28,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     private int effectTimer;
     private bool isFire;
     private bool isControl;
+    private float ringSpeed;
 
     private void PlayerController()
     {
@@ -138,14 +140,19 @@ public class PlayerScript : MonoBehaviour
          
 
             burstSpeed -= 0.1f;
+            ringSpeed -= 0.1f;
             if (burstSpeed <= 0)
             {
                 burstSpeed = 0;
             }
+            if(ringSpeed <= 0)
+            {
+                ringSpeed = 0;
+            }
         }
         if(isControl)
         {
-            speedBuff = playerSpeed + burstSpeed;
+            speedBuff = playerSpeed + burstSpeed+ringSpeed;
         }
     }
     private void FlameEffect()
@@ -183,6 +190,11 @@ public class PlayerScript : MonoBehaviour
         {     
             isControl =true;
         }
+        if(other.tag == "SpeedUpRing")
+        {
+            ringSpeed = playerSpeed * 0.3f;
+            playerSpeed += playerSpeed * ringBust;
+        }
     }
     public bool GetControll()
     {
@@ -197,6 +209,7 @@ public class PlayerScript : MonoBehaviour
         effectTimer = 0;
         isFire = false;
         isControl = false;
+        ringSpeed = 0;
         tf.position=lp.GetPos();
     }
 
