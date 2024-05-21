@@ -8,6 +8,7 @@ TagManager:
   - LaunchPad
   - YawUILeft
   - YawUIRight
+  - SpeedUpRing
   layers:
   - Default
   - TransparentFX
