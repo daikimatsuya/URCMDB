@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 
     private Vector2 rowling;
     private Vector3 playerMove;
+    private Vector3 playerMoveBuff;
     private float burstSpeed;
     private int effectTimer;
     private bool isFire;
@@ -57,6 +58,7 @@ public class PlayerScript : MonoBehaviour
 
 
             rb.velocity = playerMove;
+            playerMoveBuff = playerMove;
         }
     }  
     private void Operation()
@@ -174,6 +176,10 @@ public class PlayerScript : MonoBehaviour
             lp.Bombed();
             Destroy(this.gameObject);
         }
+    }
+    public Vector3 GetPlayerSpeed()
+    {
+        return playerMoveBuff;
     }
     public double ToRadian(double angle)
     {
