@@ -24,7 +24,7 @@ public class FlakScript : MonoBehaviour
     {
         if(playerPos != null)
         {
-            playerDis=playerPos.position-pos.position;
+            playerDis=playerPos.position-barrel.position;
             Vector3 playerDisNormal=playerDis.normalized;
 
             float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
