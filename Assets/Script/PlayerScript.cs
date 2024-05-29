@@ -201,6 +201,10 @@ public class PlayerScript : MonoBehaviour
             ringSpeed = playerSpeed * 0.3f;
             playerSpeed += playerSpeed * ringBust;
         }
+        if (other.tag == "Bullet")
+        {
+            playerHp = 0;
+        }
     }
     public bool GetControll()
     {

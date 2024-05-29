@@ -64,7 +64,7 @@ MonoBehaviour:
   bulletPoint: {fileID: 738718703630668316}
   bullet: {fileID: 2408358433001188916, guid: 6fc4f32f9e8c5ca4ea26c852ed9ef16e, type: 3}
   isCanReach: 0
-  bulletSpeed: 1000
+  bulletSpeed: 9000
 --- !u!1 &3717692369710504743
 GameObject:
   m_ObjectHideFlags: 0
