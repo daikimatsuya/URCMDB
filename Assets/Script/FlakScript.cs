@@ -16,7 +16,7 @@ public class FlakScript : MonoBehaviour
 
     [SerializeField] private bool isCanReach;
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private float bulletReachTime;
+
 
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
@@ -46,6 +46,10 @@ public class FlakScript : MonoBehaviour
             body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);
             barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);
           
+        }
+        else
+        {
+            isCanReach = false;
         }
         if (Input.GetKeyDown(KeyCode.F))
         {

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d598ca03742833841a423b76d20dd477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deleteTime: 6
 --- !u!54 &4545860703227956663
 Rigidbody:
   m_ObjectHideFlags: 0

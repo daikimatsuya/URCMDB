@@ -14,6 +14,7 @@ public class PlayerCameraScript : MonoBehaviour
     private float rot;
 
     [SerializeField] private float cameraDeff;
+    [SerializeField] private float rotSpeed;
 
     private void PlayerCameraController()
     {
@@ -34,7 +35,7 @@ public class PlayerCameraScript : MonoBehaviour
                 {
                     if (rot < 10)
                     {
-                        rot += 0.25f;
+                        rot += rotSpeed;
                     }
 
                 }
@@ -42,7 +43,7 @@ public class PlayerCameraScript : MonoBehaviour
                 {
                     if (rot > -10)
                     {
-                        rot -= 0.25f;
+                        rot -= rotSpeed;
                     }
 
                 }
@@ -50,11 +51,11 @@ public class PlayerCameraScript : MonoBehaviour
                 {
                     if (rot > 0)
                     {
-                        rot -= 0.25f;
+                        rot -= rotSpeed;
                     }
                     if (rot < 0)
                     {
-                        rot += 0.25f;
+                        rot += rotSpeed;
                     }
 
                 }
@@ -62,11 +63,11 @@ public class PlayerCameraScript : MonoBehaviour
                 {
                     if (rot > 0)
                     {
-                        rot -= 0.25f;
+                        rot -= rotSpeed;
                     }
                     if (rot < 0)
                     {
-                        rot += 0.25f;
+                        rot += rotSpeed;
                     }
 
                 }
