@@ -122,7 +122,7 @@ MonoBehaviour:
   burst: 100
   rowlingSpeedX: 2
   rowlingSpeedY: 1.5
-  fixRowling: 0.01
+  fixRowling: 0.05
 --- !u!54 &7870347104334944391
 Rigidbody:
   m_ObjectHideFlags: 0

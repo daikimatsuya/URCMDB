@@ -35,8 +35,10 @@ public class FlakScript : MonoBehaviour
             float dis = Mathf.Sqrt(playerDis.x * playerDis.x + playerDis.y * playerDis.y + playerDis.z * playerDis.z) / bulletSpeed;
 
             Vector3 playerSpeed = playerScript.GetPlayerSpeed();
-            playerDis = new Vector3((playerPos.position.x + (playerSpeed.x * dis)-barrel.position.x), (playerPos.position.y + (playerSpeed.y * dis)-barrel.position.y), (playerPos.position.z + (playerSpeed.z * dis)-barrel.position.z));
-            
+            playerDis = new Vector3((playerDis.x - (playerPos.position.x + (playerSpeed.x * dis) - barrel.position.x)), (playerDis.y - (playerPos.position.y + (playerSpeed.y * dis) - barrel.position.y)), (playerDis.z - (playerPos.position.z + (playerSpeed.z * dis) - barrel.position.z)));
+
+            dis += (Mathf.Sqrt(playerDis.x * playerDis.x + playerDis.y * playerDis.y + playerDis.z * playerDis.z) / bulletSpeed) / 2;
+            playerDis = new Vector3((playerPos.position.x + (playerSpeed.x * dis) - barrel.position.x), (playerPos.position.y + (playerSpeed.y * dis) - barrel.position.y), (playerPos.position.z + (playerSpeed.z * dis) - barrel.position.z));
 
             playerDisNormal =playerDis.normalized;
 
