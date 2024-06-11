@@ -9,17 +9,17 @@ public class SyusuiScript : MonoBehaviour
     Transform tf;
     Rigidbody rb;
 
-    [SerializeField] private float firstSpeed;
+    [SerializeField] private float speed;
     [SerializeField] private Vector2 rowSpeed;
 
     private Vector3 moveSpeed;
-    private float speed;
     private bool isSearch;
     private Transform playerPos;
     private PlayerScript playerScript;
 
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
+    private Vector3 Row;
 
     private void SyusuiController()
     {
@@ -28,13 +28,13 @@ public class SyusuiScript : MonoBehaviour
     }
     private void Move()
     {
-        moveSpeed.x = firstSpeed * (float)Math.Sin(ToRadian(tf.eulerAngles.y));
-        moveSpeed.z = firstSpeed * (float)Math.Cos(ToRadian(tf.eulerAngles.y));
+        moveSpeed.x = speed * (float)Math.Sin(ToRadian(tf.eulerAngles.y));
+        moveSpeed.z = speed * (float)Math.Cos(ToRadian(tf.eulerAngles.y));
 
         moveSpeed.x = moveSpeed.x * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
         moveSpeed.z = moveSpeed.z * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
 
-        moveSpeed.y = firstSpeed * (float)Math.Sin(ToRadian(tf.eulerAngles.x)) * -1;
+        moveSpeed.y = speed * (float)Math.Sin(ToRadian(tf.eulerAngles.x)) * -1;
 
 
         rb.velocity = moveSpeed;
@@ -59,11 +59,47 @@ public class SyusuiScript : MonoBehaviour
 
         float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
         float vertical = Mathf.Atan2(Mathf.Sqrt(playerDisNormal.x * playerDisNormal.x + playerDisNormal.z * playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
-        float z = 180;
 
+        vertical -= 90;
 
+        Rowring(horizontal, vertical);
 
-        tf.localEulerAngles = new Vector3((vertical*-1)-90, horizontal-180, z);
+        tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);
+    }
+    private void Rowring(float horizontal,float vertical)
+    {
+        if (horizontal - Row.y > 0)
+        {
+            Row.y += rowSpeed.y;
+            if (horizontal - Row.y < 0)
+            {
+                Row.y = horizontal;
+            }
+        }
+        else if (horizontal - Row.y < 0)
+        {
+            Row.y -= rowSpeed.y;
+            if (horizontal - Row.y > 0)
+            {
+                Row.y = horizontal;
+            }
+        }
+        if (vertical - Row.x > 0)
+        {
+            Row.x += rowSpeed.x;
+            if (vertical - Row.x < 0)
+            {
+                Row.x = vertical;
+            }
+        }
+        else if (vertical - Row.x < 0)
+        {
+            Row.x -= rowSpeed.x;
+            if (vertical - Row.x > 0)
+            {
+                Row.x = vertical;
+            }
+        }
     }
     public double ToRadian(double angle)
     {
@@ -92,7 +128,7 @@ public class SyusuiScript : MonoBehaviour
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
 
-        speed = firstSpeed;
+        Row = tf.localEulerAngles;
         isSearch = false;
     }
 
