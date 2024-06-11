@@ -173,8 +173,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (playerHp <= 0)
         {
-            lp.Bombed();
-            Destroy(this.gameObject);
+            //lp.Bombed();
+            //Destroy(this.gameObject);
         }
     }
     public Vector3 GetPlayerSpeed()
