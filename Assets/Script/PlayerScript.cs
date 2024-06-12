@@ -139,10 +139,10 @@ public class PlayerScript : MonoBehaviour
             {
                 playerSpeed += accelerate;
             }
-         
 
-            burstSpeed -= 0.1f;
-            ringSpeed -= 0.1f;
+
+            burstSpeed -= playerSpeed / 300;
+            ringSpeed -= playerSpeed * 0.003f;
             if (burstSpeed <= 0)
             {
                 burstSpeed = 0;
@@ -173,8 +173,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (playerHp <= 0)
         {
-            //lp.Bombed();
-            //Destroy(this.gameObject);
+            lp.Bombed();
+            Destroy(this.gameObject);
         }
     }
     public Vector3 GetPlayerSpeed()
