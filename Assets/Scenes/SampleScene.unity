@@ -11419,10 +11419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1914594259424843597, guid: 24c3b77fca87c324b976b3563b9a2936, type: 3}
-      propertyPath: maxBaseDis
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 1960321966416631159, guid: 24c3b77fca87c324b976b3563b9a2936, type: 3}
       propertyPath: m_RootOrder
       value: 54

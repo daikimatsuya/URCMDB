@@ -142,6 +142,9 @@ MonoBehaviour:
   minSpeed: 300
   maxSpeed: 1000
   brake: 1
+  maxBaseDis: 10000
+  minBaseDis: 100
+  backTimer: 8
 --- !u!54 &6768362690174841656
 Rigidbody:
   m_ObjectHideFlags: 0

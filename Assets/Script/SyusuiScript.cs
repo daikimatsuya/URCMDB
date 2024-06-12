@@ -20,6 +20,7 @@ public class SyusuiScript : MonoBehaviour
     [SerializeField] private float brake;
     [SerializeField] private float maxBaseDis;
     [SerializeField] private float minBaseDis;
+    [SerializeField] private int backTimer;
 
     private Vector3 moveSpeed;
     private bool isSearch;
@@ -31,6 +32,8 @@ public class SyusuiScript : MonoBehaviour
     private Vector3 playerDisNormal;
     private Vector3 Row;
     private bool isLeftBase;
+    private int timeBuff;
+
 
     private void SyusuiController()
     {
@@ -70,6 +73,7 @@ public class SyusuiScript : MonoBehaviour
     }
     private void Aim()
     {
+
         playerDis = playerPos.position - tf.position;
         playerDisNormal = playerDis.normalized;
 
@@ -101,7 +105,7 @@ public class SyusuiScript : MonoBehaviour
     }
     private void NormalOperation()
     {
-        float horizontal = tf.localEulerAngles.y;
+        float horizontal = Row.y;
         float vertical = 0;
         if (tf.position.y < normalPosY - normalPosRange)
         {
@@ -121,7 +125,12 @@ public class SyusuiScript : MonoBehaviour
         float dis2=dis.magnitude;
         if (dis2 > maxBaseDis)
         {
-            isLeftBase = true;
+            if(!isLeftBase)
+            {
+                isLeftBase = true;
+                timeBuff = backTimer * 60;
+            }
+            
         }
         if (dis2 <= minBaseDis)
         {
@@ -131,10 +140,18 @@ public class SyusuiScript : MonoBehaviour
         { 
             Vector3 disVector= new Vector3(dis.x, 0, dis.y).normalized;
             float horizontal = Mathf.Atan2(disVector.x, disVector.z) * Mathf.Rad2Deg;
-
-            Rowring(horizontal,Row.x);
+            if(timeBuff > 0)
+            {
+                Rowring(horizontal, Row.x);
+            }
+            else
+            {
+                Row.y = horizontal;
+            }
 
             tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);
+
+            timeBuff--;
         }
         else
         {
@@ -151,7 +168,7 @@ public class SyusuiScript : MonoBehaviour
                 Row.y = horizontal;
             }
         }
-        else if (horizontal - Row.y < 0)
+        if (horizontal - Row.y < 0)
         {
             Row.y -= rowSpeed.y;
             if (horizontal - Row.y > 0)
@@ -159,6 +176,7 @@ public class SyusuiScript : MonoBehaviour
                 Row.y = horizontal;
             }
         }
+
         if (vertical - Row.x > 0)
         {
             Row.x += rowSpeed.x;
