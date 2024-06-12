@@ -10,6 +10,8 @@ TagManager:
   - YawUIRight
   - SpeedUpRing
   - Bullet
+  - Target
+  - AirBase
   layers:
   - Default
   - TransparentFX

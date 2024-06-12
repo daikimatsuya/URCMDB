@@ -11,15 +11,26 @@ public class SyusuiScript : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private Vector2 rowSpeed;
+    [SerializeField] private float normalPosY;
+    [SerializeField] private float normalPosRange;
+    [SerializeField] private float minDis;
+    [SerializeField] private float maxDis;
+    [SerializeField] private float minSpeed;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float brake;
+    [SerializeField] private float maxBaseDis;
+    [SerializeField] private float minBaseDis;
 
     private Vector3 moveSpeed;
     private bool isSearch;
     private Transform playerPos;
     private PlayerScript playerScript;
+    private Transform basePos;
 
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
     private Vector3 Row;
+    private bool isLeftBase;
 
     private void SyusuiController()
     {
@@ -44,12 +55,17 @@ public class SyusuiScript : MonoBehaviour
         if (playerScript == null)
         {
             isSearch = false;
+           
         }
         if (isSearch)
         {
             Aim();
+            KeepDis();
 
-
+        }
+        else
+        {
+           LeftBase();
         }
     }
     private void Aim()
@@ -65,6 +81,65 @@ public class SyusuiScript : MonoBehaviour
         Rowring(horizontal, vertical);
 
         tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);
+    }
+    private void KeepDis()
+    {
+        if (playerDis.magnitude < minDis)
+        {
+            if(speed>minSpeed)
+            {
+                speed -= brake;
+            }            
+        }
+        if(playerDis.magnitude > maxDis)
+        {
+            if(speed<maxSpeed)
+            {
+                speed += brake;
+            }           
+        }
+    }
+    private void NormalOperation()
+    {
+        float horizontal = tf.localEulerAngles.y;
+        float vertical = 0;
+        if (tf.position.y < normalPosY - normalPosRange)
+        {
+            vertical -= rowSpeed.x*20;
+        }
+        if (tf.position.y > normalPosY + normalPosRange)
+        {
+            vertical += rowSpeed.x*20;
+        }
+        horizontal += rowSpeed.y / 10;
+        Rowring(horizontal, vertical);
+        tf.localEulerAngles = Row;
+    }
+    private void LeftBase()
+    {
+        Vector2 dis = new Vector2(basePos.position.x - tf.position.x,basePos.position.z-tf.position.z);
+        float dis2=dis.magnitude;
+        if (dis2 > maxBaseDis)
+        {
+            isLeftBase = true;
+        }
+        if (dis2 <= minBaseDis)
+        {
+            isLeftBase = false;
+        }
+        if(isLeftBase)
+        { 
+            Vector3 disVector= new Vector3(dis.x, 0, dis.y).normalized;
+            float horizontal = Mathf.Atan2(disVector.x, disVector.z) * Mathf.Rad2Deg;
+
+            Rowring(horizontal,Row.x);
+
+            tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);
+        }
+        else
+        {
+            NormalOperation();
+        }
     }
     private void Rowring(float horizontal,float vertical)
     {
@@ -127,6 +202,7 @@ public class SyusuiScript : MonoBehaviour
     {
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        basePos=GameObject.FindWithTag("AirBase").GetComponent<Transform>();
 
         Row = tf.localEulerAngles;
         isSearch = false;

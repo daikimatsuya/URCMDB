@@ -10,7 +10,9 @@ public class PlayerScript : MonoBehaviour
     Transform tf;
 
     private LaunchPointScript lp;
+    private TargetScript ts;
 
+    [SerializeField] private float time;
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject flame;
     [SerializeField] private float speedBuff;
@@ -31,6 +33,7 @@ public class PlayerScript : MonoBehaviour
     private bool isFire;
     private bool isControl;
     private float ringSpeed;
+ 
 
     private void PlayerController()
     {
@@ -42,6 +45,7 @@ public class PlayerScript : MonoBehaviour
         Operation();
         Acceleration();
         Move();
+        CountDown();
        // FlameEffect();
     }
     private void Move()
@@ -177,6 +181,18 @@ public class PlayerScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    private void CountDown()
+    {
+        if (isControl)
+        {
+            if (time <= 0)
+            {
+                playerHp = 0;
+            }
+            time--;
+        }
+    }
+
     public Vector3 GetPlayerSpeed()
     {
         return playerMoveBuff;
@@ -189,6 +205,10 @@ public class PlayerScript : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         playerHp = 0;
+        if (collision.gameObject.tag == "Target")
+        {
+            ts.Hit(speedBuff);
+        }
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -214,14 +234,17 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        time = time * 60;
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
         lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
+        ts = GameObject.FindWithTag("Target").GetComponent<TargetScript>();
         effectTimer = 0;
         isFire = false;
         isControl = false;
         ringSpeed = 0;
         tf.position=lp.GetPos();
+        
     }
 
     // Update is called once per frame
