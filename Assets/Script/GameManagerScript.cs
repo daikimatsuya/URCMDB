@@ -7,14 +7,17 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private int playerMissile;
 
+    private bool playerDead;
     private void GameManagerController()
     {
         SpawnPlayer();
     }
+
     private void SpawnPlayer()
     {
         if (!GameObject.FindWithTag("Player"))
         {
+            playerDead = true;
             if(Input.GetKeyDown(KeyCode.Space)&&playerMissile > 0)
             {
 
@@ -24,6 +27,14 @@ public class GameManagerScript : MonoBehaviour
                 playerMissile--;
             }
         }
+        else
+        {
+            playerDead= false;
+        }
+    }
+    public bool IsPlayerDead()
+    {
+        return playerDead;
     }
     // Start is called before the first frame update
     void Start()

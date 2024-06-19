@@ -4,56 +4,70 @@ using UnityEngine;
 
 public class SpeedUpRingScript : MonoBehaviour
 {
-    [SerializeField] private float offTime;
+
     [SerializeField] private float shrinkSpeed;
     [SerializeField] private float ringSize;
+    [SerializeField] private float offsetTime;  
 
-    private int timeBuff;
+
+    private int offsetBuff;
+    private bool isGet;
 
     new CapsuleCollider  collider;
     Transform tf;
 
+    private GameManagerScript gm;
+
     private void SpeedUpRingController()
     {
         Off();
+        ON();
     }
     private void Off()
     {
-        if(timeBuff>0)
+        if(isGet)
         {
-            if (tf.localScale.y > 0)
+            if(offsetBuff <= 0)
             {
-                tf.localScale = new Vector3(1, tf.localScale.z - shrinkSpeed, tf.localScale.z - shrinkSpeed);
+                if (tf.localScale.y > 0)
+                {
+                    tf.localScale = new Vector3(1, tf.localScale.z - shrinkSpeed, tf.localScale.z - shrinkSpeed);
+                }
+                else
+                {
+                    tf.localScale = new Vector3(0, 0, 0);
+                }
             }
-            else
-            {
-                tf.localScale = new Vector3(0, 0, 0);
-            }
-            
-
-            timeBuff--;
-            if(timeBuff <= 0)
-            {
-                tf.localScale=new Vector3(1, ringSize, ringSize); 
-                collider.enabled = true;
-            }
+            offsetBuff--;
+        }         
+    }
+    private void ON()
+    {
+        if (gm.IsPlayerDead()==true)
+        {
+            isGet = false;
+            tf.localScale = new Vector3(1, ringSize, ringSize);
+            collider.enabled = true;
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            timeBuff = (int)(offTime * 60);
+            offsetBuff = (int)(offsetTime * 60);
+            isGet = true;
             collider.enabled = false;
         }
     }
     // Start is called before the first frame update
     void Start()
     {
+        gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         tf = GetComponent<Transform>();
         collider=GetComponent<CapsuleCollider>();
-        timeBuff = 0;
         tf.localScale = new Vector3(1, ringSize, ringSize);
+        offsetBuff = (int)(offsetTime * 60);
+        isGet = false;
     }
 
     // Update is called once per frame

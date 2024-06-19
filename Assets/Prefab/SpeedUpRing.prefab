@@ -112,5 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offTime: 30
-  shrinkSpeed: 0.5
+  shrinkSpeed: 2
   ringSize: 10
+  offsetTime: 0.2
