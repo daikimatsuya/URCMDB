@@ -33,14 +33,13 @@ public class PlayerScript : MonoBehaviour
     private bool isFire;
     private bool isControl;
     private float ringSpeed;
+    [SerializeField] private bool RockOned;
  
 
     private void PlayerController()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            isControl = true;
-        }
+        RockOned = false;
+
         Booooooomb();
         Operation();
         Acceleration();
@@ -197,6 +196,10 @@ public class PlayerScript : MonoBehaviour
     {
         return playerMoveBuff;
     }
+    public void IsLock()
+    {
+        RockOned = true;
+    }
     public double ToRadian(double angle)
     {
         return angle * Math.PI / 180f;
@@ -244,7 +247,7 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position=lp.GetPos();
-        
+        RockOned = false;
     }
 
     // Update is called once per frame

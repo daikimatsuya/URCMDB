@@ -12,6 +12,8 @@ public class FlakScript : MonoBehaviour
     private Transform playerPos;
     private PlayerScript playerScript;
 
+    [SerializeField] private bool autShotSwitch;
+
     [SerializeField] private Transform body;
     [SerializeField] private Transform barrel;
     [SerializeField] private Transform bulletPoint;
@@ -19,20 +21,24 @@ public class FlakScript : MonoBehaviour
 
     [SerializeField] private bool isCanReach;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private float shotInterval;
 
 
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
+    private int intervalBuff;
 
     private void FlakController()
     {
         Aim();
     }
-
     private void Aim()
     {
+
         if(playerPos != null)
         {
+            
+            playerScript.IsLock();
             
             playerDis=playerPos.position-barrel.position;
             Vector3 playerSpeed= playerScript.GetPlayerSpeed();
@@ -59,11 +65,23 @@ public class FlakScript : MonoBehaviour
           
             body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);
             barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);
-          
+
+            if (intervalBuff <= 0)
+            {
+                if(autShotSwitch)
+                {
+                    Shot();
+                    intervalBuff = (int)(shotInterval * 60);
+                }
+                
+            }
+            intervalBuff--;
         }
         else
         {
             isCanReach = false;
+            intervalBuff = (int)(shotInterval * 60);
+
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -91,6 +109,7 @@ public class FlakScript : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            intervalBuff = (int)(shotInterval * 60);
             isCanReach = false;
             playerPos = null;
         }
@@ -101,6 +120,7 @@ public class FlakScript : MonoBehaviour
     {
         isCanReach=false;      
         pos=GetComponent<Transform>();
+        intervalBuff = (int)(shotInterval * 60);
     }
 
     // Update is called once per frame
