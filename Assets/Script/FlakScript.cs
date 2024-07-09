@@ -8,6 +8,8 @@ using UnityEngine;
 public class FlakScript : MonoBehaviour
 {
     Transform pos;
+    Transform linePos;
+    LineUIScript lineScript;
 
     private Transform playerPos;
     private PlayerScript playerScript;
@@ -18,11 +20,12 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private Transform barrel;
     [SerializeField] private Transform bulletPoint;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject line;
 
     [SerializeField] private bool isCanReach;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
-
+    [SerializeField] private float lineTest;
 
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
@@ -37,14 +40,25 @@ public class FlakScript : MonoBehaviour
 
         if(playerPos != null)
         {
-            
+
+
             playerScript.IsLock();
             
             playerDis=playerPos.position-barrel.position;
+            playerDisNormal = playerDis.normalized;
+            float horizontal0 = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
+            float vertical0 = Mathf.Atan2(Mathf.Sqrt(playerDisNormal.x * playerDisNormal.x + playerDisNormal.z * playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
+
+
+            lineScript.SetLine(new Vector3(0,0,Vector3.Dot(playerDis,playerDis)*0.01f), Vector3.zero);
+            linePos.eulerAngles = new Vector3((vertical0 * -1.0f)+90 , 0, horizontal0 + 90);
+
             Vector3 playerSpeed= playerScript.GetPlayerSpeed();
             float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);
             float b = Vector3.Dot(playerDis, playerSpeed) * 2;
             float c = Vector3.Dot(playerDis, playerDis);
+
+            
 
             float discriminant = (b * b) - (4 * a * c);
             if(discriminant < 0)
@@ -56,8 +70,6 @@ public class FlakScript : MonoBehaviour
 
             float t = new float[] { t1, t2 }.Where(t => t > 0).Max();
 
-
-
             playerDis = new Vector3((playerPos.position.x + (playerSpeed.x * t) - barrel.position.x), (playerPos.position.y + (playerSpeed.y * t) - barrel.position.y), (playerPos.position.z + (playerSpeed.z * t) - barrel.position.z));
             playerDisNormal = playerDis.normalized;
             float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
@@ -65,6 +77,8 @@ public class FlakScript : MonoBehaviour
           
             body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);
             barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);
+
+
 
             if (intervalBuff <= 0)
             {
@@ -120,6 +134,8 @@ public class FlakScript : MonoBehaviour
     {
         isCanReach=false;      
         pos=GetComponent<Transform>();
+        linePos = line.GetComponent<Transform>();
+        lineScript=line.GetComponent<LineUIScript>();
         intervalBuff = (int)(shotInterval * 60);
     }
 
