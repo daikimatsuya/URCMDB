@@ -13,6 +13,7 @@ public class FlakScript : MonoBehaviour
 
     private Transform playerPos;
     private PlayerScript playerScript;
+    private LineUIScript lineUI;
 
     [SerializeField] private bool autShotSwitch;
 
@@ -25,11 +26,12 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private bool isCanReach;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
-    [SerializeField] private float lineTest;
+
 
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
     private int intervalBuff;
+
 
     private void FlakController()
     {
@@ -40,19 +42,12 @@ public class FlakScript : MonoBehaviour
 
         if(playerPos != null)
         {
-
+            
 
             playerScript.IsLock();
             
             playerDis=playerPos.position-barrel.position;
-            playerDisNormal = playerDis.normalized;
-            float horizontal0 = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
-            float vertical0 = Mathf.Atan2(Mathf.Sqrt(playerDisNormal.x * playerDisNormal.x + playerDisNormal.z * playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
-
-
-            lineScript.SetLine(new Vector3(0,0,Vector3.Dot(playerDis,playerDis)*0.01f), Vector3.zero);
-            linePos.eulerAngles = new Vector3((vertical0 * -1.0f)+90 , 0, horizontal0 + 90);
-
+            lineUI.SetLine(barrel.position,playerDis);
             Vector3 playerSpeed= playerScript.GetPlayerSpeed();
             float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);
             float b = Vector3.Dot(playerDis, playerSpeed) * 2;
@@ -96,6 +91,11 @@ public class FlakScript : MonoBehaviour
             isCanReach = false;
             intervalBuff = (int)(shotInterval * 60);
 
+            if(lineUI != null)
+            {
+                lineUI.Death();
+            }
+            
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -117,6 +117,9 @@ public class FlakScript : MonoBehaviour
             isCanReach = true;
             playerPos = other.transform;
             playerScript = other.GetComponent<PlayerScript>();
+            GameObject _ = Instantiate(line);
+            lineUI = _.GetComponent<LineUIScript>();
+            _.transform.position = barrel.position;
         }
     }
     public void OnTriggerExit(Collider other)

@@ -12,17 +12,22 @@ public class LineUIScript : MonoBehaviour
     {
 
     }
-    public void SetLine(Vector3 pos,Vector3 targetPos)
+    public void SetLine(Vector3 Pos,Vector3 targetLength)
     {
-        line.SetPosition(0, pos);
-        line.SetPosition(1, targetPos);
+ 
+        line.SetPosition(0, targetLength);
+        pos.position = Pos;
     }
-    //private void TestLine()
-    //{
-    //    Vector3 pos0 = new Vector3(playerPos.position.x + Random.Range(-rand, rand), playerPos.position.y + Random.Range(-rand, rand), playerPos.position.z + Random.Range(-rand, rand));
+    public void Death()
+    {
+        Destroy(this.gameObject);
+    }
+    private void TestLine()
+    {
+        Vector3 pos0 = new Vector3(playerPos.position.x + Random.Range(-rand, rand), playerPos.position.y + Random.Range(-rand, rand), playerPos.position.z + Random.Range(-rand, rand));
 
-    //    line.SetPosition(0, pos0);
-    //}
+        line.SetPosition(0, pos0);
+    }
     // Start is called before the first frame update
     void Start()
     {
