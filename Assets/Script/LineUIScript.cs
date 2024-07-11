@@ -6,9 +6,13 @@ public class LineUIScript : MonoBehaviour
 {
     Transform pos;
     LineRenderer line;
-    private Transform playerPos;
+
+    private int timeBuff;
+    private bool red;
+
     [SerializeField] private float rand;
-    private void LineUIController()
+    [SerializeField] private float colorChangeTime;
+    private void TestLineUIController()
     {
 
     }
@@ -22,24 +26,56 @@ public class LineUIScript : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-    private void TestLine()
+    public void SetRed()
     {
-        Vector3 pos0 = new Vector3(playerPos.position.x + Random.Range(-rand, rand), playerPos.position.y + Random.Range(-rand, rand), playerPos.position.z + Random.Range(-rand, rand));
-
-        line.SetPosition(0, pos0);
+        line.startColor = Color.red;
+        line.endColor = Color.red;
     }
+    public void SetWarning()
+    {
+        if (timeBuff <= 0)
+        {
+            if (red)
+            {
+                line.startColor= Color.yellow;
+                line.endColor = Color.yellow;
+                SetTime();
+                red = false;
+            }
+            else
+            {
+                line.startColor = Color.red;
+                line.endColor = Color.red;
+                SetTime();
+                red = true;
+            }
+        }
+        timeBuff--;
+    }
+    public void SetVoid()
+    {
+        line.startColor = new Color(0, 0, 0, 0);
+        line.endColor = new Color(0, 0, 0, 0);    
+    }
+    private void SetTime()
+    {
+        timeBuff = (int)(colorChangeTime * 60);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
+        //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
         pos=GetComponent<Transform>();
         line = GetComponent<LineRenderer>();
 
+        SetTime();
+        red = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //TestLine();
+        TestLineUIController();
     }
 }

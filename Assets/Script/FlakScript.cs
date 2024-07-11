@@ -27,6 +27,8 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
 
+    [SerializeField] private float setWarning;
+    [SerializeField] private float setVoid;
 
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
@@ -74,11 +76,12 @@ public class FlakScript : MonoBehaviour
             barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);
 
 
-
+            SetLineColor();
             if (intervalBuff <= 0)
             {
                 if(autShotSwitch)
                 {
+                    
                     Shot();
                     intervalBuff = (int)(shotInterval * 60);
                 }
@@ -109,6 +112,21 @@ public class FlakScript : MonoBehaviour
         _.transform.localEulerAngles = new Vector3(-barrel.localEulerAngles.x, body.localEulerAngles.z + 180, 0);
         FlakBulletScript fb=_.GetComponent<FlakBulletScript>();
         fb.GetAcce(new Vector3(playerDisNormal.x*bulletSpeed,playerDisNormal.y*bulletSpeed,playerDisNormal.z*bulletSpeed));
+    }
+    private void SetLineColor()
+    {
+        if (intervalBuff > (setWarning+setVoid) * 60) 
+        {
+            lineUI.SetVoid();
+        }
+        else if(intervalBuff > setWarning * 60) 
+        {
+            lineUI.SetRed();
+        }
+        else
+        {
+            lineUI.SetWarning();
+        }
     }
     public void OnTriggerEnter(Collider other)
     {
