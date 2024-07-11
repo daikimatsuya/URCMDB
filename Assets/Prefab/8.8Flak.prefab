@@ -67,9 +67,9 @@ MonoBehaviour:
   line: {fileID: 6275503242035776631, guid: b07d319ca5214314bac2ddbef8251e99, type: 3}
   isCanReach: 0
   bulletSpeed: 6000
-  shotInterval: 5
-  setWarning: 0.5
-  setVoid: 1
+  shotInterval: 10
+  setWarning: 0.3
+  setVoid: 2
 --- !u!1 &3717692369710504743
 GameObject:
   m_ObjectHideFlags: 0

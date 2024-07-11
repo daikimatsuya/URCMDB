@@ -12,10 +12,7 @@ public class LineUIScript : MonoBehaviour
 
     [SerializeField] private float rand;
     [SerializeField] private float colorChangeTime;
-    private void TestLineUIController()
-    {
 
-    }
     public void SetLine(Vector3 Pos,Vector3 targetLength)
     {
  
@@ -76,6 +73,6 @@ public class LineUIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TestLineUIController();
+
     }
 }

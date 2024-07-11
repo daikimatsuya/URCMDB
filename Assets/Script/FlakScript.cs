@@ -43,8 +43,7 @@ public class FlakScript : MonoBehaviour
     {
 
         if(playerPos != null)
-        {
-            
+        {            
 
             playerScript.IsLock();
             
@@ -54,8 +53,6 @@ public class FlakScript : MonoBehaviour
             float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);
             float b = Vector3.Dot(playerDis, playerSpeed) * 2;
             float c = Vector3.Dot(playerDis, playerDis);
-
-            
 
             float discriminant = (b * b) - (4 * a * c);
             if(discriminant < 0)

@@ -31,7 +31,7 @@ public class PlayerCameraScript : MonoBehaviour
 
             if (ps.GetControll())
             {
-                if (Input.GetKey(KeyCode.LeftArrow))
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 {
                     if (rot < 10)
                     {
@@ -39,7 +39,7 @@ public class PlayerCameraScript : MonoBehaviour
                     }
 
                 }
-                if (Input.GetKey(KeyCode.RightArrow))
+                if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
                 {
                     if (rot > -10)
                     {
@@ -47,7 +47,7 @@ public class PlayerCameraScript : MonoBehaviour
                     }
 
                 }
-                if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
+                if ((Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) && Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A)) 
                 {
                     if (rot > 0)
                     {
@@ -59,7 +59,7 @@ public class PlayerCameraScript : MonoBehaviour
                     }
 
                 }
-                if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
+                if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.A)&& !Input.GetKey(KeyCode.D)) 
                 {
                     if (rot > 0)
                     {

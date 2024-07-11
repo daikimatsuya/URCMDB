@@ -109,9 +109,6 @@ public class PlayerScript : MonoBehaviour
                     rowling.x = 0;
                 }
             }
-
-
-           
         }
         else
         {
@@ -142,7 +139,6 @@ public class PlayerScript : MonoBehaviour
             {
                 playerSpeed += accelerate;
             }
-
 
             burstSpeed -= playerSpeed / 300;
             ringSpeed -= playerSpeed * 0.003f;

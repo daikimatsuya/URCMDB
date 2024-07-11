@@ -20,10 +20,7 @@ public class GameManagerScript : MonoBehaviour
             playerDead = true;
             if(Input.GetKeyDown(KeyCode.Space)&&playerMissile > 0)
             {
-
                 GameObject _ = Instantiate(player);
-                
-
                 playerMissile--;
             }
         }
