@@ -47,7 +47,7 @@ public class PlayerCameraScript : MonoBehaviour
                     }
 
                 }
-                if ((Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) && Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A)) 
+                if ((Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))) 
                 {
                     if (rot > 0)
                     {
