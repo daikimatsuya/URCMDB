@@ -9,16 +9,19 @@ public class MarkerCamera : MonoBehaviour
     private GameObject player;
     private Transform playerPos;
 
+    [SerializeField] private float dis;
+
     private void MarkerCameraController()
     {
-
+        SearchPlayer();
+        Move();
     }
     private void Move()
     {
         if(playerPos!=null)
         {
-            tf.position = new Vector3(playerPos.position.x, tf.position.y, playerPos.position.z);
-            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, playerPos.localEulerAngles.y, tf.localEulerAngles.z);
+            tf.position = new Vector3(playerPos.position.x, dis, playerPos.position.z);
+            tf.eulerAngles = new Vector3(tf.eulerAngles.x, player.transform.eulerAngles.y, tf.eulerAngles.z);
         }
     }
     private void SearchPlayer()
@@ -42,6 +45,6 @@ public class MarkerCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MarkerCameraController();
     }
 }
