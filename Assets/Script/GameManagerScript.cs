@@ -8,6 +8,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private int playerMissile;
 
     private bool playerDead;
+    private Vector3 playerRot;
     private void GameManagerController()
     {
         SpawnPlayer();
@@ -32,6 +33,15 @@ public class GameManagerScript : MonoBehaviour
     public bool IsPlayerDead()
     {
         return playerDead;
+    }
+
+    public void PlayerRotSet(Vector3 rot)
+    {
+       playerRot = rot;
+    }
+    public Vector3 GetPlayerRot()
+    {
+        return playerRot;
     }
     // Start is called before the first frame update
     void Start()

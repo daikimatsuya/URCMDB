@@ -13,6 +13,8 @@ TagManager:
   - Target
   - AirBase
   - MarkerCamera
+  - UICanvas
+  - YawUI2
   layers:
   - Default
   - TransparentFX

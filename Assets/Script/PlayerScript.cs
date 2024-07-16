@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
 
     private LaunchPointScript lp;
     private TargetScript ts;
+    private GameManagerScript gm;
 
     [SerializeField] private float time;
     [SerializeField] private float playerHp;
@@ -45,7 +46,8 @@ public class PlayerScript : MonoBehaviour
         Acceleration();
         Move();
         CountDown();
-       // FlameEffect();
+        // FlameEffect();
+        gm.PlayerRotSet(rowling);
     }
     private void Move()
     {
@@ -192,6 +194,10 @@ public class PlayerScript : MonoBehaviour
     {
         return playerMoveBuff;
     }
+    public Vector3 GetPlayerRot()
+    {
+        return tf.eulerAngles;
+    }
     public void IsLock()
     {
         RockOned = true;
@@ -238,6 +244,7 @@ public class PlayerScript : MonoBehaviour
         tf = GetComponent<Transform>();
         lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
         ts = GameObject.FindWithTag("Target").GetComponent<TargetScript>();
+        gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         effectTimer = 0;
         isFire = false;
         isControl = false;
