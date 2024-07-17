@@ -7,7 +7,9 @@ public class FlakBulletScript : MonoBehaviour
     Rigidbody rb;
 
     private Vector3 speed;
+
     [SerializeField] private float deleteTime;
+    [SerializeField] private GameObject marker;
     private void BulletController()
     {
         Move();

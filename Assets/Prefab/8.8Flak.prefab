@@ -65,6 +65,7 @@ MonoBehaviour:
   bulletPoint: {fileID: 738718703630668316}
   bullet: {fileID: 2408358433001188916, guid: 6fc4f32f9e8c5ca4ea26c852ed9ef16e, type: 3}
   line: {fileID: 6275503242035776631, guid: b07d319ca5214314bac2ddbef8251e99, type: 3}
+  marker: {fileID: 7506089732503652708, guid: 2fc4c26d65e02874094e47c2d55fdb1b, type: 3}
   isCanReach: 0
   bulletSpeed: 6000
   shotInterval: 10

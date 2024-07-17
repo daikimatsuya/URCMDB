@@ -14,6 +14,7 @@ public class FlakScript : MonoBehaviour
     private Transform playerPos;
     private PlayerScript playerScript;
     private LineUIScript lineUI;
+    private MarkerScript ms; 
 
     [SerializeField] private bool autShotSwitch;
 
@@ -22,6 +23,7 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private Transform bulletPoint;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject line;
+    [SerializeField] private GameObject marker;
 
     [SerializeField] private bool isCanReach;
     [SerializeField] private float bulletSpeed;
@@ -124,6 +126,13 @@ public class FlakScript : MonoBehaviour
         {
             lineUI.SetWarning();
         }
+    }
+    private void CreateMarker()
+    {
+        GameObject _ = Instantiate(marker);
+        ms = _.GetComponent<MarkerScript>();
+
+     
     }
     public void OnTriggerEnter(Collider other)
     {
