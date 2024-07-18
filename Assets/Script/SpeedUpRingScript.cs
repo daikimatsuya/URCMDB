@@ -42,7 +42,11 @@ public class SpeedUpRingScript : MonoBehaviour
             isGet = false;
             tf.localScale = new Vector3(1, ringSize, ringSize);
             collider.enabled = true;
-            CreateMarker();
+            if(ms==null)
+            {
+                CreateMarker();
+            }
+            
         }
     }
     private void CreateMarker()
