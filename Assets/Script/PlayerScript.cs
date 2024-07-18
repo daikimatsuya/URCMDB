@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour
     private LaunchPointScript lp;
     private TargetScript ts;
     private GameManagerScript gm;
+    private GameObject dust;
 
     [SerializeField] private float time;
     [SerializeField] private float playerHp;
@@ -220,6 +221,7 @@ public class PlayerScript : MonoBehaviour
         if (other.tag == "LaunchPad")
         {     
             isControl =true;
+            dust.SetActive(true);
         }
         if(other.tag == "SpeedUpRing")
         {
@@ -245,6 +247,8 @@ public class PlayerScript : MonoBehaviour
         lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
         ts = GameObject.FindWithTag("Target").GetComponent<TargetScript>();
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+        dust = GameObject.FindWithTag("PlayerDust");
+        dust.SetActive(false);
         effectTimer = 0;
         isFire = false;
         isControl = false;
