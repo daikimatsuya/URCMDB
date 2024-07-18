@@ -26,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float rowlingSpeedX;
     [SerializeField] private float rowlingSpeedY;
     [SerializeField] private float fixRowling;
-    [SerializeField] private bool PMC;
+    
 
     private Vector2 rowling;
     private Vector3 playerMove;
@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour
     private bool isFire;
     private bool isControl;
     private float ringSpeed;
+    private bool PMS;
     [SerializeField] private bool RockOned;
  
 
@@ -97,7 +98,7 @@ public class PlayerScript : MonoBehaviour
                 rowling.x = 89;
             }
 
-            if (PMC)
+            if (PMS)
             {
                 if (rowling.x < 15 && rowling.x > 0)
                 {
@@ -133,18 +134,9 @@ public class PlayerScript : MonoBehaviour
                 lp.Shoot();
             }
         }
+        PMS=gm.GetPMS();
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (PMC)
-            {
-                PMC = false;
-            }
-            else
-            {
-                PMC= true;
-            }
-        }
+       
     }
     private void Acceleration()
     {
@@ -257,7 +249,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PMC = true;
+        PMS = true;
         time = time * 60;
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();

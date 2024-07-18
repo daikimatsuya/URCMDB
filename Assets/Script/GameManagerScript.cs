@@ -6,11 +6,13 @@ public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private int playerMissile;
+    [SerializeField] private bool PMS;
 
     private bool playerDead;
     private Vector3 playerRot;
     private void GameManagerController()
     {
+        ChangePMS();
         SpawnPlayer();
     }
 
@@ -29,6 +31,24 @@ public class GameManagerScript : MonoBehaviour
         {
             playerDead= false;
         }
+    }
+    private void ChangePMS()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (PMS)
+            {
+                PMS = false;
+            }
+            else
+            {
+                PMS = true;
+            }
+        }
+    }
+    public bool GetPMS()
+    {
+        return PMS;
     }
     public bool IsPlayerDead()
     {

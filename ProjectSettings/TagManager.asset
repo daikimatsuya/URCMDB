@@ -15,6 +15,7 @@ TagManager:
   - MarkerCamera
   - UICanvas
   - YawUI2
+  - PlayerDust
   layers:
   - Default
   - TransparentFX

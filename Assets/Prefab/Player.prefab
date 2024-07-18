@@ -124,7 +124,7 @@ MonoBehaviour:
   burst: 100
   rowlingSpeedX: 2
   rowlingSpeedY: 1.5
-  fixRowling: 0.05
+  fixRowling: 0.07
   RockOned: 0
 --- !u!54 &7870347104334944391
 Rigidbody:
@@ -427,7 +427,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1009,7 +1009,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 60
       minScalar: 10
       maxCurve:
         serializedVersion: 2
