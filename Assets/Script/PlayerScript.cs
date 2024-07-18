@@ -229,7 +229,7 @@ public class PlayerScript : MonoBehaviour
         if (other.tag == "Bullet")
         {
             playerHp = 0;
-            Destroy(other.gameObject);
+            other.GetComponent<FlakBulletScript>().Delete();            
         }
     }
     public bool GetControll()

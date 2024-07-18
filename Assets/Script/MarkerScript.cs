@@ -23,6 +23,10 @@ public class MarkerScript : MonoBehaviour
             tf.position = new Vector3(pos.x, markerPosY, pos.z);
         }
     }
+    public void Delete()
+    {
+        Destroy(this.gameObject);
+    }
     // Start is called before the first frame update
     void Start()
     {

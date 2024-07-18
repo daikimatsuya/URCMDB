@@ -9,7 +9,7 @@ public class MarkerCamera : MonoBehaviour
     private GameObject player;
     private Transform playerPos;
 
-    [SerializeField] private float dis;
+    [SerializeField] private float pos;
 
     private void MarkerCameraController()
     {
@@ -20,7 +20,7 @@ public class MarkerCamera : MonoBehaviour
     {
         if(playerPos!=null)
         {
-            tf.position = new Vector3(playerPos.position.x, dis, playerPos.position.z);
+            tf.position = new Vector3(playerPos.position.x, pos, playerPos.position.z);
             tf.eulerAngles = new Vector3(tf.eulerAngles.x, player.transform.eulerAngles.y, tf.eulerAngles.z);
         }
     }

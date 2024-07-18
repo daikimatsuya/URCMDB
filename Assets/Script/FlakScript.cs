@@ -131,7 +131,7 @@ public class FlakScript : MonoBehaviour
     {
         GameObject _ = Instantiate(marker);
         ms = _.GetComponent<MarkerScript>();
-
+        ms.Move(pos.position);
      
     }
     public void OnTriggerEnter(Collider other)
@@ -164,6 +164,8 @@ public class FlakScript : MonoBehaviour
         linePos = line.GetComponent<Transform>();
         lineScript=line.GetComponent<LineUIScript>();
         intervalBuff = (int)(shotInterval * 60);
+
+        CreateMarker();
     }
 
     // Update is called once per frame
