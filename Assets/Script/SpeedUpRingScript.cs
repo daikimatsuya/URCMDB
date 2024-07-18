@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class SpeedUpRingScript : MonoBehaviour
 {
 
     [SerializeField] private float shrinkSpeed;
     [SerializeField] private float ringSize;
-    [SerializeField] private float offsetTime;  
+    [SerializeField] private float offsetTime;
+    [SerializeField] private GameObject marker;
 
 
     private int offsetBuff;
     private bool isGet;
 
+    private MarkerScript ms;
     new CapsuleCollider  collider;
     Transform tf;
 
@@ -25,21 +28,11 @@ public class SpeedUpRingScript : MonoBehaviour
     }
     private void Off()
     {
-        if(isGet)
+        if (isGet)
         {
-            if(offsetBuff <= 0)
-            {
-                if (tf.localScale.y > 0)
-                {
-                    tf.localScale = new Vector3(1, tf.localScale.z - shrinkSpeed, tf.localScale.z - shrinkSpeed);
-                }
-                else
-                {
-                    tf.localScale = new Vector3(0, 0, 0);
-                }
-            }
-            offsetBuff--;
-        }         
+            tf.localScale = new Vector3(0, 0, 0);
+            ms.Delete();
+        }
     }
     private void ON()
     {
@@ -49,6 +42,13 @@ public class SpeedUpRingScript : MonoBehaviour
             tf.localScale = new Vector3(1, ringSize, ringSize);
             collider.enabled = true;
         }
+    }
+    private void CreateMarker()
+    {
+        GameObject _ = Instantiate(marker);
+        ms = _.GetComponent<MarkerScript>();
+        ms.Move(tf.position);
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -68,6 +68,7 @@ public class SpeedUpRingScript : MonoBehaviour
         tf.localScale = new Vector3(1, ringSize, ringSize);
         offsetBuff = (int)(offsetTime * 60);
         isGet = false;
+        CreateMarker();
     }
 
     // Update is called once per frame

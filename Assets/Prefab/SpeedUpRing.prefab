@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627bdbf90d0d7ac4f82fb86e29d528f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offTime: 30
   shrinkSpeed: 2
   ringSize: 10
   offsetTime: 0.2
+  marker: {fileID: 8266175863323519500, guid: 6bc388777247436469176c60f437341a, type: 3}
