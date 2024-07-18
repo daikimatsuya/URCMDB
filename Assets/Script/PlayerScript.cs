@@ -26,6 +26,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float rowlingSpeedX;
     [SerializeField] private float rowlingSpeedY;
     [SerializeField] private float fixRowling;
+    [SerializeField] private bool PMC;
 
     private Vector2 rowling;
     private Vector3 playerMove;
