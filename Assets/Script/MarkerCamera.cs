@@ -20,7 +20,7 @@ public class MarkerCamera : MonoBehaviour
     {
         if(playerPos!=null)
         {
-            tf.position = new Vector3(playerPos.position.x, pos, playerPos.position.z);
+            tf.position = new Vector3(playerPos.position.x, playerPos.position.y, playerPos.position.z);
             tf.eulerAngles = new Vector3(tf.eulerAngles.x, player.transform.eulerAngles.y, tf.eulerAngles.z);
         }
     }

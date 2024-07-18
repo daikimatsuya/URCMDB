@@ -23,8 +23,9 @@ public class SpeedUpRingScript : MonoBehaviour
 
     private void SpeedUpRingController()
     {
-        Off();
+        
         ON();
+        Off();
     }
     private void Off()
     {
@@ -41,6 +42,7 @@ public class SpeedUpRingScript : MonoBehaviour
             isGet = false;
             tf.localScale = new Vector3(1, ringSize, ringSize);
             collider.enabled = true;
+            CreateMarker();
         }
     }
     private void CreateMarker()

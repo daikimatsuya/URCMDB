@@ -15,12 +15,12 @@ public class MarkerScript : MonoBehaviour
     {
         if(tf != null)
         {
-            tf.position = new Vector3(pos.x, markerPosY, pos.z);
+            tf.position = new Vector3(pos.x, pos.y, pos.z);
         }
         else
         {
             tf=GetComponent<Transform>();
-            tf.position = new Vector3(pos.x, markerPosY, pos.z);
+            tf.position = new Vector3(pos.x, pos.y, pos.z);
         }
     }
     public void Delete()
