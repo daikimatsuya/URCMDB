@@ -97,22 +97,26 @@ public class PlayerScript : MonoBehaviour
                 rowling.x = 89;
             }
 
-            if (rowling.x < 10 && rowling.x > 0)
+            if (PMC)
             {
-                rowling.x -= fixRowling;
-                if (rowling.x <= 0)
+                if (rowling.x < 15 && rowling.x > 0)
                 {
-                    rowling.x = 0;
+                    rowling.x -= fixRowling;
+                    if (rowling.x <= 0)
+                    {
+                        rowling.x = 0;
+                    }
+                }
+                if (rowling.x > -15 && rowling.x < 0)
+                {
+                    rowling.x += fixRowling;
+                    if (rowling.x >= 0)
+                    {
+                        rowling.x = 0;
+                    }
                 }
             }
-            if (rowling.x > -10 && rowling.x < 0)
-            {
-                rowling.x += fixRowling;
-                if (rowling.x >= 0)
-                {
-                    rowling.x = 0;
-                }
-            }
+            
         }
         else
         {
@@ -130,6 +134,17 @@ public class PlayerScript : MonoBehaviour
             }
         }
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (PMC)
+            {
+                PMC = false;
+            }
+            else
+            {
+                PMC= true;
+            }
+        }
     }
     private void Acceleration()
     {
@@ -242,6 +257,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PMC = true;
         time = time * 60;
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
@@ -256,6 +272,7 @@ public class PlayerScript : MonoBehaviour
         ringSpeed = 0;
         tf.position=lp.GetPos();
         RockOned = false;
+       
     }
 
     // Update is called once per frame
