@@ -669,7 +669,14 @@ MonoBehaviour:
   isStageSelect: 0
   stageCount: 0
   maxStage: 5
-  stage1: Stage1
+  betTime: 1
+  stage:
+  - Stage1
+  - Stage1
+  - Stage1
+  - Stage1
+  - Stage1
+  - Stage1
 --- !u!1001 &7347044719948423556
 PrefabInstance:
   m_ObjectHideFlags: 0

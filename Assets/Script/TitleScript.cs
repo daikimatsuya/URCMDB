@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleScript : MonoBehaviour
 {
@@ -12,12 +13,14 @@ public class TitleScript : MonoBehaviour
     private int stageChangeCount;
     private bool isSceneChange;
     private bool isPush;
+    private int betBuff;
 
     [SerializeField] private bool isStageSelect;
     [SerializeField] private int stageCount;
     [SerializeField] private int maxStage;
+    [SerializeField] private float betTime;
 
-    [SerializeField] private string stage1;
+    [SerializeField] private string []stage;
 
     private void TitleController()
     {
@@ -28,6 +31,7 @@ public class TitleScript : MonoBehaviour
             InStageSelect();
         }
         StageSelect();
+        SceneCountDow();
     }
     private void InStageSelect()
     {
@@ -69,6 +73,17 @@ public class TitleScript : MonoBehaviour
 
         }
     }
+    private void SceneCountDow()
+    {
+        if(isSceneChange)
+        {
+            if (betBuff <= 0)
+            {
+                SceneManager.LoadScene(stage[stageCount]);
+            }
+            betBuff--;
+        }
+    }
     private void SceneChange()
     {
         if (!isPush)
@@ -82,10 +97,12 @@ public class TitleScript : MonoBehaviour
                         isStageSelect = false;
                         stageCount = 1;
                         stageChangeCount = 1;
+                        
                     }
                     else
                     {
                         isSceneChange = true;
+                        betBuff = (int)(betTime * 60);
                     }
                     isPush = true;
                 }
