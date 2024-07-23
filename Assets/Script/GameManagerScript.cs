@@ -67,6 +67,7 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        PMS = true;
     }
 
     // Update is called once per frame

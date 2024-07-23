@@ -83,7 +83,7 @@ public class PlayerCameraScript : MonoBehaviour
             deff.y = (cameraDeff + 5) * (float)Math.Sin(ToRadian(playerPos.eulerAngles.x)) * -1;
 
 
-            tf.localPosition = new Vector3(playerPos.localPosition.x - deff.x, playerPos.localPosition.y - deff.y + 3, playerPos.localPosition.z - deff.z);
+            tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
         }
     }
     private void SearchPlayer()
