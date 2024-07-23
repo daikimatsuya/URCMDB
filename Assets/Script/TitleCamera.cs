@@ -5,23 +5,21 @@ using UnityEngine;
 
 public class TitleCamera : MonoBehaviour
 {
-        [SerializeField] private Vector3 firstPos;
+    [SerializeField] private Vector3 firstPos;
     [SerializeField] private Vector3 movePos;
     [SerializeField] private float moveTime;
 
-
-    [SerializeField] private bool testBool;
 
     private TitleScript ts;
 
     Transform tf;
 
     private float time;
-    
+    private bool moveEnd;
 
     private void TitleCameraController()
     {
-
+        Move(ts.GetIsStageSelect());
     }
     private void Move(bool isStageSelect)
     {
@@ -34,11 +32,15 @@ public class TitleCamera : MonoBehaviour
             {           
                 dis = movePos - firstPos;
                 tf.position = new Vector3(firstPos.x + (dis.x * x), firstPos.y + (dis.y * x), firstPos.z + (dis.z * x));
+                moveEnd = false;
+                ts.SendMoveEnd(moveEnd);
                 time++;
             }
             else
             {
                 tf.position = movePos;
+                moveEnd = true;
+                ts.SendMoveEnd(moveEnd);
             }                       
         }
         else
@@ -48,30 +50,19 @@ public class TitleCamera : MonoBehaviour
             {
                 dis = movePos - firstPos;
                 tf.position = new Vector3(firstPos.x - (dis.x * x), firstPos.y + (dis.y * x), firstPos.z - (dis.z * x));
+                moveEnd = false;
+                ts.SendMoveEnd(moveEnd);
                 time--;
             }
             else
             {
                 tf.position = firstPos;
+                moveEnd = true;
+                ts.SendMoveEnd(moveEnd);
             }
         }
     }
-    private void Test()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if(testBool)
-            {
-                testBool=false;
 
-            }
-            else
-            {
-                testBool = true;
-
-            }
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +75,6 @@ public class TitleCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move(testBool);
-        Test();
+        Move(ts.GetIsStageSelect());
     }
 }
