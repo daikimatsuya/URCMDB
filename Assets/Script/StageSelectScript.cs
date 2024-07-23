@@ -55,7 +55,8 @@ public class StageSelectScript : MonoBehaviour
         }
         else
         {
-            tf.eulerAngles = new Vector3(0, rotateBuff, 0);            
+            tf.eulerAngles = new Vector3(0, rotateBuff, 0);     
+            rotateBuff = 0;
         }
     }
     // Start is called before the first frame update
