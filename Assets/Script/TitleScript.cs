@@ -9,7 +9,9 @@ public class TitleScript : MonoBehaviour
 
     private bool moveEnd;
     private bool rotateEnd;
-    [SerializeField] private int stageChangeCount;
+    private int stageChangeCount;
+    private bool isSceneChange;
+    private bool isPush;
 
     [SerializeField] private bool isStageSelect;
     [SerializeField] private int stageCount;
@@ -19,6 +21,8 @@ public class TitleScript : MonoBehaviour
 
     private void TitleController()
     {
+        isPush = false;
+        SceneChange();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             InStageSelect();
@@ -27,7 +31,11 @@ public class TitleScript : MonoBehaviour
     }
     private void InStageSelect()
     {
-        isStageSelect = true;
+        if (!isPush)
+        {
+            isStageSelect = true;
+            isPush = true;
+        }
     }
     private void StageSelect()
     {
@@ -59,18 +67,28 @@ public class TitleScript : MonoBehaviour
                 }
             }
 
-            SceneChange();
         }
     }
     private void SceneChange()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!isPush)
         {
-            if (stageCount == 0)
+            if (moveEnd && isStageSelect && rotateEnd)
             {
-                isStageSelect = false;
-                stageCount = 1;
-                stageChangeCount = 1;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (stageCount == 0)
+                    {
+                        isStageSelect = false;
+                        stageCount = 1;
+                        stageChangeCount = 1;
+                    }
+                    else
+                    {
+                        isSceneChange = true;
+                    }
+                    isPush = true;
+                }
             }
         }
     }
@@ -82,6 +100,10 @@ public class TitleScript : MonoBehaviour
     {
         return new Vector2(stageChangeCount, maxStage);
     }
+    public bool GetIsSceneChange()
+    {
+        return isSceneChange;
+    }
     public void SendMoveEnd(bool end)
     {
         moveEnd = end;
@@ -90,6 +112,7 @@ public class TitleScript : MonoBehaviour
     {
         rotateEnd = end;
     }
+   
     // Start is called before the first frame update
     void Start()
     {

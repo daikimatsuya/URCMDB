@@ -8,6 +8,7 @@ public class TitleCamera : MonoBehaviour
     [SerializeField] private Vector3 firstPos;
     [SerializeField] private Vector3 movePos;
     [SerializeField] private float moveTime;
+    [SerializeField] private float zoomSpeed;
 
 
     private TitleScript ts;
@@ -20,6 +21,7 @@ public class TitleCamera : MonoBehaviour
     private void TitleCameraController()
     {
         Move(ts.GetIsStageSelect());
+        SceneChangeMove();
     }
     private void Move(bool isStageSelect)
     {
@@ -31,14 +33,14 @@ public class TitleCamera : MonoBehaviour
             if (time < moveTime)
             {           
                 dis = movePos - firstPos;
-                tf.position = new Vector3(firstPos.x + (dis.x * x), firstPos.y + (dis.y * x), firstPos.z + (dis.z * x));
+                tf.position = new Vector3(firstPos.x + (dis.x * x), firstPos.y + (dis.y * x),tf.position.z);
                 moveEnd = false;
                 ts.SendMoveEnd(moveEnd);
                 time++;
             }
             else
             {
-                tf.position = movePos;
+                tf.position = new Vector3(movePos.x, movePos.y,tf.position.z);
                 moveEnd = true;
                 ts.SendMoveEnd(moveEnd);
             }                       
@@ -49,17 +51,24 @@ public class TitleCamera : MonoBehaviour
             if (time>0)
             {
                 dis = movePos - firstPos;
-                tf.position = new Vector3(firstPos.x - (dis.x * x), firstPos.y + (dis.y * x), firstPos.z - (dis.z * x));
+                tf.position = new Vector3(firstPos.x - (dis.x * x), firstPos.y + (dis.y * x), tf.position.z);
                 moveEnd = false;
                 ts.SendMoveEnd(moveEnd);
                 time--;
             }
             else
             {
-                tf.position = firstPos;
+                tf.position = new Vector3(firstPos.x, firstPos.y,tf.position.z);
                 moveEnd = true;
                 ts.SendMoveEnd(moveEnd);
             }
+        }
+    }
+    private void SceneChangeMove()
+    {
+        if(ts.GetIsSceneChange())
+        {
+            tf.position=new Vector3(tf.position.x,tf.position.y,tf.position.z+zoomSpeed);
         }
     }
 
@@ -75,6 +84,6 @@ public class TitleCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move(ts.GetIsStageSelect());
+        TitleCameraController();
     }
 }

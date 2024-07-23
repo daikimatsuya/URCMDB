@@ -453,24 +453,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1312596362 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5066845859886312940, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
-  m_PrefabInstance: {fileID: 7347044719948423556}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1312596364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312596362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d77e9666e43c34fa7d37e70bfac0bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 15
 --- !u!1 &1631119292
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +553,7 @@ MonoBehaviour:
   firstPos: {x: 0, y: 0, z: 0}
   movePos: {x: 0, y: -19, z: -10}
   moveTime: 1
+  zoomSpeed: 0.1
 --- !u!1 &1749908278
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97998c2f2270bf04cb732f37cef6ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageChangeCount: 0
   isStageSelect: 0
   stageCount: 0
   maxStage: 5
