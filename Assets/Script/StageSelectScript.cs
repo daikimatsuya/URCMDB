@@ -8,6 +8,11 @@ public class StageSelectScript : MonoBehaviour
     TitleScript ts;
     Transform tf;
 
+    private float rotateBuff;
+    private bool rotateEnd;
+
+    [SerializeField] private float rotateSpeed;
+
     private void StageSelectController()
     {
         Move(ts.GetStageCount());
@@ -15,14 +20,51 @@ public class StageSelectScript : MonoBehaviour
     private void Move(Vector2 stage)
     {
         float rot = (360 / (stage.y+1)) * stage.x;
-
-        tf.eulerAngles=new Vector3 (0,rot,0);
+        if (ts.GetIsStageSelect())
+        {
+            if (rot > rotateBuff)
+            {
+                rotateEnd = false;
+                ts.SendRotateEnd(rotateEnd);
+                rotateBuff += rotateSpeed;
+                if (rot < rotateBuff)
+                {
+                    rotateBuff = rot;
+                    rotateEnd = true;
+                    ts.SendRotateEnd(rotateEnd);
+                }
+            }
+            else if (rot < rotateBuff)
+            {
+                rotateEnd = false;
+                ts.SendRotateEnd(rotateEnd);
+                rotateBuff -= rotateSpeed;
+                if (rot > rotateBuff)
+                {
+                    rotateBuff = rot;
+                    rotateEnd = true;
+                    ts.SendRotateEnd(rotateEnd);
+                }
+            }
+            else
+            {
+                rotateEnd = true;
+                ts.SendRotateEnd(rotateEnd);
+            }
+            tf.eulerAngles = new Vector3(0, rotateBuff, 0);
+        }
+        else
+        {
+            tf.eulerAngles = new Vector3(0, rotateBuff, 0);            
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         ts = GameObject.FindWithTag("TitleManager").GetComponent<TitleScript>();
         tf = GetComponent<Transform>();
+        rotateBuff=tf.eulerAngles.y;
+
     }
 
     // Update is called once per frame

@@ -6,8 +6,10 @@ public class TitleScript : MonoBehaviour
 {
     private Transform cameraPos;
 
-    private bool moveEnd;
 
+    private bool moveEnd;
+    private bool rotateEnd;
+    [SerializeField] private int stageChangeCount;
 
     [SerializeField] private bool isStageSelect;
     [SerializeField] private int stageCount;
@@ -29,10 +31,11 @@ public class TitleScript : MonoBehaviour
     }
     private void StageSelect()
     {
-        if (moveEnd&&isStageSelect)
+        if (moveEnd&&isStageSelect&&rotateEnd)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
+                stageChangeCount--;
                 if (stageCount > 0)
                 {
                     stageCount--;
@@ -45,6 +48,7 @@ public class TitleScript : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
+                stageChangeCount++;
                 if (stageCount < maxStage)
                 {
                     stageCount++;
@@ -66,6 +70,7 @@ public class TitleScript : MonoBehaviour
             {
                 isStageSelect = false;
                 stageCount = 1;
+                stageChangeCount = 1;
             }
         }
     }
@@ -75,11 +80,15 @@ public class TitleScript : MonoBehaviour
     }
     public Vector2 GetStageCount()
     {
-        return new Vector2(stageCount, maxStage);
+        return new Vector2(stageChangeCount, maxStage);
     }
     public void SendMoveEnd(bool end)
     {
         moveEnd = end;
+    }
+    public void SendRotateEnd(bool end)
+    {
+        rotateEnd = end;
     }
     // Start is called before the first frame update
     void Start()
@@ -87,6 +96,8 @@ public class TitleScript : MonoBehaviour
         Application.targetFrameRate = 60;
         TitleController();
         stageCount = 1;
+        stageChangeCount = 1;
+        rotateEnd = true;
     }
 
     // Update is called once per frame

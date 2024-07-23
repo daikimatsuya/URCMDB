@@ -433,7 +433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594032856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -15.74, z: 13.48}
+  m_LocalPosition: {x: 0, y: -20, z: 13.48}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d77e9666e43c34fa7d37e70bfac0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateSpeed: 5
 --- !u!1 &796265496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,6 +1367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97998c2f2270bf04cb732f37cef6ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageChangeCount: 0
   isStageSelect: 0
   stageCount: 0
   maxStage: 5
