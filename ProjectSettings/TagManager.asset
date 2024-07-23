@@ -16,6 +16,7 @@ TagManager:
   - UICanvas
   - YawUI2
   - PlayerDust
+  - TitleManager
   layers:
   - Default
   - TransparentFX
