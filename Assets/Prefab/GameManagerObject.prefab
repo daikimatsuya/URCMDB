@@ -52,6 +52,8 @@ MonoBehaviour:
   player: {fileID: 7870347104334944388, guid: 77c5b027360415942bf41ce3ba2cc146, type: 3}
   playerMissile: 3
   PMS: 0
+  stage: 
+  title: Title
 --- !u!1001 &785534975822530880
 PrefabInstance:
   m_ObjectHideFlags: 0

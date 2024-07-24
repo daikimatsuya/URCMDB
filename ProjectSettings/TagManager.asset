@@ -17,6 +17,7 @@ TagManager:
   - YawUI2
   - PlayerDust
   - TitleManager
+  - GameOverUI
   layers:
   - Default
   - TransparentFX

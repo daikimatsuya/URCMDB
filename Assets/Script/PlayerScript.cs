@@ -10,7 +10,6 @@ public class PlayerScript : MonoBehaviour
     Transform tf;
 
     private LaunchPointScript lp;
-    private TargetScript ts;
     private GameManagerScript gm;
     private GameObject dust;
 
@@ -203,6 +202,10 @@ public class PlayerScript : MonoBehaviour
     {
         return playerMoveBuff;
     }
+    public float GetPlayerSpeedFloat()
+    {
+        return speedBuff;
+    }
     public Vector3 GetPlayerRot()
     {
         return tf.eulerAngles;
@@ -219,10 +222,7 @@ public class PlayerScript : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         playerHp = 0;
-        if (collision.gameObject.tag == "Target")
-        {
-            ts.Hit(speedBuff);
-        }
+
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -254,7 +254,6 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
         lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
-        ts = GameObject.FindWithTag("Target").GetComponent<TargetScript>();
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);

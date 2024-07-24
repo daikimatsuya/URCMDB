@@ -1,19 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private int playerMissile;
     [SerializeField] private bool PMS;
+    [SerializeField] private string stage;
+    [SerializeField] private string title;
 
     private bool playerDead;
     private Vector3 playerRot;
+    private bool gameOverFlag;
+    private bool ClearFlag;
     private void GameManagerController()
     {
         ChangePMS();
         SpawnPlayer();
+        if(ClearFlag)
+        {
+            if(Input.GetKeyUp(KeyCode.Space))
+            {
+                BackTitle();
+            }
+           
+        }
     }
 
     private void SpawnPlayer()
@@ -21,11 +34,19 @@ public class GameManagerScript : MonoBehaviour
         if (!GameObject.FindWithTag("Player"))
         {
             playerDead = true;
-            if(Input.GetKeyDown(KeyCode.Space)&&playerMissile > 0)
+            if(Input.GetKeyDown(KeyCode.Space))
             {
-                GameObject _ = Instantiate(player);
-                playerMissile--;
+                if (playerMissile > 0)
+                {
+                    GameObject _ = Instantiate(player);
+                    playerMissile--;
+                }
+                else
+                {
+                    gameOverFlag = true;
+                }
             }
+
         }
         else
         {
@@ -63,11 +84,33 @@ public class GameManagerScript : MonoBehaviour
     {
         return playerRot;
     }
+    public bool GetGameOverFlag()
+    {
+        return gameOverFlag;
+    }
+    public void Retry()
+    {
+        SceneManager.LoadScene(stage);
+    }
+    public void BackTitle()
+    {
+        SceneManager.LoadScene(title);
+    }
+    public void SetClearFlag()
+    {
+        ClearFlag = true;
+    }
+    public bool GetClearFlag()
+    {
+        return ClearFlag;
+    }
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
         PMS = true;
+        gameOverFlag= false;
+        ClearFlag = false;
     }
 
     // Update is called once per frame
