@@ -120,7 +120,7 @@ MonoBehaviour:
   firstSpeed: 0.8
   playerSpeed: 100
   ringBust: 0.05
-  accelerate: 0.01
+  accelerate: 0.05
   burst: 100
   rowlingSpeedX: 2
   rowlingSpeedY: 1.5
@@ -158,7 +158,7 @@ GameObject:
   m_TagString: PlayerDust
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &6651370120650251201
 Transform:

@@ -111,6 +111,11 @@ public class GameManagerScript : MonoBehaviour
         PMS = true;
         gameOverFlag= false;
         ClearFlag = false;
+        if (!GameObject.FindWithTag("Player"))
+        {
+            GameObject _ = Instantiate(player);
+            playerMissile--;
+        }
     }
 
     // Update is called once per frame
