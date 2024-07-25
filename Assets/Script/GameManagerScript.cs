@@ -15,6 +15,7 @@ public class GameManagerScript : MonoBehaviour
 
     private bool playerDead;
     private Vector3 playerRot;
+    private float playerSpeed;
     private float playerSpeedBuff;
     private bool gameOverFlag;
     private bool ClearFlag;
@@ -57,7 +58,8 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             playerDead= false;
-            playerSpeedBuff = ps.GetPlayerSpeedFloat();
+            playerSpeed = ps.GetPlayerSpeedFloat();
+            playerSpeedBuff = ps.GetPlayerSpeedBuffFloat();
         }
     }
     private void ChangePMS()
@@ -112,6 +114,10 @@ public class GameManagerScript : MonoBehaviour
         return ClearFlag;
     }
     public float GetPlayerSpeed()
+    {
+        return playerSpeed;
+    }
+    public float GetPlayerSpeedBuff()
     {
         return playerSpeedBuff;
     }

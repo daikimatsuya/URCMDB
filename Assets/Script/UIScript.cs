@@ -16,6 +16,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private Vector3 gameOverUIPos;
     [SerializeField] private TextMeshProUGUI pmsTex;
     [SerializeField] private TextMeshProUGUI playerSpeed;
+    [SerializeField] private TextMeshProUGUI playerSpeedBuff;
     private void UIController()
     {
         GetPlayerRot();
@@ -74,6 +75,8 @@ public class UIScript : MonoBehaviour
     private void PlayerSpeedUI()
     {
         playerSpeed.text = (int)gm.GetPlayerSpeed() + "M/S";
+        playerSpeedBuff.text = (int)gm.GetPlayerSpeedBuff() + "M/S";
+
     }
     // Start is called before the first frame update
     void Start()

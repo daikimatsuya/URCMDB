@@ -29,7 +29,7 @@ public class TargetScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             PlayerScript ps=collision.gameObject.GetComponent<PlayerScript>();
-            hp-=(int)(ps.GetPlayerSpeedFloat()/10);
+            hp-=(int)(ps.GetPlayerSpeedBuffFloat()/10);
         }
     }
 
