@@ -202,9 +202,13 @@ public class PlayerScript : MonoBehaviour
     {
         return playerMoveBuff;
     }
-    public float GetPlayerSpeedFloat()
+    public float GetPlayerSpeedBuffFloat()
     {
         return speedBuff;
+    }
+    public float GetPlayerSpeedFloat()
+    {
+        return playerSpeed;
     }
     public Vector3 GetPlayerRot()
     {

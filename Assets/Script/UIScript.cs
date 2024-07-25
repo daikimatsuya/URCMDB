@@ -15,12 +15,14 @@ public class UIScript : MonoBehaviour
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
     [SerializeField] private TextMeshProUGUI pmsTex;
+    [SerializeField] private TextMeshProUGUI playerSpeed;
     private void UIController()
     {
         GetPlayerRot();
         YawUIController();
         PMSMode();
         IsGameOver();
+        PlayerSpeedUI();
     }
     private void GetPlayerRot()
     {
@@ -68,6 +70,10 @@ public class UIScript : MonoBehaviour
         {
             pmsTex.text = "PMS:OFF";
         }
+    }
+    private void PlayerSpeedUI()
+    {
+        playerSpeed.text = (int)gm.GetPlayerSpeed() + "M/S";
     }
     // Start is called before the first frame update
     void Start()

@@ -11,10 +11,14 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private string stage;
     [SerializeField] private string title;
 
+    private PlayerScript ps;
+
     private bool playerDead;
     private Vector3 playerRot;
+    private float playerSpeedBuff;
     private bool gameOverFlag;
     private bool ClearFlag;
+
     private void GameManagerController()
     {
         ChangePMS();
@@ -39,11 +43,13 @@ public class GameManagerScript : MonoBehaviour
                 if (playerMissile > 0)
                 {
                     GameObject _ = Instantiate(player);
+                    ps=_.GetComponent<PlayerScript>();
                     playerMissile--;
                 }
                 else
                 {
                     gameOverFlag = true;
+
                 }
             }
 
@@ -51,6 +57,7 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             playerDead= false;
+            playerSpeedBuff = ps.GetPlayerSpeedFloat();
         }
     }
     private void ChangePMS()
@@ -104,7 +111,10 @@ public class GameManagerScript : MonoBehaviour
     {
         return ClearFlag;
     }
-
+    public float GetPlayerSpeed()
+    {
+        return playerSpeedBuff;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -115,6 +125,7 @@ public class GameManagerScript : MonoBehaviour
         if (!GameObject.FindWithTag("Player"))
         {
             GameObject _ = Instantiate(player);
+            ps = _.GetComponent<PlayerScript>();
             playerMissile--;
         }
     }

@@ -328,7 +328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   YawUIMag: 4
   gameOverUIPos: {x: 0, y: 0, z: 0}
-  pmsTex: {fileID: 0}
+  pmsTex: {fileID: 5955157045048122946}
+  playerSpeed: {fileID: 0}
 --- !u!1001 &436174275405967200
 PrefabInstance:
   m_ObjectHideFlags: 0
