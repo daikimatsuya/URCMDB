@@ -20,6 +20,10 @@ public class TargetScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    public int GetHp()
+    {
+        return hp;
+    }
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")

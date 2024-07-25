@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameOverUIScript : MonoBehaviour
@@ -7,7 +8,12 @@ public class GameOverUIScript : MonoBehaviour
     [SerializeField] private float retryPos;
     [SerializeField] private float backTitlePos;
     [SerializeField] private Transform cursorPos;
-    
+    [SerializeField] private TextMeshProUGUI targetHpTex;
+
+    private GameObject target;
+    private TargetScript targetScript;
+    private int targetHp;
+
     public void MoveRetry()
     {
 
@@ -24,10 +30,27 @@ public class GameOverUIScript : MonoBehaviour
     {
         return cursorPos.localPosition.x;
     }
+    public void SetTargetHp()
+    {
+        targetHp=targetScript.GetHp();
+    }
+    public void TargetHpUI()
+    {
+        if (target != null)
+        {
+            SetTargetHp();
+            targetHpTex.text = "Hp"+targetHp;
+        }
+        else
+        {
+
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = GameObject.FindWithTag("Target");
+        targetScript = target.GetComponent<TargetScript>();
     }
 
     // Update is called once per frame

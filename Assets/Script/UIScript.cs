@@ -31,6 +31,7 @@ public class UIScript : MonoBehaviour
     {
         if(gm.GetGameOverFlag())
         {
+            
             gameOverUI.transform.localPosition = gameOverUIPos;
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
@@ -51,6 +52,7 @@ public class UIScript : MonoBehaviour
                     gm.BackTitle();
                 }
             }
+            goUs.TargetHpUI();
         }
     }
     // Start is called before the first frame update
