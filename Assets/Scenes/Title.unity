@@ -666,10 +666,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97998c2f2270bf04cb732f37cef6ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolTimeBuff: 0
   isStageSelect: 0
   stageCount: 0
   maxStage: 5
   betTime: 1
+  stageSelectCoolTime: 0.1
   stage:
   - Stage1
   - Stage1

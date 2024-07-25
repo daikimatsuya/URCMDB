@@ -14,11 +14,13 @@ public class TitleScript : MonoBehaviour
     private bool isSceneChange;
     private bool isPush;
     private int betBuff;
+    [SerializeField] private int coolTimeBuff;
 
     [SerializeField] private bool isStageSelect;
     [SerializeField] private int stageCount;
     [SerializeField] private int maxStage;
     [SerializeField] private float betTime;
+    [SerializeField] private float stageSelectCoolTime;
 
     [SerializeField] private string []stage;
 
@@ -45,7 +47,7 @@ public class TitleScript : MonoBehaviour
     {
         if (moveEnd&&isStageSelect&&rotateEnd)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0)) 
             {
                 stageChangeCount--;
                 if (stageCount > 0)
@@ -56,9 +58,9 @@ public class TitleScript : MonoBehaviour
                 {
                     stageCount = maxStage;
                 }
-
+                coolTimeBuff = (int)(stageSelectCoolTime * 60);
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && coolTimeBuff == 0))
             {
                 stageChangeCount++;
                 if (stageCount < maxStage)
@@ -69,8 +71,9 @@ public class TitleScript : MonoBehaviour
                 {
                     stageCount = 0;
                 }
+                coolTimeBuff = (int)(stageSelectCoolTime * 60);
             }
-
+            coolTimeBuff--;
         }
     }
     private void SceneCountDow()
