@@ -104,6 +104,7 @@ public class GameManagerScript : MonoBehaviour
     {
         return ClearFlag;
     }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIScript : MonoBehaviour
@@ -13,10 +14,12 @@ public class UIScript : MonoBehaviour
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
+    [SerializeField] private TextMeshProUGUI pmsTex;
     private void UIController()
     {
         GetPlayerRot();
         YawUIController();
+        PMSMode();
         IsGameOver();
     }
     private void GetPlayerRot()
@@ -55,6 +58,17 @@ public class UIScript : MonoBehaviour
             goUs.TargetHpUI();
         }
     }
+    private void PMSMode()
+    {
+        if (gm.GetPMS())
+        {
+            pmsTex.text = "PMS:ON";
+        }
+        else
+        {
+            pmsTex.text = "PMS:OFF";
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +76,7 @@ public class UIScript : MonoBehaviour
         yawUI = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
+       
     }
 
     // Update is called once per frame
