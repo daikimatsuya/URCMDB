@@ -9,14 +9,18 @@ public class UIScript : MonoBehaviour
     private Transform yawUI;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
+    private RectTransform canvasPos;
+    private RectTransform targetMarkerPos;
 
     private Vector3 playerRot;
+    private Vector3 targetPos;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
     [SerializeField] private TextMeshProUGUI pmsTex;
     [SerializeField] private TextMeshProUGUI playerSpeed;
     [SerializeField] private TextMeshProUGUI playerSpeedBuff;
+    [SerializeField] private GameObject targetMarker;
     private void UIController()
     {
         GetPlayerRot();
@@ -24,6 +28,7 @@ public class UIScript : MonoBehaviour
         PMSMode();
         IsGameOver();
         PlayerSpeedUI();
+        TargetMarkerUI();
     }
     private void GetPlayerRot()
     {
@@ -78,14 +83,26 @@ public class UIScript : MonoBehaviour
         playerSpeedBuff.text = (int)gm.GetPlayerSpeedBuff() + "M/S";
 
     }
+    private void TargetMarkerUI()
+    {
+        targetPos = gm.GetTargetPos();
+        Vector2 pos;
+        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, targetPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasPos, screenPos, Camera.main, out pos);
+        targetMarkerPos.localPosition = new Vector3(pos.x, pos.y, targetMarkerPos.localPosition.z);
+    }
     // Start is called before the first frame update
     void Start()
     {
+        canvasPos = GetComponent<RectTransform>();
+
         gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         yawUI = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
+        targetMarkerPos=targetMarker.GetComponent<RectTransform>(); 
        
+  
     }
 
     // Update is called once per frame
