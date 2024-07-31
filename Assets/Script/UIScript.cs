@@ -7,7 +7,7 @@ using UnityEngine;
 public class UIScript : MonoBehaviour
 {
     private GameManagerScript gm;
-    private Transform yawUI;
+    private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
     private RectTransform canvasPos;
@@ -16,13 +16,19 @@ public class UIScript : MonoBehaviour
 
     private Vector3 playerRot;
     private Vector3 targetPos;
+    private TextMeshProUGUI pmsTex;
+    private TextMeshProUGUI playerSpeedTex;
+    private TextMeshProUGUI playerSpeedBuffTex;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
-    [SerializeField] private TextMeshProUGUI pmsTex;
-    [SerializeField] private TextMeshProUGUI playerSpeed;
-    [SerializeField] private TextMeshProUGUI playerSpeedBuff;
+    [SerializeField] private GameObject pms;
+    [SerializeField] private GameObject playerSpeed;
+    [SerializeField] private GameObject playerSpeedBuff;
     [SerializeField] private GameObject targetMarker;
+    [SerializeField] private GameObject yawUI;
+    [SerializeField] private GameObject yawUI2;
+    [SerializeField] private GameObject rowImage;
     private void UIController()
     {
         GetPlayerRot();
@@ -31,6 +37,30 @@ public class UIScript : MonoBehaviour
         IsGameOver();
         PlayerSpeedUI();
         TargetMarkerUI();
+        ActiveChecker();
+    }
+    private void ActiveChecker()
+    {
+        if (gm.IsPlayerDead())
+        {
+            targetMarker.SetActive(false);
+            pms.SetActive(false);
+            playerSpeed.SetActive(false);
+            playerSpeedBuff.SetActive(false);
+            yawUI.SetActive(false);
+            yawUI2.SetActive(false);
+            rowImage.SetActive(false);
+        }
+        else
+        {
+            targetMarker.SetActive(true);
+            pms.SetActive(true);
+            playerSpeed.SetActive(true);
+            playerSpeedBuff.SetActive(true);
+            yawUI.SetActive(true);
+            yawUI2.SetActive(true);
+            rowImage.SetActive(true);
+        }
     }
     private void GetPlayerRot()
     {
@@ -38,7 +68,7 @@ public class UIScript : MonoBehaviour
     }
     private void YawUIController()
     {
-        yawUI.localPosition = new Vector3(yawUI.localPosition.x, playerRot.x*-YawUIMag, 0);
+        yawUItf.localPosition = new Vector3(yawUItf.localPosition.x, playerRot.x*-YawUIMag, 0);
     }
     private void IsGameOver()
     {
@@ -81,8 +111,8 @@ public class UIScript : MonoBehaviour
     }
     private void PlayerSpeedUI()
     {
-        playerSpeed.text = (int)gm.GetPlayerSpeed() + "M/S";
-        playerSpeedBuff.text = (int)gm.GetPlayerSpeedBuff() + "M/S";
+        playerSpeedTex.text = (int)gm.GetPlayerSpeed() + "M/S";
+        playerSpeedBuffTex.text = (int)gm.GetPlayerSpeedBuff() + "M/S";
 
     }
     private void TargetMarkerUI()
@@ -109,13 +139,15 @@ public class UIScript : MonoBehaviour
         canvasPos = GetComponent<RectTransform>();
 
         gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
-        yawUI = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
+        yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
-        targetMarkerPos=targetMarker.GetComponent<RectTransform>(); 
+        targetMarkerPos=targetMarker.GetComponent<RectTransform>();
 
-       
-  
+        pmsTex = pms.GetComponent<TextMeshProUGUI>();
+        playerSpeedTex = playerSpeed.GetComponent<TextMeshProUGUI>();
+        playerSpeedBuffTex = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
+
     }
 
     // Update is called once per frame

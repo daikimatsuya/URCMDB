@@ -780,10 +780,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   YawUIMag: 4
   gameOverUIPos: {x: 0, y: 0, z: 0}
-  pmsTex: {fileID: 5955157045048122946}
-  playerSpeed: {fileID: 3064566553657682198}
-  playerSpeedBuff: {fileID: 1344333559579816890}
-  targetMarker: {fileID: 0}
+  pms: {fileID: 3836077525650319097}
+  playerSpeed: {fileID: 1293755923754871431}
+  playerSpeedBuff: {fileID: 3241218769236592264}
+  targetMarker: {fileID: 4671060062580925894}
+  yawUI: {fileID: 8062726808229489935}
+  yawUI2: {fileID: 2669244137733249811}
+  rowImage: {fileID: 3179233195731408671}
 --- !u!1001 &436174275405967200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -884,6 +887,11 @@ PrefabInstance:
 --- !u!224 &2669244137733249810 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2523868845871871090, guid: 5445c8366763fda49a3c23ebe79d21eb, type: 3}
+  m_PrefabInstance: {fileID: 436174275405967200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2669244137733249811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2523868845871871091, guid: 5445c8366763fda49a3c23ebe79d21eb, type: 3}
   m_PrefabInstance: {fileID: 436174275405967200}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3468722118846600402
@@ -1088,5 +1096,10 @@ PrefabInstance:
 --- !u!224 &8062726808229489932 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2635631701040042639, guid: e41cb76e79d4d744e8cbc45e4d6ee886, type: 3}
+  m_PrefabInstance: {fileID: 5437861534787813251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8062726808229489935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2635631701040042636, guid: e41cb76e79d4d744e8cbc45e4d6ee886, type: 3}
   m_PrefabInstance: {fileID: 5437861534787813251}
   m_PrefabAsset: {fileID: 0}
