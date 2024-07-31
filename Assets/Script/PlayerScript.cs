@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float rowlingSpeedX;
     [SerializeField] private float rowlingSpeedY;
     [SerializeField] private float fixRowling;
+    [SerializeField] private float speedCut;
     
 
     private Vector2 rowling;
@@ -72,22 +73,45 @@ public class PlayerScript : MonoBehaviour
     {
         if (isControl)
         {
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) 
+            if(Input.GetKey(KeyCode.LeftShift))
             {
-                rowling.x -= rowlingSpeedY;
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                {
+                    rowling.x -= rowlingSpeedY/speedCut;
+                }
+                if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                {
+                    rowling.x += rowlingSpeedY/speedCut;
+                }
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                {
+                    rowling.y -= rowlingSpeedX/speedCut;
+                }
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    rowling.y += rowlingSpeedX/speedCut;
+                }
             }
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            else
             {
-                rowling.x += rowlingSpeedY;
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                {
+                    rowling.x -= rowlingSpeedY;
+                }
+                if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                {
+                    rowling.x += rowlingSpeedY;
+                }
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                {
+                    rowling.y -= rowlingSpeedX;
+                }
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    rowling.y += rowlingSpeedX;
+                }
             }
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-            {
-                rowling.y -= rowlingSpeedX;
-            }
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-            {
-                rowling.y += rowlingSpeedX;
-            }
+            
             if (rowling.x <= -90)
             {
                 rowling.x = -89;
