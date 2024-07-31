@@ -19,6 +19,7 @@ public class UIScript : MonoBehaviour
     private TextMeshProUGUI pmsTex;
     private TextMeshProUGUI playerSpeedTex;
     private TextMeshProUGUI playerSpeedBuffTex;
+    private bool targetMarkerflag;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -53,7 +54,11 @@ public class UIScript : MonoBehaviour
         }
         else
         {
-            targetMarker.SetActive(true);
+            if(targetMarkerflag)
+            {
+                targetMarker.SetActive(true);
+            }
+            
             pms.SetActive(true);
             playerSpeed.SetActive(true);
             playerSpeedBuff.SetActive(true);
@@ -126,10 +131,12 @@ public class UIScript : MonoBehaviour
 
         if (Vector3.Dot(Camera.main.transform.forward, (targetPos - Camera.main.transform.position)) < 0)
         {
+            targetMarkerflag = false;
             targetMarker.SetActive(false);
         }
         else
         {
+            targetMarkerflag = true;
             targetMarker.SetActive(true);
         }
     }
