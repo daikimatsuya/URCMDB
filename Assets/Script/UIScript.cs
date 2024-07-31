@@ -125,7 +125,10 @@ public class UIScript : MonoBehaviour
         Vector2 pos;
         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, targetPos);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasPos, screenPos, Camera.main, out pos);
-        targetMarkerPos.localPosition = new Vector3(pos.x, pos.y, targetMarkerPos.localPosition.z);
+        if(pos.x != 0.0f && pos.y != 0)
+        {
+            targetMarkerPos.localPosition = new Vector3(pos.x, pos.y);
+        }
 
 
         if (Vector3.Dot(Camera.main.transform.forward, (targetPos - Camera.main.transform.position)) < 0)
