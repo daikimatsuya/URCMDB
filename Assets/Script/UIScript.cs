@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIScript : MonoBehaviour
@@ -11,6 +12,7 @@ public class UIScript : MonoBehaviour
     private GameOverUIScript goUs;
     private RectTransform canvasPos;
     private RectTransform targetMarkerPos;
+
 
     private Vector3 playerRot;
     private Vector3 targetPos;
@@ -90,6 +92,16 @@ public class UIScript : MonoBehaviour
         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, targetPos);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasPos, screenPos, Camera.main, out pos);
         targetMarkerPos.localPosition = new Vector3(pos.x, pos.y, targetMarkerPos.localPosition.z);
+
+
+        if (Vector3.Dot(Camera.main.transform.forward, (targetPos - Camera.main.transform.position)) < 0)
+        {
+            targetMarker.SetActive(false);
+        }
+        else
+        {
+            targetMarker.SetActive(true);
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -101,6 +113,7 @@ public class UIScript : MonoBehaviour
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
         targetMarkerPos=targetMarker.GetComponent<RectTransform>(); 
+
        
   
     }
