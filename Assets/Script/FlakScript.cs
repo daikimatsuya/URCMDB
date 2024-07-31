@@ -25,7 +25,7 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private GameObject line;
     [SerializeField] private GameObject marker;
 
-    [SerializeField] private bool isCanReach;
+    //[SerializeField] private bool isCanReach;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
 
@@ -90,7 +90,7 @@ public class FlakScript : MonoBehaviour
         }
         else
         {
-            isCanReach = false;
+            //isCanReach = false;
             intervalBuff = (int)(shotInterval * 60);
 
             if(lineUI != null)
@@ -138,7 +138,7 @@ public class FlakScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            isCanReach = true;
+            //isCanReach = true;
             playerPos = other.transform;
             playerScript = other.GetComponent<PlayerScript>();
             GameObject _ = Instantiate(line);
@@ -151,7 +151,7 @@ public class FlakScript : MonoBehaviour
         if(other.tag == "Player")
         {
             intervalBuff = (int)(shotInterval * 60);
-            isCanReach = false;
+            //isCanReach = false;
             playerPos = null;
         }
     }
@@ -159,7 +159,7 @@ public class FlakScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isCanReach=false;      
+        //isCanReach=false;      
         pos=GetComponent<Transform>();
         linePos = line.GetComponent<Transform>();
         lineScript=line.GetComponent<LineUIScript>();

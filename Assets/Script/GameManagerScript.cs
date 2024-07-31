@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private string title;
 
     private PlayerScript ps;
-    private Vector3 targetPos;
+    private Transform targetPos;
 
     private bool playerDead;
     private Vector3 playerRot;
@@ -124,9 +124,8 @@ public class GameManagerScript : MonoBehaviour
     }
     public Vector3 GetTargetPos()
     {
-
-        return targetPos;
-        
+        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
+        return targetPos.position;
     }
     // Start is called before the first frame update
     void Start()
@@ -135,7 +134,7 @@ public class GameManagerScript : MonoBehaviour
         PMS = true;
         gameOverFlag= false;
         ClearFlag = false;
-        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>().position;
+        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         if (!GameObject.FindWithTag("Player"))
         {
             GameObject _ = Instantiate(player);

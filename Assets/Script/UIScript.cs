@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIScript : MonoBehaviour
@@ -122,7 +121,7 @@ public class UIScript : MonoBehaviour
     }
     private void TargetMarkerUI()
     {
-        targetPos = gm.GetTargetPos();
+
         Vector2 pos;
         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, targetPos);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasPos, screenPos, Camera.main, out pos);
@@ -143,6 +142,8 @@ public class UIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         canvasPos = GetComponent<RectTransform>();
 
         gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
@@ -155,6 +156,7 @@ public class UIScript : MonoBehaviour
         playerSpeedTex = playerSpeed.GetComponent<TextMeshProUGUI>();
         playerSpeedBuffTex = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
 
+        targetPos = gm.GetTargetPos();
     }
 
     // Update is called once per frame

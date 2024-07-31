@@ -37,12 +37,12 @@ public class PlayerScript : MonoBehaviour
     private bool isControl;
     private float ringSpeed;
     private bool PMS;
-    [SerializeField] private bool RockOned;
+    //[SerializeField] private bool RockOned;
  
 
     private void PlayerController()
     {
-        RockOned = false;
+        //RockOned = false;
 
         Booooooomb();
         Operation();
@@ -240,7 +240,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void IsLock()
     {
-        RockOned = true;
+        //RockOned = true;
     }
     public double ToRadian(double angle)
     {
@@ -290,7 +290,7 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position=lp.GetPos();
-        RockOned = false;
+        //RockOned = false;
        
     }
 
