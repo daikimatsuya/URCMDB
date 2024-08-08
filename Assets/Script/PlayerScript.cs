@@ -197,6 +197,7 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetKey(KeyCode.Alpha0))
         {
             playerSpeed = 0;
+            speedBuff = 0;
         }
         if ((Input.GetKey(KeyCode.Alpha1)))
         {
