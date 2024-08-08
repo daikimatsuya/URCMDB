@@ -44,6 +44,8 @@ public class PlayerScript : MonoBehaviour
     {
         //RockOned = false;
 
+        SpeedControllDebager();//デバッグ用
+
         Booooooomb();
         Operation();
         Acceleration();
@@ -188,6 +190,21 @@ public class PlayerScript : MonoBehaviour
         if(isControl)
         {
             speedBuff = playerSpeed + burstSpeed+ringSpeed;
+        }
+    }
+    private void SpeedControllDebager()
+    {
+        if(Input.GetKey(KeyCode.Alpha0))
+        {
+            playerSpeed = 0;
+        }
+        if ((Input.GetKey(KeyCode.Alpha1)))
+        {
+            playerSpeed++;
+        }
+        if ((Input.GetKey(KeyCode.Alpha2)))
+        {
+            playerSpeed--;
         }
     }
     private void FlameEffect()
