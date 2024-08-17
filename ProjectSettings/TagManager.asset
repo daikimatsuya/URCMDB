@@ -18,6 +18,8 @@ TagManager:
   - PlayerDust
   - TitleManager
   - GameOverUI
+  - MarkerCanvas
+  - TargetMarker
   layers:
   - Default
   - TransparentFX

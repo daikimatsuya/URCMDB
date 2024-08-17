@@ -20,13 +20,15 @@ public class UIScript : MonoBehaviour
     private TextMeshProUGUI playerSpeedBuffTex;
     private bool targetMarkerflag;
     private Camera mainCamera;
+    private RectTransform markerCanvas;
+    private GameObject targetMarker;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
     [SerializeField] private GameObject pms;
     [SerializeField] private GameObject playerSpeed;
     [SerializeField] private GameObject playerSpeedBuff;
-    [SerializeField] private GameObject targetMarker;
+
     [SerializeField] private GameObject yawUI;
     [SerializeField] private GameObject yawUI2;
     [SerializeField] private GameObject rowImage;
@@ -125,9 +127,10 @@ public class UIScript : MonoBehaviour
 
         Vector2 pos;
         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetPos);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasPos, screenPos, mainCamera, out pos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(markerCanvas, screenPos, mainCamera, out pos);
 
-        targetMarkerPos.localPosition = new Vector3(pos.x, pos.y);
+        targetMarker.transform.localPosition = pos;
+
         
 
 
@@ -154,11 +157,13 @@ public class UIScript : MonoBehaviour
         yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
-        targetMarkerPos=targetMarker.GetComponent<RectTransform>();
+        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
+        targetMarker = GameObject.FindWithTag("TargetMarker");
 
         pmsTex = pms.GetComponent<TextMeshProUGUI>();
         playerSpeedTex = playerSpeed.GetComponent<TextMeshProUGUI>();
         playerSpeedBuffTex = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
+
 
         targetPos = gm.GetTargetPos();
     }
