@@ -307,7 +307,7 @@ MonoBehaviour:
   retryPos: -200
   backTitlePos: 200
   cursorPos: {fileID: 3035848919925433270}
-  targetHpTex: {fileID: 0}
+  targetHpTex: {fileID: 9059915485162774821}
 --- !u!1 &5979786581871371120
 GameObject:
   m_ObjectHideFlags: 0
