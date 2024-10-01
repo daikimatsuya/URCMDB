@@ -32,7 +32,10 @@ public class SpeedUpRingScript : MonoBehaviour
         if (isGet)
         {
             tf.localScale = new Vector3(0, 0, 0);
-            ms.Delete();
+            if(ms!=null)
+            {
+                ms.Delete();
+            }
         }
     }
     private void ON()

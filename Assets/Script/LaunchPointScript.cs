@@ -70,6 +70,7 @@ public class LaunchPointScript : MonoBehaviour
     void Start()
     {
         tf=GetComponent<Transform>();   
+        rowling=new Vector2(tf.localEulerAngles.x,tf.localEulerAngles.y);
 
         isControll = true;
        

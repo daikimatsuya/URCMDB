@@ -13062,22 +13062,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5422282899932315148, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
-      propertyPath: rockSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5422282899932315148, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
-      propertyPath: rockSize.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5422282899932315148, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
-      propertyPath: spawnWidth.x
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 5422282899932315148, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
-      propertyPath: spawnWidth.y
-      value: 400
-      objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315149, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: m_Name
       value: RockFall
@@ -13092,11 +13076,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315151, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 433
+      value: 793.39
       objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315151, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -440
+      value: -454.45
       objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315151, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: m_LocalRotation.w
