@@ -20,6 +20,7 @@ TagManager:
   - GameOverUI
   - MarkerCanvas
   - TargetMarker
+  - Rock
   layers:
   - Default
   - TransparentFX
