@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rock: {fileID: 8088954530154100155, guid: e90177b68b8e9fd4caa4ca630f09f7ef, type: 3}
-  spawnInterval: 1
-  spawnWidth: {x: 200, y: 200}
+  spawnInterval: 0.2
+  spawnWidth: {x: 400, y: 400}
   breakArea: -200
-  fallSpeed: 20
+  fallSpeed: 60
+  rockSize: {x: 1, y: 2}
