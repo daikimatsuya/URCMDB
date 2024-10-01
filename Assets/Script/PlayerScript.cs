@@ -308,7 +308,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PMS = true;
+        PMS = false;
         time = time * 60;
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();

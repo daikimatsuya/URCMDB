@@ -9,6 +9,7 @@ public class LineUIScript : MonoBehaviour
 
     private int timeBuff;
     private bool red;
+    private bool brock;
 
     [SerializeField] private float rand;
     [SerializeField] private float colorChangeTime;
@@ -57,6 +58,14 @@ public class LineUIScript : MonoBehaviour
     private void SetTime()
     {
         timeBuff = (int)(colorChangeTime * 60);
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.tag != "Player")
+        {
+              brock=true;
+        }
     }
 
     // Start is called before the first frame update

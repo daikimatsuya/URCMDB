@@ -131,7 +131,7 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        PMS = true;
+        PMS = false;
         gameOverFlag= false;
         ClearFlag = false;
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
