@@ -21,6 +21,7 @@ TagManager:
   - MarkerCanvas
   - TargetMarker
   - Rock
+  - stage
   layers:
   - Default
   - TransparentFX

@@ -104,9 +104,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6566983059578203607}
+  - component: {fileID: 8714959232979467376}
   m_Layer: 0
   m_Name: Stage
-  m_TagString: Untagged
+  m_TagString: stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +133,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8714959232979467376
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6566983059578203606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 20000
+  m_Center: {x: 0, y: 0, z: -19000}
 --- !u!1 &6566983060162850782
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,11 +504,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8580634092724796725, guid: 29f092ab999241042a1b110d9738493c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1189.5056
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580634092724796725, guid: 29f092ab999241042a1b110d9738493c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16360.312
+      value: -37648
       objectReference: {fileID: 0}
     - target: {fileID: 8580634092724796725, guid: 29f092ab999241042a1b110d9738493c, type: 3}
       propertyPath: m_LocalRotation.w
