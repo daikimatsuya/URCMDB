@@ -3289,7 +3289,7 @@ Transform:
   m_GameObject: {fileID: 427311071}
   m_LocalRotation: {x: -0, y: -0.9573589, z: -0, w: 0.2889016}
   m_LocalPosition: {x: -24, y: 400, z: -10578}
-  m_LocalScale: {x: 1000, y: 1000, z: 100}
+  m_LocalScale: {x: 1108.1001, y: 1000, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1910647671}
@@ -6869,7 +6869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315148, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: fallSpeed
-      value: 200
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315148, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: rockSize.x
@@ -6889,7 +6889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315148, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: spawnInterval
-      value: 0.8
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5422282899932315149, guid: 4ef9c5853a41e4440a21a964c41f2a66, type: 3}
       propertyPath: m_Name

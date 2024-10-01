@@ -669,14 +669,14 @@ MonoBehaviour:
   coolTimeBuff: 0
   isStageSelect: 0
   stageCount: 0
-  maxStage: 5
+  maxStage: 1
   betTime: 1
   stageSelectCoolTime: 0.1
   stage:
   - Stage1
   - Stage1
   - Stage1
-  - SampleScene
+  - Stage1
   - Stage1
   - Stage1
 --- !u!1001 &7347044719948423556
@@ -690,6 +690,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b10edcfafe40cde49b981448b3e79dc2, type: 2}
+    - target: {fileID: 1779360108929659468, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512660663658694099, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560219169087568608, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2801382136352766806, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -740,6 +752,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534477994385250880, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
