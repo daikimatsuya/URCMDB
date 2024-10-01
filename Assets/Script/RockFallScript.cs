@@ -9,7 +9,7 @@ public class RockFallScript : MonoBehaviour
     [SerializeField] private Vector2 spawnWidth;
     [SerializeField] private float breakArea;
     [SerializeField] private float fallSpeed;
-    [SerializeField] private Vector2 rockSize;
+    [Tooltip("x:ç≈è¨íl  y:ç≈ëÂíl")] [SerializeField] private Vector2 rockSize;
 
     Transform tf;
 
@@ -18,7 +18,7 @@ public class RockFallScript : MonoBehaviour
     // Start is called before the first frame update
     private void FallRockController()
     {
-        spawnPos = tf.position;//å„Ç≈è¡Ç∑
+        spawnPos = tf.position;
         if (intervalBuff < 0) 
         {
             SpawnRock();
@@ -31,9 +31,11 @@ public class RockFallScript : MonoBehaviour
         float randY = Random.Range(0, spawnWidth.y);
         randX -= spawnWidth.x / 2;
         randY -= spawnWidth.y / 2;
+        float randScale=Random.Range(rockSize.x, rockSize.y);
 
         GameObject _=Instantiate(rock);
         _.transform.position = new Vector3(spawnPos.x + randX, spawnPos.y, spawnPos.z + randY);
+        _.transform.localScale = new Vector3(_.transform.localScale.x * randScale, _.transform.localScale.y * randScale, _.transform.localScale.z * randScale);
         RoclScript rs=_.GetComponent<RoclScript>();
         rs.GetBreakArea(breakArea);
         rs.GetFallSpeed(fallSpeed);
