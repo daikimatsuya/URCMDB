@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3003304992172900266}
   - component: {fileID: 1672831005678619591}
   - component: {fileID: 62840231584075077}
-  - component: {fileID: 4504710003763900421}
+  - component: {fileID: 1632086958654709537}
   m_Layer: 5
   m_Name: model
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4504710003763900421
-BoxCollider:
+--- !u!136 &1632086958654709537
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,8 +94,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8179791986025536740
 GameObject:
@@ -110,7 +111,7 @@ GameObject:
   - component: {fileID: 6994551650166640289}
   m_Layer: 5
   m_Name: miniPlayer
-  m_TagString: Untagged
+  m_TagString: miniPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,5 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d34898a4588084c9d00853a137d770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoMoveSpeed: 0
+  moveSpeed: 0.1
   autoRotateSpeed: 1
+  rollingTime: 10
