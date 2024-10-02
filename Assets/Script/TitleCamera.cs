@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TitleCamera : MonoBehaviour
 {
-    [SerializeField] private Vector3 firstPos;
+    
     [SerializeField] private Vector3 movePos;
     [SerializeField] private float moveTime;
     [SerializeField] private float zoomSpeed;
@@ -17,6 +17,7 @@ public class TitleCamera : MonoBehaviour
 
     private float time;
     private bool moveEnd;
+    private Vector3 firstPos;
 
     private void TitleCameraController()
     {
