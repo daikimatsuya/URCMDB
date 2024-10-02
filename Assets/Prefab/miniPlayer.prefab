@@ -160,3 +160,5 @@ MonoBehaviour:
   moveSpeed: 0.1
   autoRotateSpeed: 1
   rollingTime: 10
+  maxHigh: 51.5
+  maxLow: 44.5

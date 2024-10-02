@@ -7,8 +7,11 @@ public class miniPlayerScript : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float autoRotateSpeed;
     [SerializeField] float rollingTime;
+    [SerializeField] float maxHigh;
+    [SerializeField] float maxLow;
 
 
+    TitlegameScript ts;
     Transform tf;
 
 
@@ -33,6 +36,11 @@ public class miniPlayerScript : MonoBehaviour
         }
 
         Move();
+
+        if(ts.GetResetFlag())
+        {
+            ResetPlayer();
+        }
     }
     private void Move()
     {
@@ -68,6 +76,14 @@ public class miniPlayerScript : MonoBehaviour
         {
             movePow-=moveSpeed;
         }
+        if(movePow>=maxHigh)
+        {
+            movePow = maxHigh;
+        }
+        if(movePow<maxLow)
+        {
+            movePow = maxLow;
+        }
         tf.position = new Vector3(tf.position.x, movePow, tf.position.z);
     }
     private void RollingDirection()
@@ -76,23 +92,25 @@ public class miniPlayerScript : MonoBehaviour
     }
     private void AutoRotation()
     {
-        tf.eulerAngles = new Vector3(tf.eulerAngles.x, tf.eulerAngles.y - autoRotateSpeed, tf.eulerAngles.z);
+        tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y - autoRotateSpeed, tf.localEulerAngles.z);
     }
     private void FixedRotation()
     {
         if (tf.eulerAngles.y <= autoRotateSpeed)
         {
-            tf.eulerAngles = new Vector3(tf.eulerAngles.x, 0.0f, tf.eulerAngles.z);
+            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, 0.0f, tf.localEulerAngles.z);
             isMove = true;
+            ts.SetMoveFlag(true);
         }
-        else if (tf.eulerAngles.y + autoRotateSpeed >= 360.0f)
+        else if (tf.localEulerAngles.y + autoRotateSpeed >= 360.0f)
         {
-            tf.eulerAngles = new Vector3(tf.eulerAngles.x, 0.0f, tf.eulerAngles.z);
+            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, 0.0f, tf.localEulerAngles.z);
             isMove = true;
+            ts.SetMoveFlag(true);
         }
         else
         {
-            tf.eulerAngles = new Vector3(tf.eulerAngles.x, tf.eulerAngles.y - autoRotateSpeed, tf.eulerAngles.z);
+            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y - autoRotateSpeed, tf.localEulerAngles.z);
         }
     }
     private void ResetTransfrom()
@@ -110,8 +128,9 @@ public class miniPlayerScript : MonoBehaviour
     void Start()
     {
         tf=GetComponent<Transform>();
+        ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
         initialPos = tf.transform.position;
-        initialRot = tf.transform.eulerAngles;
+        initialRot = tf.transform.localEulerAngles;
 
         ResetPlayer();
     }

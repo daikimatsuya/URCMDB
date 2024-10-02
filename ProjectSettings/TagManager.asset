@@ -23,6 +23,7 @@ TagManager:
   - Rock
   - stage
   - miniPlayer
+  - miniManager
   layers:
   - Default
   - TransparentFX
