@@ -6,6 +6,7 @@ public class TitlegameScript : MonoBehaviour
 {
     private bool isReset;
     private bool isMoveStart;
+    private bool isHit;
     private void TitleGameController()
     {
         if (isReset)
@@ -15,7 +16,12 @@ public class TitlegameScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             isReset = true;
+            ResetFlags();
         }
+    }
+    private void ResetFlags()
+    {
+        isMoveStart = false;
     }
     public bool GetResetFlag()
     {
@@ -28,6 +34,10 @@ public class TitlegameScript : MonoBehaviour
     public bool GetMoveFlag()
     {
         return isMoveStart;
+    }
+    public void SetHitFlag(bool flag)
+    {
+        isHit = flag;
     }
     // Start is called before the first frame update
     void Start()

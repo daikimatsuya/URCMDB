@@ -24,16 +24,14 @@ public class miniPlayerScript : MonoBehaviour
 
 
 
+
     private void miniPlayerController()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             isRolling = false;
         }
-        else
-        {
-            isRolling = true;
-        }
+
 
         Move();
 
@@ -63,6 +61,12 @@ public class miniPlayerScript : MonoBehaviour
     private void AutoMove()
     {
 
+    }
+    private void ResetPlayer()
+    {
+        isRolling = true;
+        isMove = false;
+        ResetTransfrom();
     }
 
     private void ControllMove()
@@ -118,12 +122,14 @@ public class miniPlayerScript : MonoBehaviour
         tf.position = initialPos;
         tf.eulerAngles = initialRot;
     }
-    public void ResetPlayer()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        isRolling = true;
-        isMove = false; 
-        ResetTransfrom();
+       //ts.SetHitFlag(true);
+        ts.SetMoveFlag(false);
     }
+
+
     // Start is called before the first frame update
     void Start()
     {
