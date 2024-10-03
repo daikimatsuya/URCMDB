@@ -24,6 +24,7 @@ TagManager:
   - stage
   - miniPlayer
   - miniManager
+  - Cloud
   layers:
   - Default
   - TransparentFX

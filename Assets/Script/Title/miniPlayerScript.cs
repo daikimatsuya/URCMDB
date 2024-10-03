@@ -31,8 +31,6 @@ public class miniPlayerScript : MonoBehaviour
         {
             isRolling = false;
         }
-
-
         Move();
 
         if(ts.GetResetFlag())
@@ -125,8 +123,12 @@ public class miniPlayerScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       //ts.SetHitFlag(true);
-        ts.SetMoveFlag(false);
+        //ts.SetHitFlag(true);
+        if (collision.gameObject.tag == "Cloud")
+        {
+            ts.SetMoveFlag(false);
+            ts.SetMiniPlayerDead(true);
+        }
     }
 
 

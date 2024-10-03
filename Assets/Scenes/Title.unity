@@ -175,6 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35d95bd92439204488b4cb4b8c8013a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0.1
+  limitPos: -10
+  resetPos: 0
 --- !u!65 &612332863
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -878,6 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec557b0b8216704ab22a35a885fab2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetInterval: 0
 --- !u!1 &1749908278
 GameObject:
   m_ObjectHideFlags: 0
