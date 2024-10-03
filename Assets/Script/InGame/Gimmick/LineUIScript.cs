@@ -16,7 +16,6 @@ public class LineUIScript : MonoBehaviour
 
     public void SetLine(Vector3 Pos,Vector3 targetLength)
     {
- 
         line.SetPosition(0, targetLength);
         pos.position = Pos;
     }

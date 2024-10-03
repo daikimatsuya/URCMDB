@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SheidScript : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float resetPos;
+
     Transform tf;
     TitlegameScript ts;
 
     private Vector3 initialPos;
-    private float moveSpeed;
     private bool isAction;
 
     private void SheidController()
