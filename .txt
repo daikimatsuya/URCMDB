@@ -1,0 +1,2 @@
+﻿[*.{cs}]
+sharset=utf-8
