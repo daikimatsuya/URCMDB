@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TitleScript : MonoBehaviour
 {
     private Transform cameraPos;
+    private TitlegameScript ts;
 
 
     private bool moveEnd;
@@ -39,6 +40,7 @@ public class TitleScript : MonoBehaviour
     {
         if (!isPush)
         {
+            ts.SetResetActionFlag(true);
             isStageSelect = true;
             isPush = true;
         }
@@ -137,6 +139,9 @@ public class TitleScript : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+
+        ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
+
         TitleController();
         stageCount = 1;
         stageChangeCount = 1;

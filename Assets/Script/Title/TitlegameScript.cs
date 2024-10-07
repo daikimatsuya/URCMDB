@@ -5,6 +5,7 @@ using UnityEngine;
 public class TitlegameScript : MonoBehaviour
 {
     [SerializeField] private float resetInterval;
+    private int intervalBuff;
 
     private bool isReset;
     private bool isMoveStart;
@@ -12,7 +13,7 @@ public class TitlegameScript : MonoBehaviour
     private bool isResetAction;
     private bool isMiniPlayerDead;
 
-    private int intervalBuff;
+   
     private int resetDelay;
 
     private void TitleGameController()
@@ -56,7 +57,7 @@ public class TitlegameScript : MonoBehaviour
     public void SetResetFlag(bool flag)
     {
         isReset=flag;
-        resetDelay=1;
+        resetDelay=30;//ëΩï™Ç†Ç∆Ç≈è¡Ç∑ÇÊÇ≠ÇÌÇ©ÇÁÇ»Ç¢
     }
     public void SetMoveFlag(bool flag)
     {
