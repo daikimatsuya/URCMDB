@@ -12,12 +12,16 @@ public class TitlegameScript : MonoBehaviour
     private bool isHit;
     private bool isResetAction;
     private bool isMiniPlayerDead;
-
+    private bool isGameStart;
    
     private int resetDelay;
 
     private void TitleGameController()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isGameStart = true;
+        }
         if (isReset)
         {
 
@@ -34,6 +38,7 @@ public class TitlegameScript : MonoBehaviour
     {
         isMoveStart = false;
         isMiniPlayerDead = false;
+        isGameStart = false;
     }
     private void ResetTimer()
     {
@@ -82,6 +87,10 @@ public class TitlegameScript : MonoBehaviour
     public void SetMiniPlayerDead(bool isDead)
     {
         isMiniPlayerDead = isDead;
+    }
+    public bool GetGameStartFlag()
+    {
+        return isGameStart;
     }
    
     // Start is called before the first frame update

@@ -27,7 +27,7 @@ public class miniPlayerScript : MonoBehaviour
 
     private void miniPlayerController()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if(ts.GetGameStartFlag())
         {
             isRolling = false;
         }
