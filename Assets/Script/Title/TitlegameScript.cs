@@ -47,6 +47,7 @@ public class TitlegameScript : MonoBehaviour
         isMoveStart = false;
         isMiniPlayerDead = false;
         isGameStart = false;
+        isGoalAction = false;
 
         startCountBuff = (int)(minigameStartCount * 60);
     }
@@ -105,6 +106,10 @@ public class TitlegameScript : MonoBehaviour
     public void SetGoalActionFlag(bool flag)
     {
         isGoalAction = flag;
+    }
+    public bool GetGoalActionFlag()
+    {
+        return isGoalAction;
     }
    
     // Start is called before the first frame update
