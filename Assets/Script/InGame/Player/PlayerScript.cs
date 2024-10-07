@@ -288,6 +288,10 @@ public class PlayerScript : MonoBehaviour
             playerHp = 0;
             other.GetComponent<FlakBulletScript>().Delete();            
         }
+        if( other.tag == "Rock")
+        {
+            playerHp = 0;
+        }
         if( other.tag == "stage")
         {
             isInStage = true;
