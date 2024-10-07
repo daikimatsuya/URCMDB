@@ -25,6 +25,7 @@ TagManager:
   - miniPlayer
   - miniManager
   - Cloud
+  - Goal
   layers:
   - Default
   - TransparentFX

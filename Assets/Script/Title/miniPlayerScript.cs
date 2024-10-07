@@ -69,24 +69,29 @@ public class miniPlayerScript : MonoBehaviour
 
     private void ControllMove()
     {
-        float movePow = tf.position.y;
-        if (Input.GetKey(KeyCode.W))
+        if (ts.GetMoveFlag())
         {
-            movePow += moveSpeed;
+
+
+            float movePow = tf.position.y;
+            if (Input.GetKey(KeyCode.W))
+            {
+                movePow += moveSpeed;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                movePow -= moveSpeed;
+            }
+            if (movePow >= maxHigh)
+            {
+                movePow = maxHigh;
+            }
+            if (movePow < maxLow)
+            {
+                movePow = maxLow;
+            }
+            tf.position = new Vector3(tf.position.x, movePow, tf.position.z);
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            movePow-=moveSpeed;
-        }
-        if(movePow>=maxHigh)
-        {
-            movePow = maxHigh;
-        }
-        if(movePow<maxLow)
-        {
-            movePow = maxLow;
-        }
-        tf.position = new Vector3(tf.position.x, movePow, tf.position.z);
     }
     private void RollingDirection()
     {
@@ -128,6 +133,21 @@ public class miniPlayerScript : MonoBehaviour
         {
             ts.SetMoveFlag(false);
             ts.SetMiniPlayerDead(true);
+            
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Goal")
+        {
+            ts.SetResetActionFlag(true);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Goal")
+        {
+            ts.SetGoalActionFlag(true);
         }
     }
 

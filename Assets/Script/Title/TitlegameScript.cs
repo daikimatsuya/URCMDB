@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TitlegameScript : MonoBehaviour
 {
+    [SerializeField] private float minigameStartCount;
+    private int startCountBuff;
     [SerializeField] private float resetInterval;
     private int intervalBuff;
 
@@ -13,12 +15,17 @@ public class TitlegameScript : MonoBehaviour
     private bool isResetAction;
     private bool isMiniPlayerDead;
     private bool isGameStart;
+    private bool isGoalAction;
    
     private int resetDelay;
 
     private void TitleGameController()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyUp(KeyCode.F)) 
+        { 
+            isGameStart = true;
+        }
+        if (startCountBuff<=0)
         {
             isGameStart = true;
         }
@@ -33,12 +40,15 @@ public class TitlegameScript : MonoBehaviour
             resetDelay--;
         }
         ResetTimer();
+        startCountBuff--;
     }
     private void ResetFlags()
     {
         isMoveStart = false;
         isMiniPlayerDead = false;
         isGameStart = false;
+
+        startCountBuff = (int)(minigameStartCount * 60);
     }
     private void ResetTimer()
     {
@@ -92,12 +102,18 @@ public class TitlegameScript : MonoBehaviour
     {
         return isGameStart;
     }
+    public void SetGoalActionFlag(bool flag)
+    {
+        isGoalAction = flag;
+    }
    
     // Start is called before the first frame update
     void Start()
     {
         isReset = false;
-        isResetAction = false;
+        isResetAction = true;
+
+        startCountBuff = (int)(minigameStartCount * 60);
     }
 
     // Update is called once per frame
