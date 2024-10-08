@@ -14,16 +14,21 @@ public class TitleScript : MonoBehaviour
     private int stageChangeCount;
     private bool isSceneChange;
     private bool isPush;
-    private int betBuff;
-    [SerializeField] private int coolTimeBuff;
+
+
 
     [SerializeField] private bool isStageSelect;
     [SerializeField] private int stageCount;
     [SerializeField] private int maxStage;
-    [SerializeField] private float betTime;
-    [SerializeField] private float stageSelectCoolTime;
+    [SerializeField] private string[] stage;
 
-    [SerializeField] private string []stage;
+    [SerializeField] private float betTime;
+    private int betBuff;
+
+    [SerializeField] private float stageSelectCoolTime;
+    [SerializeField] private int coolTimeBuff;
+
+
 
     private void TitleController()
     {
@@ -35,6 +40,8 @@ public class TitleScript : MonoBehaviour
         }
         StageSelect();
         SceneCountDow();
+
+        
     }
     private void InStageSelect()
     {
