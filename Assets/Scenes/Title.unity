@@ -14197,12 +14197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97998c2f2270bf04cb732f37cef6ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolTimeBuff: 0
   isStageSelect: 0
   stageCount: 0
   maxStage: 1
-  betTime: 1
-  stageSelectCoolTime: 0.1
   stage:
   - Stage1
   - Stage1
@@ -14210,6 +14207,9 @@ MonoBehaviour:
   - Stage1
   - Stage1
   - Stage1
+  betTime: 1
+  stageSelectCoolTime: 0.1
+  coolTimeBuff: 0
 --- !u!1001 &2114340020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14481,27 +14481,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a74589a923eda49bab9cb02c76fc45, type: 3}
---- !u!1 &2143605191 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8179791986025536740, guid: f36eb459b77b76c4a97cee3596f09c70, type: 3}
-  m_PrefabInstance: {fileID: 5483656577415578996}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &2143605194
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143605191}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!4 &2143612726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1039069308248200310, guid: 32834dd88b311f349a4d936181fbeec4, type: 3}
