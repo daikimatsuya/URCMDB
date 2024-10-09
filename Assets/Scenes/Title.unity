@@ -14590,10 +14590,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2096328453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97998c2f2270bf04cb732f37cef6ac7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6abf7731cd9dfdd43b2e2bd545c82ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStageSelect: 0
+  isCameraMove: 0
   stageCount: 0
   maxStage: 1
   stage:
@@ -14618,6 +14618,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d77e9666e43c34fa7d37e70bfac0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageCount: 0
+  maxStage: 1
+  stage:
+  - Stage1
+  - Stage1
+  - Stage1
+  - Stage1
+  - Stage1
+  - Stage1
+  stageSelectCoolTime: 0.1
+  coolTimeBuff: 0
 --- !u!4 &2110879514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}

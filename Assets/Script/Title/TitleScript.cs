@@ -9,7 +9,8 @@ public class TitleScript : MonoBehaviour
     private TitlegameScript ts;
 
 
-    private bool moveEnd;
+    private bool cameraMoveEnd;
+    private bool isStageSelect;
     private bool rotateEnd;
     private int stageChangeCount;
     private bool isSceneChangeMode;
@@ -18,7 +19,7 @@ public class TitleScript : MonoBehaviour
 
 
 
-    [SerializeField] private bool isStageSelect;
+    [SerializeField] private bool isCameraMove;
     [SerializeField] private int stageCount;
     [SerializeField] private int maxStage;
     [SerializeField] private string[] stage;
@@ -37,25 +38,24 @@ public class TitleScript : MonoBehaviour
         SceneChange();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            InStageSelect();
+            CameraStartMove();
         }
-        StageSelect();
+        //StageSelect();
         SceneCountDow();
 
         
     }
-    private void InStageSelect()
+    private void CameraStartMove()
     {
         if (!isPush)
         {
-
-            isStageSelect = true;
+            isCameraMove = true;
             isPush = true;
         }
     }
     private void StageSelect()
     {
-        if (moveEnd&&isStageSelect&&rotateEnd)
+        if (cameraMoveEnd&&isCameraMove&&rotateEnd)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0)) 
             {
@@ -101,13 +101,13 @@ public class TitleScript : MonoBehaviour
     {
         if (!isPush)
         {
-            if (moveEnd && isStageSelect && rotateEnd)
+            if (cameraMoveEnd && isCameraMove && rotateEnd)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     if (stageCount == 0)
                     {
-                        isStageSelect = false;
+                        isCameraMove = false;
                         stageCount = 1;
                         stageChangeCount = 1;
                         ts.SetResetFlag(true);
@@ -122,9 +122,21 @@ public class TitleScript : MonoBehaviour
             }
         }
     }
+    public bool GetStageSelectFlag()
+    {
+        if (cameraMoveEnd && isCameraMove)
+        {
+            isStageSelect = true;
+        }
+        else
+        {
+            isStageSelect = false;
+        }
+        return isStageSelect;
+    }
     public bool GetIsStageSelect()
     {
-        return isStageSelect;
+        return isCameraMove;
     }
     public Vector2 GetStageCount()
     {
@@ -136,7 +148,7 @@ public class TitleScript : MonoBehaviour
     }
     public void SendMoveEnd(bool end)
     {
-        moveEnd = end;
+        cameraMoveEnd = end;
     }
     public void SendRotateEnd(bool end)
     {
