@@ -47,7 +47,7 @@ public class TitleScript : MonoBehaviour
     {
         if (!isPush)
         {
-            ts.SetResetActionFlag(true);
+
             isStageSelect = true;
             isPush = true;
         }
@@ -109,7 +109,7 @@ public class TitleScript : MonoBehaviour
                         isStageSelect = false;
                         stageCount = 1;
                         stageChangeCount = 1;
-                        
+                        ts.SetResetFlag(true);
                     }
                     else
                     {
@@ -141,7 +141,11 @@ public class TitleScript : MonoBehaviour
     {
         rotateEnd = end;
     }
-   
+    public bool GetSceneChangeFlag()
+    {
+        return isSceneChange;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

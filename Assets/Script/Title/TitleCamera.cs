@@ -69,9 +69,10 @@ public class TitleCamera : MonoBehaviour
     {
         if(ts.GetIsSceneChange())
         {
-            tf.position=new Vector3(tf.position.x,tf.position.y,tf.position.z+zoomSpeed);
+            //tf.position=new Vector3(tf.position.x,tf.position.y,tf.position.z+zoomSpeed);
         }
     }
+
 
     // Start is called before the first frame update
     void Start()
