@@ -13,6 +13,7 @@ public class TitleScript : MonoBehaviour
     private bool isSceneChangeMode;
     private bool sceneChangeFlag;
     private bool isPush;
+    private string stage;
 
     [SerializeField] private bool isCameraMove;
     [SerializeField] private float betTime;
@@ -43,7 +44,7 @@ public class TitleScript : MonoBehaviour
         {
             if (betBuff <= 0)
             {
-                SceneManager.LoadScene(stage[stageCount]);
+                SceneManager.LoadScene(stage);
             }
             betBuff--;
         }
@@ -100,6 +101,10 @@ public class TitleScript : MonoBehaviour
     public void SetSceneChangeFlag(bool flag)
     {
         sceneChangeFlag = flag;
+    }
+    public void SetStage(string stage)
+    {
+        
     }
 
 

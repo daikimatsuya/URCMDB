@@ -18,6 +18,7 @@ public class StageSelectScript : MonoBehaviour
     private void SelectController()
     {
         StageSelect();
+        ts.SetStage(stage[stageCount]);
     }
     private void StageSelect()
     {
