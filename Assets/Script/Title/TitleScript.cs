@@ -53,15 +53,12 @@ public class TitleScript : MonoBehaviour
     {
         if (!isPush)
         {
-            if (cameraMoveEnd && isCameraMove && rotateEnd)
+            if (isStageSelect)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (stageCount == 0)
+                    if (stage==null)
                     {
-                        isCameraMove = false;
-                        stageCount = 1;
-                        stageChangeCount = 1;
                         ts.SetResetFlag(true);
                     }
                     else
@@ -104,7 +101,7 @@ public class TitleScript : MonoBehaviour
     }
     public void SetStage(string stage)
     {
-        
+        this.stage = stage;
     }
 
 
