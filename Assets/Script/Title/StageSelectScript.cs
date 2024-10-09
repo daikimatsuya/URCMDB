@@ -13,13 +13,15 @@ public class StageSelectScript : MonoBehaviour
     private bool rotateEnd;
     private int stageChangeCount;
 
+    TitleScript ts;
+
     private void SelectController()
     {
         StageSelect();
     }
     private void StageSelect()
     {
-        if (rotateEnd)
+        if (rotateEnd&&ts.GetStageSelectFlag())
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0))
             {
@@ -65,6 +67,8 @@ public class StageSelectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ts=GetComponent<TitleScript>();
+
         stageCount = 1;
         stageChangeCount = 1;
         rotateEnd = true;

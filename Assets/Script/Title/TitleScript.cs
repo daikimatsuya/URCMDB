@@ -8,28 +8,15 @@ public class TitleScript : MonoBehaviour
     private Transform cameraPos;
     private TitlegameScript ts;
 
-
     private bool cameraMoveEnd;
     private bool isStageSelect;
-    private bool rotateEnd;
-    private int stageChangeCount;
     private bool isSceneChangeMode;
     private bool sceneChangeFlag;
     private bool isPush;
 
-
-
     [SerializeField] private bool isCameraMove;
-    [SerializeField] private int stageCount;
-    [SerializeField] private int maxStage;
-    [SerializeField] private string[] stage;
-
     [SerializeField] private float betTime;
     private int betBuff;
-
-    [SerializeField] private float stageSelectCoolTime;
-    [SerializeField] private int coolTimeBuff;
-
 
 
     private void TitleController()
@@ -40,10 +27,7 @@ public class TitleScript : MonoBehaviour
         {
             CameraStartMove();
         }
-        //StageSelect();
-        SceneCountDow();
-
-        
+        //SceneCountDow();
     }
     private void CameraStartMove()
     {
@@ -51,39 +35,6 @@ public class TitleScript : MonoBehaviour
         {
             isCameraMove = true;
             isPush = true;
-        }
-    }
-    private void StageSelect()
-    {
-        if (cameraMoveEnd&&isCameraMove&&rotateEnd)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0)) 
-            {
-                stageChangeCount--;
-                if (stageCount > 0)
-                {
-                    stageCount--;
-                }
-                else
-                {
-                    stageCount = maxStage;
-                }
-                coolTimeBuff = (int)(stageSelectCoolTime * 60);
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && coolTimeBuff == 0))
-            {
-                stageChangeCount++;
-                if (stageCount < maxStage)
-                {
-                    stageCount++;
-                }
-                else
-                {
-                    stageCount = 0;
-                }
-                coolTimeBuff = (int)(stageSelectCoolTime * 60);
-            }
-            coolTimeBuff--;
         }
     }
     private void SceneCountDow()
@@ -96,7 +47,7 @@ public class TitleScript : MonoBehaviour
             }
             betBuff--;
         }
-    }
+    }//Žg‚í‚È‚³‚»‚¤
     private void SceneChange()
     {
         if (!isPush)
@@ -138,10 +89,6 @@ public class TitleScript : MonoBehaviour
     {
         return isCameraMove;
     }
-    public Vector2 GetStageCount()
-    {
-        return new Vector2(stageChangeCount, maxStage);
-    }
     public bool GetIsSceneChangeModeFlag()
     {
         return isSceneChangeMode;
@@ -149,10 +96,6 @@ public class TitleScript : MonoBehaviour
     public void SendMoveEnd(bool end)
     {
         cameraMoveEnd = end;
-    }
-    public void SendRotateEnd(bool end)
-    {
-        rotateEnd = end;
     }
     public void SetSceneChangeFlag(bool flag)
     {
@@ -168,9 +111,7 @@ public class TitleScript : MonoBehaviour
         ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
 
         TitleController();
-        stageCount = 1;
-        stageChangeCount = 1;
-        rotateEnd = true;
+
     }
 
     // Update is called once per frame
