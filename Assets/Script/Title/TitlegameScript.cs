@@ -116,7 +116,7 @@ public class TitlegameScript : MonoBehaviour
     void Start()
     {
         isReset = false;
-        isResetAction = true;
+        isResetAction = false;
 
         startCountBuff = (int)(minigameStartCount * 60);
     }
