@@ -37,14 +37,21 @@ public class LaunchPointScript : MonoBehaviour
         {
             rowling.y += rowlingSpeedX;
         }
-
+        if (rowling.y <= -90)
+        {
+            rowling.y = -90;
+        }
+        if (rowling.y >= 90)
+        {
+            rowling.y = 90;
+        }
         if(rowling.x <= 0)
         {
             rowling.x = 0;
         }
-        if(rowling.x >= 89)
+        if(rowling.x >= 25)
         {
-            rowling.x = 89;
+            rowling.x = 25;
         }
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y,0);
     }
@@ -64,7 +71,7 @@ public class LaunchPointScript : MonoBehaviour
     }
     public Vector2 GetRowling()
     {
-        return tf.localEulerAngles;
+        return tf.eulerAngles;
     }
     // Start is called before the first frame update
     void Start()
