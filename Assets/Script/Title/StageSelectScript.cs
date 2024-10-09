@@ -60,7 +60,7 @@ public class StageSelectScript : MonoBehaviour
     }
     public Vector2 GetStageCount()
     {
-        return new Vector2(stageCount,maxStage);
+        return new Vector2(stageChangeCount,maxStage);
     }
     // Start is called before the first frame update
     void Start()
