@@ -12,6 +12,7 @@ public class StageSelectScript : MonoBehaviour
     private bool rotateEnd;
 
     [SerializeField] private float rotateSpeed;
+    [SerializeField] private float baseRot;
 
     private void StageSelectController()
     {
@@ -51,11 +52,11 @@ public class StageSelectScript : MonoBehaviour
                 rotateEnd = true;
                 ts.SendRotateEnd(rotateEnd);
             }
-            tf.eulerAngles = new Vector3(0, rotateBuff, 0);
+            tf.localEulerAngles = new Vector3(0, rotateBuff, 0);
         }
         else
         {
-            tf.eulerAngles = new Vector3(0, rotateBuff, 0);     
+            tf.localEulerAngles = new Vector3(0, rotateBuff, 0);     
             rotateBuff = 0;
         }
     }
@@ -64,7 +65,7 @@ public class StageSelectScript : MonoBehaviour
     {
         ts = GameObject.FindWithTag("TitleManager").GetComponent<TitleScript>();
         tf = GetComponent<Transform>();
-        rotateBuff=tf.eulerAngles.y;
+        rotateBuff=tf.localEulerAngles.y;
 
     }
 
