@@ -24,7 +24,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
     }
     private void UpDown()
     {
-        if (ts.GetIsSceneChange())
+        if (ts.GetIsSceneChangeModeFlag())
         {
             if (rotationTimeBuff>0)
             {

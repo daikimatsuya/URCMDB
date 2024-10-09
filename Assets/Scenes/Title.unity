@@ -6576,7 +6576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missile: {fileID: 850343124}
   pad: {fileID: 1366111573}
-  targetRot: 12
+  targetRot: 7
   rotationTime: 0.5
   missileMovepeed: 0
 --- !u!1 &796265496
@@ -15299,7 +15299,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0140c34453b577849b0f05f65bd93958, type: 2}
     - target: {fileID: 5066845859886312940, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_Name
-      value: StageSelect
+      value: Stages
       objectReference: {fileID: 0}
     - target: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_RootOrder

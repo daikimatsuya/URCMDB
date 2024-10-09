@@ -12,7 +12,8 @@ public class TitleScript : MonoBehaviour
     private bool moveEnd;
     private bool rotateEnd;
     private int stageChangeCount;
-    private bool isSceneChange;
+    private bool isSceneChangeMode;
+    private bool sceneChangeFlag;
     private bool isPush;
 
 
@@ -87,7 +88,7 @@ public class TitleScript : MonoBehaviour
     }
     private void SceneCountDow()
     {
-        if(isSceneChange)
+        if(sceneChangeFlag)
         {
             if (betBuff <= 0)
             {
@@ -113,7 +114,7 @@ public class TitleScript : MonoBehaviour
                     }
                     else
                     {
-                        isSceneChange = true;
+                        isSceneChangeMode = true;
                         betBuff = (int)(betTime * 60);
                     }
                     isPush = true;
@@ -129,9 +130,9 @@ public class TitleScript : MonoBehaviour
     {
         return new Vector2(stageChangeCount, maxStage);
     }
-    public bool GetIsSceneChange()
+    public bool GetIsSceneChangeModeFlag()
     {
-        return isSceneChange;
+        return isSceneChangeMode;
     }
     public void SendMoveEnd(bool end)
     {
@@ -141,10 +142,11 @@ public class TitleScript : MonoBehaviour
     {
         rotateEnd = end;
     }
-    public bool GetSceneChangeFlag()
+    public void SetSceneChangeFlag(bool flag)
     {
-        return isSceneChange;
+        sceneChangeFlag = flag;
     }
+
 
     // Start is called before the first frame update
     void Start()

@@ -67,7 +67,7 @@ public class TitleCamera : MonoBehaviour
     }
     private void SceneChangeMove()
     {
-        if(ts.GetIsSceneChange())
+        if(ts.GetIsSceneChangeModeFlag())
         {
             //tf.position=new Vector3(tf.position.x,tf.position.y,tf.position.z+zoomSpeed);
         }

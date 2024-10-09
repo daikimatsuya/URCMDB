@@ -37,7 +37,7 @@ public class PlayerScript : MonoBehaviour
     private bool isControl;
     private float ringSpeed;
     private bool PMS;
-    private bool isInStage;
+    //private bool isInStage;
     //[SerializeField] private bool RockOned;
  
 
@@ -294,14 +294,14 @@ public class PlayerScript : MonoBehaviour
         }
         if( other.tag == "stage")
         {
-            isInStage = true;
+            //isInStage = true;
         }
     }
     public void OnTriggerExit(Collider other)
     {
         if(other.tag == "stage")
         {
-            isInStage = false;
+            //isInStage = false;
         }
     }
 
@@ -325,7 +325,7 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position=lp.GetPos();
-        isInStage = true;
+        //isInStage = true;
         //RockOned = false;
        
     }
