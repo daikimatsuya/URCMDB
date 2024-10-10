@@ -16,7 +16,7 @@ public class SpeedUpRingScript : MonoBehaviour
     private bool isGet;
 
     private MarkerScript ms;
-    new CapsuleCollider  collider;
+    CapsuleCollider  collider_;
     Transform tf;
 
     private GameManagerScript gm;
@@ -44,7 +44,7 @@ public class SpeedUpRingScript : MonoBehaviour
         {
             isGet = false;
             tf.localScale = new Vector3(1, ringSize, ringSize);
-            collider.enabled = true;
+            collider_.enabled = true;
             if(ms==null)
             {
                 CreateMarker();
@@ -65,7 +65,7 @@ public class SpeedUpRingScript : MonoBehaviour
         {
             offsetBuff = (int)(offsetTime * 60);
             isGet = true;
-            collider.enabled = false;
+            collider_.enabled = false;
         }
     }
     // Start is called before the first frame update
@@ -73,7 +73,7 @@ public class SpeedUpRingScript : MonoBehaviour
     {
         gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         tf = GetComponent<Transform>();
-        collider=GetComponent<CapsuleCollider>();
+        collider_=GetComponent<CapsuleCollider>();
         tf.localScale = new Vector3(1, ringSize, ringSize);
         offsetBuff = (int)(offsetTime * 60);
         isGet = false;

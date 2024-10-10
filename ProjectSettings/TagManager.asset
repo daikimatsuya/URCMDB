@@ -26,6 +26,7 @@ TagManager:
   - miniManager
   - Cloud
   - Goal
+  - LaunchBase
   layers:
   - Default
   - TransparentFX

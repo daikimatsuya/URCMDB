@@ -6755,6 +6755,7 @@ GameObject:
   - component: {fileID: 850343128}
   - component: {fileID: 850343127}
   - component: {fileID: 850343126}
+  - component: {fileID: 850343129}
   m_Layer: 0
   m_Name: playermodel
   m_TagString: Untagged
@@ -6840,6 +6841,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850343124}
   m_Mesh: {fileID: -5495902117074765545, guid: a617748db82a9944a969ca329aa7e0f0, type: 3}
+--- !u!114 &850343129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850343124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f2fc93fb7a5324e8b0ae049427b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  rotationSpeed: 0
+  animationTime: 0
 --- !u!1 &858849695
 GameObject:
   m_ObjectHideFlags: 0
@@ -8042,6 +8058,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6298096762094358973, guid: d4108f244dc100949847cd3a0c12ef5a, type: 3}
       propertyPath: m_Name
+      value: LaunchBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298096762094358973, guid: d4108f244dc100949847cd3a0c12ef5a, type: 3}
+      propertyPath: m_TagString
       value: LaunchBase
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -15324,7 +15344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_LocalPosition.z

@@ -51,11 +51,7 @@ public class StageRotationScript : MonoBehaviour
              sss.SetRotateEnd(rotateEnd);
          }
          tf.localEulerAngles = new Vector3(0, rotateBuff, 0);
-        // else
-        //{
-        //    tf.localEulerAngles = new Vector3(0, rotateBuff, 0);
-        //    rotateBuff = 0;
-        //}
+
     }
     // Start is called before the first frame update
     void Start()

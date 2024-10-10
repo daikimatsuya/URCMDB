@@ -15,8 +15,10 @@ public class SceneChangeAnimationScript : MonoBehaviour
     TitleScript ts;
 
 
-    private float initialRot;
+
     private float padRotBuff;
+    private bool isShot;
+    private bool isFadeStart;
 
     private void AnimationController()
     {
@@ -26,6 +28,13 @@ public class SceneChangeAnimationScript : MonoBehaviour
     {
         if (ts.GetIsSceneChangeModeFlag())
         {
+            if (rotationTimeBuff < (int)(rotationTime * 60))
+            {
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    isShot = true;
+                }
+            }
             if (rotationTimeBuff>0)
             {
                 padRotBuff += rotationSpeed;
@@ -45,20 +54,30 @@ public class SceneChangeAnimationScript : MonoBehaviour
             }
         }
     }
-    private void Shoot()
+    private void ResetFlags()
     {
+        isShot=false;
+        isFadeStart=false;
+    }
 
+    public bool GetIsShotFlag()
+    {
+        return isShot;
+    }
+    public void SetStartFadeFlag(bool flag)
+    {
+        isFadeStart = flag;
     }
     // Start is called before the first frame update
     void Start()
     {
         ts=GameObject.FindWithTag("TitleManager").GetComponent<TitleScript>();
         
-        initialRot = pad.transform.localEulerAngles.x;
         padRotBuff = pad.transform.localEulerAngles.x;
-
         rotationTimeBuff = (int)(rotationTime * 60);
         rotationSpeed = targetRot / rotationTimeBuff;
+
+        ResetFlags();
     }
 
     // Update is called once per frame

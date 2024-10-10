@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class TitleScript : MonoBehaviour
 {
-    private Transform cameraPos;
     private TitlegameScript ts;
 
     private bool cameraMoveEnd;
@@ -14,6 +13,7 @@ public class TitleScript : MonoBehaviour
     private bool sceneChangeFlag;
     private bool isPush;
     private string stage;
+
 
     [SerializeField] private bool isCameraMove;
     [SerializeField] private float betTime;
@@ -28,7 +28,7 @@ public class TitleScript : MonoBehaviour
         {
             CameraStartMove();
         }
-        //SceneCountDow();
+
     }
     private void CameraStartMove()
     {
@@ -38,17 +38,6 @@ public class TitleScript : MonoBehaviour
             isPush = true;
         }
     }
-    private void SceneCountDow()
-    {
-        if(sceneChangeFlag)
-        {
-            if (betBuff <= 0)
-            {
-                SceneManager.LoadScene(stage);
-            }
-            betBuff--;
-        }
-    }//Žg‚í‚È‚³‚»‚¤
     private void SceneChange()
     {
         if (!isPush)
@@ -71,6 +60,7 @@ public class TitleScript : MonoBehaviour
             }
         }
     }
+    #region ’lŽó‚¯“n‚µ—pŠÖ”ŒQ
     public bool GetStageSelectFlag()
     {
         if (cameraMoveEnd && isCameraMove)
@@ -104,7 +94,7 @@ public class TitleScript : MonoBehaviour
         this.stage = stage;
     }
 
-
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

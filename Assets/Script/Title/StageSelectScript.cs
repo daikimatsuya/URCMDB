@@ -17,12 +17,20 @@ public class StageSelectScript : MonoBehaviour
 
     private void SelectController()
     {
-        StageSelect();
+        if (ts.GetStageSelectFlag())   
+        {
+            StageSelect();
+        }
+        else
+        {
+            StageSelectReset();
+        }
+
         ts.SetStage(stage[stageCount]);
     }
     private void StageSelect()
     {
-        if (rotateEnd&&ts.GetStageSelectFlag())
+        if (rotateEnd)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0))
             {
@@ -52,7 +60,14 @@ public class StageSelectScript : MonoBehaviour
             }
             coolTimeBuff--;
         }
+
     }
+    private void StageSelectReset()
+    {
+        stageCount = 1;
+        stageChangeCount = 1;        
+    }
+
     public void SetRotateEnd(bool flag)
     {
         rotateEnd = flag;
