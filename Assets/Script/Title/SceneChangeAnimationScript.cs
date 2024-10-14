@@ -68,6 +68,10 @@ public class SceneChangeAnimationScript : MonoBehaviour
     {
         isFadeStart = flag;
     }
+    public bool GetIsFadeStartFlag()
+    {
+        return isFadeStart;
+    }
     // Start is called before the first frame update
     void Start()
     {

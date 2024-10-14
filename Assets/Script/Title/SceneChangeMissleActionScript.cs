@@ -9,6 +9,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     [SerializeField] private float maxRotate;
     [SerializeField] private float animationTime;
     private int animationTimeBuff;
+    [SerializeField] private float targetPos;
 
     private SceneChangeAnimationScript scas;
     Transform tf;
@@ -24,9 +25,13 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     }
     private void Shoot()
     {
+        if (tf.localPosition.z < targetPos)
+        {
+            scas.SetStartFadeFlag(true);
+        }
+
         moveBuff.x = moveSpeed * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
         moveBuff.y = moveSpeed * (float)Math.Sin(ToRadian(tf.eulerAngles.x));
-
 
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y-moveBuff.y, tf.localPosition.z-moveBuff.x);
         tf.localEulerAngles = new Vector3(tf.localEulerAngles.x+maxRotate, tf.localEulerAngles.y, tf.localEulerAngles.z);
