@@ -21,7 +21,11 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     {
         if (scas.GetIsShotFlag())
         {
-            Shoot();
+            if (sss.GetStage() != "")
+            {
+                Shoot();
+            }
+            
         }
     }
     private void Shoot()

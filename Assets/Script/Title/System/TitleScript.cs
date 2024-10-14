@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 public class TitleScript : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class TitleScript : MonoBehaviour
     private bool cameraMoveEnd;
     private bool isStageSelect;
     private bool isSceneChangeMode;
-    private bool sceneChangeFlag;
     private bool isPush;
     private string stage;
 
@@ -48,20 +48,20 @@ public class TitleScript : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (stage==null)
-                    {
-                        ts.SetResetFlag(true);
-                    }
-                    else
-                    {
-                        isSceneChangeMode = true;
-
-                    }
+                    isSceneChangeMode = true;
                     isPush = true;
                 }
             }
         }
     }
+    //public void ResetTitle()
+    //{
+    //    ts.SetResetFlag(true);
+    //    isStageSelect = false;
+    //    isSceneChangeMode=false;
+    //    isCameraMove=false;
+    //    isPush = true;
+    //}
     #region íléÛÇØìnÇµópä÷êîåQ
     public bool GetStageSelectFlag()
     {
@@ -75,9 +75,14 @@ public class TitleScript : MonoBehaviour
         }
         return isStageSelect;
     }
+
     public bool GetIsStageSelect()
     {
         return isCameraMove;
+    }
+    public void SetCameraMove(bool flag)
+    {
+        isCameraMove = flag;
     }
     public bool GetIsSceneChangeModeFlag()
     {
@@ -87,10 +92,7 @@ public class TitleScript : MonoBehaviour
     {
         cameraMoveEnd = end;
     }
-    public void SetSceneChangeFlag(bool flag)
-    {
-        sceneChangeFlag = flag;
-    }
+
     public void SetStage(string stage)
     {
         this.stage = stage;
@@ -104,7 +106,7 @@ public class TitleScript : MonoBehaviour
 
         ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
 
-        TitleController();
+        //TitleController();
 
     }
 

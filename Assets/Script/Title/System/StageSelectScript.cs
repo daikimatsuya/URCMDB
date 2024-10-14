@@ -80,7 +80,7 @@ public class StageSelectScript : MonoBehaviour
     private void StageSelectReset()
     {
         stageCount = 1;
-        stageChangeCount = 1;        
+        stageChangeCount = 1;
     }
 
     private void SceneChange()
@@ -91,6 +91,10 @@ public class StageSelectScript : MonoBehaviour
     public void SetRotateEnd(bool flag)
     {
         rotateEnd = flag;
+    }
+    public string GetStage()
+    {
+        return stage[stageCount];
     }
     public bool GetRotateEnd() 
     {
