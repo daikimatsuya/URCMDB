@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,14 @@ using UnityEngine;
 public class SceneChangeMissleActionScript : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float maxRotate;
     [SerializeField] private float animationTime;
     private int animationTimeBuff;
 
     private SceneChangeAnimationScript scas;
     Transform tf;
+
+    private Vector2 moveBuff;
 
     private void SCMAController()
     {
@@ -21,7 +24,16 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     }
     private void Shoot()
     {
+        moveBuff.x = moveSpeed * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
+        moveBuff.y = moveSpeed * (float)Math.Sin(ToRadian(tf.eulerAngles.x));
 
+
+        tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y-moveBuff.y, tf.localPosition.z-moveBuff.x);
+        tf.localEulerAngles = new Vector3(tf.localEulerAngles.x+maxRotate, tf.localEulerAngles.y, tf.localEulerAngles.z);
+    }
+    public double ToRadian(double angle)
+    {
+        return angle * Math.PI / 180f;
     }
     // Start is called before the first frame update
     void Start()
