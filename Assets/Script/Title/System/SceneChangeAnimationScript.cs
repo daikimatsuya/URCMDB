@@ -12,6 +12,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
     private float rotationTimeBuff;
     [SerializeField] private float missileMovepeed;
 
+
     TitleScript ts;
 
 
@@ -80,6 +81,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
         padRotBuff = pad.transform.localEulerAngles.x;
         rotationTimeBuff = (int)(rotationTime * 60);
         rotationSpeed = targetRot / rotationTimeBuff;
+
 
         ResetFlags();
     }

@@ -6793,14 +6793,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850343124}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.003504144, y: 0.99998647, z: -0.002062, w: -0.0032551582}
+  m_LocalPosition: {x: 0.0028786063, y: 0.0018397719, z: -0.0000054836273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1366111574}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.238, y: 180.372, z: -0.401}
 --- !u!65 &850343126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8197,6 +8197,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2843116379085515684, guid: d4108f244dc100949847cd3a0c12ef5a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843116379085515684, guid: d4108f244dc100949847cd3a0c12ef5a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a6c05f3779ce384b9631a84170b82bb, type: 2}
+    - target: {fileID: 4572710322837524321, guid: d4108f244dc100949847cd3a0c12ef5a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572710322837524321, guid: d4108f244dc100949847cd3a0c12ef5a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ebc674f9df81c74dab6a6702f0f441c, type: 2}
     - target: {fileID: 6298096762094358973, guid: d4108f244dc100949847cd3a0c12ef5a, type: 3}
       propertyPath: m_Name
       value: LaunchBase
@@ -14880,6 +14896,7 @@ MonoBehaviour:
   - Stage1
   stageSelectCoolTime: 0.1
   coolTimeBuff: 0
+  fadeTime: 3
 --- !u!4 &2110879514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}

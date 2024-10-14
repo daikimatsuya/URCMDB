@@ -12,6 +12,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     [SerializeField] private float targetPos;
 
     private SceneChangeAnimationScript scas;
+    private StageSelectScript sss;
     Transform tf;
 
     private Vector2 moveBuff;
@@ -28,6 +29,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         if (tf.localPosition.z < targetPos)
         {
             scas.SetStartFadeFlag(true);
+            sss.SetFadeFlag(true);
         }
 
         moveBuff.x = moveSpeed * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
@@ -44,6 +46,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     void Start()
     {
         scas = GameObject.FindWithTag("LaunchBase").GetComponent<SceneChangeAnimationScript>();
+        sss=GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
         tf=GetComponent<Transform>();
     }
 

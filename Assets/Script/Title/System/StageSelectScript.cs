@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageSelectScript : MonoBehaviour
 {
@@ -9,14 +10,23 @@ public class StageSelectScript : MonoBehaviour
     [SerializeField] private string[] stage;
     [SerializeField] private float stageSelectCoolTime;
     [SerializeField] private int coolTimeBuff;
+    [SerializeField] private float fadeTime;
+    private int fadeTimeBuff;
+
 
     private bool rotateEnd;
     private int stageChangeCount;
+    private bool fadeStart;
 
     TitleScript ts;
 
     private void SelectController()
     {
+        if (fadeTimeBuff <= 0)
+        {
+            SceneChange();
+        }
+        
         if (ts.GetStageSelectFlag())   
         {
             StageSelect();
@@ -27,6 +37,11 @@ public class StageSelectScript : MonoBehaviour
         }
 
         ts.SetStage(stage[stageCount]);
+
+        if (fadeStart)
+        {
+            fadeTimeBuff--;
+        }
     }
     private void StageSelect()
     {
@@ -68,6 +83,11 @@ public class StageSelectScript : MonoBehaviour
         stageChangeCount = 1;        
     }
 
+    private void SceneChange()
+    {
+        SceneManager.LoadScene(stage[stageCount]);
+    }
+
     public void SetRotateEnd(bool flag)
     {
         rotateEnd = flag;
@@ -80,6 +100,10 @@ public class StageSelectScript : MonoBehaviour
     {
         return new Vector2(stageChangeCount,maxStage);
     }
+    public void SetFadeFlag(bool flag)
+    {
+        fadeStart = flag;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +112,7 @@ public class StageSelectScript : MonoBehaviour
         stageCount = 1;
         stageChangeCount = 1;
         rotateEnd = true;
+        fadeTimeBuff = (int)(fadeTime * 60);
     }
 
     // Update is called once per frame

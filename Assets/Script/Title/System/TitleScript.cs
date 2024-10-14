@@ -15,9 +15,11 @@ public class TitleScript : MonoBehaviour
     private string stage;
 
 
+
     [SerializeField] private bool isCameraMove;
     [SerializeField] private float betTime;
-    private int betBuff;
+
+
 
 
     private void TitleController()
@@ -53,7 +55,7 @@ public class TitleScript : MonoBehaviour
                     else
                     {
                         isSceneChangeMode = true;
-                        betBuff = (int)(betTime * 60);
+
                     }
                     isPush = true;
                 }
