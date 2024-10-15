@@ -13098,6 +13098,10 @@ PrefabInstance:
       propertyPath: stage
       value: SampleScene
       objectReference: {fileID: 0}
+    - target: {fileID: 4320082708551101942, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: fadeObject
+      value: 
+      objectReference: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
     - target: {fileID: 4320082708551101943, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_RootOrder
       value: 15

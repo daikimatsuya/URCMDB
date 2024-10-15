@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ActivationFadeScript : MonoBehaviour
 {
+    [SerializeField] private bool start;
+
     [SerializeField] private bool upFade;
     [SerializeField] private bool downFade;
     [SerializeField] private bool deleteFade;
@@ -21,23 +23,31 @@ public class ActivationFadeScript : MonoBehaviour
 
     private void ActivationFadeController()
     {
-        if (life < 0)
+        if (start)
         {
-            Destroy(GameObject.FindWithTag("FadeObject"));
+            if (life < 0)
+            {
+                Destroy(GameObject.FindWithTag("FadeObject"));
+            }
+            if (upFade)
+            {
+                UpFade();
+            }
+            if (downFade)
+            {
+                DownFade();
+            }
+            if (deleteFade)
+            {
+                DeleteFade();
+            }
+            life--;
         }
-        if (upFade)
+
+        if(Input.GetKeyUp(KeyCode.U))
         {
-            UpFade();
+            SetStart();
         }
-        if (downFade)
-        {
-            DownFade();
-        }
-        if (deleteFade)
-        {
-            DeleteFade();
-        }
-        life--;
     }
     private void UpFade()
     {
@@ -66,10 +76,15 @@ public class ActivationFadeScript : MonoBehaviour
         }
         deleteTimeBuff--;
     }
+    private void SetStart()
+    {
+        start = true;
+    }
     // Start is called before the first frame update
     void Start()
     {
         tf = GetComponent<Transform>();
+        start = false;
 
         if (upFade)
         {

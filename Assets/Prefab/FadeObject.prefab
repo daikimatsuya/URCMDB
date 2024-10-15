@@ -209,12 +209,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 0
   downFade: 0
   deleteFade: 1
   moveSpeed: 0
   moveDelay: 0
-  deleteTime: 1.4
+  deleteTime: 0.2
   life: 4
 --- !u!1 &2327888645161449054
 GameObject:
@@ -327,12 +328,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 0
   downFade: 0
   deleteFade: 1
   moveSpeed: 0
   moveDelay: 0
-  deleteTime: 1.6
+  deleteTime: 0.4
   life: 4
 --- !u!1 &2492809662061241313
 GameObject:
@@ -445,12 +447,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 0
   downFade: 0
   deleteFade: 1
   moveSpeed: 0
   moveDelay: 0
-  deleteTime: 1.8
+  deleteTime: 0.6
   life: 4
 --- !u!1 &3037135361329186883
 GameObject:
@@ -634,12 +637,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 0
   downFade: 0
   deleteFade: 1
   moveSpeed: 0
   moveDelay: 0
-  deleteTime: 1.4
+  deleteTime: 0.2
   life: 4
 --- !u!1 &5237617351008942003
 GameObject:
@@ -850,12 +854,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 0
   downFade: 0
   deleteFade: 1
   moveSpeed: 0
   moveDelay: 0
-  deleteTime: 1
+  deleteTime: 0
   life: 4
 --- !u!1 &5797261358928579575
 GameObject:
@@ -902,11 +907,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 0
   downFade: 1
   deleteFade: 0
-  moveSpeed: 0.1
-  moveDelay: 2
+  moveSpeed: 0.3
+  moveDelay: 0.8
   deleteTime: 0
   life: 4
 --- !u!1 &5880374922337668807
@@ -954,11 +960,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 1
   downFade: 0
   deleteFade: 0
-  moveSpeed: 0.1
-  moveDelay: 2
+  moveSpeed: 0.3
+  moveDelay: 0.8
   deleteTime: 0
   life: 4
 --- !u!1 &9180156141195901698
@@ -1072,10 +1079,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d170e06dd16b14b806d8d560172eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
   upFade: 0
   downFade: 0
   deleteFade: 1
   moveSpeed: 0
   moveDelay: 0
-  deleteTime: 1.4
+  deleteTime: 0.2
   life: 4
