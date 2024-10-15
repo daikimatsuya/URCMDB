@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Profiling.Editor;
 using UnityEngine;
 
 public class MovieFade : MonoBehaviour
 {
     [SerializeField] private bool upside;
-    [SerializeField] private bool downside;
     [SerializeField] private float parfectShadePos;
     [SerializeField] private float movieShadePos;
     [SerializeField] private float openlyPos;
+    [SerializeField] private float moveSpeed;
 
     private int shadeLevel;
 
@@ -29,36 +30,15 @@ public class MovieFade : MonoBehaviour
     }
     private void ParfectSgade()
     {
-        if(upside)
-        {
 
-        }
-        else
-        {
-
-        }
     }
     private void MovieShade()
     {
-        if (upside)
-        {
 
-        }
-        else
-        {
-
-        }
     }
     private void Openly()
     {
-        if (upside)
-        {
 
-        }
-        else
-        {
-
-        }
     }
     public void SetShadeLevel(int level)
     {
@@ -67,12 +47,19 @@ public class MovieFade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(upside)
+        {
+            moveSpeed *= 1;
+        }
+        else
+        {
+            moveSpeed *= -1;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        MovieFadeController();
     }
 }

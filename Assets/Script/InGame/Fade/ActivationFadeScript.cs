@@ -23,7 +23,7 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if (life < 0)
         {
-           Destroy(this.gameObject);
+            Destroy(GameObject.FindWithTag("FadeObject"));
         }
         if (upFade)
         {
@@ -61,7 +61,8 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if (deleteTimeBuff < 0)
         {
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
         deleteTimeBuff--;
     }

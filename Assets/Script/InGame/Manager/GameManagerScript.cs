@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject fadeObject;
     [SerializeField] private int playerMissile;
     [SerializeField] private bool PMS;
     [SerializeField] private string stage;
@@ -47,6 +48,12 @@ public class GameManagerScript : MonoBehaviour
                     GameObject _ = Instantiate(player);
                     ps=_.GetComponent<PlayerScript>();
                     playerMissile--;
+
+                    GameObject __ = Instantiate(fadeObject);
+                    __.transform.SetParent(GameObject.FindWithTag("UICanvas").transform);
+                    __.transform.localScale = Vector3.one;
+                    __.transform.localPosition = Vector3.zero;
+                    __.transform.localRotation = Quaternion.identity;
                 }
                 else
                 {
