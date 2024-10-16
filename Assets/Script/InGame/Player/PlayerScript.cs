@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
 {
     Rigidbody rb;
     Transform tf;
+    TimeCountScript tcs;
 
     private LaunchPointScript lp;
     private GameManagerScript gm;
@@ -233,11 +234,11 @@ public class PlayerScript : MonoBehaviour
     {
         if (isControl)
         {
-            if (time <= 0)
+            if (tcs.TimeCounter(ref time))
             {
                 playerHp = 0;
             }
-            time--;
+
         }
     }
 
@@ -273,33 +274,33 @@ public class PlayerScript : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "LaunchPad")
+        if (other.CompareTag("LaunchPad"))
         {     
             isControl =true;
             dust.SetActive(true);
         }
-        if(other.tag == "SpeedUpRing")
+        if(other.CompareTag("SpeedUpRing"))
         {
             ringSpeed = playerSpeed * 0.3f;
             playerSpeed += playerSpeed * ringBust;
         }
-        if (other.tag == "Bullet")
+        if (other.CompareTag("Bullet"))
         {
             playerHp = 0;
             other.GetComponent<FlakBulletScript>().Delete();            
         }
-        if( other.tag == "Rock")
+        if( other.CompareTag("Rock"))
         {
             playerHp = 0;
         }
-        if( other.tag == "stage")
+        if( other.CompareTag("stage"))
         {
             //isInStage = true;
         }
     }
     public void OnTriggerExit(Collider other)
     {
-        if(other.tag == "stage")
+        if(other.CompareTag("stage"))
         {
             //isInStage = false;
         }
@@ -314,8 +315,11 @@ public class PlayerScript : MonoBehaviour
     {
         PMS = false;
         time = time * 60;
+
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
+        tcs=GetComponent<TimeCountScript>();
+
         lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         dust = GameObject.FindWithTag("PlayerDust");

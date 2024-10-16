@@ -18,6 +18,7 @@ public class ActivationFadeScript : MonoBehaviour
     [SerializeField]private float life;
 
     Transform tf;
+    TimeCountScript tcs;
 
     private float speedBuff;
 
@@ -25,7 +26,7 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if (start)
         {
-            if (TimeCounter(ref life))
+            if (tcs.TimeCounter(ref life))
             {
                 Destroy(GameObject.FindWithTag("FadeObject"));
             }
@@ -50,21 +51,21 @@ public class ActivationFadeScript : MonoBehaviour
     }
     private void UpFade()
     {
-        if(TimeCounter(ref delayBuff))
+        if(tcs.TimeCounter(ref delayBuff))
         {
             MoveFadeObject(moveSpeed);
         }
     }
     private void DownFade()
     {
-        if (TimeCounter(ref delayBuff))
+        if (tcs.TimeCounter(ref delayBuff))
         {
             MoveFadeObject(-moveSpeed);
         }
     }
     private void DeleteFade()
     {
-        if (TimeCounter(ref deleteTimeBuff))
+        if (tcs.TimeCounter(ref deleteTimeBuff))
         {
             Destroy(this.gameObject);
         }
@@ -75,30 +76,7 @@ public class ActivationFadeScript : MonoBehaviour
         speedBuff += speed;
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y + speedBuff, tf.localPosition.z);
     }
-    private bool TimeCounter(ref int timeBuff)
-    {
-        if (timeBuff <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            timeBuff--;
-            return false;
-        }
-    }
-    private bool TimeCounter(ref float timeBuff)
-    {
-        if (timeBuff <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            timeBuff--;
-            return false;
-        }
-    }
+
     private void SetStart()
     {
         start = true;
@@ -107,6 +85,7 @@ public class ActivationFadeScript : MonoBehaviour
     void Start()
     {
         tf = GetComponent<Transform>();
+        tcs = GetComponent<TimeCountScript>();
         start = false;
 
         if (upFade)

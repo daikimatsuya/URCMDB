@@ -129,7 +129,7 @@ public class miniPlayerScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //ts.SetHitFlag(true);
-        if (collision.gameObject.tag == "Cloud")
+        if (collision.gameObject.CompareTag("Cloud"))
         {
             ts.SetMoveFlag(false);
             ts.SetMiniPlayerDead(true);
@@ -138,14 +138,14 @@ public class miniPlayerScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Goal")
+        if (other.gameObject.CompareTag("Goal"))
         {
             ts.SetResetActionFlag(true);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Goal")
+        if(other.CompareTag("Goal"))
         {
             ts.SetGoalActionFlag(true);
         }
