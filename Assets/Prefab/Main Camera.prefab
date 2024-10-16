@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3536103835060491499}
   - component: {fileID: 3536103835060491498}
   - component: {fileID: 3536103835060491501}
+  - component: {fileID: 7791156980856930781}
   - component: {fileID: 5831787967426061405}
   m_Layer: 0
   m_Name: Main Camera
@@ -100,6 +101,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDeff: 10
   rotSpeed: 1
+--- !u!114 &7791156980856930781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536103835060491497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fd796db4d05ae4aa74767bca266125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knotNumber: 0
+  targetPosition: []
+  startPosition: []
+  targetRotation: []
+  startRotation: []
+  moveTime: []
 --- !u!114 &5831787967426061405
 MonoBehaviour:
   m_ObjectHideFlags: 0

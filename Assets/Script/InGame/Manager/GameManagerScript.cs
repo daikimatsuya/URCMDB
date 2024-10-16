@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     private float playerSpeedBuff;
     private bool gameOverFlag;
     private bool ClearFlag;
+    private bool gameStart;
 
     private void GameManagerController()
     {
@@ -36,7 +37,14 @@ public class GameManagerScript : MonoBehaviour
            
         }
     }
-
+    public void Retry()
+    {
+        SceneManager.LoadScene(stage);
+    }
+    public void BackTitle()
+    {
+        SceneManager.LoadScene(title);
+    }
     private void SpawnPlayer()
     {
         if (!GameObject.FindWithTag("Player"))
@@ -86,6 +94,8 @@ public class GameManagerScript : MonoBehaviour
             }
         }
     }
+
+    #region ’lŽó‚¯“n‚µ
     public bool GetPMS()
     {
         return PMS;
@@ -107,14 +117,7 @@ public class GameManagerScript : MonoBehaviour
     {
         return gameOverFlag;
     }
-    public void Retry()
-    {
-        SceneManager.LoadScene(stage);
-    }
-    public void BackTitle()
-    {
-        SceneManager.LoadScene(title);
-    }
+
     public void SetClearFlag()
     {
         ClearFlag = true;
@@ -136,6 +139,11 @@ public class GameManagerScript : MonoBehaviour
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         return targetPos.position;
     }
+    public bool GetGameStartFlag()
+    {
+        return gameStart;
+    }
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

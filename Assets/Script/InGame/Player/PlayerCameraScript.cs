@@ -10,17 +10,28 @@ public class PlayerCameraScript : MonoBehaviour
     private Transform playerPos;
     private PlayerScript ps;
     private GameObject player;
-    
+    private GameManagerScript gm;
+    private GameObject mainCanvas;
+    MovieCamera mc;
 
     private float rot;
+
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
 
     private void PlayerCameraController()
     {
-        SearchPlayer();       
-        Move();
+        if (gm.GetGameStartFlag())
+        {
+            SearchPlayer();
+            Move();
+        }
+        else
+        {
+            mc.CameraController();
+            mainCanvas.SetActive(false);
+        }
     }
     private void Move()
     {
@@ -107,7 +118,10 @@ public class PlayerCameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         tf=GetComponent<Transform>();
+        mc=GetComponent<MovieCamera>();
+        mainCanvas = GameObject.FindWithTag("UICanvas");
         //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
