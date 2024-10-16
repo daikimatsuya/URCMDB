@@ -25,7 +25,7 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if (start)
         {
-            if (life < 0)
+            if (TimeCounter(ref life))
             {
                 Destroy(GameObject.FindWithTag("FadeObject"));
             }
@@ -41,7 +41,6 @@ public class ActivationFadeScript : MonoBehaviour
             {
                 DeleteFade();
             }
-            life--;
         }
 
         if(Input.GetKeyUp(KeyCode.U))
@@ -51,30 +50,54 @@ public class ActivationFadeScript : MonoBehaviour
     }
     private void UpFade()
     {
-        if(delayBuff<0)
+        if(TimeCounter(ref delayBuff))
         {
-            speedBuff += moveSpeed;
-            tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y+speedBuff, tf.localPosition.z);
+            MoveFadeObject(moveSpeed);
         }
-        delayBuff--;
     }
     private void DownFade()
     {
-        if (delayBuff < 0)
+        if (TimeCounter(ref delayBuff))
         {
-            speedBuff += moveSpeed;
-            tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y - speedBuff, tf.localPosition.z);
+            MoveFadeObject(-moveSpeed);
         }
-        delayBuff--;
     }
     private void DeleteFade()
     {
-        if (deleteTimeBuff < 0)
+        if (TimeCounter(ref deleteTimeBuff))
         {
-            //this.gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
-        deleteTimeBuff--;
+    }
+
+    private void MoveFadeObject(float speed)
+    {
+        speedBuff += speed;
+        tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y + speedBuff, tf.localPosition.z);
+    }
+    private bool TimeCounter(ref int timeBuff)
+    {
+        if (timeBuff <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            timeBuff--;
+            return false;
+        }
+    }
+    private bool TimeCounter(ref float timeBuff)
+    {
+        if (timeBuff <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            timeBuff--;
+            return false;
+        }
     }
     private void SetStart()
     {

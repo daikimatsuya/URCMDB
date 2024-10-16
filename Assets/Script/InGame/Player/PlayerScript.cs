@@ -32,7 +32,7 @@ public class PlayerScript : MonoBehaviour
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
     private float burstSpeed;
-    private int effectTimer;
+    //private int effectTimer;
     private bool isFire;
     private bool isControl;
     private float ringSpeed;
@@ -209,18 +209,18 @@ public class PlayerScript : MonoBehaviour
             playerSpeed--;
         }
     }
-    private void FlameEffect()
-    {
-        if (effectTimer <= 0)
-        {
-            GameObject _ = Instantiate(flame);
-            _.transform.position = new Vector3(tf.localPosition.x, tf.localPosition.y , tf.localPosition.z);
+    //private void FlameEffect()
+    //{
+    //    if (effectTimer <= 0)
+    //    {
+    //        GameObject _ = Instantiate(flame);
+    //        _.transform.position = new Vector3(tf.localPosition.x, tf.localPosition.y , tf.localPosition.z);
 
-            effectTimer = 2;
+    //        effectTimer = 2;
 
-        }
-        effectTimer--;
-    }
+    //    }
+    //    effectTimer--;
+    //}
     private void Booooooomb()
     {
         if (playerHp <= 0)
@@ -320,7 +320,7 @@ public class PlayerScript : MonoBehaviour
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);
-        effectTimer = 0;
+        //effectTimer = 0;
         isFire = false;
         isControl = false;
         ringSpeed = 0;
