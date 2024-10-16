@@ -49,11 +49,12 @@ public class GameManagerScript : MonoBehaviour
                     ps=_.GetComponent<PlayerScript>();
                     playerMissile--;
 
+                    Transform uiTransform = GameObject.FindWithTag("UICanvas").transform;
                     GameObject __ = Instantiate(fadeObject);
-                    __.transform.SetParent(GameObject.FindWithTag("UICanvas").transform);
+                    __.transform.SetParent(uiTransform);
                     __.transform.localScale = Vector3.one;
                     __.transform.localPosition = Vector3.zero;
-                    __.transform.localRotation = Quaternion.identity;
+                    __.transform.localEulerAngles = new Vector3(0, 0, 0);
                 }
                 else
                 {
