@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//タイトルのミニゲーム用プレイヤーの処理
 public class miniPlayerScript : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
@@ -17,6 +18,7 @@ public class miniPlayerScript : MonoBehaviour
 
     private Vector3 initialPos;
     private Vector3 initialRot;
+    private Vector3 angles;
 
     private bool isAuto;
     private bool isRolling;
@@ -69,11 +71,11 @@ public class miniPlayerScript : MonoBehaviour
 
     private void ControllMove()
     {
+        Vector3 pos=tf.position;
         if (ts.GetMoveFlag())
         {
-
-
             float movePow = tf.position.y;
+
             if (Input.GetKey(KeyCode.W))
             {
                 movePow += moveSpeed;
@@ -90,35 +92,47 @@ public class miniPlayerScript : MonoBehaviour
             {
                 movePow = maxLow;
             }
-            tf.position = new Vector3(tf.position.x, movePow, tf.position.z);
+            SetVector3(ref pos, tf.position.x, movePow, tf.position.z);
+            tf.position=pos;
         }
     }
-    private void RollingDirection()
+    private void RollingDirection()//後程追記する
     {
 
     }
     private void AutoRotation()
     {
-        tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y - autoRotateSpeed, tf.localEulerAngles.z);
+        SetVector3(ref angles, tf.localEulerAngles.x, (tf.localEulerAngles.y - autoRotateSpeed), tf.localEulerAngles.z);
+        SetAngles();
     }
     private void FixedRotation()
     {
+        angles = tf.localEulerAngles;
         if (tf.eulerAngles.y <= autoRotateSpeed)
         {
-            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, 0.0f, tf.localEulerAngles.z);
+            SetVector3(ref angles, tf.localEulerAngles.x, 0.0f, tf.localEulerAngles.z);
             isMove = true;
             ts.SetMoveFlag(true);
         }
         else if (tf.localEulerAngles.y + autoRotateSpeed >= 360.0f)
         {
-            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, 0.0f, tf.localEulerAngles.z);
+            SetVector3(ref angles, tf.localEulerAngles.x, 0.0f, tf.localEulerAngles.z);
             isMove = true;
             ts.SetMoveFlag(true);
         }
         else
         {
-            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y - autoRotateSpeed, tf.localEulerAngles.z);
+            SetVector3(ref angles, tf.localEulerAngles.x, (tf.localEulerAngles.y-autoRotateSpeed), tf.localEulerAngles.z);
         }
+        SetAngles();
+    }
+    private void SetAngles()
+    {
+        tf.localEulerAngles=angles;
+    }
+    private static void SetVector3(ref Vector3 target,float x,float y,float z)
+    {
+         target = new Vector3(x, y, z);
     }
     private void ResetTransfrom()
     {
@@ -159,7 +173,7 @@ public class miniPlayerScript : MonoBehaviour
         ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
         initialPos = tf.transform.position;
         initialRot = tf.transform.localEulerAngles;
-
+        angles = tf.transform.eulerAngles;
         ResetPlayer();
     }
 

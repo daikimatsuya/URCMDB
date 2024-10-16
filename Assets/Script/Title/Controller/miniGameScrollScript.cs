@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//タイトルのミニゲームのステージをスクロールさせる
 public class miniGameScrollScript : MonoBehaviour
 {
     [SerializeField] float scrollSpeed;

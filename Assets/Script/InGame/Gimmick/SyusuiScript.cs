@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+//H…ŠÇ—
 public class SyusuiScript : MonoBehaviour
 {
     Transform tf;

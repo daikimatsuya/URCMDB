@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//タイトルのステージ選択処理用
 public class StageSelectScript : MonoBehaviour
 {
     [SerializeField] private int stageCount;

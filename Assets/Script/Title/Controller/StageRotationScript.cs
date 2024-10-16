@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ステージセレクト画面でステージを回転させる
 public class StageRotationScript : MonoBehaviour
 {
     StageSelectScript sss;

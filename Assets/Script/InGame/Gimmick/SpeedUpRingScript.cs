@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//スピードアップリング管理
 public class SpeedUpRingScript : MonoBehaviour
 {
 

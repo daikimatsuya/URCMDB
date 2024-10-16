@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ステージセレクトからインゲームへの演出管理
 public class SceneChangeAnimationScript : MonoBehaviour
 {
     [SerializeField] private GameObject missile;

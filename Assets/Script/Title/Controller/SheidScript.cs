@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//タイトルゲームを初期化するときのミサイルが横からくる動き管理
 public class SheidScript : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;

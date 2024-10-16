@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//コンパスに写すマーカー管理
 public class MarkerCamera : MonoBehaviour
 {
     Transform tf;

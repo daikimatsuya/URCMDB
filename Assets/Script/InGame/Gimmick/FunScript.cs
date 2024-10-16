@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Š·‹Cî‚Ì‰ñ“]ŠÇ—
 public class FunScript : MonoBehaviour
 {
     private Transform tf;

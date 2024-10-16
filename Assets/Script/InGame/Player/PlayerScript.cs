@@ -3,12 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
+//インゲームのプレイヤーの処理
 public class PlayerScript : MonoBehaviour
 {
     Rigidbody rb;
     Transform tf;
-    TimeCountScript tcs;
+
 
     private LaunchPointScript lp;
     private GameManagerScript gm;
@@ -163,7 +165,6 @@ public class PlayerScript : MonoBehaviour
         }
         PMS=gm.GetPMS();
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
-       
     }
     private void Acceleration()
     {
@@ -234,7 +235,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (isControl)
         {
-            if (tcs.TimeCounter(ref time))
+            if (TimeCountScript.TimeCounter(ref time))
             {
                 playerHp = 0;
             }
@@ -318,7 +319,7 @@ public class PlayerScript : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
-        tcs=GetComponent<TimeCountScript>();
+
 
         lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();

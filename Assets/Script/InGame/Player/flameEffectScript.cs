@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤーのブースト演出管理
 public class flameEffectScript : MonoBehaviour
 {
     // Start is called before the first frame update

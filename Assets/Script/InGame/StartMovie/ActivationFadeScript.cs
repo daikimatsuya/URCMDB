@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤーを生成したときの演出
 public class ActivationFadeScript : MonoBehaviour
 {
     [SerializeField] private bool start;
@@ -18,7 +19,7 @@ public class ActivationFadeScript : MonoBehaviour
     [SerializeField]private float life;
 
     Transform tf;
-    TimeCountScript tcs;
+
 
     private float speedBuff;
 
@@ -26,7 +27,7 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if (start)
         {
-            if (tcs.TimeCounter(ref life))
+            if (TimeCountScript.TimeCounter(ref life))
             {
                 Destroy(GameObject.FindWithTag("FadeObject"));
             }
@@ -51,21 +52,21 @@ public class ActivationFadeScript : MonoBehaviour
     }
     private void UpFade()
     {
-        if(tcs.TimeCounter(ref delayBuff))
+        if(TimeCountScript.TimeCounter(ref delayBuff))
         {
             MoveFadeObject(moveSpeed);
         }
     }
     private void DownFade()
     {
-        if (tcs.TimeCounter(ref delayBuff))
+        if (TimeCountScript.TimeCounter(ref delayBuff))
         {
             MoveFadeObject(-moveSpeed);
         }
     }
     private void DeleteFade()
     {
-        if (tcs.TimeCounter(ref deleteTimeBuff))
+        if (TimeCountScript.TimeCounter(ref deleteTimeBuff))
         {
             Destroy(this.gameObject);
         }
@@ -85,7 +86,7 @@ public class ActivationFadeScript : MonoBehaviour
     void Start()
     {
         tf = GetComponent<Transform>();
-        tcs = GetComponent<TimeCountScript>();
+
         start = false;
 
         if (upFade)

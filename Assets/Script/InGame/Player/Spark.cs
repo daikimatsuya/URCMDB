@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤーの背後の火管理用
 public class Spark : MonoBehaviour
 {
     [SerializeField] private float time;

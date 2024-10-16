@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ステージ選択からインゲームに遷移するときのミサイルの挙動管理
 public class SceneChangeMissleActionScript : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;

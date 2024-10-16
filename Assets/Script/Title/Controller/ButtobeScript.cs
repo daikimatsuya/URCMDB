@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//くっつけたオブジェクトを上下に動かす
 public class ButtobeScript : MonoBehaviour
 {
     [SerializeField] private float maxHight;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//今のところインゲーム関連のデータのやり取りや裏方仕事全般のちのち奇麗にする
 public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] private GameObject player;

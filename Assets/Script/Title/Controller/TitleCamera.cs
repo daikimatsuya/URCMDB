@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
+//タイトルシーンでのカメラの動き管理
 public class TitleCamera : MonoBehaviour
 {
     

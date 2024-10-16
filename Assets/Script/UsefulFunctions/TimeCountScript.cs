@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeCountScript : MonoBehaviour
+//時間関係の関数をまとめたユーティリティクラス
+public static class TimeCountScript 
 {
-    public bool TimeCounter(ref int timeBuff)
+    public static bool TimeCounter(ref int timeBuff)
     {
         if (timeBuff <= 0)
         {
@@ -16,7 +17,7 @@ public class TimeCountScript : MonoBehaviour
             return false;
         }
     }
-    public bool TimeCounter(ref float timeBuff)
+    public static bool  TimeCounter(ref float timeBuff)
     {
         if (timeBuff <= 0)
         {
@@ -28,15 +29,10 @@ public class TimeCountScript : MonoBehaviour
             return false;
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    public static void SetTime(ref int timeBuff,float time)
     {
-        
+        timeBuff = (int)(time * 60);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

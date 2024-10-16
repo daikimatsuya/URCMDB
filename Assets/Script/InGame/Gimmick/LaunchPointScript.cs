@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//”­Ë‘äŠÇ—
 public class LaunchPointScript : MonoBehaviour
 {
     private Transform tf;

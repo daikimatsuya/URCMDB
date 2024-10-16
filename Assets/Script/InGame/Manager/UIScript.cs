@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//ÉCÉìÉQÅ[ÉÄì‡ÇÃUIÇÃèàóù
 public class UIScript : MonoBehaviour
 {
     private GameManagerScript gm;
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
-    private RectTransform canvasPos;
-    private RectTransform targetMarkerPos;
+    //private RectTransform canvasPos;
+    //private RectTransform targetMarkerPos;
 
 
     private Vector3 playerRot;
@@ -150,7 +151,7 @@ public class UIScript : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        canvasPos = GetComponent<RectTransform>();
+        //canvasPos = GetComponent<RectTransform>();
         mainCamera=GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
         gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();

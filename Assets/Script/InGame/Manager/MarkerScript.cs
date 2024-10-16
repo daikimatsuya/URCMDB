@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ターゲット用マーカー管理
 public class MarkerScript : MonoBehaviour
 {
     Transform tf;

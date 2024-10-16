@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//”j‰ó–Ú•WŠÇ—
 public class TargetScript : MonoBehaviour
 {
     [SerializeField] private int hp;

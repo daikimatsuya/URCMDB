@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ƒRƒ“ƒpƒX‚ÌUIŠÇ—
 public class CompassScript : MonoBehaviour
 {
     Transform tf;

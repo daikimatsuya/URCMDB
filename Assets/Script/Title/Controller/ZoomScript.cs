@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ズームするような動きを管理
 public class ZoomScript : MonoBehaviour
 {
     [SerializeField] private bool setInitialPos;//初期値に値を足して位置をずらしてから初期値まで動かす

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//インゲームでプレイヤーにくっついているカメラ管理
 public class PlayerCameraScript : MonoBehaviour
 {
     private Transform tf;

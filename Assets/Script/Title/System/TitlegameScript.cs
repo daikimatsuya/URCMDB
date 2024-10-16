@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//今のところタイトルのミニゲームの管理のちのち奇麗にする
 public class TitlegameScript : MonoBehaviour
 {
     [SerializeField] private float minigameStartCount;

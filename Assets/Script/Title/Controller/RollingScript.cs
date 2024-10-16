@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//くっつけたオブジェクトを回転させる
 public class RollingScript : MonoBehaviour
 {
     [SerializeField] private float rowSpeed;

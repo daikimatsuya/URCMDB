@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//岩を落とすオブジェクト管理
 public class RockFallScript : MonoBehaviour
 {
     [SerializeField] private GameObject rock;

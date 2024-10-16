@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//タイトルシーンからインゲームへ演出の円が収縮していく演出管理
 public class CircleFadeObjectScript : MonoBehaviour
 {
     [SerializeField] private float increaseSpeed;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//ゲームオーバー時のUI管理
 public class GameOverUIScript : MonoBehaviour
 {
     [SerializeField] private float retryPos;
