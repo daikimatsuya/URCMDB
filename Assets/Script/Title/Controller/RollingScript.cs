@@ -8,6 +8,7 @@ public class RollingScript : MonoBehaviour
     [SerializeField] private float rowSpeed;
 
     Transform tf;
+    //回転した座標をトランスフォームに入れる
     private void Rolling()
     {
         tf.localEulerAngles=new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y,tf.localEulerAngles.z+rowSpeed);

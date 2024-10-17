@@ -13,6 +13,7 @@ public class LaunchPointScript : MonoBehaviour
     private bool isControll;
     private Vector2 rowling;
 
+    //”­Ë‘äŠÇ—ŠÖ”
     private void LaunchPointController()
     {
         if(isControll)
@@ -20,6 +21,7 @@ public class LaunchPointScript : MonoBehaviour
             Move();
         }        
     }
+    //Œü‚«‚ğ•ÏX
     private void Move()
     {
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
@@ -56,7 +58,7 @@ public class LaunchPointScript : MonoBehaviour
         }
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y,0);
     }
-
+    #region ’ló‚¯“n‚µ
     public void Shoot()
     {
         isControll= false;
@@ -74,6 +76,7 @@ public class LaunchPointScript : MonoBehaviour
     {
         return tf.eulerAngles;
     }
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

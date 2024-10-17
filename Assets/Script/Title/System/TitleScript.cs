@@ -22,7 +22,7 @@ public class TitleScript : MonoBehaviour
 
 
 
-
+    //タイトル管理
     private void TitleController()
     {
         isPush = false;
@@ -33,6 +33,7 @@ public class TitleScript : MonoBehaviour
         }
 
     }
+    //カメラの動作開始
     private void CameraStartMove()
     {
         if (!isPush)
@@ -41,6 +42,7 @@ public class TitleScript : MonoBehaviour
             isPush = true;
         }
     }
+    //シーンチェンジ
     private void SceneChange()
     {
         if (!isPush)

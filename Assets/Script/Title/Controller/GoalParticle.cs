@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ミニゲームのゴール演出管理
 public class GoalParticle : MonoBehaviour
 {
     private TitlegameScript ts;
     ParticleSystem ps;
 
-    
+    //パーティクルの発生と消滅
     private void PariticleController()
     {
         if (ts.GetGoalActionFlag())

@@ -15,6 +15,7 @@ public class RoclScript : MonoBehaviour
     float breakArea;
     float fallSpeed;
 
+    //ä«óù
     private void RockController()
     {
         if (tf.position.y < breakArea)
@@ -23,17 +24,19 @@ public class RoclScript : MonoBehaviour
         }
         Fall();
     }
+    //óéâ∫èàóù
     private void Fall()
     {
         rb.velocity = Vector3.zero;
         rb.velocity = new Vector3(0.0f, -fallSpeed, 0.0f);
     }
+    //ä‚ÇîjâÛÇ∑ÇÈ
     private void BreakRock()
     {
         Destroy(this.gameObject);
     }
 
-
+    //íléÛÇØìnÇµÇ±Ç±Ç©ÇÁ
     public void GetBreakArea(float posY)
     {
         breakArea = posY;
@@ -42,6 +45,8 @@ public class RoclScript : MonoBehaviour
     {
         fallSpeed= speed;
     }
+    //Ç±Ç±Ç‹Ç≈
+
     // Start is called before the first frame update
     void Start()
     {

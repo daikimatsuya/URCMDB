@@ -15,20 +15,24 @@ public class LineUIScript : MonoBehaviour
     [SerializeField] private float rand;
     [SerializeField] private float colorChangeTime;
 
+    //予測線設置
     public void SetLine(Vector3 Pos,Vector3 targetLength)
     {
         line.SetPosition(0, targetLength);
         pos.position = Pos;
     }
+    //予測線削除
     public void Death()
     {
         Destroy(this.gameObject);
     }
+    //色を赤に変更
     public void SetRed()
     {
         line.startColor = Color.red;
         line.endColor = Color.red;
     }
+    //色を赤と黄で点滅
     public void SetWarning()
     {
         if (timeBuff <= 0)
@@ -50,11 +54,13 @@ public class LineUIScript : MonoBehaviour
         }
         timeBuff--;
     }
+    //色を透明にする
     public void SetVoid()
     {
         line.startColor = new Color(0, 0, 0, 0);
         line.endColor = new Color(0, 0, 0, 0);    
     }
+    //時間を初期化
     private void SetTime()
     {
         timeBuff = (int)(colorChangeTime * 60);

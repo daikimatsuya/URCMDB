@@ -10,7 +10,7 @@ public class FunScript : MonoBehaviour
     [SerializeField] float rotateSpeed;
 
     private Vector3 rotation;
-
+    //ƒtƒ@ƒ“‚ð‰ñ“]‚³‚¹‚é
     private void RotateFun()
     {
         rotation = new Vector3(rotation.x+rotateSpeed,rotation.y,rotation.z);

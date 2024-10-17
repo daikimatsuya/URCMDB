@@ -13,6 +13,7 @@ public class ButtobeScript : MonoBehaviour
     private float initialPosY;
     private float posBuff;
     private bool isUp;
+    //è„â∫Ç…à⁄ìÆ
     private void Move()
     {
         if(isUp)

@@ -15,18 +15,20 @@ public class FlakBulletScript : MonoBehaviour
     [SerializeField] private float deleteTime;
     [SerializeField] private GameObject marker;
 
-
+    //砲弾管理
     private void BulletController()
     {
         Move();
         Delete();
     }
+    //移動
     private void Move()
     {
         rb.velocity = speed;
 
         ms.Move(pos.position);
     }
+    //消去
     public void Delete()
     {
         if (deleteTime <= 0)
@@ -36,10 +38,12 @@ public class FlakBulletScript : MonoBehaviour
         }
         deleteTime--;
     }
+    //速度受け取り
     public void GetAcce(Vector3 acce)
     {
         speed = acce;
     }
+    //マーカー生成
     private void CreateMarker()
     {
         GameObject _ = Instantiate(marker);

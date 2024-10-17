@@ -23,6 +23,7 @@ public class ActivationFadeScript : MonoBehaviour
 
     private float speedBuff;
 
+    //演出の管理関数
     private void ActivationFadeController()
     {
         if (start)
@@ -50,6 +51,7 @@ public class ActivationFadeScript : MonoBehaviour
             SetStart();
         }
     }
+    //上に移動する奴を管理
     private void UpFade()
     {
         if(TimeCountScript.TimeCounter(ref delayBuff))
@@ -57,6 +59,7 @@ public class ActivationFadeScript : MonoBehaviour
             MoveFadeObject(moveSpeed);
         }
     }
+    //下に行くやつを管理
     private void DownFade()
     {
         if (TimeCountScript.TimeCounter(ref delayBuff))
@@ -64,6 +67,7 @@ public class ActivationFadeScript : MonoBehaviour
             MoveFadeObject(-moveSpeed);
         }
     }
+    //ぱっと消えるやつ管理
     private void DeleteFade()
     {
         if (TimeCountScript.TimeCounter(ref deleteTimeBuff))
@@ -71,13 +75,13 @@ public class ActivationFadeScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
+    //速度を足して座標をトランスフォームにいれる
     private void MoveFadeObject(float speed)
     {
         speedBuff += speed;
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y + speedBuff, tf.localPosition.z);
     }
-
+    //開始フラグをオンにする
     private void SetStart()
     {
         start = true;

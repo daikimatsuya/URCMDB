@@ -42,8 +42,8 @@ public class PlayerScript : MonoBehaviour
     private bool PMS;
     //private bool isInStage;
     //[SerializeField] private bool RockOned;
- 
 
+    //プレイヤー管理関数
     private void PlayerController()
     {
         //RockOned = false;
@@ -58,6 +58,7 @@ public class PlayerScript : MonoBehaviour
         // FlameEffect();
         gm.PlayerRotSet(rowling);
     }
+    //速度を足してトランスフォームのバッファに入れる
     private void Move()
     {
         if (isFire)
@@ -74,7 +75,8 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = playerMove;
             playerMoveBuff = playerMove;
         }
-    }  
+    }
+    //プレイヤーの操作で向いてる方向を変える
     private void Operation()
     {
         if (isControl)
@@ -166,6 +168,7 @@ public class PlayerScript : MonoBehaviour
         PMS=gm.GetPMS();
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
     }
+    //加減速処理
     private void Acceleration()
     {
         if (isFire)
@@ -195,6 +198,7 @@ public class PlayerScript : MonoBehaviour
             speedBuff = playerSpeed + burstSpeed+ringSpeed;
         }
     }
+    //デバッグで速度調節する（後で消す
     private void SpeedControllDebager()
     {
         if(Input.GetKey(KeyCode.Alpha0))
@@ -223,6 +227,7 @@ public class PlayerScript : MonoBehaviour
     //    }
     //    effectTimer--;
     //}
+    //体力が無くなったら爆破して消す
     private void Booooooomb()
     {
         if (playerHp <= 0)
@@ -231,6 +236,7 @@ public class PlayerScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    //プレイヤーの爆発までのカウントダウン
     private void CountDown()
     {
         if (isControl)
@@ -242,7 +248,7 @@ public class PlayerScript : MonoBehaviour
 
         }
     }
-
+    #region　値受け渡し
     public Vector3 GetPlayerSpeed()
     {
         return playerMoveBuff;
@@ -259,10 +265,17 @@ public class PlayerScript : MonoBehaviour
     {
         return tf.eulerAngles;
     }
+    public bool GetControll()
+    {
+        return isControl;
+    }
+    #endregion
+    //狙われているかのチェック
     public void IsLock()
     {
         //RockOned = true;
     }
+    //デグをラッドに変換
     public double ToRadian(double angle)
     {
         return angle * Math.PI / 180f;
@@ -307,10 +320,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public bool GetControll()
-    {
-        return isControl;
-    }
+
     // Start is called before the first frame update
     void Start()
     {

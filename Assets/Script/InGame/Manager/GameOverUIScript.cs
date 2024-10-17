@@ -15,18 +15,21 @@ public class GameOverUIScript : MonoBehaviour
     private TargetScript targetScript;
     private int targetHp;
 
+    //リトライを選択したときにカーソルを移動
     public void MoveRetry()
     {
 
         cursorPos.localPosition = new Vector3(retryPos, cursorPos.localPosition.y, cursorPos.localPosition.z);
         
     }
+    //タイトルに戻るを洗濯したときにカーソルを移動
     public void MoveBackTitle()
     {
 
         cursorPos.localPosition = new Vector3(backTitlePos, cursorPos.localPosition.y, cursorPos.localPosition.z);
         
     }
+    #region 値受け渡し
     public float GetPos()
     {
         return cursorPos.localPosition.x;
@@ -35,6 +38,8 @@ public class GameOverUIScript : MonoBehaviour
     {
         targetHp=targetScript.GetHp();
     }
+    #endregion
+    //ターゲットのHPを表示
     public void TargetHpUI()
     {
         if (target != null)

@@ -14,6 +14,7 @@ public class MovieFade : MonoBehaviour
 
     private int shadeLevel;
 
+    //このスクリプトを動かす関数
     private void MovieFadeController()
     {
         if(shadeLevel == 0)
@@ -29,18 +30,22 @@ public class MovieFade : MonoBehaviour
             ParfectSgade();
         }
     }
+    //完全に画面を黒帯で囲う
     private void ParfectSgade()
     {
 
     }
+    //上下に帯を表示する
     private void MovieShade()
     {
 
     }
+    //完全に帯を非表示にする
     private void Openly()
     {
 
     }
+    //帯のレベルを取得
     public void SetShadeLevel(int level)
     {
         shadeLevel = level;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ターゲット用マーカー管理
+//アイテムとか敵とかのマーカー管理
 public class MarkerScript : MonoBehaviour
 {
     Transform tf;
@@ -12,6 +12,7 @@ public class MarkerScript : MonoBehaviour
     {
 
     }
+    //移動させる
     public void Move(Vector3 pos)
     {
         if(tf != null)
@@ -24,6 +25,7 @@ public class MarkerScript : MonoBehaviour
             tf.position = new Vector3(pos.x, markerPosY, pos.z);
         }
     }
+    //消去
     public void Delete()
     {
         Destroy(this.gameObject);

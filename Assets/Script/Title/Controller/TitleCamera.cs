@@ -20,11 +20,13 @@ public class TitleCamera : MonoBehaviour
     private bool moveEnd;
     private Vector3 firstPos;
 
+    //ƒJƒƒ‰‚ğ“®‚©‚·
     private void TitleCameraController()
     {
         Move(ts.GetIsStageSelect());
         SceneChangeMove();
     }
+    //ˆÚ“®
     private void Move(bool isStageSelect)
     {
         Vector3 dis;
@@ -66,6 +68,7 @@ public class TitleCamera : MonoBehaviour
             }
         }
     }
+    //‰‰o‚Ég‚¤—\’è
     private void SceneChangeMove()
     {
         if(ts.GetIsSceneChangeModeFlag())

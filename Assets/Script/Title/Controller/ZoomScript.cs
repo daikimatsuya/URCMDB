@@ -18,6 +18,7 @@ public class ZoomScript : MonoBehaviour
 
     private float PosBuffZ;
     private Vector3 initialPos;
+    //ズームインアウト管理
     private void ZoomController()
     {
         if(zoomIn)
@@ -29,6 +30,7 @@ public class ZoomScript : MonoBehaviour
             ZoomOUT();
         }
     }
+    //ズームインのような動きをさせる
     private void ZoomIn()
     {
         if (setInitialPos)
@@ -58,6 +60,7 @@ public class ZoomScript : MonoBehaviour
             tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ);
         }
     }
+    //ズームアウトのような動きをさせる
     private void ZoomOUT()
     {
         if (setInitialPos)

@@ -19,7 +19,7 @@ public class TitlegameScript : MonoBehaviour
     private bool isGoalAction;
    
     private int resetDelay;
-
+    //ミニゲーム管理
     private void TitleGameController()
     {
         if(Input.GetKeyUp(KeyCode.F)) 
@@ -43,6 +43,7 @@ public class TitlegameScript : MonoBehaviour
         ResetTimer();
         startCountBuff--;
     }
+    //フラグ関連リセット
     private void ResetFlags()
     {
         isMoveStart = false;
@@ -52,6 +53,7 @@ public class TitlegameScript : MonoBehaviour
 
         startCountBuff = (int)(minigameStartCount * 60);
     }
+    //タイマーリセット
     private void ResetTimer()
     {
         if(isMiniPlayerDead)
@@ -67,6 +69,7 @@ public class TitlegameScript : MonoBehaviour
             }
         }
     }
+    #region　値受け渡し
     public bool GetResetFlag()
     {
         return isReset;
@@ -112,7 +115,7 @@ public class TitlegameScript : MonoBehaviour
     {
         return isGoalAction;
     }
-   
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//プレイヤーの背後の火管理用
+//プレイヤーの背後の火管理用多分消す
 public class Spark : MonoBehaviour
 {
     [SerializeField] private float time;

@@ -20,6 +20,7 @@ public class PlayerCameraScript : MonoBehaviour
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
 
+    //カメラ動かす関数
     private void PlayerCameraController()
     {
         if (gm.GetGameStartFlag())
@@ -33,6 +34,8 @@ public class PlayerCameraScript : MonoBehaviour
             mainCanvas.SetActive(false);
         }
     }
+
+    //カメラがプレイヤーの後ろに移動する
     private void Move()
     {
         if (playerPos != null)
@@ -98,6 +101,7 @@ public class PlayerCameraScript : MonoBehaviour
             tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
         }
     }
+    //プレイヤーが居なかったら再取得する
     private void SearchPlayer()
     {
         if (playerPos == null)
@@ -111,6 +115,7 @@ public class PlayerCameraScript : MonoBehaviour
             }
         }
     }
+    //デグラド変換
     public double ToRadian(double angle)
     {
         return angle * Math.PI / 180f;

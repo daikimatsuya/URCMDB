@@ -12,6 +12,7 @@ public class CircleFadeObjectScript : MonoBehaviour
     Transform tf;
     private SceneChangeAnimationScript scas;
 
+    //‰‰oƒtƒ‰ƒO
     private void CircleFadeController()
     {
         if(scas.GetIsFadeStartFlag())

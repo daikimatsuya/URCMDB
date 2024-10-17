@@ -17,6 +17,7 @@ public class RockFallScript : MonoBehaviour
     private int intervalBuff;
     private Vector3 spawnPos;
     // Start is called before the first frame update
+    //管理
     private void FallRockController()
     {
         spawnPos = tf.position;
@@ -26,6 +27,7 @@ public class RockFallScript : MonoBehaviour
         }
         IntervalTimer();
     }
+    //岩生成
     private void SpawnRock()
     {
         float randX = Random.Range(0, spawnWidth.x);
@@ -43,6 +45,7 @@ public class RockFallScript : MonoBehaviour
 
         intervalBuff = (int)(spawnInterval * 60);
     }
+    //インターバル管理
     private void IntervalTimer()
     {
         intervalBuff--;

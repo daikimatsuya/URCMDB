@@ -21,13 +21,14 @@ public class SpeedUpRingScript : MonoBehaviour
     Transform tf;
 
     private GameManagerScript gm;
-
+    //管理
     private void SpeedUpRingController()
     {
         
         ON();
         Off();
     }
+    //消す
     private void Off()
     {
         if (isGet)
@@ -39,6 +40,7 @@ public class SpeedUpRingScript : MonoBehaviour
             }
         }
     }
+    //再表示
     private void ON()
     {
         if (gm.IsPlayerDead()==true)
@@ -53,6 +55,7 @@ public class SpeedUpRingScript : MonoBehaviour
             
         }
     }
+    //マーカー生成
     private void CreateMarker()
     {
         GameObject _ = Instantiate(marker);

@@ -20,7 +20,7 @@ public class StageSelectScript : MonoBehaviour
     private bool fadeStart;
 
     TitleScript ts;
-
+    //ステージセレクト管理
     private void SelectController()
     {
         if (fadeTimeBuff <= 0)
@@ -44,6 +44,7 @@ public class StageSelectScript : MonoBehaviour
             fadeTimeBuff--;
         }
     }
+    //選択ステージ数加算減算
     private void StageSelect()
     {
         if (rotateEnd)
@@ -78,17 +79,18 @@ public class StageSelectScript : MonoBehaviour
         }
 
     }
+    //ステージ選択リセット
     private void StageSelectReset()
     {
         stageCount = 1;
         stageChangeCount = 1;
     }
-
+    //シーンチェンジ
     private void SceneChange()
     {
         SceneManager.LoadScene(stage[stageCount]);
     }
-
+    #region 値受け渡し
     public void SetRotateEnd(bool flag)
     {
         rotateEnd = flag;
@@ -109,6 +111,7 @@ public class StageSelectScript : MonoBehaviour
     {
         fadeStart = flag;
     }
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

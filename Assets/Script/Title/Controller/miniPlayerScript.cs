@@ -26,7 +26,7 @@ public class miniPlayerScript : MonoBehaviour
 
 
 
-
+    //ミニプレーヤー管理
     private void miniPlayerController()
     {
         if(ts.GetGameStartFlag())
@@ -40,6 +40,7 @@ public class miniPlayerScript : MonoBehaviour
             ResetPlayer();
         }
     }
+    //移動
     private void Move()
     {
         if (isMove)
@@ -62,6 +63,7 @@ public class miniPlayerScript : MonoBehaviour
     {
 
     }
+    //位置初期化
     private void ResetPlayer()
     {
         isRolling = true;
@@ -69,6 +71,7 @@ public class miniPlayerScript : MonoBehaviour
         ResetTransfrom();
     }
 
+    //プレーヤーが操作して上下に移動
     private void ControllMove()
     {
         Vector3 pos=tf.position;
@@ -100,11 +103,13 @@ public class miniPlayerScript : MonoBehaviour
     {
 
     }
+    //タイトルの周りをくるくる回る
     private void AutoRotation()
     {
         SetVector3(ref angles, tf.localEulerAngles.x, (tf.localEulerAngles.y - autoRotateSpeed), tf.localEulerAngles.z);
         SetAngles();
     }
+    //所定の位置まで回ってから回転終了
     private void FixedRotation()
     {
         angles = tf.localEulerAngles;
@@ -126,6 +131,7 @@ public class miniPlayerScript : MonoBehaviour
         }
         SetAngles();
     }
+    #region 値受け渡し
     private void SetAngles()
     {
         tf.localEulerAngles=angles;
@@ -134,11 +140,14 @@ public class miniPlayerScript : MonoBehaviour
     {
          target = new Vector3(x, y, z);
     }
+    #endregion
+    //位置初期化
     private void ResetTransfrom()
     {
         tf.position = initialPos;
         tf.eulerAngles = initialRot;
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {

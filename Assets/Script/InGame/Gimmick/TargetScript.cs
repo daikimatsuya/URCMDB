@@ -9,10 +9,12 @@ public class TargetScript : MonoBehaviour
 
     private GameManagerScript gm;
 
+    //ターゲット管理
     private void TargetController()
     {
         IsBreak();
     }
+    //HPが無くなったら消滅
     private void IsBreak()
     {
         if(hp <= 0)
@@ -21,6 +23,7 @@ public class TargetScript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    //HP渡し
     public int GetHp()
     {
         return hp;

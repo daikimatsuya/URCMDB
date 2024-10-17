@@ -14,10 +14,12 @@ public class StageRotationScript : MonoBehaviour
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float baseRot;
 
+    //ステージの回転管理
     private void StageSelectController()
     {
         Move(sss.GetStageCount());
     }
+    //ステージ数で回転
     private void Move(Vector2 stage)
     {
         float rot = (360 / (stage.y + 1)) * stage.x;

@@ -24,6 +24,7 @@ public class GameManagerScript : MonoBehaviour
     private bool ClearFlag;
     private bool gameStart;
 
+    //ゲームシステムを動かす
     private void GameManagerController()
     {
         ChangePMS();
@@ -37,14 +38,17 @@ public class GameManagerScript : MonoBehaviour
            
         }
     }
+    //リトライするときにシーンをロード
     public void Retry()
     {
         SceneManager.LoadScene(stage);
     }
+    //タイトルに戻るときにシーンをロード
     public void BackTitle()
     {
         SceneManager.LoadScene(title);
     }
+    //プレイヤー生成
     private void SpawnPlayer()
     {
         if (!GameObject.FindWithTag("Player"))
@@ -80,6 +84,7 @@ public class GameManagerScript : MonoBehaviour
             playerSpeedBuff = ps.GetPlayerSpeedBuffFloat();
         }
     }
+    //PMSのオンオフ
     private void ChangePMS()
     {
         if (Input.GetKeyDown(KeyCode.P))

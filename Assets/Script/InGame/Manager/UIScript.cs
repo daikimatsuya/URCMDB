@@ -33,6 +33,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private GameObject yawUI;
     [SerializeField] private GameObject yawUI2;
     [SerializeField] private GameObject rowImage;
+    //UI全般管理関数
     private void UIController()
     {
         GetPlayerRot();
@@ -43,6 +44,7 @@ public class UIScript : MonoBehaviour
         TargetMarkerUI();
         ActiveChecker();
     }
+    //プレイヤーが死んでいたら消す
     private void ActiveChecker()
     {
         if (gm.IsPlayerDead())
@@ -70,14 +72,17 @@ public class UIScript : MonoBehaviour
             rowImage.SetActive(true);
         }
     }
+    //プレイヤーの角度取得
     private void GetPlayerRot()
     {
         playerRot = gm.GetPlayerRot();
     }
+    //プレイヤーの向きをUIにいれる
     private void YawUIController()
     {
         yawUItf.localPosition = new Vector3(yawUItf.localPosition.x, playerRot.x*-YawUIMag, 0);
     }
+    //ゲームオーバー時のUI管理
     private void IsGameOver()
     {
         if(gm.GetGameOverFlag())
@@ -106,6 +111,7 @@ public class UIScript : MonoBehaviour
             goUs.TargetHpUI();
         }
     }
+    //PMSのオンオフ表示
     private void PMSMode()
     {
         if (gm.GetPMS())
@@ -117,12 +123,14 @@ public class UIScript : MonoBehaviour
             pmsTex.text = "PMS:OFF";
         }
     }
+    //プレイヤーのスピードをUIに表示
     private void PlayerSpeedUI()
     {
         playerSpeedTex.text = (int)gm.GetPlayerSpeed() + "M/S";
         playerSpeedBuffTex.text = (int)gm.GetPlayerSpeedBuff() + "M/S";
 
     }
+    //ターゲットの位置をUIに表示
     private void TargetMarkerUI()
     {
 

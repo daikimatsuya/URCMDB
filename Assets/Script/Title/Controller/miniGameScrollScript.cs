@@ -12,6 +12,7 @@ public class miniGameScrollScript : MonoBehaviour
 
     private Vector3 initialPos;
 
+    //ミニゲームのスクロール管理
     private void ScrollController()
     {
         if (ts.GetMoveFlag())
@@ -24,10 +25,12 @@ public class miniGameScrollScript : MonoBehaviour
             ScrollReset();
         }
     }
+    //スクロールさせる
     private void Scroll()
     {
         tf.position = new Vector3(tf.position.x-scrollSpeed, tf.position.y, tf.position.z);
     }
+    //スクロール値リセット
     private void ScrollReset()
     {
         tf.position=initialPos;

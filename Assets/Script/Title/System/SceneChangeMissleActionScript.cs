@@ -17,7 +17,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     Transform tf;
 
     private Vector2 moveBuff;
-
+    //飛んでくミサイル管理
     private void SCMAController()
     {
         if (scas.GetIsShotFlag())
@@ -29,6 +29,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
             
         }
     }
+    //発射管理
     private void Shoot()
     {
         if (tf.localPosition.z < targetPos)
@@ -43,6 +44,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y-moveBuff.y, tf.localPosition.z-moveBuff.x);
         tf.localEulerAngles = new Vector3(tf.localEulerAngles.x+maxRotate, tf.localEulerAngles.y, tf.localEulerAngles.z);
     }
+    //デグラド変換
     public double ToRadian(double angle)
     {
         return angle * Math.PI / 180f;

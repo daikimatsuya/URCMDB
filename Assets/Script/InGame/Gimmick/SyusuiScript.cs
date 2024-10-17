@@ -35,12 +35,13 @@ public class SyusuiScript : MonoBehaviour
     private bool isLeftBase;
     private int timeBuff;
 
-
+    //機能管理
     private void SyusuiController()
     {
         Chase();
         Move();
     }
+    //移動
     private void Move()
     {
         moveSpeed.x = speed * (float)Math.Sin(ToRadian(tf.eulerAngles.y));
@@ -54,6 +55,7 @@ public class SyusuiScript : MonoBehaviour
 
         rb.velocity = moveSpeed;
     }
+    //範囲内にプレイヤーがいたら追跡する
     private void Chase()
     {
         if (playerScript == null)
@@ -72,6 +74,7 @@ public class SyusuiScript : MonoBehaviour
            LeftBase();
         }
     }
+    //プレイヤーのいる方向を取得
     private void Aim()
     {
 
@@ -87,6 +90,7 @@ public class SyusuiScript : MonoBehaviour
 
         tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);
     }
+    //プレイヤーから離れず近すぎずを維持
     private void KeepDis()
     {
         if (playerDis.magnitude < minDis)
@@ -104,6 +108,7 @@ public class SyusuiScript : MonoBehaviour
             }           
         }
     }
+    //プレイヤーを追跡していないときの挙動
     private void NormalOperation()
     {
         float horizontal = Row.y;
@@ -120,6 +125,7 @@ public class SyusuiScript : MonoBehaviour
         Rowring(horizontal, vertical);
         tf.localEulerAngles = Row;
     }
+    //拠点から一定数離れたら戻る
     private void LeftBase()
     {
         Vector2 dis = new Vector2(basePos.position.x - tf.position.x,basePos.position.z-tf.position.z);
@@ -159,6 +165,7 @@ public class SyusuiScript : MonoBehaviour
             NormalOperation();
         }
     }
+    //回転
     private void Rowring(float horizontal,float vertical)
     {
         if (horizontal - Row.y > 0)
@@ -195,6 +202,7 @@ public class SyusuiScript : MonoBehaviour
             }
         }
     }
+    //デグラド変換
     public double ToRadian(double angle)
     {
         return angle * Math.PI / 180f;

@@ -22,6 +22,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
     private bool isShot;
     private bool isFadeStart;
 
+    //演出管理
     private void AnimationController()
     {
         UpDown();
@@ -58,12 +59,13 @@ public class SceneChangeAnimationScript : MonoBehaviour
             }
         }
     }
+    //フラグリセット
     private void ResetFlags()
     {
         isShot=false;
         isFadeStart=false;
     }
-
+    #region 値受け渡し
     public bool GetIsShotFlag()
     {
         return isShot;
@@ -76,6 +78,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
     {
         return isFadeStart;
     }
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

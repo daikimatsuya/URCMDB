@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//動く雲のスクリプト
 public class MoveCloundScript : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
@@ -13,6 +14,7 @@ public class MoveCloundScript : MonoBehaviour
 
 
     private float posBuff;
+    //上下に動かす
     private void Move()
     {
         if (isUp)
