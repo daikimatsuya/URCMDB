@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Profiling.Editor;
 using UnityEngine;
 
 //インゲーム開始時のカメラ演出時の演出
