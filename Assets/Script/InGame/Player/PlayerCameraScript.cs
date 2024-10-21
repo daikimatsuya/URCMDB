@@ -13,25 +13,32 @@ public class PlayerCameraScript : MonoBehaviour
     private GameManagerScript gm;
     private GameObject mainCanvas;
     MovieCamera mc;
+    MovieFade mf;
 
     private float rot;
 
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
+    [SerializeField] private GameObject movieCanvas;
 
     //ÉJÉÅÉâìÆÇ©Ç∑ä÷êî
     private void PlayerCameraController()
     {
-        if (gm.GetGameStartFlag())
+        if (mc.GetEnd())
         {
+            movieCanvas.SetActive(false);
+            mainCanvas.SetActive(true);
+
             SearchPlayer();
             Move();
         }
         else
         {
+            mf.MovieFadeController();
             mc.CameraController();
             mainCanvas.SetActive(false);
+            movieCanvas.SetActive(true);
         }
     }
 
@@ -126,6 +133,7 @@ public class PlayerCameraScript : MonoBehaviour
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         tf=GetComponent<Transform>();
         mc=GetComponent<MovieCamera>();
+        mf = GetComponent<MovieFade>();
         mainCanvas = GameObject.FindWithTag("UICanvas");
         //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
     }

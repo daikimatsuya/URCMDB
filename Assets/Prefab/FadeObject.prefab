@@ -217,6 +217,7 @@ MonoBehaviour:
   moveDelay: 0
   deleteTime: 0.2
   life: 4
+  playerMoveTime: 0
 --- !u!1 &2327888645161449054
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +337,7 @@ MonoBehaviour:
   moveDelay: 0
   deleteTime: 0.4
   life: 4
+  playerMoveTime: 0
 --- !u!1 &2492809662061241313
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +457,7 @@ MonoBehaviour:
   moveDelay: 0
   deleteTime: 0.6
   life: 4
+  playerMoveTime: 0
 --- !u!1 &3037135361329186883
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +648,7 @@ MonoBehaviour:
   moveDelay: 0
   deleteTime: 0.2
   life: 4
+  playerMoveTime: 0
 --- !u!1 &5237617351008942003
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +866,7 @@ MonoBehaviour:
   moveDelay: 0
   deleteTime: 0
   life: 4
+  playerMoveTime: 0
 --- !u!1 &5797261358928579575
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797261358928579575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -915,6 +920,7 @@ MonoBehaviour:
   moveDelay: 0.8
   deleteTime: 0
   life: 4
+  playerMoveTime: 0
 --- !u!1 &5880374922337668807
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +946,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5880374922337668807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -967,7 +973,8 @@ MonoBehaviour:
   moveSpeed: 0.3
   moveDelay: 0.8
   deleteTime: 0
-  life: 4
+  life: 1.8
+  playerMoveTime: 0
 --- !u!1 &9180156141195901698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,3 +1094,4 @@ MonoBehaviour:
   moveDelay: 0
   deleteTime: 0.2
   life: 4
+  playerMoveTime: 0

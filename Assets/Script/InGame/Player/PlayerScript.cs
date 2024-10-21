@@ -46,16 +46,21 @@ public class PlayerScript : MonoBehaviour
     //プレイヤー管理関数
     private void PlayerController()
     {
-        //RockOned = false;
+        if (gm.GetGameStartFlag())
+        {
+            lp.SetStart(true);
+            //RockOned = false;
 
-        SpeedControllDebager();//デバッグ用
+            SpeedControllDebager();//デバッグ用
 
-        Booooooomb();
-        Operation();
-        Acceleration();
-        Move();
-        CountDown();
-        // FlameEffect();
+            Booooooomb();
+            Operation();
+            Acceleration();
+            Move();
+            CountDown();
+            // FlameEffect();
+           
+        }
         gm.PlayerRotSet(rowling);
     }
     //速度を足してトランスフォームのバッファに入れる
@@ -157,15 +162,16 @@ public class PlayerScript : MonoBehaviour
                 speedBuff += firstSpeed;
             }
             rowling.x = -lp.GetRowling().x;
-            rowling.y = lp.GetRowling().y+180;
-          
-            if(Input.GetKeyDown(KeyCode.Space))
+            rowling.y = lp.GetRowling().y + 180;
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 isFire = true;
                 lp.Shoot();
             }
         }
         PMS=gm.GetPMS();
+
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
     }
     //加減速処理
@@ -340,9 +346,14 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position=lp.GetPos();
+
+        rowling.x = -lp.GetRowling().x;
+        rowling.y = lp.GetRowling().y + 180;
+        tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
+        lp.SetStart(false);
         //isInStage = true;
         //RockOned = false;
-       
+
     }
 
     // Update is called once per frame

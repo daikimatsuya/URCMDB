@@ -17,10 +17,11 @@ public class ActivationFadeScript : MonoBehaviour
     [SerializeField] private float deleteTime;
     private int deleteTimeBuff=0;
     [SerializeField]private float life;
+    [SerializeField] private float playerMoveTime;
 
     Transform tf;
 
-
+    private GameManagerScript gm;
     private float speedBuff;
 
     //‰‰o‚ÌŠÇ—ŠÖ”
@@ -30,6 +31,7 @@ public class ActivationFadeScript : MonoBehaviour
         {
             if (TimeCountScript.TimeCounter(ref life))
             {
+                gm.SetGameStartFlag(true);
                 Destroy(GameObject.FindWithTag("FadeObject"));
             }
             if (upFade)
@@ -46,10 +48,9 @@ public class ActivationFadeScript : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyUp(KeyCode.U))
-        {
+     
             SetStart();
-        }
+        
     }
     //ã‚ÉˆÚ“®‚·‚é“z‚ğŠÇ—
     private void UpFade()
@@ -58,6 +59,7 @@ public class ActivationFadeScript : MonoBehaviour
         {
             MoveFadeObject(moveSpeed);
         }
+
     }
     //‰º‚És‚­‚â‚Â‚ğŠÇ—
     private void DownFade()
@@ -90,6 +92,8 @@ public class ActivationFadeScript : MonoBehaviour
     void Start()
     {
         tf = GetComponent<Transform>();
+        gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+
 
         start = false;
 

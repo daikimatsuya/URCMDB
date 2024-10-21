@@ -14,6 +14,8 @@ public class MovieCamera : MonoBehaviour
     [SerializeField] private Vector3[] startRotation;
     [SerializeField] private float[] moveTime;
     private int moveTimeBuff;
+    [SerializeField] private float fadeoutTime;
+
 
     private bool ready;
     [SerializeField] private bool isMove;
@@ -24,8 +26,11 @@ public class MovieCamera : MonoBehaviour
     private Vector3 rotRange;
     private Vector3 moveSpeed;
     private Vector3 RotSpeed;
+    private bool isEnd;
+    private bool isSkip;
 
     Transform tf;
+    MovieFade mf;
     //ƒJƒƒ‰‚ð“®‚©‚·ŠÖ”
     public void CameraController()
     {
@@ -35,17 +40,41 @@ public class MovieCamera : MonoBehaviour
     //ˆÚ“®‚³‚¹‚éŠÖ”
     private void Move()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isSkip = true;
+        }
         if (isMove)
         {
             if (moveTimeBuff > 0)
             {
+
+
                 posBuff += moveSpeed;
                 rotBuff += RotSpeed;
 
                 SetTransform();
+                if(isSkip)
+                {
+                    mf.SetShadeLevel(2);
+                    if (mf.GetShade())
+                    {
+                        isEnd = true;
+                        mf.SetShadeLevel(3);
+                    }
+                }
+                else if (fadeoutTime > moveTimeBuff)
+                {
+                    mf.SetShadeLevel(2);
+                }
+                else
+                {
+                    mf.SetShadeLevel(1);
+                }
             }
             else
             {
+
                 ready = false;
                 isMove = false;
             }
@@ -78,11 +107,12 @@ public class MovieCamera : MonoBehaviour
 
                 number++;
                 ready = true;
-                //isMove = true;
+                isMove = true;
             }
             else
             {
-
+                isEnd = true;
+                mf.SetShadeLevel(3);
             }
         }
     }
@@ -91,13 +121,22 @@ public class MovieCamera : MonoBehaviour
         tf.position = posBuff;
         tf.eulerAngles=rotBuff;
     }
+    public bool GetEnd()
+    {
+        return  isEnd;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        isSkip = false;
         ready = false;
+        isEnd = false;
         tf= GetComponent<Transform>();
+        mf = GetComponent<MovieFade>();
         number = 0;
         SetNext();
+        isMove = true;
+        fadeoutTime *= 60;
     }
 
     // Update is called once per frame

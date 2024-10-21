@@ -12,14 +12,19 @@ public class LaunchPointScript : MonoBehaviour
 
     private bool isControll;
     private Vector2 rowling;
+    private bool isStart;
+
 
     //î≠éÀë‰ä«óùä÷êî
     private void LaunchPointController()
     {
-        if(isControll)
+        if (isStart)
         {
-            Move();
-        }        
+            if (isControll)
+            {
+                Move();
+            }
+        }
     }
     //å¸Ç´ÇïœçX
     private void Move()
@@ -59,6 +64,10 @@ public class LaunchPointScript : MonoBehaviour
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y,0);
     }
     #region íléÛÇØìnÇµ
+    public void SetStart(bool flag)
+    {
+        isStart = flag;
+    }
     public void Shoot()
     {
         isControll= false;
@@ -80,11 +89,12 @@ public class LaunchPointScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
         tf=GetComponent<Transform>();   
         rowling=new Vector2(tf.localEulerAngles.x,tf.localEulerAngles.y);
 
         isControll = true;
-       
+        isStart = false;
     }
 
     // Update is called once per frame

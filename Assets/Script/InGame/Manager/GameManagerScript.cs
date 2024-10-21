@@ -54,6 +54,7 @@ public class GameManagerScript : MonoBehaviour
         if (!GameObject.FindWithTag("Player"))
         {
             playerDead = true;
+            gameStart = false;
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 if (playerMissile > 0)
@@ -147,6 +148,10 @@ public class GameManagerScript : MonoBehaviour
     public bool GetGameStartFlag()
     {
         return gameStart;
+    }
+    public void SetGameStartFlag(bool start)
+    {
+        gameStart = start;
     }
     #endregion
     // Start is called before the first frame update
