@@ -107,10 +107,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3536103835060491500}
+  - component: {fileID: 7791156980856930781}
+  - component: {fileID: 3536103835060491501}
   - component: {fileID: 3536103835060491499}
   - component: {fileID: 3536103835060491498}
-  - component: {fileID: 3536103835060491501}
-  - component: {fileID: 7791156980856930781}
   - component: {fileID: 5831787967426061405}
   m_Layer: 0
   m_Name: Main Camera
@@ -136,6 +136,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &7791156980856930781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536103835060491497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fd796db4d05ae4aa74767bca266125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knotNumber: 1
+  targetPosition:
+  - {x: 0, y: 0, z: 0}
+  startPosition:
+  - {x: 0, y: 0, z: 0}
+  targetRotation:
+  - {x: 0, y: 100, z: 0}
+  startRotation:
+  - {x: 0, y: 0, z: 0}
+  moveTime:
+  - 0
+  isMove: 0
+--- !u!114 &3536103835060491501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536103835060491497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15f15b481429f64c91ab2e9b2dc33a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDeff: 10
+  rotSpeed: 1
 --- !u!20 &3536103835060491499
 Camera:
   m_ObjectHideFlags: 0
@@ -187,39 +225,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3536103835060491497}
   m_Enabled: 1
---- !u!114 &3536103835060491501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3536103835060491497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15f15b481429f64c91ab2e9b2dc33a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraDeff: 10
-  rotSpeed: 1
---- !u!114 &7791156980856930781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3536103835060491497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13fd796db4d05ae4aa74767bca266125, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knotNumber: 0
-  targetPosition: []
-  startPosition: []
-  targetRotation: []
-  startRotation: []
-  moveTime: []
-  isMove: 0
 --- !u!114 &5831787967426061405
 MonoBehaviour:
   m_ObjectHideFlags: 0

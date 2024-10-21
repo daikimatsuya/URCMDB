@@ -29,9 +29,7 @@ public class MovieCamera : MonoBehaviour
     //カメラを動かす関数
     public void CameraController()
     {
-  
-        Move();
-        
+        Move();    
         SetNext();
     }
     //移動させる関数
@@ -41,7 +39,10 @@ public class MovieCamera : MonoBehaviour
         {
             if (moveTimeBuff > 0)
             {
+                posBuff += moveSpeed;
+                rotBuff += RotSpeed;
 
+                SetTransform();
             }
             else
             {
@@ -50,6 +51,7 @@ public class MovieCamera : MonoBehaviour
             }
             moveTimeBuff--;
         }
+
     }
     //次に移動するために必要なものを準備する
     private void SetNext()
@@ -71,6 +73,8 @@ public class MovieCamera : MonoBehaviour
 
                 moveSpeed = posRange / moveTimeBuff;
                 RotSpeed = rotRange / moveTimeBuff;
+    
+               // SetTransform();
 
                 number++;
                 ready = true;
@@ -82,12 +86,11 @@ public class MovieCamera : MonoBehaviour
             }
         }
     }
-    //ベクター３に値を入れる処理を書くのを楽にするための関数
-    private void SetVector3(ref Vector3 target, float x, float y, float z)
+    private void SetTransform()
     {
-        target = new Vector3(x, y, z);
+        tf.position = posBuff;
+        tf.eulerAngles=rotBuff;
     }
-
     // Start is called before the first frame update
     void Start()
     {
