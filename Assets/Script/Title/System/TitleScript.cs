@@ -81,14 +81,7 @@ public class TitleScript : MonoBehaviour
     {
         SceneManager.LoadScene(stage);
     }
-    //public void ResetTitle()
-    //{
-    //    ts.SetResetFlag(true);
-    //    isStageSelect = false;
-    //    isSceneChangeMode=false;
-    //    isCameraMove=false;
-    //    isPush = true;
-    //}
+
     #region ’ló‚¯“n‚µ—pŠÖ”ŒQ
     public bool GetShootFlag()
     {
