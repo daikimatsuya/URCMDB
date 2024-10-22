@@ -19,6 +19,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float time;
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject flame;
+    [SerializeField] private GameObject explode;
     [SerializeField] private float speedBuff;
     [SerializeField] private float firstSpeed;
     [SerializeField] private float playerSpeed;
@@ -239,6 +240,8 @@ public class PlayerScript : MonoBehaviour
         if (playerHp <= 0)
         {
             lp.Bombed();
+            GameObject _ = Instantiate(explode);
+            _.transform.position = tf.position;
             Destroy(this.gameObject);
         }
     }
