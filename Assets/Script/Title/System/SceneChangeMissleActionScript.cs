@@ -14,23 +14,25 @@ public class SceneChangeMissleActionScript : MonoBehaviour
 
     private SceneChangeAnimationScript scas;
     private StageSelectScript sss;
+    private TitleScript ts;
     Transform tf;
 
     private Vector2 moveBuff;
+    private bool isShot;
     //飛んでくミサイル管理
     private void SCMAController()
     {
-        if (scas.GetIsShotFlag())
+        if(ts == null)
         {
-            if (sss.GetStage() != "")
-            {
-                Shoot();
-            }
-            
+            ts=sss.GetTitleScript();
+        }
+        if (ts.GetShootFlag())
+        {
+            Shoot();
         }
     }
     //発射管理
-    private void Shoot()
+    public void Shoot()
     {
         if (tf.localPosition.z < targetPos)
         {
@@ -44,6 +46,11 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y-moveBuff.y, tf.localPosition.z-moveBuff.x);
         tf.localEulerAngles = new Vector3(tf.localEulerAngles.x+maxRotate, tf.localEulerAngles.y, tf.localEulerAngles.z);
     }
+    //発射フラグ受け渡し
+    public void SetShotFlag(bool flag)
+    {
+        isShot= flag;
+    }
     //デグラド変換
     public double ToRadian(double angle)
     {
@@ -55,6 +62,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         scas = GameObject.FindWithTag("LaunchBase").GetComponent<SceneChangeAnimationScript>();
         sss=GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
         tf=GetComponent<Transform>();
+        ts=sss.GetTitleScript();
     }
 
     // Update is called once per frame

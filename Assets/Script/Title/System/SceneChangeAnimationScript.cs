@@ -33,12 +33,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
         {
             if (rotationTimeBuff < (int)(rotationTime * 60))
             {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
 
-                    isShot = true;
-
-                }  
             }
             if (rotationTimeBuff>0)
             {

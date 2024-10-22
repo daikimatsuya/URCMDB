@@ -25,9 +25,9 @@ public class StageSelectScript : MonoBehaviour
     {
         if (fadeTimeBuff <= 0)
         {
-            SceneChange();
+            ts.SceneChange();
         }
-        
+
         if (ts.GetStageSelectFlag())   
         {
             StageSelect();
@@ -85,11 +85,7 @@ public class StageSelectScript : MonoBehaviour
         stageCount = 1;
         stageChangeCount = 1;
     }
-    //シーンチェンジ
-    private void SceneChange()
-    {
-        SceneManager.LoadScene(stage[stageCount]);
-    }
+ 
     #region 値受け渡し
     public void SetRotateEnd(bool flag)
     {
@@ -110,6 +106,10 @@ public class StageSelectScript : MonoBehaviour
     public void SetFadeFlag(bool flag)
     {
         fadeStart = flag;
+    }
+    public TitleScript GetTitleScript()
+    {
+        return ts;
     }
     #endregion
     // Start is called before the first frame update

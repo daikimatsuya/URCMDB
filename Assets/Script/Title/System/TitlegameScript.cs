@@ -19,6 +19,9 @@ public class TitlegameScript : MonoBehaviour
     private bool isGoalAction;
    
     private int resetDelay;
+
+    //miniGameScrollScript mgss;
+
     //ミニゲーム管理
     private void TitleGameController()
     {
@@ -44,7 +47,7 @@ public class TitlegameScript : MonoBehaviour
         startCountBuff--;
     }
     //フラグ関連リセット
-    private void ResetFlags()
+    public void ResetFlags()
     {
         isMoveStart = false;
         isMiniPlayerDead = false;

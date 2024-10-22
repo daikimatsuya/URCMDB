@@ -35,6 +35,11 @@ public class miniGameScrollScript : MonoBehaviour
     {
         tf.position=initialPos;
     }
+    //èâä˙ílìoò^
+    public void SetInitialPos(Vector3 pos)
+    {
+        initialPos = pos;
+    }
 
     // Start is called before the first frame update
     void Start()

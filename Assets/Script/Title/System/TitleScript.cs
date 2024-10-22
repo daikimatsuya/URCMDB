@@ -14,7 +14,7 @@ public class TitleScript : MonoBehaviour
     private bool isSceneChangeMode;
     private bool isPush;
     private string stage;
-
+    private bool isShoot;
 
 
     [SerializeField] private bool isCameraMove;
@@ -25,37 +25,61 @@ public class TitleScript : MonoBehaviour
     //タイトル管理
     private void TitleController()
     {
-        isPush = false;
-        SceneChange();
-        if (Input.GetKeyDown(KeyCode.Space))
+        Shoot();
+    }
+    //フラグ関連処理
+    private void Shoot()
+    {
+
+        if (!isCameraMove)
         {
-            CameraStartMove();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isCameraMove = true;
+            }
+            return;
         }
 
-    }
-    //カメラの動作開始
-    private void CameraStartMove()
-    {
-        if (!isPush)
+        if (!isStageSelect)
         {
-            isCameraMove = true;
-            isPush = true;
+            return;
         }
+
+        if (stage == "")
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                ResetTitle();
+            }
+            return;
+        }
+        if (!isSceneChangeMode)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isSceneChangeMode = true;
+            }
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isShoot = true;
+        }
+    }
+    //タイトル画面に戻す
+    private void ResetTitle()
+    {
+        isCameraMove = false;
+        isStageSelect = false;
+        isSceneChangeMode=false;
+
+        ts.SetResetFlag(true);
     }
     //シーンチェンジ
-    private void SceneChange()
+    public void SceneChange()
     {
-        if (!isPush)
-        {
-            if (isStageSelect)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    isSceneChangeMode = true;
-                    isPush = true;
-                }
-            }
-        }
+        SceneManager.LoadScene(stage);
     }
     //public void ResetTitle()
     //{
@@ -66,6 +90,10 @@ public class TitleScript : MonoBehaviour
     //    isPush = true;
     //}
     #region 値受け渡し用関数群
+    public bool GetShootFlag()
+    {
+        return isShoot;
+    }
     public bool GetStageSelectFlag()
     {
         if (cameraMoveEnd && isCameraMove)
