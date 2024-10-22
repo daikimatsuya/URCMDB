@@ -13160,11 +13160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: knotNumber
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: moveTime.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: moveTime.Array.data[0]
@@ -13184,19 +13184,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: startPosition.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: startRotation.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: targetPosition.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: targetRotation.Array.size
-      value: 4
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7420093908258146461, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: targetRotation.Array.data[0].y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7638326502331100956, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_RootOrder

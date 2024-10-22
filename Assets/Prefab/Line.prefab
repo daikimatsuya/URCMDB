@@ -144,5 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c954f77987025b24a9a7cb5272d4db3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rand: 0
+  randPow: 0.001
   colorChangeTime: 0.05

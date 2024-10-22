@@ -28,6 +28,7 @@ public class FlakScript : MonoBehaviour
     //[SerializeField] private bool isCanReach;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
+    [SerializeField] private float range;
 
     [SerializeField] private float setWarning;
     [SerializeField] private float setVoid;
@@ -45,12 +46,13 @@ public class FlakScript : MonoBehaviour
     {
 
         if(playerPos != null)
-        {            
+        {
+
 
             playerScript.IsLock();
             
             playerDis=playerPos.position-barrel.position;
-            lineUI.SetLine(barrel.position,playerDis);
+            lineUI.SetLine(barrel.position,playerDis,intervalBuff);
             Vector3 playerSpeed= playerScript.GetPlayerSpeed();
             float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);
             float b = Vector3.Dot(playerDis, playerSpeed) * 2;
@@ -75,7 +77,7 @@ public class FlakScript : MonoBehaviour
             barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);
 
 
-            SetLineColor();
+            
             if (intervalBuff <= 0)
             {
                 if(autShotSwitch)
@@ -86,7 +88,17 @@ public class FlakScript : MonoBehaviour
                 }
                 
             }
-            intervalBuff--;
+            if (lineUI.GetShade())
+            {
+                intervalBuff++;
+                lineUI.SetVoid();
+            }
+            else
+            {
+                SetLineColor();
+                intervalBuff--;
+            }
+            
         }
         else
         {
@@ -114,11 +126,11 @@ public class FlakScript : MonoBehaviour
     }
     private void SetLineColor()
     {
-        if (intervalBuff > (setWarning+setVoid) * 60) 
+        if (intervalBuff > (shotInterval-setWarning-setVoid) * 60) 
         {
             lineUI.SetVoid();
         }
-        else if(intervalBuff > setWarning * 60) 
+        else if(intervalBuff > (setWarning) * 60) 
         {
             lineUI.SetRed();
         }

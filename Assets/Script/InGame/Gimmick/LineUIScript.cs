@@ -11,16 +11,33 @@ public class LineUIScript : MonoBehaviour
     private int timeBuff;
     private bool red;
     //private bool brock;
+    private RaycastHit hit;
+    private bool isShade;
 
-    [SerializeField] private float rand;
+    [SerializeField] private float randPow;
     [SerializeField] private float colorChangeTime;
 
     //予測線設置
-    public void SetLine(Vector3 Pos,Vector3 targetLength)
+    public void SetLine(Vector3 Pos,Vector3 targetLength,float time)
     {
-        line.SetPosition(0, targetLength);
+        float randX = (Random.Range(-time * randPow, time * randPow));
+        float randY = (Random.Range(-time * randPow, time * randPow));
+        float randZ = (Random.Range(-time * randPow, time * randPow));
+        line.SetPosition(0, new Vector3( targetLength.x+randX , targetLength.y+randY,targetLength.z + randZ));
         pos.position = Pos;
+        if(Physics.Raycast(pos.position,Vector3.Normalize(targetLength),out hit, Vector3.Magnitude(targetLength)))
+        {
+            if (!hit.collider.CompareTag("Player"))
+            {
+                isShade = true;
+            }
+            else 
+            {
+                isShade = false;
+            }
+        }
     }
+
     //予測線削除
     public void Death()
     {
@@ -65,7 +82,11 @@ public class LineUIScript : MonoBehaviour
     {
         timeBuff = (int)(colorChangeTime * 60);
     }
-
+    //プレイヤーが撃てるかどうかを取得
+    public bool GetShade()
+    {
+        return isShade;
+    }
     public void OnTriggerStay(Collider other)
     {
         //if (other.tag != "Player")

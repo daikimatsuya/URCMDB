@@ -68,7 +68,8 @@ MonoBehaviour:
   marker: {fileID: 7506089732503652708, guid: 2fc4c26d65e02874094e47c2d55fdb1b, type: 3}
   bulletSpeed: 6000
   shotInterval: 10
-  setWarning: 0.3
+  range: 0
+  setWarning: 0.5
   setVoid: 2
 --- !u!1 &3717692369710504743
 GameObject:
