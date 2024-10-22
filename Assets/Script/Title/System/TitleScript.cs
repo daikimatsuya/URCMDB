@@ -50,18 +50,15 @@ public class TitleScript : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 ResetTitle();
+                return;
             }
+            isSceneChangeMode = false;
             return;
         }
-        if (!isSceneChangeMode)
+        else
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isSceneChangeMode = true;
-            }
-            return;
+            isSceneChangeMode = true;
         }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isShoot = true;

@@ -82,8 +82,8 @@ public class StageSelectScript : MonoBehaviour
     //ステージ選択リセット
     private void StageSelectReset()
     {
-        stageCount = 1;
-        stageChangeCount = 1;
+        stageCount = 0;
+        stageChangeCount = 0;
     }
  
     #region 値受け渡し
@@ -117,8 +117,8 @@ public class StageSelectScript : MonoBehaviour
     {
         ts=GetComponent<TitleScript>();
 
-        stageCount = 1;
-        stageChangeCount = 1;
+        stageCount = 0;
+        stageChangeCount = 0;
         rotateEnd = true;
         fadeTimeBuff = (int)(fadeTime * 60);
     }
