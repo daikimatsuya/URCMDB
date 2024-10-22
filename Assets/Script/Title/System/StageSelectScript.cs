@@ -83,7 +83,7 @@ public class StageSelectScript : MonoBehaviour
     private void StageSelectReset()
     {
         stageCount = 0;
-        stageChangeCount = 0;
+        //stageChangeCount = 0;
     }
  
     #region ’lŽó‚¯“n‚µ
