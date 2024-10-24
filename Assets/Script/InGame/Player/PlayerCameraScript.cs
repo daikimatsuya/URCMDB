@@ -14,8 +14,10 @@ public class PlayerCameraScript : MonoBehaviour
     private GameObject mainCanvas;
     MovieCamera mc;
     MovieFade mf;
+    ExplodeCamera ec;
 
     private float rot;
+    private Vector3 cameraRot;
 
 
     [SerializeField] private float cameraDeff;
@@ -25,12 +27,20 @@ public class PlayerCameraScript : MonoBehaviour
     //ÉJÉÅÉâìÆÇ©Ç∑ä÷êî
     private void PlayerCameraController()
     {
+        if (player == null)
+        {
+            SearchPlayer();
+            cameraRot = transform.localEulerAngles;
+            tf.position= ec.ExplodeCameraController(ref cameraRot);
+            tf.localEulerAngles = cameraRot;
+            return;
+        }
         if (mc.GetEnd())
         {
             movieCanvas.SetActive(false);
             mainCanvas.SetActive(true);
 
-            SearchPlayer();
+
             Move();
         }
         else
@@ -134,6 +144,7 @@ public class PlayerCameraScript : MonoBehaviour
         tf=GetComponent<Transform>();
         mc=GetComponent<MovieCamera>();
         mf = GetComponent<MovieFade>();
+        ec=GetComponent<ExplodeCamera>();
         mainCanvas = GameObject.FindWithTag("UICanvas");
         //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
