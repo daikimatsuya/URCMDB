@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7870347104334944394}
+  - component: {fileID: 7870347104334944390}
   - component: {fileID: 7870347104334944395}
   - component: {fileID: 7870347104334944392}
   - component: {fileID: 7870347104334944393}
-  - component: {fileID: 7870347104334944390}
   - component: {fileID: 7870347104334944391}
   m_Layer: 0
   m_Name: Player
@@ -37,6 +37,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7870347104334944390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870347104334944388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686b6adcaa9ac6c469968e7ce2eb4965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 180
+  playerHp: 100
+  flame: {fileID: 8816118968784135207, guid: a766f634a93d08a41b869da86cd14a81, type: 3}
+  explode: {fileID: 2981810423162024347, guid: 3338e49f60502a043a6e9e2ba5422c16, type: 3}
+  speedBuff: 0
+  firstSpeed: 0.8
+  playerSpeed: 100
+  ringBust: 0.05
+  accelerate: 0.05
+  burst: 100
+  rowlingSpeedX: 2
+  rowlingSpeedY: 1.5
+  fixRowling: 0.07
+  speedCut: 4
 --- !u!33 &7870347104334944395
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -101,32 +127,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.4}
---- !u!114 &7870347104334944390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7870347104334944388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 686b6adcaa9ac6c469968e7ce2eb4965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 180
-  playerHp: 100
-  flame: {fileID: 8816118968784135207, guid: a766f634a93d08a41b869da86cd14a81, type: 3}
-  explode: {fileID: 2981810423162024347, guid: 3338e49f60502a043a6e9e2ba5422c16, type: 3}
-  speedBuff: 0
-  firstSpeed: 0.8
-  playerSpeed: 100
-  ringBust: 0.05
-  accelerate: 0.05
-  burst: 100
-  rowlingSpeedX: 2
-  rowlingSpeedY: 1.5
-  fixRowling: 0.07
-  speedCut: 4
 --- !u!54 &7870347104334944391
 Rigidbody:
   m_ObjectHideFlags: 0

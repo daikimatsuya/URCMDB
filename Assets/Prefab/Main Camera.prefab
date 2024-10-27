@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerPos: {x: 0, y: 0, z: 0}
-  directionX: 0
-  distance: 0
-  rotateSpeed: 0
+  directionX: 50
+  distance: 40000
+  rotateSpeed: 0.3
 --- !u!114 &7791156980856930781
 MonoBehaviour:
   m_ObjectHideFlags: 0
