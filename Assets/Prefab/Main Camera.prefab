@@ -195,6 +195,7 @@ MonoBehaviour:
   cameraDeff: 10
   rotSpeed: 1
   movieCanvas: {fileID: 5518903822528575276}
+  explodeEffectTime: 2
 --- !u!114 &2914198514719080994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +212,7 @@ MonoBehaviour:
   downside: {fileID: 8266503002121076687}
   parfectShadeRot: 65
   movieShadeRot: 40
-  openlyRot: 0
+  openlyRot: 33
   moveSpeed: 0.3
 --- !u!20 &3536103835060491499
 Camera:

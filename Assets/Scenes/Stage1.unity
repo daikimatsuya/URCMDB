@@ -3126,22 +3126,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -500
       objectReference: {fileID: 0}
-    - target: {fileID: 4196792848575429236, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4196792848575429236, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4196792848575429236, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4196792848575429236, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -850
-      objectReference: {fileID: 0}
     - target: {fileID: 4320082708551101941, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_Name
       value: GameManagerObject
@@ -3193,14 +3177,6 @@ PrefabInstance:
     - target: {fileID: 4320082708551101943, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4320082709675292708, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_PlaneDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4320082709675292708, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4320082709853593004, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_LocalPosition.x

@@ -18,11 +18,14 @@ public class PlayerCameraScript : MonoBehaviour
 
     private float rot;
     private Vector3 cameraRot;
+    private bool isExplodeEffectFade;
 
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
     [SerializeField] private GameObject movieCanvas;
+    [SerializeField] private float explodeEffectTime;
+    private int explodeEffectTimeBuff;
 
     //ÉJÉÅÉâìÆÇ©Ç∑ä÷êî
     private void PlayerCameraController()
@@ -33,6 +36,24 @@ public class PlayerCameraScript : MonoBehaviour
             cameraRot = transform.localEulerAngles;
             tf.position= ec.ExplodeCameraController(ref cameraRot);
             tf.localEulerAngles = cameraRot;
+            if (!isExplodeEffectFade)
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    mf.SetShadeLevel(2);
+                    TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
+                    isExplodeEffectFade = true;
+                }
+            }
+            else
+            {
+                if(TimeCountScript.TimeCounter(ref explodeEffectTimeBuff))
+                {
+                    mf.SetShadeLevel(3);
+                    gm.SetPlayerSpawnFlag();
+                    isExplodeEffectFade = false;
+                }
+            }
             return;
         }
         if (mc.GetEnd())

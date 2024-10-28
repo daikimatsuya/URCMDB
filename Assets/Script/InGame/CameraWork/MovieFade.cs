@@ -36,7 +36,14 @@ public class MovieFade : MonoBehaviour
             ParfectSgade();
         }
         else{
-            rotBuff = Vector3.zero;
+            if (upside)
+            {
+                rotBuff.x = openlyRot;
+            }
+            else
+            {
+                rotBuff.x = -openlyRot;
+            }
         }
         SetRot();
     }

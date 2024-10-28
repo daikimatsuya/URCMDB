@@ -23,6 +23,7 @@ public class GameManagerScript : MonoBehaviour
     private bool gameOverFlag;
     private bool ClearFlag;
     private bool gameStart;
+    private bool playerSpawnFlag;
 
     //ゲームシステムを動かす
     private void GameManagerController()
@@ -55,7 +56,8 @@ public class GameManagerScript : MonoBehaviour
         {
             playerDead = true;
             gameStart = false;
-            if(Input.GetKeyDown(KeyCode.Space))
+            
+            if(playerSpawnFlag)
             {
                 if (playerMissile > 0)
                 {
@@ -69,6 +71,7 @@ public class GameManagerScript : MonoBehaviour
                     __.transform.localScale = Vector3.one;
                     __.transform.localPosition = Vector3.zero;
                     __.transform.localEulerAngles = new Vector3(0, 0, 0);
+                    playerSpawnFlag = false;
                 }
                 else
                 {
@@ -152,6 +155,10 @@ public class GameManagerScript : MonoBehaviour
     public void SetGameStartFlag(bool start)
     {
         gameStart = start;
+    }
+    public void SetPlayerSpawnFlag()
+    {
+        playerSpawnFlag = true;
     }
     #endregion
     // Start is called before the first frame update
