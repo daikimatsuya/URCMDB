@@ -24,6 +24,8 @@ public class PlayerCameraScript : MonoBehaviour
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
     [SerializeField] private GameObject movieCanvas;
+    [SerializeField] private float explodeFadeTime;
+    private int explodeFadeTimeBuff;
     [SerializeField] private float explodeEffectTime;
     private int explodeEffectTimeBuff;
 
@@ -38,21 +40,27 @@ public class PlayerCameraScript : MonoBehaviour
             tf.localEulerAngles = cameraRot;
             if (!isExplodeEffectFade)
             {
-                if (Input.GetKey(KeyCode.Space))
+                if (TimeCountScript.TimeCounter(ref explodeEffectTimeBuff))
                 {
                     mf.SetShadeLevel(2);
-                    TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
+                    TimeCountScript.SetTime(ref explodeFadeTimeBuff, explodeFadeTime);
                     isExplodeEffectFade = true;
                 }
             }
             else
             {
-                if(TimeCountScript.TimeCounter(ref explodeEffectTimeBuff))
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+
+                }
+                if(TimeCountScript.TimeCounter(ref explodeFadeTimeBuff))
                 {
                     mf.SetShadeLevel(3);
                     gm.SetPlayerSpawnFlag();
                     isExplodeEffectFade = false;
+                    TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
                 }
+                
             }
             return;
         }
@@ -142,6 +150,7 @@ public class PlayerCameraScript : MonoBehaviour
     //ÉvÉåÉCÉÑÅ[Ç™ãèÇ»Ç©Ç¡ÇΩÇÁçƒéÊìæÇ∑ÇÈ
     private void SearchPlayer()
     {
+
         if (playerPos == null)
         {
             if (GameObject.FindWithTag("Player"))
@@ -167,6 +176,7 @@ public class PlayerCameraScript : MonoBehaviour
         mf = GetComponent<MovieFade>();
         ec=GetComponent<ExplodeCamera>();
         mainCanvas = GameObject.FindWithTag("UICanvas");
+        TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
         //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 

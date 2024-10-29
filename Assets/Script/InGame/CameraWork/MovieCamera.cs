@@ -18,7 +18,7 @@ public class MovieCamera : MonoBehaviour
 
 
     private bool ready;
-    [SerializeField] private bool isMove;
+    private bool isMove;
     private int number;
     private Vector3 posBuff;
     private Vector3 rotBuff;
