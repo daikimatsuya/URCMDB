@@ -15815,11 +15815,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1894394147}
     m_Modifications:
+    - target: {fileID: 1119864284715874413, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142302055749122676, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1662605536087058839, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b10edcfafe40cde49b981448b3e79dc2, type: 2}
     - target: {fileID: 1779360108929659468, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317509416388520021, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -15838,6 +15850,18 @@ PrefabInstance:
     - target: {fileID: 5066845859886312940, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_Name
       value: Stages
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520104726954621873, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106412646786121492, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6278075365010099863, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_RootOrder
