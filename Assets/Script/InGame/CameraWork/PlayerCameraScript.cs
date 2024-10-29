@@ -40,6 +40,10 @@ public class PlayerCameraScript : MonoBehaviour
             tf.localEulerAngles = cameraRot;
             if (!isExplodeEffectFade)
             {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    explodeEffectTimeBuff = 0;
+                }
                 if (TimeCountScript.TimeCounter(ref explodeEffectTimeBuff))
                 {
                     mf.SetShadeLevel(2);
@@ -49,10 +53,7 @@ public class PlayerCameraScript : MonoBehaviour
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
 
-                }
                 if(TimeCountScript.TimeCounter(ref explodeFadeTimeBuff))
                 {
                     mf.SetShadeLevel(3);
