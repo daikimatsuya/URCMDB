@@ -133,6 +133,11 @@ public class PlayerCameraScript : MonoBehaviour
             }
         }
     }
+    //ムービーカメラのフラグ受け渡し
+    public bool GetEnd()
+    {
+        return mc.GetEnd();
+    }
 
     //デグラド変換
     public double ToRadian(double angle)

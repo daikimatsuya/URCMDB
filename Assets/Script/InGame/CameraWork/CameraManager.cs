@@ -23,17 +23,15 @@ public class CameraManager : MonoBehaviour
     {
         if (player == null)
         {
-
-
             ExplodeFadeController();
 
             return;
         }
-        if (!mc.GetEnd())
+        if (!pcs.GetEnd())
         {
             mf.MovieFadeController();
         }
-        CanvasActive(mc.GetEnd());
+        CanvasActive(pcs.GetEnd());
     }
     //キャンバスのオンオフ管理
     private void CanvasActive(bool flag)
