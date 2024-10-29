@@ -38,31 +38,9 @@ public class PlayerCameraScript : MonoBehaviour
             cameraRot = transform.localEulerAngles;
             tf.position= ec.ExplodeCameraController(ref cameraRot);
             tf.localEulerAngles = cameraRot;
-            if (!isExplodeEffectFade)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    explodeEffectTimeBuff = 0;
-                }
-                if (TimeCountScript.TimeCounter(ref explodeEffectTimeBuff))
-                {
-                    mf.SetShadeLevel(2);
-                    TimeCountScript.SetTime(ref explodeFadeTimeBuff, explodeFadeTime);
-                    isExplodeEffectFade = true;
-                }
-            }
-            else
-            {
 
-                if(TimeCountScript.TimeCounter(ref explodeFadeTimeBuff))
-                {
-                    mf.SetShadeLevel(3);
-                    gm.SetPlayerSpawnFlag();
-                    isExplodeEffectFade = false;
-                    TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
-                }
-                
-            }
+            ExplodeFadeController();
+
             return;
         }
         if (mc.GetEnd())
@@ -170,6 +148,35 @@ public class PlayerCameraScript : MonoBehaviour
         {
             mainCanvas.SetActive(false);
             movieCanvas.SetActive(true);
+        }
+    }
+    //爆破時のフェード管理
+    private void ExplodeFadeController()
+    {
+        if (!isExplodeEffectFade)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                explodeEffectTimeBuff = 0;
+            }
+            if (TimeCountScript.TimeCounter(ref explodeEffectTimeBuff))
+            {
+                mf.SetShadeLevel(2);
+                TimeCountScript.SetTime(ref explodeFadeTimeBuff, explodeFadeTime);
+                isExplodeEffectFade = true;
+            }
+        }
+        else
+        {
+
+            if (TimeCountScript.TimeCounter(ref explodeFadeTimeBuff))
+            {
+                mf.SetShadeLevel(3);
+                gm.SetPlayerSpawnFlag();
+                isExplodeEffectFade = false;
+                TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
+            }
+
         }
     }
     //デグラド変換
