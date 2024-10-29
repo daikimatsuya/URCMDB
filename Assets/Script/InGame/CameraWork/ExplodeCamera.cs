@@ -13,7 +13,6 @@ public class ExplodeCamera : MonoBehaviour
     private Vector3 pos;
     public Vector3 ExplodeCameraController(ref Vector3 rotation)
     {
-
         Move(rotation);
         rotation = new Vector3(directionX, rotation.y + rotateSpeed, 0);
         return pos;

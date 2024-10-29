@@ -30,7 +30,7 @@ public class PlayerCameraScript : MonoBehaviour
     private int explodeEffectTimeBuff;
 
     //カメラ動かす関数
-    private void PlayerCameraController()
+    public void PlayerCameraController()
     {
         if (player == null)
         {
@@ -66,19 +66,14 @@ public class PlayerCameraScript : MonoBehaviour
         }
         if (mc.GetEnd())
         {
-            movieCanvas.SetActive(false);
-            mainCanvas.SetActive(true);
-
-
             Move();
         }
         else
         {
             mf.MovieFadeController();
             mc.CameraController();
-            mainCanvas.SetActive(false);
-            movieCanvas.SetActive(true);
         }
+        CanvasActive(mc.GetEnd());
     }
 
     //カメラがプレイヤーの後ろに移動する
@@ -162,6 +157,20 @@ public class PlayerCameraScript : MonoBehaviour
             }
         }
     }
+    //キャンバスのオンオフ管理
+    private void CanvasActive(bool flag)
+    {
+        if (flag)
+        {
+            movieCanvas.SetActive(false);
+            mainCanvas.SetActive(true);
+        }
+        else
+        {
+            mainCanvas.SetActive(false);
+            movieCanvas.SetActive(true);
+        }
+    }
     //デグラド変換
     public double ToRadian(double angle)
     {
@@ -183,6 +192,6 @@ public class PlayerCameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerCameraController();
+        //PlayerCameraController();
     }
 }

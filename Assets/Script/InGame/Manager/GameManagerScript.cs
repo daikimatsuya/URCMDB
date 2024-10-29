@@ -15,6 +15,7 @@ public class GameManagerScript : MonoBehaviour
 
     private PlayerScript ps;
     private Transform targetPos;
+    private CameraManager cm;
 
     private bool playerDead;
     private Vector3 playerRot;
@@ -30,6 +31,7 @@ public class GameManagerScript : MonoBehaviour
     {
         ChangePMS();
         SpawnPlayer();
+        cm.CameraController();
         if(ClearFlag)
         {
             if(Input.GetKeyUp(KeyCode.Space))
@@ -169,6 +171,7 @@ public class GameManagerScript : MonoBehaviour
         gameOverFlag= false;
         ClearFlag = false;
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
+        cm=GetComponent<CameraManager>();
         if (!GameObject.FindWithTag("Player"))
         {
             GameObject _ = Instantiate(player);
