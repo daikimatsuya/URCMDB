@@ -56,20 +56,20 @@ public class MovieCamera : MonoBehaviour
                 SetTransform();
                 if(isSkip)
                 {
-                    mf.SetShadeLevel(2);
-                    if (mf.GetShade())
-                    {
-                        isEnd = true;
-                        mf.SetShadeLevel(3);
-                    }
+                   // mf.SetShadeLevel(2);
+                    //if (mf.GetShade())
+                    //{
+                    //    isEnd = true;
+                      //  mf.SetShadeLevel(3);
+                    //}
                 }
                 else if (fadeoutTime > moveTimeBuff)
                 {
-                    mf.SetShadeLevel(2);
+                    //mf.SetShadeLevel(2);
                 }
                 else
                 {
-                    mf.SetShadeLevel(1);
+                    //mf.SetShadeLevel(1);
                 }
             }
             else
@@ -112,7 +112,7 @@ public class MovieCamera : MonoBehaviour
             else
             {
                 isEnd = true;
-                mf.SetShadeLevel(3);
+                //mf.SetShadeLevel(3);
             }
         }
     }
