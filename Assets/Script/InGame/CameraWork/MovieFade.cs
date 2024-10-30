@@ -7,13 +7,13 @@ public class MovieFade : MonoBehaviour
 {
     [SerializeField] private GameObject upside;
     [SerializeField] private GameObject downside;
-    [SerializeField] private float parfectShadeRot;
-    [SerializeField] private float movieShadeRot;
-    [SerializeField] private float openlyRot;
+    [SerializeField] private float parfectShadePos;
+    [SerializeField] private float movieShadePos;
+    [SerializeField] private float openlyPos;
     [SerializeField] private float moveSpeed;
 
     private int shadeLevel;
-    private Vector3 rotBuff;
+    private Vector3 posBuff;
     private bool isShade;
     private bool isEffectEnd;
 
@@ -23,7 +23,7 @@ public class MovieFade : MonoBehaviour
     //このスクリプトを動かす関数
     public void MovieFadeController()
     {
-        isShade = false;
+
         isEffectEnd = false;
 
         if (shadeLevel == 0)
@@ -36,23 +36,24 @@ public class MovieFade : MonoBehaviour
         }
         else if(shadeLevel == 2)
         {
-            ParfectSgade();
+            ParfectShade();
         }
         else{
             isEffectEnd = true;
             Nothing();
         }
-        SetRot();
+        SetPos();
     }
     //完全に画面を黒帯で囲う
-    private void ParfectSgade()
+    private void ParfectShade()
     {
-        if(rotBuff.x < parfectShadeRot)
+        if(posBuff.y > parfectShadePos)
         {
-            rotBuff.x += moveSpeed;
-            if(rotBuff.x >= parfectShadeRot)
+            isShade = false;
+            posBuff.y -= moveSpeed;
+            if(posBuff.y <= parfectShadePos)
             {
-                rotBuff.x = parfectShadeRot;
+                posBuff.y = parfectShadePos;
                 isShade = true;
             }
         }
@@ -60,33 +61,35 @@ public class MovieFade : MonoBehaviour
     //上下に帯を表示する
     private void MovieShade()
     {
-        if (rotBuff.x < movieShadeRot)
+        isShade = false;
+        if (posBuff.y < movieShadePos)
         {
-            rotBuff.x += moveSpeed;
-            if (rotBuff.x >= movieShadeRot)
+            posBuff.y += moveSpeed;
+            if (posBuff.y >= movieShadePos)
             {
-                rotBuff.x = movieShadeRot;
+                posBuff.y = movieShadePos;
             }
         }
-        else if (rotBuff.x > movieShadeRot)
+        else if (posBuff.y > movieShadePos)
         {
 
-            rotBuff.x -= moveSpeed;
-            if (rotBuff.x <= movieShadeRot)
+            posBuff.y -= moveSpeed;
+            if (posBuff.y <= movieShadePos)
             {
-                rotBuff.x = movieShadeRot;
+                posBuff.y = movieShadePos;
             }
         }
     }
     //完全に帯を非表示にする
     private void Openly()
     {
-        if (rotBuff.x < parfectShadeRot)
+        isShade = false;
+        if (posBuff.y > parfectShadePos)
         {
-            rotBuff.x += moveSpeed;
-            if (rotBuff.x >= parfectShadeRot)
+            posBuff.y -= moveSpeed;
+            if (posBuff.y <= parfectShadePos)
             {
-                rotBuff.x = parfectShadeRot;
+                posBuff.y = parfectShadePos;
 
                 isEffectEnd = true;
             }
@@ -97,11 +100,11 @@ public class MovieFade : MonoBehaviour
     {
         if (upside)
         {
-            rotBuff.x = openlyRot;
+            posBuff.y = openlyPos;
         }
         else
         {
-            rotBuff.x = -openlyRot;
+            posBuff.y = -openlyPos;
         }
         isShade = true;
     }
@@ -109,7 +112,6 @@ public class MovieFade : MonoBehaviour
     //帯のレベルを取得
     public void SetShadeLevel(int level)
     {
-        isShade = false;
         shadeLevel = level;
     }
     //演出が終わったかどうかを取得
@@ -123,10 +125,10 @@ public class MovieFade : MonoBehaviour
         return isShade;
     }
     //値をトランスフォームに代入
-    private void SetRot()
+    private void SetPos()
     {
-        upTf.localEulerAngles = rotBuff;
-        downTf.localEulerAngles = -rotBuff;
+        upTf.localPosition = posBuff;
+        downTf.localPosition = -posBuff;
     }
     // Start is called before the first frame update
     void Start()
@@ -134,7 +136,7 @@ public class MovieFade : MonoBehaviour
         upTf = upside.GetComponent<Transform>();
         downTf = downside.GetComponent<Transform>();
         shadeLevel = 1;
-        rotBuff = upTf.localEulerAngles;
+        posBuff = upTf.localPosition;
         isShade = false;
 
         if (upside)

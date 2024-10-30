@@ -77,7 +77,7 @@ MonoBehaviour:
   moveTime:
   - 5
   - 7
-  fadeoutTime: 0.75
+  fadeoutTime: 0.8
 --- !u!114 &5475272097197440114
 MonoBehaviour:
   m_ObjectHideFlags: 0

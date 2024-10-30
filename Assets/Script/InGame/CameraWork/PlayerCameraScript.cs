@@ -111,8 +111,11 @@ public class PlayerCameraScript : MonoBehaviour
         {
             if (mc.GetSkip())
             {
-
                 mf.SetShadeLevel(2);
+                if (mf.GetIsShade())
+                {
+                    mf.SetShadeLevel(3);
+                }
             }
             else if (mc.GetFadeoutTime() > mc.GetMoveTime())
             {
