@@ -28,6 +28,7 @@ TagManager:
   - Goal
   - LaunchBase
   - FadeObject
+  - GameCamera
   layers:
   - Default
   - TransparentFX

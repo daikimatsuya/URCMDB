@@ -29,21 +29,23 @@ public class PlayerCameraScript : MonoBehaviour
     //カメラ動かす関数
     public void PlayerCameraController()
     {
-        //if (player == null)
-        //{
-        //    cameraRot = transform.localEulerAngles;
-        //    tf.position= ec.ExplodeCameraController(ref cameraRot);
-        //    tf.localEulerAngles = cameraRot;
+        if (player == null)
+        {
+            SearchPlayer();
+            cameraRot = transform.localEulerAngles;
+            tf.position = ec.ExplodeCameraController(ref cameraRot);
+            tf.localEulerAngles = cameraRot;
 
-        //    ExplodeFadeController();
-
-        //    return;
-        //}
-        //if (!mc.GetEnd())
-        //{
-        //    mf.MovieFadeController();
-        //}
-        //CanvasActive(mc.GetEnd());
+            return;
+        }
+        if (mc.GetEnd())
+        {
+            Move();
+        }
+        else
+        {
+            mc.CameraController();
+        }
     }
 
     //カメラがプレイヤーの後ろに移動する
@@ -161,19 +163,6 @@ public class PlayerCameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            SearchPlayer();
-        }
-        
-        if (mc.GetEnd())
-        {
-            Move();
-        }
-        else
-        {
-            mc.CameraController();
-        }
-        //PlayerCameraController();
+        PlayerCameraController();
     }
 }

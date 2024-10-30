@@ -31,7 +31,7 @@ public class GameManagerScript : MonoBehaviour
     {
         ChangePMS();
         SpawnPlayer();
-        cm.CameraController();
+        //cm.CameraController();
         if(ClearFlag)
         {
             if(Input.GetKeyUp(KeyCode.Space))
