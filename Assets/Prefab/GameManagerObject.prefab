@@ -67,6 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69ff062c2fde504190cb7d72b8cfc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explodeEffectTime: 0
+  explodeFadeTime: 0
+  movieCanvas: {fileID: 0}
 --- !u!1001 &785534975822530880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,11 +87,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.15
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -99999
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -96,19 +99,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -116,7 +119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

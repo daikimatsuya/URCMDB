@@ -108,7 +108,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3536103835060491500}
   - component: {fileID: 5335780075296582319}
-  - component: {fileID: 3536103835060491501}
   - component: {fileID: 7791156980856930781}
   - component: {fileID: 2914198514719080994}
   - component: {fileID: 3536103835060491499}
@@ -155,23 +154,6 @@ MonoBehaviour:
   directionX: 50
   distance: 40000
   rotateSpeed: 0.3
---- !u!114 &3536103835060491501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3536103835060491497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15f15b481429f64c91ab2e9b2dc33a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraDeff: 10
-  rotSpeed: 1
-  movieCanvas: {fileID: 5518903822528575276}
-  explodeFadeTime: 2
-  explodeEffectTime: 3
 --- !u!114 &7791156980856930781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +220,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 150000
+  far clip plane: 20
   field of view: 60
   orthographic: 0
   orthographic size: 5
