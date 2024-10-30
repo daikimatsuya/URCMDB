@@ -31,7 +31,7 @@ public class GameManagerScript : MonoBehaviour
     {
         ChangePMS();
         SpawnPlayer();
-        //cm.CameraController();
+        cm.CameraController();
         if(ClearFlag)
         {
             if(Input.GetKeyUp(KeyCode.Space))
@@ -171,7 +171,7 @@ public class GameManagerScript : MonoBehaviour
         gameOverFlag= false;
         ClearFlag = false;
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
-        cm=GetComponent<CameraManager>();
+        cm=GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         if (!GameObject.FindWithTag("Player"))
         {
             GameObject _ = Instantiate(player);

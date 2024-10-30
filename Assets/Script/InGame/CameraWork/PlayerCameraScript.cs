@@ -8,44 +8,22 @@ public class PlayerCameraScript : MonoBehaviour
 {
     private Transform tf;
     private Transform playerPos;
-    private PlayerScript ps;
-    private GameObject player;
     private Vector3 cameraRot;
-
-    MovieCamera mc;
-
-    ExplodeCamera ec;
-
     private float rot;
 
-
+    private MovieCamera mc;
+    private ExplodeCamera ec;
+    private PlayerScript ps;
+    private GameObject player;
+    private MovieFade mf;
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
 
-
-
-
     //カメラ動かす関数
     public void PlayerCameraController()
     {
-        if (player == null)
-        {
-            SearchPlayer();
-            cameraRot = transform.localEulerAngles;
-            tf.position = ec.ExplodeCameraController(ref cameraRot);
-            tf.localEulerAngles = cameraRot;
 
-            return;
-        }
-        if (mc.GetEnd())
-        {
-            Move();
-        }
-        else
-        {
-            mc.CameraController();
-        }
     }
 
     //カメラがプレイヤーの後ろに移動する
@@ -147,22 +125,23 @@ public class PlayerCameraScript : MonoBehaviour
         return angle * Math.PI / 180f;
     }
 
+    //MoviewFade取得用
+    public void SetMoviewFade(MovieFade mf)
+    {
+        this.mf = mf;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
         tf=GetComponent<Transform>();
         mc=GetComponent<MovieCamera>();
-
         ec=GetComponent<ExplodeCamera>();
-
-
-        //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerCameraController();
+        //PlayerCameraController();
     }
 }

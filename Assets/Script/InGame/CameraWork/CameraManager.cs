@@ -14,24 +14,14 @@ public class CameraManager : MonoBehaviour
     private PlayerCameraScript pcs;
     private GameObject mainCanvas;
     private GameManagerScript gm;
-    private GameObject player;
+    private MovieFade mf;
 
     private bool isExplodeEffectFade;
-    private Transform tf;
-    MovieFade mf;
+
     public  void CameraController()
     {
-        if (player == null)
-        {
-            ExplodeFadeController();
-
-            return;
-        }
-        if (!pcs.GetEnd())
-        {
-            mf.MovieFadeController();
-        }
-        CanvasActive(pcs.GetEnd());
+        mf.MovieFadeController();
+        pcs.PlayerCameraController();
     }
     //キャンバスのオンオフ管理
     private void CanvasActive(bool flag)
@@ -80,10 +70,15 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
-        //pcs = GameObject.FindWithTag("MainCamera").GetComponent<PlayerCameraScript>();
+        pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
+        mf = GetComponent<MovieFade>();
+        mf.SetShadeLevel(1);
+        pcs.SetMoviewFade(mf);
         TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
         mainCanvas = GameObject.FindWithTag("UICanvas");
-        mf = GetComponent<MovieFade>();
+        mainCanvas.SetActive(false);
+
+
     }
 
     // Update is called once per frame
