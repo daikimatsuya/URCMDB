@@ -59,6 +59,10 @@ public class GameManagerScript : MonoBehaviour
         {
             playerDead = true;
             isCanShot = false;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                playerSpawnFlag = true;
+            }
             
             if(playerSpawnFlag)
             {
