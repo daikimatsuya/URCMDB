@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //インゲームでプレイヤーにくっついているカメラ管理
@@ -11,6 +12,7 @@ public class PlayerCameraScript : MonoBehaviour
     private Vector3 cameraRot;
     private float rot;
 
+
     private MovieCamera mc;
     private ExplodeCamera ec;
     private PlayerScript ps;
@@ -20,14 +22,9 @@ public class PlayerCameraScript : MonoBehaviour
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
 
-    //カメラ動かす関数
-    public void PlayerCameraController()
-    {
 
-    }
-
-    //カメラがプレイヤーの後ろに移動する
-    private void Move()
+    //カメラがプレイヤーの後ろに追従する
+    public void FollowPlayer()
     {
         if (playerPos != null)
         {
@@ -35,50 +32,48 @@ public class PlayerCameraScript : MonoBehaviour
 
             Vector3 deff = Vector3.zero;
 
-            if (ps.GetControll())
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            if (rot < 10)
             {
-                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                {
-                    if (rot < 10)
-                    {
-                        rot += rotSpeed;
-                    }
-
-                }
-                if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
-                {
-                    if (rot > -10)
-                    {
-                        rot -= rotSpeed;
-                    }
-
-                }
-                if ((Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))) 
-                {
-                    if (rot > 0)
-                    {
-                        rot -= rotSpeed;
-                    }
-                    if (rot < 0)
-                    {
-                        rot += rotSpeed;
-                    }
-
-                }
-                if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.A)&& !Input.GetKey(KeyCode.D)) 
-                {
-                    if (rot > 0)
-                    {
-                        rot -= rotSpeed;
-                    }
-                    if (rot < 0)
-                    {
-                        rot += rotSpeed;
-                    }
-
-                }
-
+                rot += rotSpeed;
             }
+
+        }
+        if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
+        {
+            if (rot > -10)
+            {
+                rot -= rotSpeed;
+            }
+
+        }
+        if ((Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))) 
+        {
+            if (rot > 0)
+            {
+                rot -= rotSpeed;
+            }
+            if (rot < 0)
+            {
+                rot += rotSpeed;
+            }
+
+        }
+        if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.A)&& !Input.GetKey(KeyCode.D)) 
+        {
+            if (rot > 0)
+            {
+                rot -= rotSpeed;
+            }
+            if (rot < 0)
+            {
+                rot += rotSpeed;
+            }
+
+        }
+
+            
             deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y + rot));
             deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y + rot));
             
@@ -91,6 +86,11 @@ public class PlayerCameraScript : MonoBehaviour
 
             tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
         }
+    }
+    public void MovieCut()
+    {
+        mc.CameraController();
+        Fade();
     }
     //プレイヤーが居なかったら再取得する
     private void SearchPlayer()
@@ -113,10 +113,29 @@ public class PlayerCameraScript : MonoBehaviour
             }
         }
     }
-    //ムービーカメラのフラグ受け渡し
-    public bool GetEnd()
+    //フェード管理
+    private void Fade()
     {
-        return mc.GetEnd();
+        if (mc.GetEnd())
+        {
+            mf.SetShadeLevel(3);
+        }
+        else
+        {
+            if (mc.GetSkip())
+            {
+
+                mf.SetShadeLevel(2);
+            }
+            else if (mc.GetFadeoutTime() > mc.GetMoveTime())
+            {
+                mf.SetShadeLevel(2);
+            }
+            else
+            {
+                mf.SetShadeLevel(1);
+            }
+        }
     }
 
     //デグラド変換
@@ -124,12 +143,24 @@ public class PlayerCameraScript : MonoBehaviour
     {
         return angle * Math.PI / 180f;
     }
-
-    //MoviewFade取得用
-    public void SetMoviewFade(MovieFade mf)
+    //プレイヤーのトランスフォーム取得用
+    public void SetPlayer(Transform tf)
+    {
+        playerPos = tf;
+    }
+    //MovieFade取得用
+    public void SetMF(MovieFade mf)
     {
         this.mf = mf;
     }
+
+
+
+    //MoviewFade取得用
+    //public void SetMoviewFade(MovieFade mf)
+    //{
+    //    this.mf = mf;
+    //}
 
     // Start is called before the first frame update
     void Start()
@@ -137,11 +168,12 @@ public class PlayerCameraScript : MonoBehaviour
         tf=GetComponent<Transform>();
         mc=GetComponent<MovieCamera>();
         ec=GetComponent<ExplodeCamera>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //PlayerCameraController();
+
     }
 }

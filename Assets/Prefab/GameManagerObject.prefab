@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58768f9212e13074ab0e25972def1129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7870347104334944388, guid: 77c5b027360415942bf41ce3ba2cc146, type: 3}
-  fadeObject: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
+  playerPrefab: {fileID: 7870347104334944388, guid: 77c5b027360415942bf41ce3ba2cc146, type: 3}
+  fadeObjectPrefab: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
   playerMissile: 3
   PMS: 0
   stage: 

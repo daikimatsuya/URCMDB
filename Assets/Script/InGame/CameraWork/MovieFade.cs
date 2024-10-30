@@ -15,6 +15,7 @@ public class MovieFade : MonoBehaviour
     private int shadeLevel;
     private Vector3 rotBuff;
     private bool isShade;
+    private bool isEffectEnd;
 
     private  Transform upTf;
     private Transform downTf;
@@ -22,8 +23,10 @@ public class MovieFade : MonoBehaviour
     //このスクリプトを動かす関数
     public void MovieFadeController()
     {
+        isShade = false;
+        isEffectEnd = false;
 
-        if(shadeLevel == 0)
+        if (shadeLevel == 0)
         {
             Openly();
         }
@@ -36,14 +39,8 @@ public class MovieFade : MonoBehaviour
             ParfectSgade();
         }
         else{
-            if (upside)
-            {
-                rotBuff.x = openlyRot;
-            }
-            else
-            {
-                rotBuff.x = -openlyRot;
-            }
+            isEffectEnd = true;
+            Nothing();
         }
         SetRot();
     }
@@ -52,7 +49,6 @@ public class MovieFade : MonoBehaviour
     {
         if(rotBuff.x < parfectShadeRot)
         {
-            isShade = false;
             rotBuff.x += moveSpeed;
             if(rotBuff.x >= parfectShadeRot)
             {
@@ -66,7 +62,6 @@ public class MovieFade : MonoBehaviour
     {
         if (rotBuff.x < movieShadeRot)
         {
-            isShade = false;
             rotBuff.x += moveSpeed;
             if (rotBuff.x >= movieShadeRot)
             {
@@ -75,7 +70,7 @@ public class MovieFade : MonoBehaviour
         }
         else if (rotBuff.x > movieShadeRot)
         {
-            isShade = false;
+
             rotBuff.x -= moveSpeed;
             if (rotBuff.x <= movieShadeRot)
             {
@@ -92,17 +87,38 @@ public class MovieFade : MonoBehaviour
             if (rotBuff.x >= parfectShadeRot)
             {
                 rotBuff.x = parfectShadeRot;
+
+                isEffectEnd = true;
             }
         }
+    }
+    //演出なく全開にする
+    private void Nothing()
+    {
+        if (upside)
+        {
+            rotBuff.x = openlyRot;
+        }
+        else
+        {
+            rotBuff.x = -openlyRot;
+        }
+        isShade = true;
     }
     
     //帯のレベルを取得
     public void SetShadeLevel(int level)
     {
+        isShade = false;
         shadeLevel = level;
     }
-    //隠れているかどうかを取得
-    public bool GetShade()
+    //演出が終わったかどうかを取得
+    public bool GetEffectEnd()
+    {
+        return isEffectEnd;
+    }
+    //完全に隠れているかどうかを取得
+    public bool GetIsShade()
     {
         return isShade;
     }

@@ -17,6 +17,7 @@ public class MovieCamera : MonoBehaviour
     [SerializeField] private float fadeoutTime;
 
 
+
     private bool ready;
     private bool isMove;
     private int number;
@@ -26,11 +27,11 @@ public class MovieCamera : MonoBehaviour
     private Vector3 rotRange;
     private Vector3 moveSpeed;
     private Vector3 RotSpeed;
-    private bool isEnd;
+    private int shadelevel;
     private bool isSkip;
+    private bool isEnd;
 
     Transform tf;
-    MovieFade mf;
     //ƒJƒƒ‰‚ð“®‚©‚·ŠÖ”
     public void CameraController()
     {
@@ -54,23 +55,7 @@ public class MovieCamera : MonoBehaviour
                 rotBuff += RotSpeed;
 
                 SetTransform();
-                if(isSkip)
-                {
-                   // mf.SetShadeLevel(2);
-                    //if (mf.GetShade())
-                    //{
-                    //    isEnd = true;
-                      //  mf.SetShadeLevel(3);
-                    //}
-                }
-                else if (fadeoutTime > moveTimeBuff)
-                {
-                    //mf.SetShadeLevel(2);
-                }
-                else
-                {
-                    //mf.SetShadeLevel(1);
-                }
+
             }
             else
             {
@@ -112,7 +97,7 @@ public class MovieCamera : MonoBehaviour
             else
             {
                 isEnd = true;
-                //mf.SetShadeLevel(3);
+                
             }
         }
     }
@@ -125,17 +110,29 @@ public class MovieCamera : MonoBehaviour
     {
         return  isEnd;
     }
+    public bool GetSkip()
+    {
+        return isSkip;
+    }
+    public float GetMoveTime()
+    {
+        return moveTimeBuff;
+    }
+    public float GetFadeoutTime()
+    {
+        return fadeoutTime;
+    }
     // Start is called before the first frame update
     void Start()
     {
         isSkip = false;
         ready = false;
-        isEnd = false;
+       
         tf= GetComponent<Transform>();
-        mf = GetComponent<MovieFade>();
         number = 0;
         SetNext();
         isMove = true;
+        isEnd = false;
         fadeoutTime *= 60;
     }
 

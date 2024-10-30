@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 //今のところインゲーム関連のデータのやり取りや裏方仕事全般のちのち奇麗にする
 public class GameManagerScript : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject fadeObject;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject fadeObjectPrefab;
     [SerializeField] private int playerMissile;
     [SerializeField] private bool PMS;
     [SerializeField] private string stage;
@@ -16,6 +16,7 @@ public class GameManagerScript : MonoBehaviour
     private PlayerScript ps;
     private Transform targetPos;
     private CameraManager cm;
+    private GameObject player;
 
     private bool playerDead;
     private Vector3 playerRot;
@@ -23,18 +24,18 @@ public class GameManagerScript : MonoBehaviour
     private float playerSpeedBuff;
     private bool gameOverFlag;
     private bool ClearFlag;
-    private bool gameStart;
+    private bool isCanShot;
     private bool playerSpawnFlag;
 
     //ゲームシステムを動かす
     private void GameManagerController()
     {
         ChangePMS();
-        SpawnPlayer();
+        PlayerCheck();
         cm.CameraController();
         if(ClearFlag)
         {
-            if(Input.GetKeyUp(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space))
             {
                 BackTitle();
             }
@@ -51,34 +52,25 @@ public class GameManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene(title);
     }
-    //プレイヤー生成
-    private void SpawnPlayer()
+    //プレイヤーの生存確認と生成
+    private void PlayerCheck()
     {
-        if (!GameObject.FindWithTag("Player"))
+        if (player==null)
         {
             playerDead = true;
-            gameStart = false;
+            isCanShot = false;
             
             if(playerSpawnFlag)
             {
                 if (playerMissile > 0)
                 {
-                    GameObject _ = Instantiate(player);
-                    ps=_.GetComponent<PlayerScript>();
-                    playerMissile--;
-
-                    Transform uiTransform = GameObject.FindWithTag("UICanvas").transform;
-                    GameObject __ = Instantiate(fadeObject);
-                    __.transform.SetParent(uiTransform);
-                    __.transform.localScale = Vector3.one;
-                    __.transform.localPosition = Vector3.zero;
-                    __.transform.localEulerAngles = new Vector3(0, 0, 0);
+                    PlayerSpawn();
+                    CreateFadeObject();
                     playerSpawnFlag = false;
                 }
                 else
                 {
                     gameOverFlag = true;
-
                 }
             }
 
@@ -89,6 +81,25 @@ public class GameManagerScript : MonoBehaviour
             playerSpeed = ps.GetPlayerSpeedFloat();
             playerSpeedBuff = ps.GetPlayerSpeedBuffFloat();
         }
+    }
+    //プレイヤー生成
+    private void PlayerSpawn()
+    {
+        player = Instantiate(playerPrefab);
+        ps = player.GetComponent<PlayerScript>();
+        cm.SetPlayer(player);
+        playerMissile--;
+
+    }
+    //開始演出生成
+    private void CreateFadeObject()
+    {
+        Transform uiTransform = GameObject.FindWithTag("UICanvas").transform;
+        GameObject __ = Instantiate(fadeObjectPrefab);
+        __.transform.SetParent(uiTransform);
+        __.transform.localScale = Vector3.one;
+        __.transform.localPosition = Vector3.zero;
+        __.transform.localEulerAngles = new Vector3(0, 0, 0);
     }
     //PMSのオンオフ
     private void ChangePMS()
@@ -150,13 +161,13 @@ public class GameManagerScript : MonoBehaviour
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         return targetPos.position;
     }
-    public bool GetGameStartFlag()
+    public bool GetCanShotFlag()
     {
-        return gameStart;
+        return isCanShot;
     }
     public void SetGameStartFlag(bool start)
     {
-        gameStart = start;
+        isCanShot = start;
     }
     public void SetPlayerSpawnFlag()
     {
@@ -172,12 +183,8 @@ public class GameManagerScript : MonoBehaviour
         ClearFlag = false;
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         cm=GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
-        if (!GameObject.FindWithTag("Player"))
-        {
-            GameObject _ = Instantiate(player);
-            ps = _.GetComponent<PlayerScript>();
-            playerMissile--;
-        }
+
+        PlayerSpawn();        
     }
 
     // Update is called once per frame

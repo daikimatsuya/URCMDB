@@ -47,7 +47,7 @@ public class PlayerScript : MonoBehaviour
     //ƒvƒŒƒCƒ„[ŠÇ—ŠÖ”
     private void PlayerController()
     {
-        if (gm.GetGameStartFlag())
+        if (gm.GetCanShotFlag())
         {
             lp.SetStart(true);
             //RockOned = false;
