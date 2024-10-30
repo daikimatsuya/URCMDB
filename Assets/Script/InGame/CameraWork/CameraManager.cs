@@ -25,7 +25,7 @@ public class CameraManager : MonoBehaviour
         mf.MovieFadeController();
         if (player == null)
         {
-
+            pcs.ExplodeCamera();
         }
         else
         {

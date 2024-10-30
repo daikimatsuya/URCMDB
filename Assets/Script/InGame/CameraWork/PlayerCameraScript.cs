@@ -87,31 +87,18 @@ public class PlayerCameraScript : MonoBehaviour
             tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
         }
     }
+    //ステージ開始時のムービーのカメラワーク
     public void MovieCut()
     {
         mc.CameraController();
         Fade();
     }
-    //プレイヤーが居なかったら再取得する
-    private void SearchPlayer()
+    //プレイヤーが爆発したときのカメラワーク
+    public void ExplodeCamera()
     {
-
-        if (playerPos == null)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                cameraRot = transform.localEulerAngles;
-                tf.position = ec.ExplodeCameraController(ref cameraRot);
-                tf.localEulerAngles = cameraRot;
-            }
-            if (GameObject.FindWithTag("Player"))
-            {
-                rot = 0;
-                player = GameObject.FindWithTag("Player");
-                playerPos = player.GetComponent<Transform>();
-                ps = player.GetComponent<PlayerScript>();
-            }
-        }
+        cameraRot = transform.localEulerAngles;
+        tf.position = ec.ExplodeCameraController(ref cameraRot);
+        tf.localEulerAngles = cameraRot;
     }
     //フェード管理
     private void Fade()
