@@ -61,18 +61,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fd796db4d05ae4aa74767bca266125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knotNumber: 1
+  knotNumber: 2
   targetPosition:
-  - {x: 0, y: 2999, z: 0}
+  - {x: 241, y: 510, z: -7860.6}
+  - {x: 6289, y: 1883, z: -25911}
   startPosition:
-  - {x: 0, y: 0, z: 0}
+  - {x: 241, y: 510, z: -6890}
+  - {x: 6289, y: 1281, z: -24117}
   targetRotation:
-  - {x: 0, y: 0, z: 0}
+  - {x: 10, y: -151.1, z: 0}
+  - {x: 66, y: 180, z: 0}
   startRotation:
-  - {x: 0, y: 0, z: 0}
+  - {x: 10, y: -151.1, z: 0}
+  - {x: 14.86, y: 180, z: 0}
   moveTime:
   - 5
-  fadeoutTime: 1.2
+  - 7
+  fadeoutTime: 0.75
 --- !u!114 &5475272097197440114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,9 +91,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerPos: {x: 0, y: 0, z: 0}
-  directionX: 0
-  distance: 0
-  rotateSpeed: 0
+  directionX: 50
+  distance: 40000
+  rotateSpeed: 0.3
 --- !u!20 &5475272097197440117
 Camera:
   m_ObjectHideFlags: 0
@@ -113,7 +118,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 15000
+  far clip plane: 200000
   field of view: 60
   orthographic: 0
   orthographic size: 5
