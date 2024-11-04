@@ -18,19 +18,25 @@ public class CameraManager : MonoBehaviour
     private GameObject player;
 
     private bool isExplodeEffectFade;
+    private bool isPlayerDead;
 
 
     public  void CameraController()
     {
         mf.MovieFadeController();
-        if (player == null)
+        if(isPlayerDead )
         {
             pcs.ExplodeCamera();
+        }
+        if (player == null)
+        {
+            isPlayerDead = true;     
         }
         else
         {
             if (mf.GetEffectEnd())
             {
+                isPlayerDead= false;
                 pcs.FollowPlayer();
             }
             else
@@ -87,11 +93,15 @@ public class CameraManager : MonoBehaviour
     //プレイヤー取得用
     public void SetPlayer(GameObject player)
     {
+        if (pcs == null)
+        {
+            pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
+        }
         this.player = player;
         pcs.SetPlayer(this.player.transform);
     }
-    // Start is called before the first frame update
-    void Start()
+    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
+    private void InitialSet()
     {
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
@@ -102,7 +112,12 @@ public class CameraManager : MonoBehaviour
         TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
         mainCanvas = GameObject.FindWithTag("UICanvas");
         mainCanvas.SetActive(false);
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
 
+        InitialSet();
     }
 
     // Update is called once per frame

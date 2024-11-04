@@ -89,6 +89,10 @@ public class GameManagerScript : MonoBehaviour
     //プレイヤー生成
     private void PlayerSpawn()
     {
+        if (cm == null)
+        {
+            InitialSet();
+        }
         player = Instantiate(playerPrefab);
         ps = player.GetComponent<PlayerScript>();
         cm.SetPlayer(player);
@@ -120,7 +124,18 @@ public class GameManagerScript : MonoBehaviour
             }
         }
     }
+    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
+    private void InitialSet()
+    {
+        Application.targetFrameRate = 60;
+        PMS = false;
+        gameOverFlag = false;
+        ClearFlag = false;
+        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
+        cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
 
+        PlayerSpawn();
+    }
     #region 値受け渡し
     public bool GetPMS()
     {
@@ -181,14 +196,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
-        PMS = false;
-        gameOverFlag= false;
-        ClearFlag = false;
-        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
-        cm=GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
-
-        PlayerSpawn();        
+        InitialSet();
     }
 
     // Update is called once per frame
