@@ -87,6 +87,7 @@ public class PlayerCameraScript : MonoBehaviour
         deff = FollowPlayer(playerPos.eulerAngles,0);
 
         tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
+        rot = 0;
     }
     //’Ç]’†‚ÌƒJƒƒ‰‚ÌˆÊ’uo‚·
     private Vector3 FollowPlayer(Vector3 playerEulerAngles,float rot)
