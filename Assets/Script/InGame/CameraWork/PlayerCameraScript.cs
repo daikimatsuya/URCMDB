@@ -15,16 +15,14 @@ public class PlayerCameraScript : MonoBehaviour
 
     private MovieCamera mc;
     private ExplodeCamera ec;
-    private PlayerScript ps;
-    private GameObject player;
     private MovieFade mf;
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
 
 
-    //カメラがプレイヤーの後ろに追従する
-    public void FollowPlayer()
+    //カメラが飛んでいるプレイヤーの後ろに追従する
+    public void FollowPlayerInShoot()
     {
         if (playerPos != null)
         {
@@ -73,20 +71,39 @@ public class PlayerCameraScript : MonoBehaviour
 
         }
 
-            
-            deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerPos.eulerAngles.y + rot));
-            deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerPos.eulerAngles.y + rot));
-            
 
-            deff.x = deff.x * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
-            deff.z = deff.z * (float)Math.Cos(ToRadian(playerPos.eulerAngles.x));
 
-            deff.y = (cameraDeff + 5) * (float)Math.Sin(ToRadian(playerPos.eulerAngles.x)) * -1;
-
+            deff = FollowPlayer(playerPos.eulerAngles, rot);
 
             tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
         }
     }
+    //カメラが発射台にあるプレイヤーの後ろに追従する
+    public void FollowPlayerInSet()
+    {
+        tf.localRotation = playerPos.localRotation;
+
+        Vector3 deff = Vector3.zero;
+        deff = FollowPlayer(playerPos.eulerAngles,0);
+
+        tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
+    }
+    //追従中のカメラの位置出す
+    private Vector3 FollowPlayer(Vector3 playerEulerAngles,float rot)
+    {
+        Vector3 deff = Vector3.zero;
+
+        deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerEulerAngles.y + rot));
+        deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerEulerAngles.y + rot));
+
+        deff.x = deff.x * (float)Math.Cos(ToRadian(playerEulerAngles.x));
+        deff.z = deff.z * (float)Math.Cos(ToRadian(playerEulerAngles.x));
+
+        deff.y = (cameraDeff + 5) * (float)Math.Sin(ToRadian(playerEulerAngles.x)) * -1;
+
+        return deff;
+    }
+
     //ステージ開始時のムービーのカメラワーク
     public void MovieCut()
     {
@@ -143,14 +160,6 @@ public class PlayerCameraScript : MonoBehaviour
     {
         this.mf = mf;
     }
-
-
-
-    //MoviewFade取得用
-    //public void SetMoviewFade(MovieFade mf)
-    //{
-    //    this.mf = mf;
-    //}
 
     // Start is called before the first frame update
     void Start()

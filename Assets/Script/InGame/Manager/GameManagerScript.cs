@@ -95,7 +95,7 @@ public class GameManagerScript : MonoBehaviour
         }
         player = Instantiate(playerPrefab);
         ps = player.GetComponent<PlayerScript>();
-        cm.SetPlayer(player);
+        cm.SetPlayer(ps);
         playerMissile--;
 
     }

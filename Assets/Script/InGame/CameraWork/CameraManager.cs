@@ -15,7 +15,7 @@ public class CameraManager : MonoBehaviour
     private GameObject mainCanvas;
     private GameManagerScript gm;
     private MovieFade mf;
-    private GameObject player;
+    private PlayerScript player;
 
     private bool isExplodeEffectFade;
     private bool isPlayerDead;
@@ -37,7 +37,14 @@ public class CameraManager : MonoBehaviour
             if (mf.GetEffectEnd())
             {
                 isPlayerDead= false;
-                pcs.FollowPlayer();
+                if (player.GetControll())
+                {
+                    pcs.FollowPlayerInShoot();
+                }
+                else
+                {
+                    pcs.FollowPlayerInSet();
+                }
             }
             else
             {
@@ -91,7 +98,7 @@ public class CameraManager : MonoBehaviour
     }
 
     //プレイヤー取得用
-    public void SetPlayer(GameObject player)
+    public void SetPlayer(PlayerScript player)
     {
         if (pcs == null)
         {
