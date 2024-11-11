@@ -161,6 +161,11 @@ public class PlayerCameraScript : MonoBehaviour
     {
         this.mf = mf;
     }
+    //プレイヤーカメラのポジション取得用
+    public Vector3 GetPos()
+    {
+        return tf.position;
+    }
 
     // Start is called before the first frame update
     void Start()
