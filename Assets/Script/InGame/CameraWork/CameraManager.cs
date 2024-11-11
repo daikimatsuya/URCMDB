@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float explodeFadeTime;
     private int explodeFadeTimeBuff;
     [SerializeField] private GameObject movieCanvas;
+    [SerializeField] private GameObject watarEffect;
+    [SerializeField] private float drownPos;
 
     private PlayerCameraScript pcs;
     private GameObject mainCanvas;
@@ -37,6 +39,14 @@ public class CameraManager : MonoBehaviour
             if (mf.GetEffectEnd())
             {
                 isPlayerDead= false;
+                if (pcs.GetPos().y <= drownPos)
+                {
+                    watarEffect.SetActive(true);
+                }
+                else
+                {
+                    watarEffect.SetActive(false);
+                }
                 if (player.GetControll())
                 {
                     pcs.FollowPlayerInShoot();
@@ -53,7 +63,7 @@ public class CameraManager : MonoBehaviour
             CanvasActive(mf.GetEffectEnd());
         }
     }
-    //キャンバスのオンオフ管理
+    //開始演出からゲーム画面へのキャンバスのオンオフ管理
     private void CanvasActive(bool flag)
     {
         if (flag)
@@ -119,6 +129,7 @@ public class CameraManager : MonoBehaviour
         TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
         mainCanvas = GameObject.FindWithTag("UICanvas");
         mainCanvas.SetActive(false);
+        watarEffect.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
