@@ -269,10 +269,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upside: {fileID: 7560917035036415990}
   downside: {fileID: 8266503002121076687}
-  parfectShadePos: 0
-  movieShadePos: 0
-  openlyPos: 0
-  moveSpeed: 0.3
+  parfectShadePos: 0.25
+  movieShadePos: 0.47
+  openlyPos: 0.6
+  moveSpeed: 0.006
 --- !u!20 &3536103835060491499
 Camera:
   m_ObjectHideFlags: 0
