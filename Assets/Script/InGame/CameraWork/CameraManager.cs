@@ -18,6 +18,7 @@ public class CameraManager : MonoBehaviour
     private GameManagerScript gm;
     private MovieFade mf;
     private PlayerScript player;
+    private ClearCamera cc;
 
     private bool isExplodeEffectFade;
     private bool isPlayerDead;
@@ -121,7 +122,9 @@ public class CameraManager : MonoBehaviour
     private void InitialSet()
     {
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
-        pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
+        GameObject _ = GameObject.FindWithTag("GameCamera");
+        pcs = _.GetComponent<PlayerCameraScript>();
+        cc = _.GetComponent<ClearCamera>();
         mf = GetComponent<MovieFade>();
         mf.SetShadeLevel(1);
         pcs.SetMF(mf);
