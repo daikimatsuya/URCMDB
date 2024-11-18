@@ -49,7 +49,7 @@ public class GameOverUIScript : MonoBehaviour
         }
         else
         {
-
+            targetHpTex.text = "0";
         }
     }
     // Start is called before the first frame update

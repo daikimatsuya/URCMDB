@@ -6221,6 +6221,26 @@ PrefabInstance:
       propertyPath: hitCameraRot.y
       value: -62
       objectReference: {fileID: 0}
+    - target: {fileID: 1709878088556506498, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: clearCameraPos.x
+      value: -8050
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709878088556506498, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: clearCameraPos.y
+      value: 1229
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709878088556506498, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: clearCameraPos.z
+      value: -12199.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709878088556506498, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: clearCameraRot.x
+      value: -28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709878088556506498, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: clearCameraRot.y
+      value: -102
+      objectReference: {fileID: 0}
     - target: {fileID: 1798518281081795701, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -6268,6 +6288,10 @@ PrefabInstance:
     - target: {fileID: 4320082708551101942, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: stage
       value: Stage1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320082708551101942, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: breakTime
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4320082708551101943, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_RootOrder
@@ -6339,11 +6363,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4841680131122676580, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: hp
-      value: 500
+      value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 5751812665510938201, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 260
+    - target: {fileID: 4841680131122676580, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: explode
+      value: 
+      objectReference: {fileID: 2981810423162024347, guid: 3338e49f60502a043a6e9e2ba5422c16, type: 3}
+    - target: {fileID: 4841680131122676580, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: explodeTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5751812665510938201, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_LocalPosition.y

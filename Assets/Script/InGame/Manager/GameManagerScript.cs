@@ -12,6 +12,8 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private bool PMS;
     [SerializeField] private string stage;
     [SerializeField] private string title;
+    [SerializeField] private float breakTime;
+    private int breakTimeBuff;
 
     private PlayerScript ps;
     private Transform targetPos;
@@ -35,7 +37,7 @@ public class GameManagerScript : MonoBehaviour
         ChangePMS();
         PlayerCheck();
         cm.CameraController();
-
+        BreakTimeContoller();
     }
     //リトライするときにシーンをロード
     public void Retry()
@@ -94,6 +96,19 @@ public class GameManagerScript : MonoBehaviour
         playerMissile--;
 
     }
+    private void BreakTimeContoller()
+    {
+        if (isClear)
+        {
+
+            if (breakTimeBuff <= 0)
+            {
+                isTargetBreak = true;
+                playerMissile = 0;
+            }
+            breakTimeBuff--;
+        }
+    }
     //開始演出生成
     private void CreateFadeObject()
     {
@@ -128,6 +143,7 @@ public class GameManagerScript : MonoBehaviour
         isClear = false;
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+        TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
         PlayerSpawn();
     }
