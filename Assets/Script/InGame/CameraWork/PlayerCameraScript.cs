@@ -111,11 +111,25 @@ public class PlayerCameraScript : MonoBehaviour
         mc.CameraController();
         Fade();
     }
-    //プレイヤーが爆発したときのカメラワーク
-    public void ExplodeCamera()
+    //プレイヤーがターゲット以外で爆発したときのカメラワーク
+    public void MissExplodeCamera()
     {
         cameraRot = transform.localEulerAngles;
-        tf.position = ec.ExplodeCameraController(ref cameraRot);
+        tf.position = ec.MissExplodeCamera(ref cameraRot);
+        tf.localEulerAngles = cameraRot;
+    }
+    //プレイヤーがターゲットにぶつかったとのカメラワーク
+    public void HitExplodeCamera()
+    {
+        cameraRot= transform.localEulerAngles;
+        tf.position=ec.HitTargetCamera(ref cameraRot);
+        tf.localEulerAngles = cameraRot;
+    }
+    //クリア時のカメラ
+    public void ClearCamera()
+    {
+        cameraRot = transform.localEulerAngles;
+        tf.position = ec.ClearCamera(ref cameraRot);
         tf.localEulerAngles = cameraRot;
     }
     //フェード管理

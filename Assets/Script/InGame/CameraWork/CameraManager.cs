@@ -28,7 +28,7 @@ public class CameraManager : MonoBehaviour
         mf.MovieFadeController();
         if(isPlayerDead )
         {
-            pcs.ExplodeCamera();
+            ExplodeCameraController();
         }
         if (player == null)
         {
@@ -36,17 +36,11 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
+            SetWaterEffect();
             if (mf.GetEffectEnd())
             {
                 isPlayerDead= false;
-                if (pcs.GetPos().y <= drownPos)
-                {
-                    watarEffect.SetActive(true);
-                }
-                else
-                {
-                    watarEffect.SetActive(false);
-                }
+
                 if (player.GetControll())
                 {
                     pcs.FollowPlayerInShoot();
@@ -61,6 +55,32 @@ public class CameraManager : MonoBehaviour
                 pcs.MovieCut();
             }
             CanvasActive(mf.GetEffectEnd());
+        }
+    }
+    private void ExplodeCameraController()
+    {
+        if(gm.GetIsHitTarget())
+        {
+            if (gm.GetTargetDead())
+            {
+                pcs.ClearCamera();
+                return;
+            }
+            pcs.HitExplodeCamera();
+            return;
+        }
+        pcs.MissExplodeCamera();
+    }
+    //水に入った時の演出管理
+    private void SetWaterEffect()
+    {
+        if (pcs.GetPos().y <= drownPos)
+        {
+            watarEffect.SetActive(true);
+        }
+        else
+        {
+            watarEffect.SetActive(false);
         }
     }
     //開始演出からゲーム画面へのキャンバスのオンオフ管理

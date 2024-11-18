@@ -17,9 +17,8 @@ public class TargetScript : MonoBehaviour
     //HPÇ™ñ≥Ç≠Ç»Ç¡ÇΩÇÁè¡ñ≈
     private void IsBreak()
     {
-        if(hp <= 0)
-        {
-            gm.SetClearFlag();
+        if(gm.GetTargetBreakFlag())
+        {  
             Destroy(this.gameObject);
         }
     }
@@ -34,6 +33,11 @@ public class TargetScript : MonoBehaviour
         {
             PlayerScript ps=collision.gameObject.GetComponent<PlayerScript>();
             hp-=(int)(ps.GetPlayerSpeedBuffFloat()/10);
+            if (hp <= 0)
+            {
+                gm.SetClearFlag();
+            }
+            gm.SetIsHitTarget(true);
         }
     }
 

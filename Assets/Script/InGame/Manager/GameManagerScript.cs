@@ -23,9 +23,11 @@ public class GameManagerScript : MonoBehaviour
     private float playerSpeed;
     private float playerSpeedBuff;
     private bool gameOverFlag;
-    private bool ClearFlag;
+    private bool isClear;
     private bool isCanShot;
     private bool playerSpawnFlag;
+    private bool isHitTarget;
+    private bool isTargetBreak;
 
     //ゲームシステムを動かす
     private void GameManagerController()
@@ -33,14 +35,7 @@ public class GameManagerScript : MonoBehaviour
         ChangePMS();
         PlayerCheck();
         cm.CameraController();
-        if(ClearFlag)
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                BackTitle();
-            }
-           
-        }
+
     }
     //リトライするときにシーンをロード
     public void Retry()
@@ -130,7 +125,7 @@ public class GameManagerScript : MonoBehaviour
         Application.targetFrameRate = 60;
         PMS = false;
         gameOverFlag = false;
-        ClearFlag = false;
+        isClear = false;
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
 
@@ -158,14 +153,26 @@ public class GameManagerScript : MonoBehaviour
     {
         return gameOverFlag;
     }
+    public bool GetTargetBreakFlag()
+    {
+        return isTargetBreak;
+    }
 
     public void SetClearFlag()
     {
-        ClearFlag = true;
+        isClear = true;
     }
-    public bool GetClearFlag()
+    public void SetIsHitTarget(bool flag)
     {
-        return ClearFlag;
+        isHitTarget = flag;
+    }
+    public bool GetIsHitTarget()
+    {
+        return isHitTarget;
+    }
+    public bool GetTargetDead()
+    {
+        return isClear;
     }
     public float GetPlayerSpeed()
     {

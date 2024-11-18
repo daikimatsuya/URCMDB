@@ -87,7 +87,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (isControl)
         {
-            if(Input.GetKey(KeyCode.LeftShift))
+            if(!Input.GetKey(KeyCode.LeftShift))
             {
                 if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
                 {
@@ -222,18 +222,7 @@ public class PlayerScript : MonoBehaviour
             playerSpeed--;
         }
     }
-    //private void FlameEffect()
-    //{
-    //    if (effectTimer <= 0)
-    //    {
-    //        GameObject _ = Instantiate(flame);
-    //        _.transform.position = new Vector3(tf.localPosition.x, tf.localPosition.y , tf.localPosition.z);
 
-    //        effectTimer = 2;
-
-    //    }
-    //    effectTimer--;
-    //}
     //‘Ì—Í‚ª–³‚­‚È‚Á‚½‚ç”š”j‚µ‚ÄÁ‚·
     private void Booooooomb()
     {
@@ -354,6 +343,7 @@ public class PlayerScript : MonoBehaviour
         rowling.y = lp.GetRowling().y + 180;
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
         lp.SetStart(false);
+        gm.SetIsHitTarget(false);
         //isInStage = true;
         //RockOned = false;
 
