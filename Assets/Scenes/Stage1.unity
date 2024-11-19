@@ -6201,6 +6201,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1063843533680486977, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc2dafa2c8c46434fbaca4c85046ac3a, type: 2}
     - target: {fileID: 1709878088556506498, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: hitCameraPos.x
       value: -8524.4
@@ -6257,6 +6261,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bc2dafa2c8c46434fbaca4c85046ac3a, type: 2}
+    - target: {fileID: 2466440130778925656, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2466440131300657233, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_LocalPosition.y
       value: 500
@@ -9069,6 +9077,10 @@ PrefabInstance:
     - target: {fileID: 2220700653041855935, guid: 46bddc8875b585941bb72e170935466e, type: 3}
       propertyPath: m_Name
       value: 8.8Flak
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032578284743416478, guid: 46bddc8875b585941bb72e170935466e, type: 3}
+      propertyPath: setVoid
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032578284743416478, guid: 46bddc8875b585941bb72e170935466e, type: 3}
       propertyPath: shotInterval
@@ -38967,6 +38979,10 @@ PrefabInstance:
     - target: {fileID: 2220700653041855935, guid: 46bddc8875b585941bb72e170935466e, type: 3}
       propertyPath: m_Name
       value: 8.8Flak (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032578284743416478, guid: 46bddc8875b585941bb72e170935466e, type: 3}
+      propertyPath: setVoid
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032578284743416478, guid: 46bddc8875b585941bb72e170935466e, type: 3}
       propertyPath: shotInterval

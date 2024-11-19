@@ -70,7 +70,7 @@ MonoBehaviour:
   shotInterval: 10
   range: 0
   setWarning: 0.5
-  setVoid: 2
+  setVoid: 0
 --- !u!1 &3717692369710504743
 GameObject:
   m_ObjectHideFlags: 0

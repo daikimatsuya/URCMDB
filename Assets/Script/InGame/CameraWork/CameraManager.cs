@@ -34,6 +34,7 @@ public class CameraManager : MonoBehaviour
         if (player == null)
         {
             isPlayerDead = true;     
+            watarEffect.SetActive(false);
         }
         else
         {

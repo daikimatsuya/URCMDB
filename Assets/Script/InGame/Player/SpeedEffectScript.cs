@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class SpeedEffectScript : MonoBehaviour
 {
+    public void BoostEffect()
+    {
+
+    }
+    public void SpeedUpEffect()
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {
