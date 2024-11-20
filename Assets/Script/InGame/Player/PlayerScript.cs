@@ -2,6 +2,7 @@ using System;
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -16,9 +17,10 @@ public class PlayerScript : MonoBehaviour
     private GameManagerScript gm;
     private GameObject dust;
 
+    
     [SerializeField] private float time;
     [SerializeField] private float playerHp;
-    [SerializeField] private GameObject flame;
+    [SerializeField] private GameObject boostEffect;
     [SerializeField] private GameObject explode;
     [SerializeField] private float speedBuff;
     [SerializeField] private float firstSpeed;
@@ -41,6 +43,7 @@ public class PlayerScript : MonoBehaviour
     private bool isControl;
     private float ringSpeed;
     private bool PMS;
+    private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
     //private bool isInStage;
     //[SerializeField] private bool RockOned;
 
@@ -59,7 +62,8 @@ public class PlayerScript : MonoBehaviour
             Acceleration();
             Move();
             CountDown();
-            // FlameEffect();
+            EffectController();
+
            
         }
         gm.PlayerRotSet(rowling);
@@ -183,6 +187,7 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 burstSpeed = burst + playerSpeed / 3;
+                CreateBoostEffect();
             }
             if (Input.GetKey(KeyCode.Space))
             {
@@ -232,6 +237,36 @@ public class PlayerScript : MonoBehaviour
             GameObject _ = Instantiate(explode);
             _.transform.position = tf.position;
             Destroy(this.gameObject);
+        }
+    }
+    //ブースト時に火花が散るエフェクト生成
+    private void CreateBoostEffect()
+    {
+        GameObject _ = Instantiate(boostEffect);
+        _.transform.SetParent(tf.transform, true);
+        _.transform.localPosition=Vector3.zero;
+        _.transform.localEulerAngles = new Vector3(0, 180, 0);
+        BoostEffectScript bf=_.GetComponent<BoostEffectScript>();
+        bf.SetTime();
+        boostEffectList.Add(bf);
+    }
+    private void EffectController()
+    {
+        if (boostEffectList != null)
+        {
+            for (int i = 0; i < boostEffectList.Count;)
+            {
+                if (boostEffectList[i].IsDelete())
+                {
+                    boostEffectList[i].Break();
+                    boostEffectList.Remove(boostEffectList[i]);
+                }
+                else
+                {
+                    boostEffectList[i].CountTime();
+                    i++;
+                }
+            }
         }
     }
     //プレイヤーの爆発までのカウントダウン

@@ -4864,7 +4864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 180
   playerHp: 100
-  flame: {fileID: 8816118968784135207, guid: a766f634a93d08a41b869da86cd14a81, type: 3}
+  boostEffect: {fileID: 2133923122692135145, guid: 66044b547477dcc46918ea4d0a74ddbf, type: 3}
   explode: {fileID: 2981810423162024347, guid: 3338e49f60502a043a6e9e2ba5422c16, type: 3}
   speedBuff: 0
   firstSpeed: 0.8
