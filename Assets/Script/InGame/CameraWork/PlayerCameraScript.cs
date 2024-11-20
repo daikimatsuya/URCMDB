@@ -16,6 +16,7 @@ public class PlayerCameraScript : MonoBehaviour
     private MovieCamera mc;
     private ExplodeCamera ec;
     private MovieFade mf;
+    private ShaderController sc;
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
@@ -165,10 +166,11 @@ public class PlayerCameraScript : MonoBehaviour
     {
         return angle * Math.PI / 180f;
     }
-    //プレイヤーのトランスフォーム取得用
-    public void SetPlayer(Transform tf)
+    //プレイヤーのトランスフォーム取得用プレイヤースクリプトも取得
+    public void SetPlayer(Transform tf,PlayerScript ps)
     {
         playerPos = tf;
+        sc.SetPlayer(ps);
     }
     //MovieFade取得用
     public void SetMF(MovieFade mf)
@@ -187,7 +189,7 @@ public class PlayerCameraScript : MonoBehaviour
         tf=GetComponent<Transform>();
         mc=GetComponent<MovieCamera>();
         ec=GetComponent<ExplodeCamera>();
-
+        sc=GetComponent<ShaderController>();
     }
 
     // Update is called once per frame

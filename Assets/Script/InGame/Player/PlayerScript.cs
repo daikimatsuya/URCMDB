@@ -32,13 +32,20 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float rowlingSpeedY;
     [SerializeField] private float fixRowling;
     [SerializeField] private float speedCut;
-    
+    [SerializeField, Range(0f, 0.3f)] private float maxBlurIntensity;
+    private float blurIntnsity;
+    [SerializeField, Range(0f, 0.2f)] private float boostedBlurIntensity;
+    [SerializeField, Range(0f, 0.1f)] private float accelelatedBlurIntensity;
+    private float minBlurIntnsity;
+    [SerializeField, Range(0f, 0.1f)] private float blurIntensityBrake;
+
 
     private Vector2 rowling;
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
-    private float burstSpeed;
-    //private int effectTimer;
+    private float accelelateSpeed;
+    private float boostSpeed;
+
     private bool isFire;
     private bool isControl;
     private float ringSpeed;
@@ -63,7 +70,7 @@ public class PlayerScript : MonoBehaviour
             Move();
             CountDown();
             EffectController();
-
+            BlurIntnsityController();
            
         }
         gm.PlayerRotSet(rowling);
@@ -173,6 +180,7 @@ public class PlayerScript : MonoBehaviour
             {
                 isFire = true;
                 lp.Shoot();
+
             }
         }
         PMS=gm.GetPMS();
@@ -186,28 +194,39 @@ public class PlayerScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                burstSpeed = burst + playerSpeed / 3;
+                accelelateSpeed = burst + playerSpeed / 3;
                 CreateBoostEffect();
+                blurIntnsity = maxBlurIntensity;
             }
             if (Input.GetKey(KeyCode.Space))
             {
                 playerSpeed += accelerate;
+                minBlurIntnsity = accelelatedBlurIntensity;
+            }
+            if(boostSpeed > 0)
+            {
+                minBlurIntnsity = boostedBlurIntensity;
+            }
+            else if (!Input.GetKey(KeyCode.Space))
+            {
+                minBlurIntnsity = 0;
             }
 
-            burstSpeed -= playerSpeed / 300;
+            accelelateSpeed -= playerSpeed / 300;
             ringSpeed -= playerSpeed * 0.003f;
-            if (burstSpeed <= 0)
+            if (accelelateSpeed <= 0)
             {
-                burstSpeed = 0;
+                accelelateSpeed = 0;
             }
             if(ringSpeed <= 0)
             {
                 ringSpeed = 0;
             }
+            boostSpeed = accelelateSpeed + ringSpeed;
         }
         if(isControl)
         {
-            speedBuff = playerSpeed + burstSpeed+ringSpeed;
+            speedBuff = playerSpeed + boostSpeed;
         }
     }
     //デバッグで速度調節する（後で消す
@@ -281,6 +300,19 @@ public class PlayerScript : MonoBehaviour
 
         }
     }
+    //ブラー強度管理
+    private void BlurIntnsityController()
+    {
+        if (blurIntnsity > minBlurIntnsity)
+        {
+            blurIntnsity -= blurIntensityBrake;
+            if(blurIntnsity<minBlurIntnsity)
+            {
+                blurIntnsity = minBlurIntnsity;
+            }
+        }
+
+    }
     #region　値受け渡し
     public Vector3 GetPlayerSpeed()
     {
@@ -301,6 +333,10 @@ public class PlayerScript : MonoBehaviour
     public bool GetControll()
     {
         return isControl;
+    }
+    public float GetBlurIntensity()
+    {
+        return blurIntnsity;
     }
     #endregion
     //狙われているかのチェック
@@ -330,6 +366,7 @@ public class PlayerScript : MonoBehaviour
         {
             ringSpeed = playerSpeed * 0.3f;
             playerSpeed += playerSpeed * ringBust;
+            blurIntnsity = maxBlurIntensity;
         }
         if (other.CompareTag("Bullet"))
         {
@@ -359,6 +396,7 @@ public class PlayerScript : MonoBehaviour
     {
         PMS = false;
         time = time * 60;
+        blurIntnsity = 0.0f;
 
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();

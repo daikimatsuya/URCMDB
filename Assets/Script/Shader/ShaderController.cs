@@ -10,16 +10,25 @@ public class ShaderController : MonoBehaviour
     
 
     private Material material;
+    private PlayerScript player;
 
     //ブラーの強度を代入
     private void BlurController()
     {
+        if(player != null)
+        {
+            intensity = player.GetBlurIntensity();
+        }
+        else
+        {
+            intensity = 0.0f;
+        }
         material.SetFloat("_BlurIntensity", intensity);
     }
     //ブラーの強度を他スクリプトから設定する
-    public void SetIntensity(float pow)
+    public void SetPlayer(PlayerScript ps)
     {
-        intensity = pow;
+        player = ps;
     }
     //ブラーをかける
     private void OnRenderImage(RenderTexture source, RenderTexture destination)

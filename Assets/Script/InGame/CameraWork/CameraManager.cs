@@ -137,7 +137,7 @@ public class CameraManager : MonoBehaviour
             pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
         }
         this.player = player;
-        pcs.SetPlayer(this.player.transform);
+        pcs.SetPlayer(this.player.transform,this.player);
     }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void InitialSet()
