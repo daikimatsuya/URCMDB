@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5475272097197440119}
-  - component: {fileID: 959236178046349029}
   - component: {fileID: 5475272097197440116}
   - component: {fileID: 5475272097197440115}
   - component: {fileID: 5475272097197440114}
+  - component: {fileID: 5408380744413451233}
   - component: {fileID: 5475272097197440117}
   m_Layer: 0
   m_Name: GameCamera
@@ -36,18 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &959236178046349029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5475272097197440120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec3bca5a3143d5946b50414acef042db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5475272097197440116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +95,24 @@ MonoBehaviour:
   directionX: 50
   distance: 40000
   rotateSpeed: 0.3
+  hitCameraPos: {x: 0, y: 0, z: 0}
+  hitCameraRot: {x: 0, y: 0, z: 0}
+  clearCameraPos: {x: 0, y: 0, z: 0}
+  clearCameraRot: {x: 0, y: 0, z: 0}
+--- !u!114 &5408380744413451233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5475272097197440120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52964b11c42b05438af293e27c1828e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radialBlur: {fileID: 4800000, guid: c95f5966e6200254b895a51a99342a3d, type: 3}
+  intensity: 0
 --- !u!20 &5475272097197440117
 Camera:
   m_ObjectHideFlags: 0
