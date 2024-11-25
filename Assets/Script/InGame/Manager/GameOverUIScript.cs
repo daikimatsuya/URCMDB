@@ -36,7 +36,10 @@ public class GameOverUIScript : MonoBehaviour
     }
     public void SetTargetHp()
     {
-        targetHp=targetScript.GetHp();
+        if (targetScript != null)
+        {
+            targetHp = targetScript.GetHp();
+        }
     }
     #endregion
     //ターゲットのHPを表示
