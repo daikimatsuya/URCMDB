@@ -4880,6 +4880,8 @@ MonoBehaviour:
   boostedBlurIntensity: 0.077
   accelelatedBlurIntensity: 0.0365
   blurIntensityBrake: 0.0095
+  firePosZ: -2.5
+  fireSize: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!33 &7870347104334944395
 MeshFilter:
   m_ObjectHideFlags: 0

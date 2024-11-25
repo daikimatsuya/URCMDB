@@ -38,6 +38,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField, Range(0f, 0.1f)] private float accelelatedBlurIntensity;
     private float minBlurIntnsity;
     [SerializeField, Range(0f, 0.1f)] private float blurIntensityBrake;
+    [SerializeField] private float firePosZ;
+    [SerializeField] private Vector3 fireSize;
 
 
     private Vector2 rowling;
@@ -263,12 +265,14 @@ public class PlayerScript : MonoBehaviour
     {
         GameObject _ = Instantiate(boostEffect);
         _.transform.SetParent(tf.transform, true);
-        _.transform.localPosition=Vector3.zero;
+        _.transform.localPosition = new Vector3(0, 0, firePosZ);
         _.transform.localEulerAngles = new Vector3(0, 180, 0);
+        _.transform.localScale = fireSize;
         BoostEffectScript bf=_.GetComponent<BoostEffectScript>();
         bf.SetTime();
         boostEffectList.Add(bf);
     }
+    //âŒâ‘çÌèúä«óù
     private void EffectController()
     {
         if (boostEffectList != null)
