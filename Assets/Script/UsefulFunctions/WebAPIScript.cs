@@ -5,6 +5,7 @@ using UnityEditor.Networking;
 using UnityEngine.Networking;
 using System;
 
+//WEBからJson形式で天気予報を取得して格納する
 public class WebAPIScript : MonoBehaviour
 {
     private string url = "https://weather.tsukumijima.net/api/forecast?city=130010";
@@ -14,9 +15,9 @@ public class WebAPIScript : MonoBehaviour
     {
         public string time;
     }
-
+    #region Json取得用の構造体
     [System.Serializable]
-    public class  webJson
+    public class  WebJson
     {
         public string publicTime;
         public string publicTimeFormatted;
@@ -27,9 +28,9 @@ public class WebAPIScript : MonoBehaviour
         public Forecasts[] forecasts;
         public Location location;
         public Copyright copyright;
+
+
         
-
-
         [System.Serializable]
         public struct Description
         {
@@ -128,41 +129,22 @@ public class WebAPIScript : MonoBehaviour
             public string T18_24;
         }
     }
-    webJson _forecasts;
+    #endregion
+    WebJson webJson;
 
+    //Jsonから天気情報取得
     [Obsolete]
     private IEnumerator WEBMethod()
     {
-        
-
         UnityWebRequest unityWebRequest = UnityWebRequest.Get(url);
         yield return unityWebRequest.SendWebRequest();
 
-
         if(unityWebRequest.isNetworkError||unityWebRequest.isHttpError)
         {
-
         }
         else
         {
-            var test1 = new webJson();
-            test1.publicTime = "pubtest";
-            //test1.forecasts[0].chanceOfRain.T06_12 = "test0";
-            //test1.forecasts[0].chanceOfRain.T18_24 = "test0";
-            //test1._chansOfRain.T00_06 = "test";
-            // JSON文字列にシリアライズ
-            var test1Json = JsonUtility.ToJson(test1, true);
-            // JSON文字列からクラスとしてデシリアライズする
-            var newTest1 = JsonUtility.FromJson<webJson>(test1Json);
-            var newTest2 = JsonUtility.FromJson<webJson>(unityWebRequest.downloadHandler.text);
-
-            str _strVal = JsonUtility.FromJson<str>(unityWebRequest.downloadHandler.text);
-            _forecasts = JsonUtility.FromJson<webJson>(unityWebRequest.downloadHandler.text);
-
-           
-            //Debug.Log(_forecasts._chansOfRain.T12_18);
-            Debug.Log(unityWebRequest.downloadHandler.text);
-            Debug.Log(JsonUtility.FromJson<webJson>(unityWebRequest.downloadHandler.text));
+            webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);
         }
     }
 
