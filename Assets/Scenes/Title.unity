@@ -15235,6 +15235,7 @@ GameObject:
   - component: {fileID: 2096328454}
   - component: {fileID: 2096328455}
   - component: {fileID: 2096328456}
+  - component: {fileID: 2096328457}
   m_Layer: 0
   m_Name: TitleManagerObject
   m_TagString: TitleManager
@@ -15295,6 +15296,18 @@ MonoBehaviour:
   stageSelectCoolTime: 0.1
   coolTimeBuff: 0
   fadeTime: 3
+--- !u!114 &2096328457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096328453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d70165f003c0584181506f034144355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2110879514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6696846022166262720, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
