@@ -182,6 +182,10 @@ public class PlayerCameraScript : MonoBehaviour
     {
         return tf.position;
     }
+    public Transform GetTransform()
+    {
+        return tf;
+    }
 
     // Start is called before the first frame update
     void Start()

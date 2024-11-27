@@ -19,6 +19,7 @@ public class GameManagerScript : MonoBehaviour
     private Transform targetPos;
     private CameraManager cm;
     private GameObject player;
+    private SelectWeatherScript sws;
 
     private bool playerDead;
     private Vector3 playerRot;
@@ -30,7 +31,7 @@ public class GameManagerScript : MonoBehaviour
     private bool playerSpawnFlag;
     private bool isHitTarget;
     private bool isTargetBreak;
-    private bool setWether;
+
 
     //ゲームシステムを動かす
     private void GameManagerController()
@@ -39,6 +40,7 @@ public class GameManagerScript : MonoBehaviour
         PlayerCheck();
         cm.CameraController();
         BreakTimeContoller();
+        sws.WeatherSetting(cm);
     }
     //リトライするときにシーンをロード
     public void Retry()
@@ -134,13 +136,7 @@ public class GameManagerScript : MonoBehaviour
             }
         }
     }
-    private void SetWeather()
-    {
-        if(!setWether)
-        {
 
-        }
-    }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void InitialSet()
     {
@@ -148,7 +144,8 @@ public class GameManagerScript : MonoBehaviour
         PMS = false;
         gameOverFlag = false;
         isClear = false;
-        setWether = false;
+
+        sws = GetComponent<SelectWeatherScript>();
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);

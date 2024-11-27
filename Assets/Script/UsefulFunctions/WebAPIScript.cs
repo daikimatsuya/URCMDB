@@ -180,7 +180,7 @@ public class WebAPIScript : MonoBehaviour
         string buff = GetStringChanceOfRain();
         if(buff == null)
         {
-            return 255;
+            return UnityEngine.Random.Range(0, 100);
         }
         if (buff == "0%")
         {

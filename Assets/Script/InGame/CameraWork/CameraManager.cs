@@ -23,7 +23,7 @@ public class CameraManager : MonoBehaviour
     private bool isExplodeEffectFade;
     private bool isPlayerDead;
 
-
+    //カメラ管理
     public  void CameraController()
     {
         mf.MovieFadeController();
@@ -59,6 +59,7 @@ public class CameraManager : MonoBehaviour
             CanvasActive(mf.GetEffectEnd());
         }
     }
+    //爆発時のカメラ
     private void ExplodeCameraController()
     {
         if(gm.GetIsHitTarget())
@@ -129,6 +130,11 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    public PlayerCameraScript GetPlayerCamera()
+    {
+        return pcs;
+    }
+
     //プレイヤー取得用
     public void SetPlayer(PlayerScript player)
     {
@@ -139,6 +145,7 @@ public class CameraManager : MonoBehaviour
         this.player = player;
         pcs.SetPlayer(this.player.transform,this.player);
     }
+
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void InitialSet()
     {
