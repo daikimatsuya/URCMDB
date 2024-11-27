@@ -11,7 +11,9 @@ public class SelectWeatherScript : MonoBehaviour
         {
             return;
         }
+
     }
+    private 
     // Start is called before the first frame update
     void Start()
     {
