@@ -30,6 +30,7 @@ public class GameManagerScript : MonoBehaviour
     private bool playerSpawnFlag;
     private bool isHitTarget;
     private bool isTargetBreak;
+    private bool setWether;
 
     //ゲームシステムを動かす
     private void GameManagerController()
@@ -100,7 +101,6 @@ public class GameManagerScript : MonoBehaviour
     {
         if (isClear)
         {
-
             if (breakTimeBuff <= 0)
             {
                 isTargetBreak = true;
@@ -134,6 +134,13 @@ public class GameManagerScript : MonoBehaviour
             }
         }
     }
+    private void SetWeather()
+    {
+        if(!setWether)
+        {
+
+        }
+    }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void InitialSet()
     {
@@ -141,9 +148,11 @@ public class GameManagerScript : MonoBehaviour
         PMS = false;
         gameOverFlag = false;
         isClear = false;
+        setWether = false;
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
+
 
         PlayerSpawn();
     }
