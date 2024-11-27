@@ -8,7 +8,7 @@ using System;
 //WEBÇ©ÇÁJsonå`éÆÇ≈ìVãCó\ïÒÇéÊìæÇµÇƒäiî[Ç∑ÇÈ
 public class WebAPIScript : MonoBehaviour
 {
-    private string url = "https://weather.tsukumijima.net/api/forecast?city=130010";
+    private static string url = "https://weather.tsukumijima.net/api/forecast?city=130010";
 
     [System.Serializable]
     public class str
@@ -130,26 +130,102 @@ public class WebAPIScript : MonoBehaviour
         }
     }
     #endregion
-    WebJson webJson;
+    static WebJson webJson;
 
     //JsonÇ©ÇÁìVãCèÓïÒéÊìæ
-    [Obsolete]
-    private IEnumerator WEBMethod()
+
+    public static IEnumerator WEBMethod()
     {
         UnityWebRequest unityWebRequest = UnityWebRequest.Get(url);
         yield return unityWebRequest.SendWebRequest();
 
-        if(unityWebRequest.isNetworkError||unityWebRequest.isHttpError)
+        if(unityWebRequest.result!=UnityWebRequest.Result.Success)
         {
         }
         else
         {
             webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);
+            Debug.Log(webJson.forecasts[0].chanceOfRain.T06_12);
         }
     }
-
+    public static void Initiaraze()
+    {
+        if (webJson == null)
+        {
+             WEBMethod();
+        }
+    }
+    public static string GetStringChanceOfRain()
+    {
+        if(webJson == null)
+        {
+            return null;
+        }
+        if (webJson.forecasts[0].chanceOfRain.T00_06 != "--%")
+        {
+            return webJson.forecasts[0].chanceOfRain.T00_06;
+        }
+        if (webJson.forecasts[0].chanceOfRain.T06_12 != "--%")
+        {
+            return webJson.forecasts[0].chanceOfRain.T06_12;
+        }
+        if (webJson.forecasts[0].chanceOfRain.T12_18 != "--%")
+        {
+            return webJson.forecasts[0].chanceOfRain.T12_18;
+        }
+        return webJson.forecasts[0].chanceOfRain.T18_24;
+    }
+    public static int GetIntChanceOfRain()
+    {
+        string buff = GetStringChanceOfRain();
+        if(buff == null)
+        {
+            return 255;
+        }
+        if (buff == "0%")
+        {
+            return 1;
+        }
+        if (buff == "10%")
+        {
+            return 10;
+        }
+        if (buff == "20%")
+        {
+            return 20;
+        }
+        if (buff == "30%")
+        {
+            return 30;
+        }
+        if (buff == "40%")
+        {
+            return 40;
+        }
+        if (buff == "50%")
+        {
+            return 50;
+        }
+        if (buff == "60%")
+        {
+            return 60;
+        }
+        if (buff == "70%")
+        {
+            return 70;
+        }
+        if (buff == "80%")
+        {
+            return 80;
+        }
+        if (buff == "90%")
+        {
+            return 90;
+        }
+        return 99;
+    }
     // Start is called before the first frame update
-    [Obsolete]
+
     void Start()
     {
         StartCoroutine(WEBMethod());

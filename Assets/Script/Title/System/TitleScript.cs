@@ -12,7 +12,6 @@ public class TitleScript : MonoBehaviour
     private bool cameraMoveEnd;
     private bool isStageSelect;
     private bool isSceneChangeMode;
-    private bool isPush;
     private string stage;
     private bool isShoot;
 
@@ -126,9 +125,6 @@ public class TitleScript : MonoBehaviour
         Application.targetFrameRate = 60;
 
         ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
-
-        //TitleController();
-
     }
 
     // Update is called once per frame
