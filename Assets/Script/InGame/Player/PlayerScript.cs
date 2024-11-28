@@ -40,9 +40,13 @@ public class PlayerScript : MonoBehaviour
     [SerializeField, Range(0f, 0.1f)] private float blurIntensityBrake;
     [SerializeField] private float firePosZ;
     [SerializeField] private Vector3 fireSize;
-
-
+    [SerializeField] private float correctionRowring;
     private Vector2 rowling;
+    [SerializeField] private float playerBoostTuner;
+    [SerializeField] private float speedUpRingTuner;
+    [SerializeField] private float boostBrakeTuner;
+    [SerializeField] private float speedUpRingBrakeTuner;
+
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
     private float accelelateSpeed;
@@ -150,7 +154,7 @@ public class PlayerScript : MonoBehaviour
 
             if (PMS)
             {
-                if (rowling.x < 15 && rowling.x > 0)
+                if (rowling.x < correctionRowring && rowling.x > 0)
                 {
                     rowling.x -= fixRowling;
                     if (rowling.x <= 0)
@@ -158,7 +162,7 @@ public class PlayerScript : MonoBehaviour
                         rowling.x = 0;
                     }
                 }
-                if (rowling.x > -15 && rowling.x < 0)
+                if (rowling.x > -correctionRowring && rowling.x < 0)
                 {
                     rowling.x += fixRowling;
                     if (rowling.x >= 0)
@@ -196,7 +200,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                accelelateSpeed = burst + playerSpeed / 3;
+                accelelateSpeed = burst + playerSpeed / playerBoostTuner;
                 CreateBoostEffect();
                 blurIntnsity = maxBlurIntensity;
             }
@@ -214,8 +218,8 @@ public class PlayerScript : MonoBehaviour
                 minBlurIntnsity = 0;
             }
 
-            accelelateSpeed -= playerSpeed / 300;
-            ringSpeed -= playerSpeed * 0.003f;
+            accelelateSpeed -= playerSpeed / boostBrakeTuner;
+            ringSpeed -= playerSpeed * speedUpRingBrakeTuner;
             if (accelelateSpeed <= 0)
             {
                 accelelateSpeed = 0;
@@ -368,7 +372,7 @@ public class PlayerScript : MonoBehaviour
         }
         if(other.CompareTag("SpeedUpRing"))
         {
-            ringSpeed = playerSpeed * 0.3f;
+            ringSpeed = playerSpeed * speedUpRingTuner;
             playerSpeed += playerSpeed * ringBust;
             blurIntnsity = maxBlurIntensity;
         }
@@ -399,7 +403,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         PMS = false;
-        time = time * 60;
+        TimeCountScript.SetTime(ref time, time);
         blurIntnsity = 0.0f;
 
         rb = GetComponent<Rigidbody>();

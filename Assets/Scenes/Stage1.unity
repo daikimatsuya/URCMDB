@@ -6573,6 +6573,10 @@ PrefabInstance:
       propertyPath: targetRotation.Array.data[1].z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7578036524238194987, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: hp
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
 --- !u!1001 &374090221

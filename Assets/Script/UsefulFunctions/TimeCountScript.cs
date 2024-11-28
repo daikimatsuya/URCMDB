@@ -36,6 +36,11 @@ public static class TimeCountScript
     {
         timeBuff = (int)(time * 60);
     }
+    //ŽžŠÔƒZƒbƒg2
+    public static void SetTime(ref float timeBuff, float time)
+    {
+        timeBuff = time * 60;
+    }
 
 
 }
