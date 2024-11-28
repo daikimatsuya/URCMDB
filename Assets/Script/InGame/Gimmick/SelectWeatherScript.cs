@@ -10,6 +10,7 @@ public class SelectWeatherScript : MonoBehaviour
     PlayerCameraScript pcs;
 
     [SerializeField] private GameObject rain;
+    [SerializeField] private int blankRain;
 
     public void WeatherSetting(CameraManager cm)
     {
@@ -25,7 +26,12 @@ public class SelectWeatherScript : MonoBehaviour
     {
 
         chanceOfRain= WebAPIScript.GetIntChanceOfRain();
-        if (chanceOfRain >= UnityEngine.Random.Range(1, 100))
+
+        if( chanceOfRain == 0 )
+        {
+            chanceOfRain = blankRain;
+        }
+         if (chanceOfRain >= UnityEngine.Random.Range(1, 100))
         {
             Debug.Log("‚ ‚ß");
             Debug.Log(chanceOfRain);

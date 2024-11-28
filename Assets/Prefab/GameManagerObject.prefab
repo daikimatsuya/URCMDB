@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rain: {fileID: 2282934652263452545, guid: 4e05bec8c4820954da9a024000d96b11, type: 3}
+  blankRain: 10
 --- !u!1001 &785534975822530880
 PrefabInstance:
   m_ObjectHideFlags: 0

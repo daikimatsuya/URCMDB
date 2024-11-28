@@ -10,11 +10,7 @@ public class WebAPIScript : MonoBehaviour
 {
     private static string url = "https://weather.tsukumijima.net/api/forecast?city=130010";
 
-    [System.Serializable]
-    public class str
-    {
-        public string time;
-    }
+
     #region JsonéÊìæópÇÃç\ë¢ëÃ
     [System.Serializable]
     public class  WebJson
@@ -145,7 +141,10 @@ public class WebAPIScript : MonoBehaviour
         else
         {
             webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);
+            Debug.Log(webJson.forecasts[0].chanceOfRain.T00_06);
             Debug.Log(webJson.forecasts[0].chanceOfRain.T06_12);
+            Debug.Log(webJson.forecasts[0].chanceOfRain.T12_18);
+            Debug.Log(webJson.forecasts[0].chanceOfRain.T18_24);
         }
     }
     public static void Initiaraze()
@@ -180,7 +179,7 @@ public class WebAPIScript : MonoBehaviour
         string buff = GetStringChanceOfRain();
         if(buff == null)
         {
-            return UnityEngine.Random.Range(0, 100);
+            return 0;
         }
         if (buff == "0%")
         {
