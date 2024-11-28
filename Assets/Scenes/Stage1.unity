@@ -6401,6 +6401,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 260
       objectReference: {fileID: 0}
+    - target: {fileID: 6098841261237397159, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: blankRain
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6127506563622668449, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: rowlingSpeedX
       value: 0.2
@@ -27141,7 +27145,7 @@ GameObject:
   - component: {fileID: 1410129501}
   m_Layer: 0
   m_Name: Directional Light
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

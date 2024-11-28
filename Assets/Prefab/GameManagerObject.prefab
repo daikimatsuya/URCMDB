@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rain: {fileID: 2282934652263452545, guid: 4e05bec8c4820954da9a024000d96b11, type: 3}
   blankRain: 10
+  skyBox: {fileID: 2100000, guid: f8c51096618874941872529ef398e240, type: 2}
 --- !u!1001 &785534975822530880
 PrefabInstance:
   m_ObjectHideFlags: 0
