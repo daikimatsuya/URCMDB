@@ -154,6 +154,10 @@ public class GameManagerScript : MonoBehaviour
         PlayerSpawn();
     }
     #region ’lŽó‚¯“n‚µ
+    public SelectWeatherScript GetWeatherScript()
+    {
+        return sws;
+    }
     public bool GetPMS()
     {
         return PMS;

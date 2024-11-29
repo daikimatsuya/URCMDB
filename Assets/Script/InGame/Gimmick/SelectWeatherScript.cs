@@ -7,6 +7,7 @@ public class SelectWeatherScript : MonoBehaviour
 {
     private bool end=false;
     private int chanceOfRain;
+    private bool isRain;
 
     PlayerCameraScript pcs;
     new Light light;
@@ -51,6 +52,7 @@ public class SelectWeatherScript : MonoBehaviour
         Debug.Log("Ç†Çﬂ");
         Debug.Log(chanceOfRain);
 
+        isRain = true;
         CreateRain();
         SetSkyBoxMaterial();
     }
@@ -59,6 +61,7 @@ public class SelectWeatherScript : MonoBehaviour
     {
         Debug.Log("ÇÕÇÍ");
         Debug.Log(chanceOfRain);
+        isRain= false;
     }
     //âJê∂ê¨
     private  void CreateRain()
@@ -75,6 +78,13 @@ public class SelectWeatherScript : MonoBehaviour
         light.color = Color.black;
         UnityEngine.RenderSettings.skybox=skyBox;
     }
+
+    public void GetWeather(ref bool isRain,ref int chanceOfRain)
+    {
+        isRain = this.isRain;
+        chanceOfRain = this.chanceOfRain;
+    }
+   
     // Start is called before the first frame update
     void Start()
     {
