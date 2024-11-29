@@ -1151,6 +1151,7 @@ MonoBehaviour:
   yawUI: {fileID: 8062726808229489935}
   yawUI2: {fileID: 2669244137733249811}
   rowImage: {fileID: 3179233195731408671}
+  weatherUI: {fileID: 24307282785331338}
 --- !u!1001 &436174275405967200
 PrefabInstance:
   m_ObjectHideFlags: 0

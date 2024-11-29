@@ -226,10 +226,14 @@ public class GameManagerScript : MonoBehaviour
         playerSpawnFlag = true;
     }
     #endregion
+    private void Awake()
+    {
+        InitialSet();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        InitialSet();
+       
     }
 
     // Update is called once per frame

@@ -10,9 +10,9 @@ public class UIScript : MonoBehaviour
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
-
-
     private WeatherUIScript wus;
+
+
     //private RectTransform canvasPos;
     //private RectTransform targetMarkerPos;
 
@@ -36,6 +36,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private GameObject yawUI;
     [SerializeField] private GameObject yawUI2;
     [SerializeField] private GameObject rowImage;
+    [SerializeField] private GameObject weatherUI;
     //UIëSî ä«óùä÷êî
     private void UIController()
     {
@@ -176,7 +177,7 @@ public class UIScript : MonoBehaviour
         playerSpeedTex = playerSpeed.GetComponent<TextMeshProUGUI>();
         playerSpeedBuffTex = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
 
-        wus = GetComponent<WeatherUIScript>();
+        wus = weatherUI.GetComponent<WeatherUIScript>();
         wus.SetWeatherScript(gm.GetWeatherScript());
 
         targetPos = gm.GetTargetPos();
