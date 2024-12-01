@@ -60,6 +60,7 @@ public class UIScript : MonoBehaviour
             yawUI.SetActive(false);
             yawUI2.SetActive(false);
             rowImage.SetActive(false);
+            weatherUI.SetActive(false);
         }
         else
         {
@@ -74,6 +75,7 @@ public class UIScript : MonoBehaviour
             yawUI.SetActive(true);
             yawUI2.SetActive(true);
             rowImage.SetActive(true);
+            weatherUI.SetActive(true);
         }
     }
     //プレイヤーの角度取得
