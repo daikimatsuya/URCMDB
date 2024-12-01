@@ -6283,7 +6283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2754180827693512297, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294967295
+      value: 4278255360
       objectReference: {fileID: 0}
     - target: {fileID: 4320082708014598050, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: far clip plane
@@ -6585,10 +6585,6 @@ PrefabInstance:
       propertyPath: rainTexture
       value: 
       objectReference: {fileID: 21300000, guid: aacf0a8bb2b1b52479151faf6ae1b1ac, type: 3}
-    - target: {fileID: 9170493262142695137, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 156.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
 --- !u!1001 &374090221

@@ -79,10 +79,20 @@ public class SelectWeatherScript : MonoBehaviour
         UnityEngine.RenderSettings.skybox=skyBox;
     }
 
-    public void GetWeather(ref bool isRain,ref int chanceOfRain)
+    public int GetChanceOfRain()
     {
-        isRain = this.isRain;
-        chanceOfRain = this.chanceOfRain;
+        if (chanceOfRain != 0)
+        {
+            return chanceOfRain;
+        }
+        else
+        {
+            return blankRain;
+        }
+    }
+    public bool GetIsRain()
+    {
+        return isRain;
     }
    
     // Start is called before the first frame update

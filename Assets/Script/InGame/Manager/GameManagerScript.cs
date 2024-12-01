@@ -40,7 +40,7 @@ public class GameManagerScript : MonoBehaviour
         PlayerCheck();
         cm.CameraController();
         BreakTimeContoller();
-        sws.WeatherSetting(cm);
+      
     }
     //リトライするときにシーンをロード
     public void Retry()
@@ -229,6 +229,7 @@ public class GameManagerScript : MonoBehaviour
     private void Awake()
     {
         InitialSet();
+        sws.WeatherSetting(cm);
     }
     // Start is called before the first frame update
     void Start()
