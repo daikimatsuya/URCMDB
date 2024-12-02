@@ -1169,6 +1169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rowSpeed: 0.5
+  x: 0
+  y: 0
+  z: 1
 --- !u!4 &471505519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5512496689015741776, guid: 3537e25b1f7090e409b1f99d06aec47e, type: 3}
