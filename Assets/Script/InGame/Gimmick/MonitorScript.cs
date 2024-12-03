@@ -10,20 +10,22 @@ public class MonitorScript : MonoBehaviour
 
 
     private float initialPosY;
+    private float initialRotY;
+    private GameManagerScript gm;
 
     Transform tf;
     RollingScript rs;
 
     private void MonitorController()
     {
-        if (!rs.enabled)
-        {
-            Move();
-        }
-        else
-        {
 
+        Move();
+        if (gm.IsPlayerDead())
+        {
+            tf.eulerAngles = new Vector3(0, initialRotY, 0);
+            rs.enabled = false;
         }
+
     }
     private void Move()
     {
@@ -38,6 +40,7 @@ public class MonitorScript : MonoBehaviour
             moveSpeed *= -1;
         }
         PosYBuff += moveSpeed;
+
         tf.position=new Vector3(tf.position.x,initialPosY+PosYBuff,tf.position.z);
     }
     private void OnTriggerEnter(Collider other)
@@ -53,8 +56,10 @@ public class MonitorScript : MonoBehaviour
     {
         tf=GetComponent<Transform>();
         initialPosY = tf.position.y;
+        initialRotY = tf.eulerAngles.y;
         rs=GetComponent<RollingScript>();
         rs.enabled = false;
+        gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
     }
 
     // Update is called once per frame

@@ -13,7 +13,7 @@ public class SpeedUpRingScript : MonoBehaviour
     [SerializeField] private GameObject marker;
 
 
-    private int offsetBuff;
+
     private bool isGet;
 
     private MarkerScript ms;
@@ -67,7 +67,7 @@ public class SpeedUpRingScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            offsetBuff = (int)(offsetTime * 60);
+
             isGet = true;
             collider_.enabled = false;
         }
@@ -79,7 +79,7 @@ public class SpeedUpRingScript : MonoBehaviour
         tf = GetComponent<Transform>();
         collider_=GetComponent<CapsuleCollider>();
         tf.localScale = new Vector3(1, ringSize, ringSize);
-        offsetBuff = (int)(offsetTime * 60);
+
         isGet = false;
         CreateMarker();
     }

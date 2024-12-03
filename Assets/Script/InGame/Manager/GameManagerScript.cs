@@ -55,6 +55,7 @@ public class GameManagerScript : MonoBehaviour
     //プレイヤーの生存確認と生成
     private void PlayerCheck()
     {
+
         if (player==null)
         {
             playerDead = true;
@@ -62,6 +63,10 @@ public class GameManagerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 playerSpawnFlag = true;
+                if (isClear)
+                {
+                    playerMissile = 0;
+                }
             }
             
             if(playerSpawnFlag)

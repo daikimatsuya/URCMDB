@@ -1194,7 +1194,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7578036524238194987, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: hp
-      value: 20
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578036524238194987, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: explodeTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8275423611137075567, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: rainTexture
@@ -3088,7 +3092,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'PUSH
 
-    W A S D
+    W A S D or ARROW
 
     TO
 
@@ -4590,23 +4594,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881671659827051649, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 200
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7881671659827051649, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 200
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7881671659827051649, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 200
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7881671659827051649, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18322
+      value: -18961
       objectReference: {fileID: 0}
     - target: {fileID: 7881671659827051649, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2242
+      value: 917
       objectReference: {fileID: 0}
     - target: {fileID: 7881671659827051649, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: m_LocalPosition.z

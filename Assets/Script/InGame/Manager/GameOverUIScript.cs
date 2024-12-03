@@ -48,11 +48,18 @@ public class GameOverUIScript : MonoBehaviour
         if (target != null)
         {
             SetTargetHp();
-            targetHpTex.text = "Hp"+targetHp;
+            if (targetHp > 0)
+            {
+                targetHpTex.text = "Hp" + targetHp;
+            }
+            else
+            {
+                targetHpTex.text = "Clear";
+            }
         }
         else
         {
-            targetHpTex.text = "0";
+
         }
     }
     // Start is called before the first frame update
