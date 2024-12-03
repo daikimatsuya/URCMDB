@@ -104,7 +104,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (isControl)
         {
-            if(!Input.GetKey(KeyCode.LeftShift))
+            if(!Input.GetKey(KeyCode.LeftShift)&&!Input.GetKey(KeyCode.RightShift))
             {
                 if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
                 {
@@ -375,6 +375,7 @@ public class PlayerScript : MonoBehaviour
             ringSpeed = playerSpeed * speedUpRingTuner;
             playerSpeed += playerSpeed * ringBust;
             blurIntnsity = maxBlurIntensity;
+            CreateBoostEffect();
         }
         if (other.CompareTag("Bullet"))
         {

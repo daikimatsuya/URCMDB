@@ -70,7 +70,7 @@ MonoBehaviour:
   blurIntensityBrake: 0.0095
   firePosZ: -2.5
   fireSize: {x: 0.5, y: 0.5, z: 0.5}
-  correctionRowring: 15
+  correctionRowring: 17
   playerBoostTuner: 3
   speedUpRingTuner: 0.3
   boostBrakeTuner: 300
