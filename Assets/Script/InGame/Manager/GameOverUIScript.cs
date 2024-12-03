@@ -57,10 +57,7 @@ public class GameOverUIScript : MonoBehaviour
                 targetHpTex.text = "Clear";
             }
         }
-        else
-        {
 
-        }
     }
     // Start is called before the first frame update
     void Start()
