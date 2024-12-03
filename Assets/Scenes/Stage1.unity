@@ -1006,6 +1006,10 @@ PrefabInstance:
       propertyPath: clearCameraRot.y
       value: -102
       objectReference: {fileID: 0}
+    - target: {fileID: 1709878088556506499, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: elements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1798518281081795701, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_Enabled
       value: 0
