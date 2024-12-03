@@ -8,10 +8,11 @@ public class MovieCamera : MonoBehaviour
     [System.Serializable]
     public class MovieCameraElement
     {
-        [SerializeField] public Vector3 targetPosition;
         [SerializeField] public Vector3 startPosition;
-        [SerializeField] public Vector3 targetRotation;
         [SerializeField] public Vector3 startRotation;
+        [SerializeField] public Vector3 targetPosition;
+        [SerializeField] public Vector3 targetRotation;
+
         [SerializeField] public float moveTime;
     }
 
