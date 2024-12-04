@@ -49,6 +49,10 @@ public class MonitorScript : MonoBehaviour
         {
             return;
         }
+        if (other.CompareTag("SensorChildren"))
+        {
+            return;
+        }
         rs.enabled = true;
     }
     // Start is called before the first frame update

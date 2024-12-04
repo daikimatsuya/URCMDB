@@ -137,6 +137,10 @@ public class SensorScript : MonoBehaviour
         {
             return;
         }
+        if (other.CompareTag("Drone"))
+        {
+            return;
+        }
          if (master)
         {
             return;

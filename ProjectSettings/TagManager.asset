@@ -36,6 +36,7 @@ TagManager:
   - Monitor
   - SensorChildren
   - Boat
+  - Drone
   layers:
   - Default
   - TransparentFX
