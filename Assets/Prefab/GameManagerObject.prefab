@@ -231,7 +231,7 @@ MonoBehaviour:
   PMS: 0
   stage: 
   title: Title
-  breakTime: 3
+  breakTime: 2
 --- !u!114 &6098841261237397159
 MonoBehaviour:
   m_ObjectHideFlags: 0
