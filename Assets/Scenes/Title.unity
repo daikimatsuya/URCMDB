@@ -16245,6 +16245,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4745075454914889394, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.37
+      objectReference: {fileID: 0}
     - target: {fileID: 5066845859886312940, guid: cddedb11d3ef16949bc3816ddb8978f9, type: 3}
       propertyPath: m_Name
       value: Stages

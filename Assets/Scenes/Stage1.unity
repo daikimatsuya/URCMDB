@@ -1210,10 +1210,6 @@ PrefabInstance:
       propertyPath: stage
       value: Stage1
       objectReference: {fileID: 0}
-    - target: {fileID: 4320082708551101942, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: breakTime
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 4320082708551101943, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_RootOrder
       value: 1

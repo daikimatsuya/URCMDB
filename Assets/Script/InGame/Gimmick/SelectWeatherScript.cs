@@ -28,14 +28,15 @@ public class SelectWeatherScript : MonoBehaviour
             chanceOfRain = WebAPIScript.GetIntChanceOfRain();
 
 
-            if (chanceOfRain == 0)
+            if (chanceOfRain == 255)
             {
                 chanceOfRain = blankRain;
             }
-            if (chanceOfRain >= UnityEngine.Random.Range(1, 100))
+            if (chanceOfRain >= UnityEngine.Random.Range(0, 100))
             {
                 Rainy();
-            }
+
+            }           
             else
             {
                 Sunny();
