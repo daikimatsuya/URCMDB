@@ -179,11 +179,11 @@ public class WebAPIScript : MonoBehaviour
         string buff = GetStringChanceOfRain();
         if(buff == null)
         {
-            return 0;
+            return 255;
         }
         if (buff == "0%")
         {
-            return 1;
+            return 0;
         }
         if (buff == "10%")
         {

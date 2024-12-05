@@ -36,6 +36,12 @@ public class WeatherUIScript : MonoBehaviour
             SetChanceOfRain(sws.GetChanceOfRain());
         }
     }
+    
+    //UIƒIƒ“ƒIƒtØ‚è‘Ö‚¦
+    public void SetWeatherUIActive(bool flag)
+    {
+        this.gameObject.SetActive(flag);
+    }
 
     
     // Start is called before the first frame update

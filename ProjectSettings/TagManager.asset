@@ -32,6 +32,11 @@ TagManager:
   - Sea
   - Light
   - WeatherIcon
+  - Sensor
+  - Monitor
+  - SensorChildren
+  - Boat
+  - Drone
   layers:
   - Default
   - TransparentFX

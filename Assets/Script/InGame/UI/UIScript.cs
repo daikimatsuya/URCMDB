@@ -10,7 +10,7 @@ public class UIScript : MonoBehaviour
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
-    private WeatherUIScript wus;
+
 
 
     //private RectTransform canvasPos;
@@ -36,7 +36,9 @@ public class UIScript : MonoBehaviour
     [SerializeField] private GameObject yawUI;
     [SerializeField] private GameObject yawUI2;
     [SerializeField] private GameObject rowImage;
-    [SerializeField] private GameObject weatherUI;
+    [SerializeField] private WeatherUIScript weatherUIScript;
+    [SerializeField] private SensorUIScript sensorUIScript;
+    //[SerializeField] private GameObject weatherUI;
     //UI全般管理関数
     private void UIController()
     {
@@ -47,6 +49,7 @@ public class UIScript : MonoBehaviour
         PlayerSpeedUI();
         TargetMarkerUI();
         ActiveChecker();
+        sensorUIScript.SensorUIController();
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
@@ -60,7 +63,8 @@ public class UIScript : MonoBehaviour
             yawUI.SetActive(false);
             yawUI2.SetActive(false);
             rowImage.SetActive(false);
-            weatherUI.SetActive(false);
+            weatherUIScript.SetWeatherUIActive(false);
+            sensorUIScript.SetSensorActive(false);
         }
         else
         {
@@ -75,7 +79,8 @@ public class UIScript : MonoBehaviour
             yawUI.SetActive(true);
             yawUI2.SetActive(true);
             rowImage.SetActive(true);
-            weatherUI.SetActive(true);
+           weatherUIScript.SetWeatherUIActive(true);
+            sensorUIScript.SetSensorActive(true);
         }
     }
     //プレイヤーの角度取得
@@ -179,8 +184,8 @@ public class UIScript : MonoBehaviour
         playerSpeedTex = playerSpeed.GetComponent<TextMeshProUGUI>();
         playerSpeedBuffTex = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
 
-        wus = weatherUI.GetComponent<WeatherUIScript>();
-        wus.SetWeatherScript(gm.GetWeatherScript());
+        //wus = weatherUI.GetComponent<WeatherUIScript>();
+        weatherUIScript.SetWeatherScript(gm.GetWeatherScript());
 
         targetPos = gm.GetTargetPos();
     }

@@ -86,15 +86,19 @@ public class LaunchPointScript : MonoBehaviour
         return tf.eulerAngles;
     }
     #endregion
+    private void Awake()
+    {
+        tf = GetComponent<Transform>();
+        rowling = new Vector2(tf.localEulerAngles.x, tf.localEulerAngles.y);
+
+        isControll = true;
+        isStart = false;
+    }
     // Start is called before the first frame update
     void Start()
     {
        
-        tf=GetComponent<Transform>();   
-        rowling=new Vector2(tf.localEulerAngles.x,tf.localEulerAngles.y);
 
-        isControll = true;
-        isStart = false;
     }
 
     // Update is called once per frame

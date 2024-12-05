@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2cca94872e2b24c8153a34da1f6a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rowlingSpeedX: 0.1
-  rowlingSpeedY: 0.08
+  rowlingSpeedX: 0.2
+  rowlingSpeedY: 0.16

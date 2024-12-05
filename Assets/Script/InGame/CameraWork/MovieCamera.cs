@@ -5,14 +5,21 @@ using UnityEngine;
 //インゲームが始まった時のカメラワークの処理
 public class MovieCamera : MonoBehaviour
 {
+    [System.Serializable]
+    public class MovieCameraElement
+    {
+        [SerializeField] public Vector3 startPosition;
+        [SerializeField] public Vector3 startRotation;
+        [SerializeField] public Vector3 targetPosition;
+        [SerializeField] public Vector3 targetRotation;
+
+        [SerializeField] public float moveTime;
+    }
+
+    [SerializeField] private MovieCameraElement[] elements;
     [SerializeField] private int knotNumber;
-    [SerializeField] private Vector3[] targetPosition;
     private Vector3 targetPos;
-    [SerializeField] private Vector3[] startPosition;
-    [SerializeField] private Vector3[] targetRotation;
     private Vector3 targetRot;
-    [SerializeField] private Vector3[] startRotation;
-    [SerializeField] private float[] moveTime;
     private int moveTimeBuff;
     [SerializeField] private float fadeoutTime;
 
@@ -74,13 +81,13 @@ public class MovieCamera : MonoBehaviour
         {
             if (knotNumber > number)
             {
-                posBuff = startPosition[number];
-                rotBuff = startRotation[number];
+                posBuff = elements[number].startPosition;
+                rotBuff = elements[number].startRotation;
 
-                targetPos = targetPosition[number];
-                targetRot = targetRotation[number];
+                targetPos = elements[number].targetPosition;
+                targetRot = elements[number].targetRotation;
 
-                TimeCountScript.SetTime(ref moveTimeBuff, moveTime[number]);
+                TimeCountScript.SetTime(ref moveTimeBuff, elements[number].moveTime);
 
                 posRange = targetPos - posBuff;
                 rotRange = targetRot - rotBuff;
@@ -88,7 +95,6 @@ public class MovieCamera : MonoBehaviour
                 moveSpeed = posRange / moveTimeBuff;
                 RotSpeed = rotRange / moveTimeBuff;
     
-               // SetTransform();
 
                 number++;
                 ready = true;
