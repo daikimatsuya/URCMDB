@@ -45,8 +45,15 @@ public class SensorUIScript : MonoBehaviour
     //ヒットフラグ取得
     private void SetHit()
     {
-        hit = ss.GetHit();
-        hitChildren=ss.GetHitChild();
+        if (ss == null)
+        {
+            ss = GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
+        }
+        else
+        {
+            hit = ss.GetHit();
+            hitChildren = ss.GetHitChild();
+        }
     }
     //センサーUIを透明にする
     private void SetSafe(Image image)
