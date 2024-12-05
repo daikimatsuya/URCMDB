@@ -47,7 +47,10 @@ public class SensorUIScript : MonoBehaviour
     {
         if (ss == null)
         {
-            ss = GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
+            if (GameObject.FindWithTag("Sensor") != null)
+            {
+                ss = GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
+            }
         }
         else
         {
