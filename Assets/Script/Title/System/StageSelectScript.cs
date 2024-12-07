@@ -99,9 +99,13 @@ public class StageSelectScript : MonoBehaviour
     {
         return rotateEnd;
     }
-    public Vector2 GetStageCount()
+    public Vector2 GetStageChangeCount()
     {
         return new Vector2(stageChangeCount,maxStage);
+    }
+    public int GetStageCount()
+    {
+        return stageCount;
     }
     public void SetFadeFlag(bool flag)
     {

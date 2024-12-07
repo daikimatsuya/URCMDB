@@ -17,7 +17,7 @@ public class StageRotationScript : MonoBehaviour
     //ステージの回転管理
     private void StageSelectController()
     {
-        Move(sss.GetStageCount());
+        Move(sss.GetStageChangeCount());
     }
     //ステージ数で回転
     private void Move(Vector2 stage)
