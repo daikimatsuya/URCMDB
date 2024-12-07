@@ -5,9 +5,11 @@ using UnityEngine;
 //破壊目標管理
 public class TargetScript : MonoBehaviour
 {
-    [SerializeField] private int hp;
+    [SerializeField] private float hp;
+    private float maxHp;
     [SerializeField] GameObject explode;
     [SerializeField] private float  explodeTime;
+    [SerializeField] private float brokePercent;
     private int explodeTimeBuff;
 
     private GameManagerScript gm;
@@ -35,6 +37,14 @@ public class TargetScript : MonoBehaviour
         }
         explodeTimeBuff--;
     }
+    //ダメージ表現
+    private void ModelBroken()
+    {
+        if (hp <= (maxHp / 100) * brokePercent)
+        {
+
+        }
+    }
     //消滅させる
     private void IsBreak()
     {
@@ -47,7 +57,7 @@ public class TargetScript : MonoBehaviour
         }
     }
     //HP渡し
-    public int GetHp()
+    public float GetHp()
     {
         return hp;
     }
@@ -57,6 +67,7 @@ public class TargetScript : MonoBehaviour
         {
             PlayerScript ps=collision.gameObject.GetComponent<PlayerScript>();
             hp-=(int)(ps.GetPlayerSpeedBuffFloat()/10);
+            ModelBroken();
             if (hp <= 0)
             {
                 gm.SetClearFlag();
@@ -69,6 +80,7 @@ public class TargetScript : MonoBehaviour
     void Start()
     {
         gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+        maxHp = hp;
     }
 
     // Update is called once per frame

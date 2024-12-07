@@ -158,4 +158,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   explode: {fileID: 2981810423162024347, guid: 3338e49f60502a043a6e9e2ba5422c16, type: 3}
-  explodeTime: 9
+  explodeTime: 3
+  brokePercent: 0

@@ -38,7 +38,7 @@ public class GameOverUIScript : MonoBehaviour
     {
         if (targetScript != null)
         {
-            targetHp = targetScript.GetHp();
+            targetHp = (int)targetScript.GetHp();
         }
     }
     #endregion

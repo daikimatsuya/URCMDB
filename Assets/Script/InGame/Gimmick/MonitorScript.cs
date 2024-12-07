@@ -20,6 +20,10 @@ public class MonitorScript : MonoBehaviour
     {
 
         Move();
+        if (gm == null)
+        {
+            return;
+        }
         if (gm.IsPlayerDead())
         {
             tf.eulerAngles = new Vector3(0, initialRotY, 0);
@@ -58,12 +62,15 @@ public class MonitorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tf=GetComponent<Transform>();
+        tf = GetComponent<Transform>();
         initialPosY = tf.position.y;
         initialRotY = tf.eulerAngles.y;
-        rs=GetComponent<RollingScript>();
+        rs = GetComponent<RollingScript>();
         rs.enabled = false;
-        gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+        if (GameObject.FindWithTag("GameController") != null)
+        {
+            gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+        }
     }
 
     // Update is called once per frame
