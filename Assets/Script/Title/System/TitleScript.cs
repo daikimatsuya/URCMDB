@@ -15,10 +15,12 @@ public class TitleScript : MonoBehaviour
     private string stage;
     private bool isShoot;
 
-    new Light light;
+
 
     [SerializeField] private bool isCameraMove;
     [SerializeField] private float betTime;
+
+    public Light Light { get; set; }
 
 
 
@@ -127,8 +129,8 @@ public class TitleScript : MonoBehaviour
 
         ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
 
-        light = GameObject.FindWithTag("Light").GetComponent<Light>();
-        light.color = Color.white;
+        Light = GameObject.FindWithTag("Light").GetComponent<Light>();
+        Light.color = Color.white;
     }
 
     // Update is called once per frame

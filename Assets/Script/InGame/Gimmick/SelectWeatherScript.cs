@@ -10,11 +10,11 @@ public class SelectWeatherScript : MonoBehaviour
     private bool isRain;
 
     PlayerCameraScript pcs;
-    new Light light;
-
     [SerializeField] private GameObject rain;
     [SerializeField] private int blankRain;
     [SerializeField] private Material skyBox;
+
+    public Light Light { get; set; }
 
 
 
@@ -75,8 +75,8 @@ public class SelectWeatherScript : MonoBehaviour
     //skyboxïœçX
     private void SetSkyBoxMaterial()
     {
-        light=GameObject.FindWithTag("Light").GetComponent<Light>();
-        light.color = Color.black;
+        Light=GameObject.FindWithTag("Light").GetComponent<Light>();
+        Light.color = Color.black;
         UnityEngine.RenderSettings.skybox=skyBox;
     }
 
