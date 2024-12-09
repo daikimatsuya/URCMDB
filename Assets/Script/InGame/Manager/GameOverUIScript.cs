@@ -11,6 +11,7 @@ public class GameOverUIScript : MonoBehaviour
     [SerializeField] private Transform cursorPos;
     [SerializeField] private TextMeshProUGUI targetHpTex;
 
+
     private GameObject target;
     private TargetScript targetScript;
     private int targetHp;
