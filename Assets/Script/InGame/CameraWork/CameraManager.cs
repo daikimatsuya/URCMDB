@@ -100,35 +100,7 @@ public class CameraManager : MonoBehaviour
             movieCanvas.SetActive(true);
         }
     }
-    //爆破時のフェード管理
-    private void ExplodeFadeController()
-    {
-        if (!isExplodeEffectFade)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                explodeEffectTimeBuff = 0;
-            }
-            if (TimeCountScript.TimeCounter(ref explodeEffectTimeBuff))
-            {
-                mf.SetShadeLevel(2);
-                TimeCountScript.SetTime(ref explodeFadeTimeBuff, explodeFadeTime);
-                isExplodeEffectFade = true;
-            }
-        }
-        else
-        {
 
-            if (TimeCountScript.TimeCounter(ref explodeFadeTimeBuff))
-            {
-                mf.SetShadeLevel(3);
-                gm.SetPlayerSpawnFlag();
-                isExplodeEffectFade = false;
-                TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
-            }
-
-        }
-    }
 
     public PlayerCameraScript GetPlayerCamera()
     {
@@ -142,6 +114,7 @@ public class CameraManager : MonoBehaviour
         {
             pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
         }
+
         this.player = player;
         pcs.SetPlayer(this.player.transform,this.player);
     }

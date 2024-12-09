@@ -14,6 +14,8 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private string title;
     [SerializeField] private float breakTime;
     private int breakTimeBuff;
+    [SerializeField] private float respawnTimer;
+    private int respawnTimerBuff;
 
     private PlayerScript ps;
     private Transform targetPos;
@@ -60,13 +62,9 @@ public class GameManagerScript : MonoBehaviour
         {
             playerDead = true;
             isCanShot = false;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff))
             {
-                playerSpawnFlag = true;
-                if (isClear)
-                {
-                    playerMissile = 0;
-                }
+                SetPlayerSpawnFlag();
             }
             
             if(playerSpawnFlag)
@@ -91,6 +89,21 @@ public class GameManagerScript : MonoBehaviour
             playerSpeedBuff = ps.GetPlayerSpeedBuffFloat();
         }
     }
+    //プレイヤーが死んだ後に一定時間後にリスポーンさせるフラグセット
+    private void SetPlayerSpawnFlag()
+    {
+        playerSpawnFlag = true;
+        if (isClear)
+        {
+            playerMissile = 0;
+        }
+    }
+    //プレイヤーリスポーンタイマーリセット
+    private void SetRespawnTimer()
+    {
+        TimeCountScript.SetTime(ref respawnTimerBuff, respawnTimer);
+    }
+
     //プレイヤー生成
     private void PlayerSpawn()
     {
@@ -103,6 +116,7 @@ public class GameManagerScript : MonoBehaviour
         cm.SetPlayer(ps);
         playerMissile--;
 
+        SetRespawnTimer();
     }
     private void BreakTimeContoller()
     {
@@ -155,8 +169,8 @@ public class GameManagerScript : MonoBehaviour
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
-
         PlayerSpawn();
+
     }
     #region 値受け渡し
     public SelectWeatherScript GetWeatherScript()
@@ -226,10 +240,7 @@ public class GameManagerScript : MonoBehaviour
     {
         isCanShot = start;
     }
-    public void SetPlayerSpawnFlag()
-    {
-        playerSpawnFlag = true;
-    }
+
     #endregion
     private void Awake()
     {
@@ -239,7 +250,8 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
+
     }
 
     // Update is called once per frame
