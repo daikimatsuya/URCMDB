@@ -9,7 +9,7 @@ public class MoveOnRailScript : MonoBehaviour
     [SerializeField] float speed;
 
    [SerializeField] float distansMagnification;
-   [SerializeField]  private LineRenderer rail;
+    private LineRenderer rail;
     private bool moveEnd;
     private int knot;
     private int next;
@@ -20,6 +20,10 @@ public class MoveOnRailScript : MonoBehaviour
     //ìÆÇ©Ç∑
     private void Move()
     {
+        if (rail == null)
+        {
+            return;
+        }
         next = knot + 1;
         if (!moveEnd)
         {
@@ -49,7 +53,7 @@ public class MoveOnRailScript : MonoBehaviour
         }
         else
         {
-            SetRail(rail);
+            rail = null;
         }
     }
     //ñ⁄ïWínì_ê›íË
@@ -73,11 +77,20 @@ public class MoveOnRailScript : MonoBehaviour
         moveEnd = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+            rail=other.gameObject.GetComponent<LineRenderer>();
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
+
+        rb.velocity=new Vector3(1,0,0);
 
         moveEnd = false;
         //rail= GetComponent<LineRenderer>(); 
