@@ -62,22 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fd796db4d05ae4aa74767bca266125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knotNumber: 2
-  targetPosition:
-  - {x: 241, y: 510, z: -7860.6}
-  - {x: 6289, y: 1883, z: -25911}
-  startPosition:
-  - {x: 241, y: 510, z: -6890}
-  - {x: 6289, y: 1281, z: -24117}
-  targetRotation:
-  - {x: 10, y: -151.1, z: 0}
-  - {x: 66, y: 180, z: 0}
-  startRotation:
-  - {x: 10, y: -151.1, z: 0}
-  - {x: 14.86, y: 180, z: 0}
-  moveTime:
-  - 5
-  - 7
+  elements: []
+  knotNumber: 0
   fadeoutTime: 0.8
 --- !u!114 &5475272097197440114
 MonoBehaviour:
