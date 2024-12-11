@@ -25,17 +25,16 @@ public class MoveOnRailScript : MonoBehaviour
             return;
         }
         next = knot + 1;
+         
+        if (rail.positionCount <= next)
+        {
+            moveEnd = true;
+            next = 0;
+            rail = null;
+        }
         if (!moveEnd)
         {
-            if (rail.positionCount <= next)
-            {
-                moveEnd = true;
-                next = 0;
-
-            }
-
-
-            if (speed > Vector3.Distance(rail.GetPosition(next), tf.position)*distansMagnification)
+            if (speed > Vector3.Distance(rail.GetPosition(next), tf.position) * distansMagnification)
             {
 
                 Vector3 targetPos = SetTargetPos(next);
@@ -49,12 +48,8 @@ public class MoveOnRailScript : MonoBehaviour
                 Vector3 targetPos = SetTargetPos(next);
                 rb.velocity = new Vector3(targetPos.normalized.x * speed, targetPos.normalized.y * speed, targetPos.normalized.z * speed);
             }
-
         }
-        else
-        {
-            rail = null;
-        }
+        
     }
     //ñ⁄ïWínì_ê›íË
     private Vector3 SetTargetPos(int next)
@@ -64,8 +59,8 @@ public class MoveOnRailScript : MonoBehaviour
         float horizontal = Mathf.Atan2(targetPos.normalized.x, targetPos.normalized.z) * Mathf.Rad2Deg;
         float vertical = Mathf.Atan2(Mathf.Sqrt(targetPos.normalized.x * targetPos.normalized.x + targetPos.normalized.z * targetPos.normalized.z), targetPos.normalized.y) * Mathf.Rad2Deg;
 
-        tf.eulerAngles = new Vector3(tf.eulerAngles.x, tf.eulerAngles.y, horizontal);
-        tf.eulerAngles = new Vector3(vertical, tf.eulerAngles.y, tf.eulerAngles.z);
+        tf.eulerAngles = new Vector3(tf.eulerAngles.x, horizontal-90, tf.eulerAngles.z);
+        tf.eulerAngles = new Vector3(tf.eulerAngles.x, tf.eulerAngles.y, -(vertical)+90);
 
         return targetPos;
     }
@@ -79,9 +74,11 @@ public class MoveOnRailScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Finish"))
+        if (other.CompareTag("Rail"))
         {
+            rail = null;
             rail=other.gameObject.GetComponent<LineRenderer>();
+            SetRail(rail);
         }
     }
     // Start is called before the first frame update
@@ -90,7 +87,7 @@ public class MoveOnRailScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
 
-        rb.velocity=new Vector3(1,0,0);
+        rb.velocity=new Vector3(speed,0,0);
 
         moveEnd = false;
         //rail= GetComponent<LineRenderer>(); 

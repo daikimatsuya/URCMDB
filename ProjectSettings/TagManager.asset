@@ -37,6 +37,7 @@ TagManager:
   - SensorChildren
   - Boat
   - Drone
+  - Rail
   layers:
   - Default
   - TransparentFX
