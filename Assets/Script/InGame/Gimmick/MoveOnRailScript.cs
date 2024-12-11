@@ -8,6 +8,7 @@ public class MoveOnRailScript : MonoBehaviour
 {
     [SerializeField] float speed;
 
+   [SerializeField] float distansMagnification;
    [SerializeField]  private LineRenderer rail;
     private bool moveEnd;
     private int knot;
@@ -19,12 +20,20 @@ public class MoveOnRailScript : MonoBehaviour
     //“®‚©‚·
     private void Move()
     {
+        next = knot + 1;
         if (!moveEnd)
         {
-
-            if (speed > Vector3.Distance(rail.GetPosition(next), tf.position))
+            if (rail.positionCount <= next)
             {
-            
+                moveEnd = true;
+                next = 0;
+
+            }
+
+
+            if (speed > Vector3.Distance(rail.GetPosition(next), tf.position)*distansMagnification)
+            {
+
                 Vector3 targetPos = SetTargetPos(next);
                 rb.velocity = new Vector3(targetPos.normalized.x * speed, targetPos.normalized.y * speed, targetPos.normalized.z * speed);
 
@@ -32,18 +41,15 @@ public class MoveOnRailScript : MonoBehaviour
             }
             else
             {
+
                 Vector3 targetPos = SetTargetPos(next);
                 rb.velocity = new Vector3(targetPos.normalized.x * speed, targetPos.normalized.y * speed, targetPos.normalized.z * speed);
             }
-            if (rail.positionCount <= next)
-            {
-                moveEnd = true;
-                next = 0;
-            }
-            else
-            {
-                next = knot + 1;
-            }
+
+        }
+        else
+        {
+            SetRail(rail);
         }
     }
     //–Ú•W’n“_Ý’è
@@ -64,6 +70,7 @@ public class MoveOnRailScript : MonoBehaviour
     {
         this.rail = rail;
         knot = 0;
+        moveEnd = false;
     }
 
     // Start is called before the first frame update
