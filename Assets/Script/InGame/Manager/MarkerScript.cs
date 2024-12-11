@@ -8,10 +8,10 @@ public class MarkerScript : MonoBehaviour
     Transform tf;
 
     [SerializeField] private float markerPosY;
-    private void MarkerController()
-    {
+    //private void MarkerController()
+    //{
 
-    }
+    //}
     //ˆÚ“®‚³‚¹‚é
     public void Move(Vector3 pos)
     {
