@@ -8,7 +8,7 @@ public class MoveOnRailScript : MonoBehaviour
 {
     [SerializeField] float speed;
 
-    private LineRenderer rail;
+   [SerializeField]  private LineRenderer rail;
     private bool moveEnd;
     private int knot;
     private int next;
@@ -19,34 +19,35 @@ public class MoveOnRailScript : MonoBehaviour
     //“®‚©‚·
     private void Move()
     {
-        if (moveEnd)
+        if (!moveEnd)
         {
-            return;
-        }
-        next = knot + 1;
-        if (rail.positionCount < next)
-        {
-            moveEnd = true;
-        }
 
-       Vector3 targetPos= SetTargetPos();
+            if (speed > Vector3.Distance(rail.GetPosition(next), tf.position))
+            {
+            
+                Vector3 targetPos = SetTargetPos(next);
+                rb.velocity = new Vector3(targetPos.normalized.x * speed, targetPos.normalized.y * speed, targetPos.normalized.z * speed);
 
-
-        if (speed > Vector3.Distance(rail.GetPosition(next), tf.position))
-        {
-            //float speed_= speed- Vector3.Distance(rail.GetPosition(next), tf.position);
-
-            //rb.velocity = new Vector3(targetPos.normalized.x * speed_, targetPos.normalized.y * speed_, targetPos.normalized.z * speed_);
-
-            knot++;
-        }
-        else
-        {
-            rb.velocity = new Vector3(targetPos.normalized.x * speed, targetPos.normalized.y * speed, targetPos.normalized.z * speed);
+                knot++;
+            }
+            else
+            {
+                Vector3 targetPos = SetTargetPos(next);
+                rb.velocity = new Vector3(targetPos.normalized.x * speed, targetPos.normalized.y * speed, targetPos.normalized.z * speed);
+            }
+            if (rail.positionCount <= next)
+            {
+                moveEnd = true;
+                next = 0;
+            }
+            else
+            {
+                next = knot + 1;
+            }
         }
     }
     //–Ú•W’n“_Ý’è
-    private Vector3 SetTargetPos()
+    private Vector3 SetTargetPos(int next)
     {
         Vector3 targetPos = rail.GetPosition(next) - tf.position;
 
@@ -69,11 +70,15 @@ public class MoveOnRailScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        tf = GetComponent<Transform>();
+
+        moveEnd = false;
+        //rail= GetComponent<LineRenderer>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Move();
     }
 }
