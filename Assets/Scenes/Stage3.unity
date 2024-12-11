@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.91372555, g: 0.91372555, b: 0.91372555, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -130,9 +130,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1709878088556506499, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: knotNumber
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4320082708551101941, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_Name
       value: GameManagerObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320082708551101942, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: stage
+      value: Stage3
       objectReference: {fileID: 0}
     - target: {fileID: 4320082708551101943, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_RootOrder
@@ -192,7 +200,7 @@ GameObject:
   - component: {fileID: 1239741790}
   m_Layer: 0
   m_Name: Directional Light
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -247,7 +247,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rain: {fileID: 2282934652263452545, guid: 4e05bec8c4820954da9a024000d96b11, type: 3}
   blankRain: 10
-  skyBox: {fileID: 2100000, guid: f8c51096618874941872529ef398e240, type: 2}
+  rainSky: {fileID: 2100000, guid: f8c51096618874941872529ef398e240, type: 2}
+  sunSky: {fileID: 2100000, guid: 5fe8d680a1df1404e8f18d428fcd7aab, type: 2}
+  defaultColor: {r: 0.9137255, g: 0.9137255, b: 0.9137255, a: 1}
+  defaultSkyColor: {r: 0.882353, g: 0.882353, b: 0.882353, a: 0}
+  defaultEquatorColor: {r: 0.9215687, g: 0.9215687, b: 0.9215687, a: 0}
+  defaultGroundColor: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 0}
 --- !u!1001 &785534975822530880
 PrefabInstance:
   m_ObjectHideFlags: 0

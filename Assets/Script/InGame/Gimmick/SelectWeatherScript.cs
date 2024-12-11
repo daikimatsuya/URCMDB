@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.Rendering;
 
 public class SelectWeatherScript : MonoBehaviour
 {
@@ -12,7 +13,12 @@ public class SelectWeatherScript : MonoBehaviour
     PlayerCameraScript pcs;
     [SerializeField] private GameObject rain;
     [SerializeField] private int blankRain;
-    [SerializeField] private Material skyBox;
+    [SerializeField] private Material rainSky;
+    [SerializeField] private Material sunSky;
+    [SerializeField] private Color defaultColor;
+    [SerializeField] private Color defaultSkyColor;
+    [SerializeField] private Color defaultEquatorColor;
+    [SerializeField] private Color defaultGroundColor;
 
     public Light Light { get; set; }
 
@@ -55,7 +61,7 @@ public class SelectWeatherScript : MonoBehaviour
 
         isRain = true;
         CreateRain();
-        SetSkyBoxMaterial();
+        SetSkyBoxMaterialRain();
     }
     //天気が晴れ
     private void Sunny()
@@ -63,6 +69,7 @@ public class SelectWeatherScript : MonoBehaviour
         Debug.Log("はれ");
         Debug.Log(chanceOfRain);
         isRain= false;
+        SetSkyBoxMaterialSunny();
     }
     //雨生成
     private  void CreateRain()
@@ -72,12 +79,31 @@ public class SelectWeatherScript : MonoBehaviour
         rs.SetCameraTransform(pcs.GetTransform());
 
     }
+
     //skybox変更
-    private void SetSkyBoxMaterial()
+    private void SetSkyBoxMaterialSunny()
     {
-        Light=GameObject.FindWithTag("Light").GetComponent<Light>();
+        Light = GameObject.FindWithTag("Light").GetComponent<Light>();
+        Light.color = Color.white;
+        UnityEngine.RenderSettings.skybox = sunSky;
+        SetDefaultSkyBox();
+    }
+    //skybox変更
+    private void SetSkyBoxMaterialRain()
+    {
+        Light = GameObject.FindWithTag("Light").GetComponent<Light>();
         Light.color = Color.black;
-        UnityEngine.RenderSettings.skybox=skyBox;
+        UnityEngine.RenderSettings.skybox = rainSky;
+        SetDefaultSkyBox();
+    }
+    //デフォルトのスカイボックス設定
+    private void SetDefaultSkyBox()
+    {
+        UnityEngine.RenderSettings.subtractiveShadowColor = defaultColor;
+        UnityEngine.RenderSettings.ambientMode = AmbientMode.Trilight;
+        UnityEngine.RenderSettings.ambientSkyColor = defaultSkyColor;
+        UnityEngine.RenderSettings.ambientEquatorColor = defaultEquatorColor;
+        UnityEngine.RenderSettings.ambientGroundColor = defaultGroundColor;
     }
 
     public int GetChanceOfRain()
