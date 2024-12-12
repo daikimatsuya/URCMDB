@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 55
-  distansMagnification: 100
+  distansMagnification: 25
 --- !u!65 &665970727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -609,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1753047956768410096, guid: 42739333e3a13ff4a9166c9513a75614, type: 3}
       propertyPath: m_Positions.Array.data[5].x
-      value: 67.15
+      value: 75.32
       objectReference: {fileID: 0}
     - target: {fileID: 1753047956768410096, guid: 42739333e3a13ff4a9166c9513a75614, type: 3}
       propertyPath: m_Positions.Array.data[5].z
