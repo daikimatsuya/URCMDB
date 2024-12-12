@@ -7,8 +7,9 @@ using UnityEngine;
 public class MoveOnRailScript : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] float distansMagnification;
+    [SerializeField] bool obtainVoluntarilyRail;
 
-   [SerializeField] float distansMagnification;
     private LineRenderer rail;
     private bool moveEnd;
     private int knot;
@@ -74,6 +75,10 @@ public class MoveOnRailScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!obtainVoluntarilyRail)
+        {
+            return;
+        }
         if (other.CompareTag("Rail"))
         {
             rail = null;
