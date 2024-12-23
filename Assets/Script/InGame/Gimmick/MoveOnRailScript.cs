@@ -21,6 +21,7 @@ public class MoveOnRailScript : MonoBehaviour
 
     Rigidbody rb;
     Transform tf;
+    ComplementingRotationScript crs;
 
     //動かす
     private void Move()
@@ -58,7 +59,9 @@ public class MoveOnRailScript : MonoBehaviour
     private void SetPosAndRot()
     {
         Vector3 targetPos = SetTargetPos(next);
+
         Rolling();
+
         rb.velocity = new Vector3(targetPos.normalized.x * moveSpeed, targetPos.normalized.y * moveSpeed, targetPos.normalized.z * moveSpeed);
     }
     //目標地点設定
@@ -69,70 +72,20 @@ public class MoveOnRailScript : MonoBehaviour
         float horizontal = Mathf.Atan2(targetPos.normalized.x, targetPos.normalized.z) * Mathf.Rad2Deg;
         float vertical = Mathf.Atan2(Mathf.Sqrt(targetPos.normalized.x * targetPos.normalized.x + targetPos.normalized.z * targetPos.normalized.z), targetPos.normalized.y) * Mathf.Rad2Deg;
 
-        //tf.eulerAngles = new Vector3(tf.eulerAngles.x, horizontal-90, tf.eulerAngles.z);
-        //tf.eulerAngles = new Vector3(tf.eulerAngles.x, tf.eulerAngles.y, -(vertical)+90);
-
-        targetAngles = new Vector3(tf.eulerAngles.x + 360, horizontal - 90 + 360, -(vertical) + 90+360);
-        //targetAngles = new Vector3(tf.eulerAngles.x, tf.eulerAngles.y, -(vertical) + 90);
+        targetAngles = new Vector3(tf.eulerAngles.x , horizontal - 90 , -(vertical) + 90);
 
         return targetPos;
     }
     //回転させる
     private void Rolling()
     {
-      
-      
-        if(targetAngles.x>rotBuff.x)
-        {
-            rotBuff.x += rotSpeed;
-            if (targetAngles.x < rotBuff.x)
-            {
-                rotBuff.x = targetAngles.x;
-            }
-        }
-        else if(targetAngles.x < rotBuff.x)
-        {
-            rotBuff.x -= rotSpeed;
-            if (targetAngles.x > rotBuff.x)
-            {
-                rotBuff.x = targetAngles.x;
-            }
-        }
-        if(targetAngles.y > rotBuff.y)
-        {
-            rotBuff.y += rotSpeed;
-            if (targetAngles.y < rotBuff.y)
-            {
-                rotBuff.y = targetAngles.y;
-            }
-        }
-        else if (targetAngles.y < rotBuff.y)
-        {
-            rotBuff.y -= rotSpeed;
-            if (targetAngles.y > rotBuff.y)
-            {
-                rotBuff.y = targetAngles.y;
-            }
-        }
-        if (targetAngles.z > rotBuff.z)
-        {
-            rotBuff.z += rotSpeed;
-            if (targetAngles.z < rotBuff.z)
-            {
-                rotBuff.z = targetAngles.z;
-            }
-        }
-        else if (targetAngles.z < rotBuff.z)
-        {
-            rotBuff.z -= rotSpeed;
-            if (targetAngles.z > rotBuff.z)
-            {
-                rotBuff.z = targetAngles.z;
-            }
-        }
+        rotBuff.x += crs.Rotate(rotSpeed, targetAngles.x, rotBuff.x);
+        rotBuff.y += crs.Rotate(rotSpeed, targetAngles.y, rotBuff.y);
+        rotBuff.z += crs.Rotate(rotSpeed, targetAngles.z, rotBuff.z);
+
         tf.eulerAngles = rotBuff;
-      //  tf.eulerAngles = targetAngles;
     }
+
     //ラインセット
     public void SetRail(LineRenderer rail)
     {
@@ -159,12 +112,13 @@ public class MoveOnRailScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
+        crs=GetComponent<ComplementingRotationScript>();
 
         rb.velocity=new Vector3(moveSpeed,0,0);
 
         moveEnd = false;
         rotBuff = tf.eulerAngles;
-        rotBuff = new Vector3(rotBuff.x + 360, rotBuff.y + 360, rotBuff.z + 360);
+        //rotBuff = new Vector3(rotBuff.x + 360, rotBuff.y + 360, rotBuff.z + 360);
         //rail= GetComponent<LineRenderer>(); 
     }
 
