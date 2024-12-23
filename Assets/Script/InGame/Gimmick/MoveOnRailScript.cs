@@ -18,7 +18,6 @@ public class MoveOnRailScript : MonoBehaviour
     private Vector3 targetAngles;
     private Vector3 rotBuff;
 
-
     Rigidbody rb;
     Transform tf;
     ComplementingRotationScript crs;
@@ -42,15 +41,12 @@ public class MoveOnRailScript : MonoBehaviour
         {
             if (moveSpeed > Vector3.Distance(rail.GetPosition(next), tf.position) * distansMagnification)
             {
-
                 SetPosAndRot();
-
                 knot++;
             }
             else
             {
                 SetPosAndRot();
-
             }
         }      
     }
@@ -58,9 +54,12 @@ public class MoveOnRailScript : MonoBehaviour
     private void SetPosAndRot()
     {
         Vector3 targetPos = SetTargetPos(next);
-
         Rolling();
-
+        Accelerate(targetPos);
+    }
+    //â¡ë¨
+    private void Accelerate(Vector3 targetPos)
+    {
         rb.velocity = new Vector3(targetPos.normalized.x * moveSpeed, targetPos.normalized.y * moveSpeed, targetPos.normalized.z * moveSpeed);
     }
     //ñ⁄ïWínì_ê›íË
@@ -117,8 +116,6 @@ public class MoveOnRailScript : MonoBehaviour
 
         moveEnd = false;
         rotBuff = tf.eulerAngles;
-        //rotBuff = new Vector3(rotBuff.x + 360, rotBuff.y + 360, rotBuff.z + 360);
-        //rail= GetComponent<LineRenderer>(); 
     }
 
     // Update is called once per frame
