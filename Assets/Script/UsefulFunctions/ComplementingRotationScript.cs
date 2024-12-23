@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//‰ñ“]‚·‚éƒIƒuƒWƒFƒNƒg‚Ì‰ñ“]‚ð•âŠ®‚·‚é
 public class ComplementingRotationScript : MonoBehaviour
 {
+    //‰ñ“]•âŠÔ
     public float Rotate(float rotateSpeed,float targetRot,float objectRot)
     {
-
+        //Œ»Ý‚ÌŠp“x‚Æ–Ú•WŠp“x‚Ì·‚ðŒvŽZ
         int rot;
-
         rot = (int)(targetRot-objectRot);
+        //end
 
+        //”½‘Î•ûŒü‚É‰ñ‚Á‚½‚Ù‚¤‚ª‹ß‚¢ê‡‚Ì·‚ðC³
         if (rot > 180)
         {
             rot = -360 + rot;
@@ -19,8 +22,9 @@ public class ComplementingRotationScript : MonoBehaviour
         {
             rot = 360 + rot;
         }
+        //end
 
-
+        //Šp“x‰ÁŽZ
         if (rot == 0)
         {
             return 0;
@@ -28,7 +32,6 @@ public class ComplementingRotationScript : MonoBehaviour
 
         if(rot < 0)
         {
-
             if (rot > rotateSpeed)
             {
                 return rot;
@@ -41,17 +44,7 @@ public class ComplementingRotationScript : MonoBehaviour
             return rotateSpeed;
         }
         return rot;
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        //end
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

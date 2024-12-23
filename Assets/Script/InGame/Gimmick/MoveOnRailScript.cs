@@ -52,8 +52,7 @@ public class MoveOnRailScript : MonoBehaviour
                 SetPosAndRot();
 
             }
-        }
-        
+        }      
     }
     //’l‘ã“ü‚·‚é
     private void SetPosAndRot()
