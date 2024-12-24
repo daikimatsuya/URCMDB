@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -60,7 +61,19 @@ public class MoveOnRailScript : MonoBehaviour
     //â¡ë¨
     private void Accelerate(Vector3 targetPos)
     {
-        rb.velocity = new Vector3(targetPos.normalized.x * moveSpeed, targetPos.normalized.y * moveSpeed, targetPos.normalized.z * moveSpeed);
+        Vector3 anglesBuff = tf.eulerAngles;
+        anglesBuff.y += 90;
+        anglesBuff.z *= -1;
+        Vector3 velocity;
+        velocity.x = moveSpeed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.y));
+        velocity.z = moveSpeed * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.y));
+
+        velocity.x = velocity.x * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.z));
+        velocity.z = velocity.z * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.z));
+
+        velocity.y = moveSpeed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.z)) * -1;
+
+        rb.velocity = velocity;
     }
     //ñ⁄ïWínì_ê›íË
     private Vector3 SetTargetPos(int next)

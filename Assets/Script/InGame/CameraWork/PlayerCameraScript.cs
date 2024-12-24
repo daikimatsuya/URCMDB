@@ -94,14 +94,15 @@ public class PlayerCameraScript : MonoBehaviour
     private Vector3 FollowPlayer(Vector3 playerEulerAngles,float rot)
     {
         Vector3 deff = Vector3.zero;
+        float buff = playerEulerAngles.y + rot;
 
-        deff.x = cameraDeff * (float)Math.Sin(ToRadian(playerEulerAngles.y + rot));
-        deff.z = cameraDeff * (float)Math.Cos(ToRadian(playerEulerAngles.y + rot));
+        deff.x = cameraDeff * (float)Math.Sin(ToRadianScript.ToRadian(ref buff));
+        deff.z = cameraDeff * (float)Math.Cos(ToRadianScript.ToRadian(ref buff));
 
-        deff.x = deff.x * (float)Math.Cos(ToRadian(playerEulerAngles.x));
-        deff.z = deff.z * (float)Math.Cos(ToRadian(playerEulerAngles.x));
+        deff.x = deff.x * (float)Math.Cos(ToRadianScript.ToRadian(ref playerEulerAngles.x));
+        deff.z = deff.z * (float)Math.Cos(ToRadianScript.ToRadian(ref playerEulerAngles.x));
 
-        deff.y = (cameraDeff + 5) * (float)Math.Sin(ToRadian(playerEulerAngles.x)) * -1;
+        deff.y = (cameraDeff + 5) * (float)Math.Sin(ToRadianScript.ToRadian(ref playerEulerAngles.x)) * -1;
 
         return deff;
     }
@@ -161,11 +162,7 @@ public class PlayerCameraScript : MonoBehaviour
         }
     }
 
-    //デグラド変換
-    public double ToRadian(double angle)
-    {
-        return angle * Math.PI / 180f;
-    }
+
     //プレイヤーのトランスフォーム取得用プレイヤースクリプトも取得
     public void SetPlayer(Transform tf,PlayerScript ps)
     {

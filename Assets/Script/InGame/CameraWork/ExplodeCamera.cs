@@ -40,19 +40,15 @@ public class ExplodeCamera : MonoBehaviour
     //”š”­Žž‚ÌƒJƒƒ‰‚ð‰ñ‚·
     private void Rotation(Vector3 rotation)
     {
-        pos.x = -distance * (float)Math.Sin(ToRadian(rotation.y));
-        pos.z = -distance * (float)Math.Cos(ToRadian(rotation.y));
+        pos.x = -distance * (float)Math.Sin(ToRadianScript.ToRadian(ref rotation.y));
+        pos.z = -distance * (float)Math.Cos(ToRadianScript.ToRadian(ref rotation.y));
 
-        pos.x = pos.x * (float)Math.Cos(ToRadian(rotation.x));
-        pos.z = pos.z * (float)Math.Cos(ToRadian(rotation.x));
+        pos.x = pos.x * (float)Math.Cos(ToRadianScript.ToRadian(ref rotation.x));
+        pos.z = pos.z * (float)Math.Cos(ToRadianScript.ToRadian(ref rotation.x));
 
-        pos.y = -distance * (float)Math.Sin(ToRadian(rotation.x)) * -1;
+        pos.y = -distance * (float)Math.Sin(ToRadianScript.ToRadian(ref rotation.x)) * -1;
     }
-    //deg->rad•ÏŠ·
-    public double ToRadian(double angle)
-    {
-        return angle * Math.PI / 180f;
-    }
+
     // Start is called before the first frame update
     void Start()
     {

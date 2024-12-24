@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  distansMagnification: 25
+  distansMagnification: 1
   obtainVoluntarilyRail: 1
   rotSpeed: 1
 --- !u!65 &665970727

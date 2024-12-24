@@ -40,8 +40,9 @@ public class SceneChangeMissleActionScript : MonoBehaviour
             sss.SetFadeFlag(true);
         }
 
-        moveBuff.x = moveSpeed * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
-        moveBuff.y = moveSpeed * (float)Math.Sin(ToRadian(tf.eulerAngles.x));
+        Vector3 anglesBuff = tf.eulerAngles;
+        moveBuff.x = moveSpeed * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.x));
+        moveBuff.y = moveSpeed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.x));
 
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y-moveBuff.y, tf.localPosition.z-moveBuff.x);
         tf.localEulerAngles = new Vector3(tf.localEulerAngles.x+maxRotate, tf.localEulerAngles.y, tf.localEulerAngles.z);
@@ -51,11 +52,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     {
         isShot= flag;
     }
-    //ƒfƒOƒ‰ƒh•ÏŠ·
-    public double ToRadian(double angle)
-    {
-        return angle * Math.PI / 180f;
-    }
+
     // Start is called before the first frame update
     void Start()
     {

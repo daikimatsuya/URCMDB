@@ -86,13 +86,14 @@ public class PlayerScript : MonoBehaviour
     {
         if (isFire)
         {
-            playerMove.x = speedBuff * (float)Math.Sin(ToRadian(tf.eulerAngles.y));
-            playerMove.z = speedBuff * (float)Math.Cos(ToRadian(tf.eulerAngles.y));
+            Vector3 anglesBuff = tf.eulerAngles;
+            playerMove.x = speedBuff * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.y));
+            playerMove.z = speedBuff * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.y));
 
-            playerMove.x = playerMove.x * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
-            playerMove.z = playerMove.z * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
+            playerMove.x = playerMove.x * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.x));
+            playerMove.z = playerMove.z * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.x));
 
-            playerMove.y = speedBuff * (float)Math.Sin(ToRadian(tf.eulerAngles.x)) * -1;
+            playerMove.y = speedBuff * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.x)) * -1;
 
 
             rb.velocity = playerMove;
@@ -352,11 +353,7 @@ public class PlayerScript : MonoBehaviour
     {
         //RockOned = true;
     }
-    //デグをラッドに変換
-    public double ToRadian(double angle)
-    {
-        return angle * Math.PI / 180f;
-    }
+
 
     public void OnCollisionEnter(Collision collision)
     {

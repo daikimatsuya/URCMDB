@@ -44,13 +44,14 @@ public class SyusuiScript : MonoBehaviour
     //ˆÚ“®
     private void Move()
     {
-        moveSpeed.x = speed * (float)Math.Sin(ToRadian(tf.eulerAngles.y));
-        moveSpeed.z = speed * (float)Math.Cos(ToRadian(tf.eulerAngles.y));
+        Vector3 anglesBuff = tf.eulerAngles;
+        moveSpeed.x = speed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.y));
+        moveSpeed.z = speed * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.y));
 
-        moveSpeed.x = moveSpeed.x * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
-        moveSpeed.z = moveSpeed.z * (float)Math.Cos(ToRadian(tf.eulerAngles.x));
+        moveSpeed.x = moveSpeed.x * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.x));
+        moveSpeed.z = moveSpeed.z * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.x));
 
-        moveSpeed.y = speed * (float)Math.Sin(ToRadian(tf.eulerAngles.x)) * -1;
+        moveSpeed.y = speed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.x)) * -1;
 
 
         rb.velocity = moveSpeed;
@@ -202,11 +203,7 @@ public class SyusuiScript : MonoBehaviour
             }
         }
     }
-    //ƒfƒOƒ‰ƒh•ÏŠ·
-    public double ToRadian(double angle)
-    {
-        return angle * Math.PI / 180f;
-    }
+
 
     public void OnTriggerEnter(Collider other)
     {
