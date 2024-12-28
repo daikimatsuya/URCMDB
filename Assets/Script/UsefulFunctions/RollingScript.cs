@@ -15,15 +15,18 @@ public class RollingScript : MonoBehaviour
     //回転した座標をトランスフォームに入れる
     private void Rolling()
     {
-        if(x)
+        
+        if(x)//x軸を回転させる
         {
-            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x + rowSpeedBuff, tf.localEulerAngles.y, tf.localEulerAngles.z);
+            float buff = tf.localEulerAngles.x + rowSpeedBuff;
+            Vector3 testBuff = new Vector3(buff, 0, 0);
+            tf.localEulerAngles= testBuff;
         }
-        if(y)
+        if(y)//y軸を回転させる
         {
-            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y + rowSpeedBuff, tf.localEulerAngles.z );
+            tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y + rowSpeedBuff, tf.localEulerAngles.z);
         }
-        if (z)
+        if (z)//z軸を回転させる
         {
             tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y, tf.localEulerAngles.z + rowSpeedBuff);
         }
@@ -44,7 +47,7 @@ public class RollingScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tf=GetComponent<Transform>();
+        tf = GetComponent<Transform>();
         rowSpeedBuff = rowSpeed;
     }
 
