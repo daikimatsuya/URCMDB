@@ -20,7 +20,7 @@ public class RollingScript : MonoBehaviour
         {
             float buff = tf.localEulerAngles.x + rowSpeedBuff;
             Vector3 testBuff = new Vector3(buff, 0, 0);
-            tf.localEulerAngles= testBuff;
+            tf.localEulerAngles= testBuff;//ここの代入がなぜかバグってる
         }
         if(y)//y軸を回転させる
         {
@@ -32,14 +32,17 @@ public class RollingScript : MonoBehaviour
         }
       
     }
+    //回転速度を外部からセット
     public void SetRowSpeed(float rowSpeed)
     {
         this.rowSpeedBuff = rowSpeed;
     }
+    //回転速度を返す
     public float GetRowSpeed()
     {
         return rowSpeed;
     }
+    //回転速度を初期値にリセット
     public void ResetRowSpeed()
     {
         rowSpeedBuff = rowSpeed;
