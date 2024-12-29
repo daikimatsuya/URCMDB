@@ -12,6 +12,15 @@ public class RollingScript : MonoBehaviour
     [SerializeField] private bool z;
 
     Transform tf;
+    private void Yakekuso(Vector3 vec)
+    {
+        if (vec == tf.localEulerAngles)
+        {
+            return;
+        }
+        tf.localEulerAngles = vec;
+        Yakekuso(vec);
+    }
     //回転した座標をトランスフォームに入れる
     private void Rolling()
     {
@@ -20,7 +29,12 @@ public class RollingScript : MonoBehaviour
         {
             float buff = tf.localEulerAngles.x + rowSpeedBuff;
             Vector3 testBuff = new Vector3(buff, 0, 0);
-            tf.localEulerAngles= testBuff;//ここの代入がなぜかバグってる
+
+            //tf.localEulerAngles = Vector3.zero;
+            //tf.localEulerAngles = testBuff;//ここの代入がなぜかバグってる
+            //Yakekuso(testBuff);
+
+            tf.localRotation = Quaternion.Euler(testBuff);
         }
         if(y)//y軸を回転させる
         {
