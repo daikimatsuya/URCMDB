@@ -30,11 +30,11 @@ public class RollingScript : MonoBehaviour
             float buff = tf.localEulerAngles.x + rowSpeedBuff;
             Vector3 testBuff = new Vector3(buff, 0, 0);
 
-            //tf.localEulerAngles = Vector3.zero;
-            //tf.localEulerAngles = testBuff;//ここの代入がなぜかバグってる
+            tf.localEulerAngles = Vector3.zero;
+            tf.localEulerAngles = testBuff;//ここの代入がなぜかバグってる
             //Yakekuso(testBuff);
 
-            tf.localRotation = Quaternion.Euler(testBuff);
+            //tf.localRotation = Quaternion.Euler(testBuff);
         }
         if(y)//y軸を回転させる
         {

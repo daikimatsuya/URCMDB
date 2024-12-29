@@ -9,6 +9,7 @@ public class LaunchPointScript : MonoBehaviour
 
     [SerializeField] private float rowlingSpeedX;
     [SerializeField] private float rowlingSpeedY;
+    [SerializeField] private Vector2 maxRow; 
 
     private bool isControll;
     private Vector2 rowling;
@@ -45,21 +46,21 @@ public class LaunchPointScript : MonoBehaviour
         {
             rowling.y += rowlingSpeedX;
         }
-        if (rowling.y <= -90)
+        if (rowling.y <= -maxRow.y)
         {
-            rowling.y = -90;
+            rowling.y = -maxRow.y;
         }
-        if (rowling.y >= 90)
+        if (rowling.y >= maxRow.y)
         {
-            rowling.y = 90;
+            rowling.y = maxRow.y;
         }
         if(rowling.x <= 0)
         {
             rowling.x = 0;
         }
-        if(rowling.x >= 25)
+        if(rowling.x >= maxRow.x)
         {
-            rowling.x = 25;
+            rowling.x = maxRow.x;
         }
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y,0);
     }

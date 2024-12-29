@@ -16,8 +16,8 @@ public class MissieAircraftScript : MonoBehaviour
     Transform upperHatchTF;
     Transform lowerHatchTF;
 
-    private bool isOpen;
-    private bool isEnd;
+    [SerializeField] private bool isOpen;
+    [SerializeField] private bool isEnd;
     private Vector3 moveSpeedUpper;
     private Vector3 moveSpeedLower;
 
@@ -30,14 +30,17 @@ public class MissieAircraftScript : MonoBehaviour
 
         if(isOpen)
         {
-            //upperHatchTF.localPosition=new Vector3(initialPosUpperHatch.x+(moveSpeedUpper.x*))
+            upperHatchTF.localPosition = new Vector3(upperHatchTF.localPosition.x - moveSpeedUpper.x, upperHatchTF.localPosition.y - moveSpeedUpper.y, upperHatchTF.localPosition.z - moveSpeedUpper.z);
+            lowerHatchTF.localPosition = new Vector3(lowerHatchTF.localPosition.x - moveSpeedLower.x, lowerHatchTF.localPosition.y - moveSpeedLower.y, lowerHatchTF.localPosition.z - moveSpeedLower.z);
         }
         else
         {
-
+            upperHatchTF.localPosition = new Vector3(upperHatchTF.localPosition.x + moveSpeedUpper.x, upperHatchTF.localPosition.y + moveSpeedUpper.y, upperHatchTF.localPosition.z + moveSpeedUpper.z);
+            lowerHatchTF.localPosition = new Vector3(lowerHatchTF.localPosition.x + moveSpeedLower.x, lowerHatchTF.localPosition.y + moveSpeedLower.y, lowerHatchTF.localPosition.z + moveSpeedLower.z);
         }
         if (TimeCountScript.TimeCounter(ref moveTimeBuff))
         {
+            TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
             isEnd = true;
         }
     }
@@ -70,11 +73,12 @@ public class MissieAircraftScript : MonoBehaviour
         TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
         SetSpeed();
         isOpen = false;
+        isEnd = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        HatchController();
     }
 }

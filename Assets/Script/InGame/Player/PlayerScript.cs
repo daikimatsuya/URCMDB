@@ -80,6 +80,10 @@ public class PlayerScript : MonoBehaviour
            
         }
         gm.PlayerRotSet(rowling);
+        if (!isFire)
+        {
+            tf.position = lp.GetPos();
+        }
     }
     //速度を足してトランスフォームのバッファに入れる
     private void Move()
@@ -99,6 +103,7 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = playerMove;
             playerMoveBuff = playerMove;
         }
+
     }
     //プレイヤーの操作で向いてる方向を変える
     private void Operation()
@@ -182,6 +187,7 @@ public class PlayerScript : MonoBehaviour
             }
             rowling.x = -lp.GetRowling().x;
             rowling.y = lp.GetRowling().y + 180;
+
 
             if (Input.GetKeyDown(KeyCode.Space))
             {

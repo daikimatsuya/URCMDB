@@ -144,3 +144,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rowlingSpeedX: 0.2
   rowlingSpeedY: 0.16
+  maxRow: {x: 25, y: 90}
