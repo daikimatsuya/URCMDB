@@ -22,6 +22,8 @@ public class GameManagerScript : MonoBehaviour
     private CameraManager cm;
     private GameObject player;
     private SelectWeatherScript sws;
+    private LaunchPointScript lp;
+    private GameObject launchPad;
 
     private bool playerDead;
     private Vector3 playerRot;
@@ -111,10 +113,13 @@ public class GameManagerScript : MonoBehaviour
         {
             InitialSet();
         }
-        player = Instantiate(playerPrefab);
+        player = Instantiate(playerPrefab);    
         ps = player.GetComponent<PlayerScript>();
+        ps.SetLaunchpad(lp);
         cm.SetPlayer(ps);
         playerMissile--;
+
+        player.transform.SetParent(launchPad.transform);
 
         SetRespawnTimer();
     }
@@ -167,6 +172,9 @@ public class GameManagerScript : MonoBehaviour
         sws = GetComponent<SelectWeatherScript>();
         targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+        launchPad = GameObject.FindWithTag("LaunchPoint");
+        lp = launchPad.GetComponent<LaunchPointScript>();
+
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
         PlayerSpawn();

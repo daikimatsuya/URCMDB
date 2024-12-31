@@ -27,7 +27,7 @@ public class PlayerCameraScript : MonoBehaviour
     {
         if (playerPos != null)
         {
-            tf.localRotation = playerPos.localRotation;
+            tf.rotation = playerPos.rotation;
 
             Vector3 deff = Vector3.zero;
 
@@ -82,7 +82,7 @@ public class PlayerCameraScript : MonoBehaviour
     //カメラが発射台にあるプレイヤーの後ろに追従する
     public void FollowPlayerInSet()
     {
-        tf.localRotation = playerPos.localRotation;
+        tf.rotation = playerPos.rotation;
 
         Vector3 deff = Vector3.zero;
         deff = FollowPlayer(playerPos.eulerAngles,0);

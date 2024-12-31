@@ -80,10 +80,7 @@ public class PlayerScript : MonoBehaviour
            
         }
         gm.PlayerRotSet(rowling);
-        if (!isFire)
-        {
-            tf.position = lp.GetPos();
-        }
+
     }
     //速度を足してトランスフォームのバッファに入れる
     private void Move()
@@ -103,7 +100,7 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = playerMove;
             playerMoveBuff = playerMove;
         }
-
+        
     }
     //プレイヤーの操作で向いてる方向を変える
     private void Operation()
@@ -149,11 +146,11 @@ public class PlayerScript : MonoBehaviour
                 }
             }
             
-            if (rowling.x <= -90)
+            if (rowling.x <= -90 && rowling.x+360 <= 270) 
             {
                 rowling.x = -89;
             }
-            if (rowling.x >= 90)
+            if (rowling.x >= 90 && rowling.x-360 >= -270) 
             {
                 rowling.x = 89;
             }
@@ -185,6 +182,10 @@ public class PlayerScript : MonoBehaviour
             {
                 speedBuff += firstSpeed;
             }
+            else
+            {
+                tf.localPosition = Vector3.zero;
+            }
             rowling.x = -lp.GetRowling().x;
             rowling.y = lp.GetRowling().y + 180;
 
@@ -198,7 +199,7 @@ public class PlayerScript : MonoBehaviour
         }
         PMS=gm.GetPMS();
 
-        tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
+        tf.eulerAngles = new Vector3(rowling.x, rowling.y, tf.eulerAngles.z);
     }
     //加減速処理
     private void Acceleration()
@@ -329,6 +330,14 @@ public class PlayerScript : MonoBehaviour
 
     }
     #region　値受け渡し
+    public void SetLaunchpad(LaunchPointScript lp)
+    {
+        this.lp = lp;
+    }
+    public void SetGameManager(GameManagerScript gm)
+    {
+        this.gm = gm;
+    }
     public Vector3 GetPlayerSpeed()
     {
         return playerMoveBuff;
@@ -372,6 +381,8 @@ public class PlayerScript : MonoBehaviour
         {     
             isControl =true;
             dust.SetActive(true);
+            tf.parent = null;
+            
         }
         if(other.CompareTag("SpeedUpRing"))
         {
@@ -413,8 +424,6 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
 
-
-        lp=GameObject.FindWithTag("LaunchPoint").GetComponent<LaunchPointScript>();
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);
@@ -424,8 +433,8 @@ public class PlayerScript : MonoBehaviour
         ringSpeed = 0;
         tf.position=lp.GetPos();
 
-        rowling.x = -lp.GetRowling().x;
-        rowling.y = lp.GetRowling().y + 180;
+        //rowling.x = -lp.GetRowling().x;
+        //rowling.y = lp.GetRowling().y + 180;
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
         lp.SetStart(false);
         gm.SetIsHitTarget(false);

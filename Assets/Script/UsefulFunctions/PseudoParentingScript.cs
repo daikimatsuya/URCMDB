@@ -11,11 +11,19 @@ public class PseudoParentingScript : MonoBehaviour
 
     private void Parent()
     {
-        Vector3 pos= parent.position+fixPos;
-        tf.position =pos ;
-        Vector3 rotate = parent.eulerAngles + fixRotate;
-        tf.localEulerAngles=rotate;
+        if (!parent)
+        {
+            return;
+        }
+            //Vector3 pos = parent.position + fixPos;
+            //tf.position = pos;
+            //Vector3 rotate = parent.eulerAngles + fixRotate;
+            //tf.eulerAngles = rotate;
+        tf.transform.SetParent(parent);
+        tf.localPosition = fixPos;
+        tf.localEulerAngles += fixRotate;
     }
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -25,12 +33,12 @@ public class PseudoParentingScript : MonoBehaviour
     }
     void Start()
     {
-        Parent();
+        //Parent();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Parent();
+        //Parent();
     }
 }
