@@ -146,11 +146,19 @@ public class PlayerScript : MonoBehaviour
                 }
             }
             
-            if (rowling.x <= -90 && rowling.x+360 <= 270) 
+            if(rowling.x > 270)
+            {
+                rowling.x -= 360;
+            }
+            if (rowling.x <= -270)
+            {
+                rowling.x += 360;
+            }
+            if (rowling.x <= -90) 
             {
                 rowling.x = -89;
             }
-            if (rowling.x >= 90 && rowling.x-360 >= -270) 
+            if (rowling.x >= 90 ) 
             {
                 rowling.x = 89;
             }
@@ -199,7 +207,7 @@ public class PlayerScript : MonoBehaviour
         }
         PMS=gm.GetPMS();
 
-        tf.eulerAngles = new Vector3(rowling.x, rowling.y, tf.eulerAngles.z);
+        tf.eulerAngles = new Vector3(rowling.x, rowling.y, 0);
     }
     //â¡å∏ë¨èàóù
     private void Acceleration()
