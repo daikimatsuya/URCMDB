@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Usefull;
 
 //タイトルのステージ選択処理用
 public class StageSelectScript : MonoBehaviour

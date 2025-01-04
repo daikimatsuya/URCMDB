@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //岩を落とすオブジェクト管理
 public class RockFallScript : MonoBehaviour

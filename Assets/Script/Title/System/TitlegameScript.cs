@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //今のところタイトルのミニゲームの管理のちのち奇麗にする
 public class TitlegameScript : MonoBehaviour

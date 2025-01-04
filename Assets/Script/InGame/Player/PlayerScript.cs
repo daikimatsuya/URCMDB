@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using Usefull;
 
 //インゲームのプレイヤーの処理
 public class PlayerScript : MonoBehaviour

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //プレイヤーを生成したときの演出
 public class ActivationFadeScript : MonoBehaviour

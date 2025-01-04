@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //–C‘ä‚ª”ò‚Î‚µ‚½’eŠÇ—
 public class FlakBulletScript : MonoBehaviour

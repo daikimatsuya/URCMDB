@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //ブースト時のエフェクト管理
 public class BoostEffectScript : MonoBehaviour

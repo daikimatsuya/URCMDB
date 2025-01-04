@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //ステージセレクトからインゲームへの演出管理
 public class SceneChangeAnimationScript : MonoBehaviour
