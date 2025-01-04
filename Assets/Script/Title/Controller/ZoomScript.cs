@@ -33,62 +33,64 @@ public class ZoomScript : MonoBehaviour
     //ズームインのような動きをさせる
     private void ZoomIn()
     {
-        if (setInitialPos)
+        if (setInitialPos)  //初期値まで動かす場合///////////////////////////////////////////////////
         {
             timeBuff--;
             if (timeBuff >= 0)
             {
-                PosBuffZ -= lengthBuff;
+                PosBuffZ -= lengthBuff; //座標加算
             }
             else
             {
-                zoomIn = false;
+                zoomIn = false; //移動終了
             }
-            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ + zoomLength);
-        }
-        else
+            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ + zoomLength);   //座標代入
+        }////////////////////////////////////////////////////////////////////////////////////////////
+
+        else   //初期値から動かす場合//////////////////////////////////////////////////////////////
         {
             timeBuff--;
             if (timeBuff >= 0)
             {
-                PosBuffZ -= lengthBuff;
+                PosBuffZ -= lengthBuff; //座標加算
             }
             else
             {
-                zoomIn = false;
+                zoomIn = false; //移動終了
             }
-            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ);
-        }
+            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ);   //座標代入
+        }///////////////////////////////////////////////////////////////////////////////////////////
     }
     //ズームアウトのような動きをさせる
     private void ZoomOUT()
     {
-        if (setInitialPos)
+        if (setInitialPos)  //初期値まで動かす場合///////////////////////////////////////////////////
         {
             timeBuff--;
             if (timeBuff >= 0)
             {
-                PosBuffZ += lengthBuff;
+                PosBuffZ += lengthBuff; //座標加算
             }
             else
             {
-                zoomIn = false;
+                zoomIn = false; //移動終了
             }
-            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ - zoomLength);
-        }
-        else
+            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ - zoomLength);   //座標代入
+        }////////////////////////////////////////////////////////////////////////////////////////////
+
+        else   //初期値から動かす場合//////////////////////////////////////////////////////////////
         {
             timeBuff--;
             if (timeBuff >= 0)
             {
-                PosBuffZ += lengthBuff;
+                PosBuffZ += lengthBuff; //座標加算
             }
             else
             {
-                zoomIn = false;
+                zoomIn = false; //移動終了
             }
-            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ);
-        }
+            tf.position = new Vector3(initialPos.x, initialPos.y, PosBuffZ);   //座標代入
+        }///////////////////////////////////////////////////////////////////////////////////////////
     }
     // Start is called before the first frame update
     void Start()
