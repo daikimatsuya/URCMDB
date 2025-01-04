@@ -2,7 +2,7 @@ name: DebugBuild
 on:
   push:
     branches:
-      - mastar
+      - master
 env:
   #リポジトリのルートディレクトリを基点としたソリューションファイルパス
   SOLUTION_FILE_PATH: C:\ユーザー\ooyas\source\repos\URCMDB\URCMDB.sln
