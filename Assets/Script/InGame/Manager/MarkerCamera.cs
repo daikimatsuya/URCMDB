@@ -12,30 +12,34 @@ public class MarkerCamera : MonoBehaviour
 
     [SerializeField] private float pos;
 
+    //MakerCamera管理
     private void MarkerCameraController()
     {
-        SearchPlayer();
-        Move();
+        SearchPlayer(); //プレイヤー検索 
+        Move(); //移動
     }
+    //カメラ移動
     private void Move()
     {
         if(playerPos!=null)
         {
-            tf.position = new Vector3(playerPos.position.x, pos, playerPos.position.z);
-            tf.eulerAngles = new Vector3(tf.eulerAngles.x, player.transform.eulerAngles.y, tf.eulerAngles.z);
+            tf.position = new Vector3(playerPos.position.x, pos, playerPos.position.z); //ポジション代入
+            tf.eulerAngles = new Vector3(tf.eulerAngles.x, player.transform.eulerAngles.y, tf.eulerAngles.z);   //角度代入
         }
     }
+    //プレイヤー生存確認と取得
     private void SearchPlayer()
     {
-        if (playerPos == null)
+        if (playerPos == null)  //プレイヤーが取得できない時////////////////////////////////////////////////
         {
-            if (GameObject.FindWithTag("Player"))
+            if (GameObject.FindWithTag("Player"))   //プレイヤーオブジェクト検索/////
             {
-                player = GameObject.FindWithTag("Player");
-                playerPos = player.GetComponent<Transform>();
+                player = GameObject.FindWithTag("Player");  //プレイヤーオブジェクト取得
+                playerPos = player.GetComponent<Transform>();   //コンポーネント取得
 
-            }
-        }
+            }///////////////////////////////////////////////////////////////////////////////
+
+        }////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     // Start is called before the first frame update
     void Start()

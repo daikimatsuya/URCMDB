@@ -16,24 +16,28 @@ public class ButtobeScript : MonoBehaviour
     //ã‰º‚ÉˆÚ“®
     private void Move()
     {
+        //ã‰ºˆÚ“®‚ğŒJ‚è•Ô‚·////////////////
         if(isUp)
         {
             posBuff += moveSpeed;
-            if(posBuff>maxHight)
+
+            if(posBuff>maxHight)    //Å‘å’l‚Ü‚Åã‚ª‚é‚ÆˆÚ“®•ûŒüØ‚è‘Ö‚¦//
             {
                 posBuff = maxHight;
                 isUp = false;
-            }
+            }//////////////////////////////////////////////////////////////////
         }
         else
         {
             posBuff -= moveSpeed;
-            if(posBuff<-maxHight)
+
+            if(posBuff<-maxHight)   //Å’á’l‚Ü‚Å‰º‚ª‚é‚ÆˆÚ“®•ûŒüØ‚è‘Ö‚¦//
             {
                 posBuff=-maxHight;
                 isUp = true;
-            }
+            }//////////////////////////////////////////////////////////////////
         }
+        //////////////////////////////////
         tf.localPosition = new Vector3(tf.localPosition.x, initialPosY + posBuff, tf.localPosition.z);
     }
     // Start is called before the first frame update

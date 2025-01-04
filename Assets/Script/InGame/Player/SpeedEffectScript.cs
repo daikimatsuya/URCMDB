@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ëΩï™è¡Ç∑
 public class SpeedEffectScript : MonoBehaviour
 {
     public void BoostEffect()

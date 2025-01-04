@@ -15,14 +15,14 @@ public class CircleFadeObjectScript : MonoBehaviour
     //演出フラグ
     private void CircleFadeController()
     {
-        if(scas.GetIsFadeStartFlag())
+        if(scas.GetIsFadeStartFlag())   //フェードフラグがオンになっているとフェード開始////
         {
             Fade();
-        }
+        }/////////////////////////////////////////////////////////////////////////////////////////
     }
     private void Fade()
     {
-        tf.localScale = new Vector3(2, 2,tf.localScale.z + increaseSpeed);
+        tf.localScale = new Vector3(2, 2,tf.localScale.z + increaseSpeed);  //サイズを縮小
     }
     // Start is called before the first frame update
     void Start()

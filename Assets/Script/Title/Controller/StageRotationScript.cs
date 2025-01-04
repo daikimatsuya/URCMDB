@@ -17,43 +17,45 @@ public class StageRotationScript : MonoBehaviour
     //ステージの回転管理
     private void StageSelectController()
     {
-        Move(sss.GetStageChangeCount());
+        Move(sss.GetStageChangeCount());    //ステージを回転させる
     }
     //ステージ数で回転
     private void Move(Vector2 stage)
     {
-        float rot = (360 / (stage.y + 1)) * stage.x;
+        float rot = (360 / (stage.y + 1)) * stage.x;    //360度をステージ数で分割
 
-         if (rot > rotateBuff)
+         if (rot > rotateBuff)  //目標回転角よりも角度が小さいとき///////////////
          {
              rotateEnd = false;
-             sss.SetRotateEnd(rotateEnd);
-             rotateBuff += rotateSpeed;
-             if (rot < rotateBuff)
+             sss.SetRotateEnd(rotateEnd);   //回転フラグを代入
+             rotateBuff += rotateSpeed; //回転させる
+             if (rot < rotateBuff)  //回転しすぎた時///////////////////
              {
                  rotateBuff = rot;
                  rotateEnd = true;
-                 sss.SetRotateEnd(rotateEnd);
-             }
-         }
-         else if (rot < rotateBuff)
+                 sss.SetRotateEnd(rotateEnd);   //回転フラグを代入
+            }//////////////////////////////////////////////////////////
+
+         }/////////////////////////////////////////////////////////////////////////
+
+         else if (rot < rotateBuff) //目標回転角よりも角度が大きいとき////
          {
              rotateEnd = false;
-             sss.SetRotateEnd(rotateEnd);
-             rotateBuff -= rotateSpeed;
-             if (rot > rotateBuff)
-             {
+             sss.SetRotateEnd(rotateEnd);   //回転フラグを代入
+            rotateBuff -= rotateSpeed; //回転させる
+            if (rot > rotateBuff) //回転しすぎた時///////////////////
+            {
                  rotateBuff = rot;
                  rotateEnd = true;
-                 sss.SetRotateEnd(rotateEnd);
-             }
-         }
+                 sss.SetRotateEnd(rotateEnd);  //回転フラグを代入
+            }
+         }//////////////////////////////////////////////////////////////////
          else
          {
              rotateEnd = true;
              sss.SetRotateEnd(rotateEnd);
          }
-         tf.localEulerAngles = new Vector3(0, rotateBuff, 0);
+         tf.localEulerAngles = new Vector3(0, rotateBuff, 0);   //回転角代入
 
     }
     // Start is called before the first frame update

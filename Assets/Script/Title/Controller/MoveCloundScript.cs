@@ -12,11 +12,11 @@ public class MoveCloundScript : MonoBehaviour
 
     Transform tf;
 
-
     private float posBuff;
     //è„â∫Ç…ìÆÇ©Ç∑
     private void Move()
     {
+        //è„â∫à⁄ìÆÇåJÇËï‘Ç∑///////////
         if (isUp)
         {
             posBuff += moveSpeed;
@@ -35,6 +35,7 @@ public class MoveCloundScript : MonoBehaviour
                 isUp = true;
             }
         }
+        /////////////////////////////////
         tf.localPosition = new Vector3(tf.localPosition.x, posBuff, tf.localPosition.z);
     }
     // Start is called before the first frame update

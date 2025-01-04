@@ -23,11 +23,11 @@ public class ZoomScript : MonoBehaviour
     {
         if(zoomIn)
         {
-            ZoomIn();
+            ZoomIn();   //ズームインっぽい動きをさせる
         }
         if(zoomOut)
         {
-            ZoomOUT();
+            ZoomOUT();  //ズームアウトっぽい動きをさせる
         }
     }
     //ズームインのような動きをさせる

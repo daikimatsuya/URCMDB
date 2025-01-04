@@ -36,15 +36,13 @@ public class GameManagerScript : MonoBehaviour
     private bool isHitTarget;
     private bool isTargetBreak;
 
-
     //ゲームシステムを動かす
     private void GameManagerController()
     {
-        ChangePMS();
-        PlayerCheck();
-        cm.CameraController();
-        BreakTimeContoller();
-      
+        ChangePMS();    //PMS管理
+        PlayerCheck();  //プレイヤーがゲームにいるかを確認
+        cm.CameraController();  //カメラ管理
+        BreakTimeContoller();   //クリア後のタイマー管理
     }
     //リトライするときにシーンをロード
     public void Retry()
@@ -60,45 +58,48 @@ public class GameManagerScript : MonoBehaviour
     private void PlayerCheck()
     {
 
-        if (player==null)
+        if (player==null)   //取得したプレイヤーがゲーム内にないことを確認/////////////////////////////////////////////////////////////
         {
+            //フラグ管理
             playerDead = true;
             isCanShot = false;
+            /////////////
+            ///
             if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff))
             {
-                SetPlayerSpawnFlag();
+                SetPlayerSpawnFlag();   //プレイヤーを生成するフラグ管理
             }
             
-            if(playerSpawnFlag)
+            if(playerSpawnFlag)  //プレイヤー生成フラグ//////////////////////
             {
                 if (playerMissile > 0)
                 {
-                    PlayerSpawn();
-                    CreateFadeObject();
+                    PlayerSpawn();  //プレイヤー生成
+                    CreateFadeObject(); //プレイヤー生成時の演出生成
                     playerSpawnFlag = false;
                 }
                 else
                 {
                     gameOverFlag = true;
                 }
-            }
+            }/////////////////////////////////////////////////////////////////
 
-        }
+        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         else
         {
             playerDead= false;
-            playerSpeed = ps.GetPlayerSpeedFloat();
-            playerSpeedBuff = ps.GetPlayerSpeedBuffFloat();
+            playerSpeed = ps.GetPlayerSpeedFloat(); //プレイヤーの速度取得
+            playerSpeedBuff = ps.GetPlayerSpeedBuffFloat(); //プレイヤーの移動速度取得
         }
     }
     //プレイヤーが死んだ後に一定時間後にリスポーンさせるフラグセット
     private void SetPlayerSpawnFlag()
     {
         playerSpawnFlag = true;
-        if (isClear)
+        if (isClear)    //クリアしてたら/////
         {
             playerMissile = 0;
-        }
+        }///////////////////////////////////
     }
     //プレイヤーリスポーンタイマーリセット
     private void SetRespawnTimer()
@@ -109,55 +110,59 @@ public class GameManagerScript : MonoBehaviour
     //プレイヤー生成
     private void PlayerSpawn()
     {
-        if (cm == null)
+        if (cm == null)     //CameraManagerが無かったら取得する//
         {
             InitialSet();
-        }
-        player = Instantiate(playerPrefab);    
-        ps = player.GetComponent<PlayerScript>();
-        ps.SetLaunchpad(lp);
-        cm.SetPlayer(ps);
-        playerMissile--;
+        }///////////////////////////////////////////////////////////////
 
-        player.transform.SetParent(launchPad.transform);
+        player = Instantiate(playerPrefab); //プレイヤー生成
+        ps = player.GetComponent<PlayerScript>();   //コンポーネント取得
+        ps.SetLaunchpad(lp);    //発射台位置情報代入
+        cm.SetPlayer(ps);   //カメラにプレイヤーを登録
+        playerMissile--;    //残機減少
 
-        SetRespawnTimer();
+        player.transform.SetParent(launchPad.transform);    //プレイヤーと発射台を親子付け
+
+        SetRespawnTimer();  //プレイヤー生成用タイマーセット
     }
+    //クリア時のターゲット破壊フラグ管理
     private void BreakTimeContoller()
     {
-        if (isClear)
+        if (!isClear)
         {
-            if (breakTimeBuff <= 0)
-            {
-                isTargetBreak = true;
-                playerMissile = 0;
-            }
-            breakTimeBuff--;
+            return;
         }
+
+        if (TimeCountScript.TimeCounter(ref breakTimeBuff))
+        {
+            isTargetBreak = true;
+            playerMissile = 0;
+        }
+        
     }
     //開始演出生成
     private void CreateFadeObject()
     {
-        Transform uiTransform = GameObject.FindWithTag("UICanvas").transform;
-        GameObject __ = Instantiate(fadeObjectPrefab);
-        __.transform.SetParent(uiTransform);
-        __.transform.localScale = Vector3.one;
-        __.transform.localPosition = Vector3.zero;
-        __.transform.localEulerAngles = new Vector3(0, 0, 0);
+        Transform uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
+        GameObject __ = Instantiate(fadeObjectPrefab);  //フェードオブジェクト生成
+        __.transform.SetParent(uiTransform);    //UICanvasに親子付け
+        __.transform.localScale = Vector3.one;  //スケール修正
+        __.transform.localPosition = Vector3.zero;  //座標修正
+        __.transform.localEulerAngles = new Vector3(0, 0, 0);   //角度修正
     }
     //PMSのオンオフ
     private void ChangePMS()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (PMS)
+            if (PMS)    //PMS管理//////////////////
             {
                 PMS = false;
             }
             else
             {
                 PMS = true;
-            }
+            }//////////////////////////////////////
         }
     }
 

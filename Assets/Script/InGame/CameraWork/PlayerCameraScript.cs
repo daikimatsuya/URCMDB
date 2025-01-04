@@ -10,7 +10,7 @@ public class PlayerCameraScript : MonoBehaviour
     private Transform tf;
     private Transform playerPos;
     private Vector3 cameraRot;
-    private float rot;
+
 
 
     private MovieCamera mc;
@@ -20,74 +20,72 @@ public class PlayerCameraScript : MonoBehaviour
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
+    [SerializeField] private float maxRot;
+    private float rot;
 
 
     //カメラが飛んでいるプレイヤーの後ろに追従する
     public void FollowPlayerInShoot()
     {
-        if (playerPos != null)
+        if (playerPos != null)  //プレイヤーがゲーム内に存在している時/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            tf.rotation = playerPos.rotation;
-
+            tf.rotation = playerPos.rotation;   //プレイヤーの回転角を取得
             Vector3 deff = Vector3.zero;
 
+            //入力によりずれを加算
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            if (rot < 10)
             {
-                rot += rotSpeed;
+                if (rot < maxRot)
+                {
+                    rot += rotSpeed;
+                }
             }
-
-        }
             if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
-        {
-            if (rot > -10)
             {
-                rot -= rotSpeed;
+                if (rot > -maxRot)
+                {
+                    rot -= rotSpeed;
+                }
             }
-
-        }
             if ((Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))) 
-        {
-            if (rot > 0)
             {
-                rot -= rotSpeed;
+                if (rot > 0)
+                {
+                    rot -= rotSpeed;
+                }
+                if (rot < 0)
+                {
+                    rot += rotSpeed;
+                }
             }
-            if (rot < 0)
-            {
-                rot += rotSpeed;
-            }
-
-        }
             if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.A)&& !Input.GetKey(KeyCode.D)) 
-        {
-            if (rot > 0)
             {
-                rot -= rotSpeed;
+                if (rot > 0)
+                {
+                    rot -= rotSpeed;
+                }
+                if (rot < 0)
+                {
+                    rot += rotSpeed;
+                }
             }
-            if (rot < 0)
-            {
-                rot += rotSpeed;
-            }
-
-        }
+            //////////////////////////
 
 
+            deff = FollowPlayer(playerPos.eulerAngles, rot);    //角度と設定した距離からずれを算出
+            tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z); //プレイヤーの座標にずれを加算してトランスフォームに代入
 
-            deff = FollowPlayer(playerPos.eulerAngles, rot);
-
-            tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
-        }
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     //カメラが発射台にあるプレイヤーの後ろに追従する
     public void FollowPlayerInSet()
     {
-        tf.rotation = playerPos.rotation;
+        tf.rotation = playerPos.rotation;   //プレイヤーの回転角を取得
 
         Vector3 deff = Vector3.zero;
-        deff = FollowPlayer(playerPos.eulerAngles,0);
+        deff = FollowPlayer(playerPos.eulerAngles,0);    //角度と設定した距離からずれを算出
 
-        tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);
+        tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z); //プレイヤーの座標にずれを加算してトランスフォームに代入
         rot = 0;
     }
     //追従中のカメラの位置出す
@@ -96,13 +94,17 @@ public class PlayerCameraScript : MonoBehaviour
         Vector3 deff = Vector3.zero;
         float buff = playerEulerAngles.y + rot;
 
+        //平面の位置を算出
         deff.x = cameraDeff * (float)Math.Sin(ToRadianScript.ToRadian(ref buff));
         deff.z = cameraDeff * (float)Math.Cos(ToRadianScript.ToRadian(ref buff));
+        ///////////////////
 
+        //水平方向と垂直方向の位置を算出
         deff.x = deff.x * (float)Math.Cos(ToRadianScript.ToRadian(ref playerEulerAngles.x));
         deff.z = deff.z * (float)Math.Cos(ToRadianScript.ToRadian(ref playerEulerAngles.x));
 
         deff.y = (cameraDeff + 5) * (float)Math.Sin(ToRadianScript.ToRadian(ref playerEulerAngles.x)) * -1;
+        //////////////////////////////////
 
         return deff;
     }
@@ -110,59 +112,65 @@ public class PlayerCameraScript : MonoBehaviour
     //ステージ開始時のムービーのカメラワーク
     public void MovieCut()
     {
-        mc.CameraController();
-        Fade();
+        mc.CameraController();  //ゲーム開始時の演出管理
+        Fade(); //フェード管理
     }
     //プレイヤーがターゲット以外で爆発したときのカメラワーク
     public void MissExplodeCamera()
     {
-        cameraRot = transform.localEulerAngles;
-        tf.position = ec.MissExplodeCamera(ref cameraRot);
-        tf.localEulerAngles = cameraRot;
+        cameraRot = transform.localEulerAngles; //トランスフォームの値をvector3へ移動
+        tf.position = ec.MissExplodeCamera(ref cameraRot);  //爆発エフェクト
+        tf.localEulerAngles = cameraRot;    //算出した値をトランスフォームに代入
     }
     //プレイヤーがターゲットにぶつかったとのカメラワーク
     public void HitExplodeCamera()
     {
-        cameraRot= transform.localEulerAngles;
-        tf.position=ec.HitTargetCamera(ref cameraRot);
-        tf.localEulerAngles = cameraRot;
+        cameraRot= transform.localEulerAngles; //トランスフォームの値をvector3へ移動
+        tf.position=ec.HitTargetCamera(ref cameraRot);  //爆発エフェクト
+        tf.localEulerAngles = cameraRot;   //算出した値をトランスフォームに代入
     }
     //クリア時のカメラ
     public void ClearCamera()
     {
-        cameraRot = transform.localEulerAngles;
-        tf.position = ec.ClearCamera(ref cameraRot);
-        tf.localEulerAngles = cameraRot;
+        cameraRot = transform.localEulerAngles; //トランスフォームの値をvector3へ移動
+        tf.position = ec.ClearCamera(ref cameraRot);    //クリアエフェクト
+        tf.localEulerAngles = cameraRot;   //算出した値をトランスフォームに代入
     }
     //フェード管理
     private void Fade()
     {
-        if (mc.GetEnd())
+        if (mc.GetEnd())    //ゲーム開始演出の終わり確認//////
         {
-            mf.SetShadeLevel(3);
-        }
-        else
+            mf.SetShadeLevel(3);    //フェードレベル設定
+
+        }/////////////////////////////////////////////////////////
+
+        else //ゲーム開始演出中////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (mc.GetSkip())
+            if (mc.GetSkip())   //演出のスキップ確認////////////////////////////////////////////////////
             {
-                mf.SetShadeLevel(2);
-                if (mf.GetIsShade())
+                mf.SetShadeLevel(2);    //フェードレベル設定
+
+                if (mf.GetIsShade())    //フェードオブジェクトの移動が終わったか/////////
                 {
-                    mf.SetShadeLevel(3);
-                }
-            }
-            else if (mc.GetFadeoutTime() > mc.GetMoveTime())
+                    mf.SetShadeLevel(3);    //フェードレベル設定
+                }////////////////////////////////////////////////////////////////////////////
+
+            }///////////////////////////////////////////////////////////////////////////////////////////
+
+            else if (mc.GetFadeoutTime() > mc.GetMoveTime())    //フェード開始フラグ確認////////
             {
-                mf.SetShadeLevel(2);
-            }
+                mf.SetShadeLevel(2);    //フェードレベル設定
+            }/////////////////////////////////////////////////////////////////////////////////////////////
             else
             {
-                mf.SetShadeLevel(1);
+                mf.SetShadeLevel(1);    //フェードレベル設定
             }
-        }
+        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
 
+    #region 値受け渡し
     //プレイヤーのトランスフォーム取得用プレイヤースクリプトも取得
     public void SetPlayer(Transform tf,PlayerScript ps)
     {
@@ -187,6 +195,7 @@ public class PlayerCameraScript : MonoBehaviour
     {
         return tf;
     }
+    #endregion
 
     private void Awake()
     {

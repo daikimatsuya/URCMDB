@@ -11,14 +11,14 @@ public class GoalParticle : MonoBehaviour
     //パーティクルの発生と消滅
     private void PariticleController()
     {
-        if (ts.GetGoalActionFlag())
+        if (ts.GetGoalActionFlag()) //ゴールしたらパーティクル再生////
         {
             ps.Play();
-        }
+        }/////////////////////////////////////////////////////////////////
         else
         {
-            ps.Pause();
-            ps.Clear();
+            ps.Pause(); //パーティクル停止
+            ps.Clear(); //パーティクル削除
         }
     }
     // Start is called before the first frame update

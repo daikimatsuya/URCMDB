@@ -8,21 +8,19 @@ public class MarkerScript : MonoBehaviour
     Transform tf;
 
     [SerializeField] private float markerPosY;
-    //private void MarkerController()
-    //{
 
-    //}
     //移動させる
     public void Move(Vector3 pos)
     {
-        if(tf != null)
+        if(tf != null)  //トランスフォームが取得されているとき///////////////////////////
         {
-            tf.position = new Vector3(pos.x, markerPosY, pos.z);
-        }
-        else
+            tf.position = new Vector3(pos.x, markerPosY, pos.z);    //移動させる
+        }/////////////////////////////////////////////////////////////////////////////////
+
+        else   //トランスフォームが取得できていない時
         {
-            tf=GetComponent<Transform>();
-            tf.position = new Vector3(pos.x, markerPosY, pos.z);
+            tf=GetComponent<Transform>();   //コンポーネント取得
+            tf.position = new Vector3(pos.x, markerPosY, pos.z);    //移動
         }
     }
     //消去

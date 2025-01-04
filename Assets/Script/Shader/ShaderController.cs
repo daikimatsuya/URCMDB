@@ -8,22 +8,22 @@ public class ShaderController : MonoBehaviour
     [SerializeField] private Shader radialBlur;
     [SerializeField,Range(0.0f,1.0f)] private float intensity;
     
-
     private Material material;
     private PlayerScript player;
 
     //ブラーの強度を代入
     private void BlurController()
     {
-        if(player != null)
+        if(player != null)  //プレイヤーがいたらブラー強度を上げる//
         {
             intensity = player.GetBlurIntensity();
-        }
+        }/////////////////////////////////////////////////////////////
+
         else
         {
             intensity = 0.0f;
         }
-        material.SetFloat("_BlurIntensity", intensity);
+        material.SetFloat("_BlurIntensity", intensity); //ブラー強度設定
     }
     //ブラーの強度を他スクリプトから設定する
     public void SetPlayer(PlayerScript ps)
@@ -33,7 +33,7 @@ public class ShaderController : MonoBehaviour
     //ブラーをかける
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        Graphics.Blit(source, destination, material);
+        Graphics.Blit(source, destination, material);   //ブラーをかける
     }
     // Start is called before the first frame update
     void Start()

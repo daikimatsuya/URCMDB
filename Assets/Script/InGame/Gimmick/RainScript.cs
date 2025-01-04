@@ -10,13 +10,16 @@ public class RainScript : MonoBehaviour
 
     [SerializeField] private float minDistance;
 
+    //ˆÚ“®‚³‚¹‚é
     private void Move()
     {
-        tf.position = new Vector3(cameraPos.position.x, cameraPos.position.y + minDistance, cameraPos.position.z);
+        tf.position = new Vector3(cameraPos.position.x, cameraPos.position.y + minDistance, cameraPos.position.z);  //ˆÚ“®
     }
+
+    //ƒJƒƒ‰‚ÌÀ•Wæ“¾
     public void SetCameraTransform(Transform cameraPos)
     {
-         this.cameraPos = cameraPos;
+         this.cameraPos = cameraPos;  //À•W‘ã“ü
     }
     // Start is called before the first frame update
     void Start()

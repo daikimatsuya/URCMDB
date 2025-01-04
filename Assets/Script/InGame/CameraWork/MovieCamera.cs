@@ -42,76 +42,83 @@ public class MovieCamera : MonoBehaviour
     //カメラを動かす関数
     public void CameraController()
     {
-        Move();    
-        SetNext();
+        Move();    //移動演出
+        SetNext();  //次の座標を設定
     }
     //移動させる関数
     private void Move()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //演出スキップ
             isSkip = true;
         }
-        if (isMove)
+        if (isMove) //演出させる/////////////////////////////////////////////////////
         {
-            if (moveTimeBuff > 0)
+            if (TimeCountScript.TimeCounter(ref moveTimeBuff))
             {
-
-
+                //座標移動
                 posBuff += moveSpeed;
                 rotBuff += RotSpeed;
 
-                SetTransform();
-
+                SetTransform();//ポジションとローテーションをトランスフォームに代入
             }
             else
             {
-
+                //終了フラグセット
                 ready = false;
                 isMove = false;
             }
-            moveTimeBuff--;
-        }
+        }////////////////////////////////////////////////////////////////////////////
 
     }
     //次に移動するために必要なものを準備する
     private void SetNext()
     {
-        if (!ready)
+        if (!ready) //演出準備が出来ていない時////////////////////////////////////////////////////////////////////////////////
         {
-            if (knotNumber > number)
+            if (knotNumber > number)    //設定した演出個数以内なら///////////////////////////////////////
             {
+                //初期値と目標値を設定
                 posBuff = elements[number].startPosition;
                 rotBuff = elements[number].startRotation;
 
                 targetPos = elements[number].targetPosition;
                 targetRot = elements[number].targetRotation;
+                ///////////////////////
 
+                //演出時間セット
                 TimeCountScript.SetTime(ref moveTimeBuff, elements[number].moveTime);
 
+                //移動速度算出
                 posRange = targetPos - posBuff;
                 rotRange = targetRot - rotBuff;
 
                 moveSpeed = posRange / moveTimeBuff;
                 RotSpeed = rotRange / moveTimeBuff;
-    
+                /////////////
 
+                //フラグ類セット
                 number++;
                 ready = true;
                 isMove = true;
-            }
-            else
+                ////////////////
+
+            }///////////////////////////////////////////////////////////////////////////////////////////////
+
+            else   //設定した回数演出が終わった///
             {
-                isEnd = true;
-                
-            }
-        }
+                isEnd = true;   //演出終了フラグオン               
+            }//////////////////////////////////////
+
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     private void SetTransform()
     {
         tf.position = posBuff;
         tf.eulerAngles=rotBuff;
     }
+    #region 値受け渡し
     public bool GetEnd()
     {
         return  isEnd;
@@ -128,6 +135,7 @@ public class MovieCamera : MonoBehaviour
     {
         return fadeoutTime;
     }
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

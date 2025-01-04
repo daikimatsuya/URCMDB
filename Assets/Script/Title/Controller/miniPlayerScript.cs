@@ -11,10 +11,8 @@ public class miniPlayerScript : MonoBehaviour
     [SerializeField] float maxHigh;
     [SerializeField] float maxLow;
 
-
     TitlegameScript ts;
     Transform tf;
-
 
     private Vector3 initialPos;
     private Vector3 initialRot;
@@ -24,61 +22,58 @@ public class miniPlayerScript : MonoBehaviour
     private bool isRolling;
     private bool isMove;
 
-
-
     //ミニプレーヤー管理
     private void miniPlayerController()
     {
-        if(ts.GetGameStartFlag())
+        if(ts.GetGameStartFlag())   //ミニゲームが始まったら回転を停止////
         {
             isRolling = false;
-        }
-        Move();
+        }/////////////////////////////////////////////////////////////////////
 
-        if(ts.GetResetFlag())
+        Move(); //移動または回転
+
+        if(ts.GetResetFlag())   //リセットフラグがオンになったらリセット////
         {
             ResetPlayer();
-        }
+        }//////////////////////////////////////////////////////////////////////
     }
     //移動
     private void Move()
     {
         if (isMove)
         {
-            ControllMove();
+            ControllMove(); //横移動と縦操作
         }
         else
         {
             if (isRolling)
             {
-                AutoRotation();
+                AutoRotation(); //自動回転する
             }
             else
             {
-                FixedRotation();
+                FixedRotation();    //回転を補正する
             }
         }
     }
-    private void AutoMove()
-    {
-
-    }
+    
     //位置初期化
     private void ResetPlayer()
     {
         isRolling = true;
         isMove = false;
-        ResetTransfrom();
+        ResetTransfrom();   //位置を初期化
     }
 
     //プレーヤーが操作して上下に移動
     private void ControllMove()
     {
         Vector3 pos=tf.position;
-        if (ts.GetMoveFlag())
+        if (ts.GetMoveFlag())   //移動フラグがオンになったら操作を受け付ける////////////
         {
             float movePow = tf.position.y;
 
+            //操作で上下移動
             if (Input.GetKey(KeyCode.W))
             {
                 movePow += moveSpeed;
@@ -87,6 +82,9 @@ public class miniPlayerScript : MonoBehaviour
             {
                 movePow -= moveSpeed;
             }
+            ////////////////
+            
+            //最大値と最小値でクランプする
             if (movePow >= maxHigh)
             {
                 movePow = maxHigh;
@@ -95,13 +93,10 @@ public class miniPlayerScript : MonoBehaviour
             {
                 movePow = maxLow;
             }
+            ///////////////////////////////
             SetVector3(ref pos, tf.position.x, movePow, tf.position.z);
             tf.position=pos;
-        }
-    }
-    private void RollingDirection()//後程追記する
-    {
-
+        }///////////////////////////////////////////////////////////////////////////////////
     }
     //タイトルの周りをくるくる回る
     private void AutoRotation()
@@ -113,6 +108,8 @@ public class miniPlayerScript : MonoBehaviour
     private void FixedRotation()
     {
         angles = tf.localEulerAngles;
+
+        //特定位置までプレイヤーの回転を継続する
         if (tf.eulerAngles.y <= autoRotateSpeed)
         {
             SetVector3(ref angles, tf.localEulerAngles.x, 0.0f, tf.localEulerAngles.z);
@@ -129,6 +126,7 @@ public class miniPlayerScript : MonoBehaviour
         {
             SetVector3(ref angles, tf.localEulerAngles.x, (tf.localEulerAngles.y-autoRotateSpeed), tf.localEulerAngles.z);
         }
+        ////////////////////////////////////////////////
         SetAngles();
     }
     #region 値受け渡し

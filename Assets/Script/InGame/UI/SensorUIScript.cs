@@ -16,31 +16,30 @@ public class SensorUIScript : MonoBehaviour
     private SensorScript.HIT hit;
     private SensorScript.HIT hitChildren;
 
-
     //センサーUI管理
     public void SensorUIController()
     {
-        SetHit();
-        SensorChecker(up,hit.up,hitChildren.up);
-        SensorChecker(down,hit.down,hitChildren.down);
-        SensorChecker(left,hit.left, hitChildren.left);
-        SensorChecker(right,hit.right, hitChildren.right);
+        SetHit();   //センサー情報取得
+        SensorChecker(up,hit.up,hitChildren.up);    //上センサー表示
+        SensorChecker(down,hit.down,hitChildren.down);  //下センサー表示
+        SensorChecker(left,hit.left, hitChildren.left); //左センサー表示
+        SensorChecker(right,hit.right, hitChildren.right);  //右センサー表示
     }
     //センサーUIのフラグチェック
     private void SensorChecker(Image image,bool flag,bool flagChild)
     {
         if (flag)
         {
-            SetCloseToObject(image);
+            SetCloseToObject(image);   //赤表示
             return;
         }
         if (flagChild)
         {
-            SetGreen(image);
+            SetGreen(image);    //緑表示
             return;
         }
 
-        SetSafe(image);
+        SetSafe(image); //表示なし
     }
     //ヒットフラグ取得
     private void SetHit()
@@ -54,8 +53,8 @@ public class SensorUIScript : MonoBehaviour
         }
         else
         {
-            hit = ss.GetHit();
-            hitChildren = ss.GetHitChild();
+            hit = ss.GetHit();  //内センサー情報取得
+            hitChildren = ss.GetHitChild(); //外センサー上表取得
         }
     }
     //センサーUIを透明にする

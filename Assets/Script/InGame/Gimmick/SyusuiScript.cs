@@ -38,82 +38,85 @@ public class SyusuiScript : MonoBehaviour
     //機能管理
     private void SyusuiController()
     {
-        Chase();
-        Move();
+        Chase();    //追跡
+        Move(); //移動
     }
     //移動
     private void Move()
     {
-        Vector3 anglesBuff = tf.eulerAngles;
+        Vector3 anglesBuff = tf.eulerAngles;    
+
+        //平面の速度算出
         moveSpeed.x = speed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.y));
         moveSpeed.z = speed * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.y));
+        /////////////////
 
+        //垂直方向と水平方向の速度算出
         moveSpeed.x = moveSpeed.x * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.x));
         moveSpeed.z = moveSpeed.z * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.x));
-
         moveSpeed.y = speed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.x)) * -1;
+        /////////////////////////////////
 
-
-        rb.velocity = moveSpeed;
+        rb.velocity = moveSpeed;    //速度代入
     }
     //範囲内にプレイヤーがいたら追跡する
     private void Chase()
     {
-        if (playerScript == null)
+        if (playerScript == null)   //プレイヤーがいなかったら追跡停止//
         {
-            isSearch = false;
-           
-        }
+            isSearch = false; 
+        }/////////////////////////////////////////////////////////////////
         if (isSearch)
         {
-            Aim();
-            KeepDis();
-
+            Aim();  //プレイヤーの方を向く
+            KeepDis();  //距離を一定に保つ
         }
         else
         {
-           LeftBase();
+           LeftBase();  //中心に戻る
         }
     }
     //プレイヤーのいる方向を取得
     private void Aim()
     {
+        playerDis = playerPos.position - tf.position;   //距離を算出
+        playerDisNormal = playerDis.normalized; //ノーマライズ化
 
-        playerDis = playerPos.position - tf.position;
-        playerDisNormal = playerDis.normalized;
-
-        float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
-        float vertical = Mathf.Atan2(Mathf.Sqrt(playerDisNormal.x * playerDisNormal.x + playerDisNormal.z * playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
-
+        float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;   //水平方向角度算出
+        float vertical = Mathf.Atan2(Mathf.Sqrt(playerDisNormal.x * playerDisNormal.x + playerDisNormal.z * playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg; //垂直方向角度算
         vertical -= 90;
+        Rowring(horizontal, vertical);  //回転させる
 
-        Rowring(horizontal, vertical);
-
-        tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);
+        tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z); //角度代入
     }
     //プレイヤーから離れず近すぎずを維持
     private void KeepDis()
     {
-        if (playerDis.magnitude < minDis)
+        if (playerDis.magnitude < minDis)   //近かったら減速する///
         {
             if(speed>minSpeed)
             {
                 speed -= brake;
             }            
-        }
-        if(playerDis.magnitude > maxDis)
+        }//////////////////////////////////////////////////////////////
+
+        if(playerDis.magnitude > maxDis)    //遠かったら加速する//////
         {
             if(speed<maxSpeed)
             {
                 speed += brake;
             }           
-        }
+        }//////////////////////////////////////////////////////////////////
     }
     //プレイヤーを追跡していないときの挙動
     private void NormalOperation()
     {
+        //角度固定
         float horizontal = Row.y;
         float vertical = 0;
+        ///////////
+
+        //中心点を起点にぐるぐるさせる
         if (tf.position.y < normalPosY - normalPosRange)
         {
             vertical -= rowSpeed.x*20;
@@ -125,29 +128,34 @@ public class SyusuiScript : MonoBehaviour
         horizontal += rowSpeed.y / 10;
         Rowring(horizontal, vertical);
         tf.localEulerAngles = Row;
+        //////////////////////////////
     }
     //拠点から一定数離れたら戻る
     private void LeftBase()
     {
-        Vector2 dis = new Vector2(basePos.position.x - tf.position.x,basePos.position.z-tf.position.z);
-        float dis2=dis.magnitude;
-        if (dis2 > maxBaseDis)
+        Vector2 dis = new Vector2(basePos.position.x - tf.position.x,basePos.position.z-tf.position.z); //中心との距離算出
+        float dis2=dis.magnitude;   //距離をfloatに変換
+
+        if (dis2 > maxBaseDis)  //許容値よりも離れると引き返す////
         {
             if(!isLeftBase)
             {
                 isLeftBase = true;
                 timeBuff = backTimer * 60;
             }
-            
-        }
-        if (dis2 <= minBaseDis)
+        }/////////////////////////////////////////////////////////////
+
+        if (dis2 <= minBaseDis) //中心付近まで来るとまた広がりだす///
         {
             isLeftBase = false;
-        }
-        if(isLeftBase)
+        }//////////////////////////////////////////////////////////////////
+
+        if(isLeftBase)  //中心地点へ戻る/////////////////////////////////////////////////////////
         { 
             Vector3 disVector= new Vector3(dis.x, 0, dis.y).normalized;
             float horizontal = Mathf.Atan2(disVector.x, disVector.z) * Mathf.Rad2Deg;
+
+            //許容時間を越したら加算から代入に変更
             if(timeBuff > 0)
             {
                 Rowring(horizontal, Row.x);
@@ -156,19 +164,21 @@ public class SyusuiScript : MonoBehaviour
             {
                 Row.y = horizontal;
             }
+            ////////////////////////////////////////
 
             tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);
 
             timeBuff--;
-        }
+        }////////////////////////////////////////////////////////////////////////////////////////
         else
         {
-            NormalOperation();
+            NormalOperation();  //通常移動
         }
     }
     //回転
     private void Rowring(float horizontal,float vertical)
     {
+        //水平方向回転角遷移/////////////
         if (horizontal - Row.y > 0)
         {
             Row.y += rowSpeed.y;
@@ -185,7 +195,9 @@ public class SyusuiScript : MonoBehaviour
                 Row.y = horizontal;
             }
         }
+        /////////////////////////////////
 
+        //垂直方向回転角遷移////////////
         if (vertical - Row.x > 0)
         {
             Row.x += rowSpeed.x;
@@ -202,6 +214,7 @@ public class SyusuiScript : MonoBehaviour
                 Row.x = vertical;
             }
         }
+        ////////////////////////////////
     }
 
 

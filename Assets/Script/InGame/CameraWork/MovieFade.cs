@@ -26,27 +26,31 @@ public class MovieFade : MonoBehaviour
 
         isEffectEnd = false;
 
+        //上下の帯の演出の位置操作
         if (shadeLevel == 0)
         {
-            Openly();
+            Openly();   //完全に開く
         }
         else if(shadeLevel == 1)
         {
-            MovieShade();
+            MovieShade();   //上下に帯みたいに残る
         }
         else if(shadeLevel == 2)
         {
-            ParfectShade();
+            ParfectShade(); //完全に画面を覆う
         }
-        else{
+        else
+        {
             isEffectEnd = true;
-            Nothing();
+            Nothing();  //演出終了
         }
+        ///////////////////////////
         SetPos();
     }
     //完全に画面を黒帯で囲う
     private void ParfectShade()
     {
+        //演出用のオブジェクトを中心に近づける
         if(posBuff.y > parfectShadePos)
         {
             isShade = false;
@@ -57,11 +61,14 @@ public class MovieFade : MonoBehaviour
                 isShade = true;
             }
         }
+        ///////////////////////////////////////
     }
     //上下に帯を表示する
     private void MovieShade()
     {
         isShade = false;
+
+        //下にずれていたら上にずらす
         if (posBuff.y < movieShadePos)
         {
             posBuff.y += moveSpeed;
@@ -70,6 +77,9 @@ public class MovieFade : MonoBehaviour
                 posBuff.y = movieShadePos;
             }
         }
+        ////////////
+     
+        //上にずれていたら下にずらす
         else if (posBuff.y > movieShadePos)
         {
 
@@ -79,11 +89,14 @@ public class MovieFade : MonoBehaviour
                 posBuff.y = movieShadePos;
             }
         }
+        ///////////
     }
     //完全に帯を非表示にする
     private void Openly()
     {
         isShade = false;
+
+        //画面外に向かってずらす
         if (posBuff.y > parfectShadePos)
         {
             posBuff.y -= moveSpeed;
@@ -94,10 +107,12 @@ public class MovieFade : MonoBehaviour
                 isEffectEnd = true;
             }
         }
+        ////////////////////////
     }
     //演出なく全開にする
     private void Nothing()
     {
+        //値代入
         if (upside)
         {
             posBuff.y = openlyPos;
@@ -106,9 +121,18 @@ public class MovieFade : MonoBehaviour
         {
             posBuff.y = -openlyPos;
         }
+        ////////
         isShade = true;
     }
-    
+
+    //値をトランスフォームに代入
+    private void SetPos()
+    {
+        upTf.localPosition = posBuff;
+        downTf.localPosition = -posBuff;
+    }
+
+    #region 値受け渡し
     //帯のレベルを取得
     public void SetShadeLevel(int level)
     {
@@ -124,12 +148,8 @@ public class MovieFade : MonoBehaviour
     {
         return isShade;
     }
-    //値をトランスフォームに代入
-    private void SetPos()
-    {
-        upTf.localPosition = posBuff;
-        downTf.localPosition = -posBuff;
-    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {

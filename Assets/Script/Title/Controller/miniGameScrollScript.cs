@@ -15,15 +15,15 @@ public class miniGameScrollScript : MonoBehaviour
     //ミニゲームのスクロール管理
     private void ScrollController()
     {
-        if (ts.GetMoveFlag())
+        if (ts.GetMoveFlag())   //ミニゲームが始まったらスクロールする///////
         {
             Scroll();
-        }
+        }/////////////////////////////////////////////////////////////////////////
 
-        if(ts.GetResetFlag())
+        if(ts.GetResetFlag())   //リセットフラグらオンになったら座標リセット///
         {
             ScrollReset();
-        }
+        }//////////////////////////////////////////////////////////////////////////
     }
     //スクロールさせる
     private void Scroll()

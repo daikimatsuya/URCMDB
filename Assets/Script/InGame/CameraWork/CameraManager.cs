@@ -26,63 +26,73 @@ public class CameraManager : MonoBehaviour
     //カメラ管理
     public  void CameraController()
     {
-        mf.MovieFadeController();
-        if(isPlayerDead )
+        mf.MovieFadeController();   //カメラのフェード
+
+        if (isPlayerDead )  //プレイヤーが爆発したか////////////////
         {
-            ExplodeCameraController();
-        }
-        if (player == null)
+            ExplodeCameraController();  //爆発時のカメラの動き
+        }//////////////////////////////////////////////////////////////
+
+
+        if (player == null) //プレイヤーオブジェクトがない時///////
         {
-            isPlayerDead = true;     
-            watarEffect.SetActive(false);
-        }
-        else
+            isPlayerDead = true;   
+            watarEffect.SetActive(false);   //水中のエフェクト停止
+        }/////////////////////////////////////////////////////////////
+
+        else   //プレイヤーオブジェクトがあるとき//////////////////////////////////////////////////////
         {
-            SetWaterEffect();
-            if (mf.GetEffectEnd())
+            SetWaterEffect();   //水中のカメラ演出管理
+            if (mf.GetEffectEnd())  //フェード演出が終わったら////////////////
             {
                 isPlayerDead= false;
 
-                if (player.GetControll())
+                if (player.GetControll())   //プレイヤーが操作できるとき////
                 {
-                    pcs.FollowPlayerInShoot();
-                }
-                else
+                    pcs.FollowPlayerInShoot();  //プレイヤーを追従
+                }/////////////////////////////////////////////////////////////
+
+                else   //プレイヤーが発射台に固定されてる時///
                 {
                     pcs.FollowPlayerInSet();
-                }
-            }
-            else
+                }////////////////////////////////////////////////
+
+            }///////////////////////////////////////////////////////////////////////
+
+            else   //フェード演出/////////////
             {
-                pcs.MovieCut();
-            }
-            CanvasActive(mf.GetEffectEnd());
+                pcs.MovieCut(); //ムービー中の演出
+            }/////////////////////////////////
+
+            CanvasActive(mf.GetEffectEnd());    //演出時のCanvas切り替え
         }
     }
     //爆発時のカメラ
     private void ExplodeCameraController()
     {
-        if(gm.GetIsHitTarget())
+        if(gm.GetIsHitTarget()) //目標にあたった時/////////////
         {
-            if (gm.GetTargetDead())
+            if (gm.GetTargetDead()) //目標が破壊されたとき/
             {
                 pcs.ClearCamera();
                 return;
-            }
+            }///////////////////////////////////////////////////
             pcs.HitExplodeCamera();
             return;
-        }
-        pcs.MissExplodeCamera();
+        }////////////////////////////////////////////////////////
+        pcs.MissExplodeCamera();    
     }
     //水に入った時の演出管理
     private void SetWaterEffect()
     {
         if (pcs.GetPos().y <= drownPos)
         {
+            //指定した座標の下に入ると画面が青くなる
             watarEffect.SetActive(true);
         }
         else
         {
+            //上がると戻る
             watarEffect.SetActive(false);
         }
     }
@@ -91,17 +101,19 @@ public class CameraManager : MonoBehaviour
     {
         if (flag)
         {
+            //ゲーム画面オン
             movieCanvas.SetActive(false);
             mainCanvas.SetActive(true);
         }
         else
         {
+            //演出画面オン
             mainCanvas.SetActive(false);
             movieCanvas.SetActive(true);
         }
     }
 
-
+    #region 値受け渡し
     public PlayerCameraScript GetPlayerCamera()
     {
         return pcs;
@@ -119,6 +131,7 @@ public class CameraManager : MonoBehaviour
         pcs.SetPlayer(this.player.transform,this.player);
     }
 
+    #endregion
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void InitialSet()
     {

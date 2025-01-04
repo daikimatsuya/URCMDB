@@ -31,10 +31,6 @@ public class SensorScript : MonoBehaviour
 
     private SensorScript[] oneBlelowScript=new SensorScript[4];
 
-
-
-
-
     //外周のセンサーチェック
     private void SetSensorChildren(bool flag)
     {
@@ -77,27 +73,25 @@ public class SensorScript : MonoBehaviour
         }
     }
 
-
-
     public HIT GetHit()
     {
-        if (master)
+        if (master) //マスターならフラグを管理//////////////////////////////
         {
             hit.up = oneBlelowScript[(int)Script.up].GetHit().up;
             hit.down = oneBlelowScript[(int)Script.down].GetHit().down;
             hit.right = oneBlelowScript[(int)Script.right].GetHit().right;
             hit.left = oneBlelowScript[(int)Script.left].GetHit().left;
-
-        }
-        return hit;
+        }/////////////////////////////////////////////////////////////////////
+        return hit; //マスター以外ならフラグを返す
     }
     public HIT GetHitChild()
     {
-        if (children)
+        if (children)   //子オブジェクトセンサーならフラグを返す///
         {
-            return hit;
-        }
-        if (master)
+            return hit; 
+        }/////////////////////////////////////////////////////////////
+
+        if (master) //マスターならフラグを管理/////////////////////////////////////////
         {
             hitChild.up = oneBlelowScript[(int)Script.up].GetHitChild().up;
             hitChild.down= oneBlelowScript[(int)Script.down].GetHitChild().down;
@@ -105,14 +99,18 @@ public class SensorScript : MonoBehaviour
             hitChild.left= oneBlelowScript[(int)Script.left].GetHitChild().left;
 
             return hitChild;
-        }
+        }///////////////////////////////////////////////////////////////////////////////////
+
+        //フラグと子オブジェクトのフラグを返す/////
         hitChild = oneBlelowScript[0].GetHit();
         return hitChild;
+        //////////////////////////////////////////////
     }
 
 
     private void OnTriggerStay(Collider other)
     {
+        //あたってもいいものは無視する///////////////////////
         if (other.CompareTag("SensorChildren"))
         {
             return;
@@ -141,6 +139,8 @@ public class SensorScript : MonoBehaviour
         {
             return;
         }
+        ////////////////////////////////////////////////////////////
+        
          if (master)
         {
             return;
@@ -162,16 +162,16 @@ public class SensorScript : MonoBehaviour
         }
         if (!master)
         {
-            oneBlelowScript[0] = this.gameObject.transform.GetChild(0).gameObject.GetComponent<SensorScript>();
+            oneBlelowScript[0] = this.gameObject.transform.GetChild(0).gameObject.GetComponent<SensorScript>(); //子オブジェクトのコンポーネント取得
             return;
         }
 
+        //四方のセンサーコンポーネント取得
         oneBlelowScript[(int)Script.up] = this.gameObject.transform.GetChild(0).gameObject.GetComponent<SensorScript>();
         oneBlelowScript[(int)Script.down] = this.gameObject.transform.GetChild(1).gameObject.GetComponent<SensorScript>();
         oneBlelowScript[(int)Script.left] = this.gameObject.transform.GetChild(2).gameObject.GetComponent<SensorScript>();
         oneBlelowScript[(int)Script.right] = this.gameObject.transform.GetChild(3).gameObject.GetComponent<SensorScript>();
-
-        //int test2 = oneBlelowScript[(int)Script.up].GetTest();
+        /////////////////////////////////////
     }
 
     private void FixedUpdate()

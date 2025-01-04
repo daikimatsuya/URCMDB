@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDeff: 10
   rotSpeed: 1
+  maxRot: 10
 --- !u!114 &5475272097197440115
 MonoBehaviour:
   m_ObjectHideFlags: 0

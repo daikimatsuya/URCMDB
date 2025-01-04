@@ -6,9 +6,6 @@ using UnityEngine;
 //óéÇ∆ÇµÇΩä‚ä«óù
 public class RoclScript : MonoBehaviour
 {
-
-
-
     Rigidbody rb;
     Transform tf;
 
@@ -18,17 +15,18 @@ public class RoclScript : MonoBehaviour
     //ä«óù
     private void RockController()
     {
-        if (tf.position.y < breakArea)
+        if (tf.position.y < breakArea)  //ê›íËYç¿ïWÇâ∫âÒÇ¡ÇΩÇÁîjâÛÇ∑ÇÈ///
         {
             BreakRock();
-        }
-        Fall();
+        }//////////////////////////////////////////////////////////////////////
+
+        Fall(); //óéâ∫
     }
     //óéâ∫èàóù
     private void Fall()
     {
         rb.velocity = Vector3.zero;
-        rb.velocity = new Vector3(0.0f, -fallSpeed, 0.0f);
+        rb.velocity = new Vector3(0.0f, -fallSpeed, 0.0f);  //óéâ∫ë¨ìxë„ì¸
     }
     //ä‚ÇîjâÛÇ∑ÇÈ
     private void BreakRock()
@@ -36,16 +34,16 @@ public class RoclScript : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    //íléÛÇØìnÇµÇ±Ç±Ç©ÇÁ
-    public void GetBreakArea(float posY)
+    #region íléÛÇØìnÇµ
+    public void SetBreakArea(float posY)
     {
         breakArea = posY;
     }
-    public void GetFallSpeed(float speed)
+    public void SetFallSpeed(float speed)
     {
         fallSpeed= speed;
     }
-    //Ç±Ç±Ç‹Ç≈
+    #endregion
 
     // Start is called before the first frame update
     void Start()

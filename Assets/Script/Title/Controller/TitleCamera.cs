@@ -23,60 +23,51 @@ public class TitleCamera : MonoBehaviour
     //カメラを動かす
     private void TitleCameraController()
     {
-        Move(ts.GetIsStageSelect());
-        SceneChangeMove();
+        Move(ts.GetIsStageSelect());    //上下移動
     }
     //移動
     private void Move(bool isStageSelect)
     {
         Vector3 dis;
 
-        if (isStageSelect)
+        if (isStageSelect)  //ステージセレクトフラグがオンになると下に移動/////////////////////////////////////////////////////
         {
             float x = 1 - Mathf.Pow(1 - (time / moveTime), 3);
             if (time < moveTime)
             {           
-                dis = movePos - firstPos;
-                tf.position = new Vector3(firstPos.x + (dis.x * x), firstPos.y + (dis.y * x),tf.position.z);
+                dis = movePos - firstPos;   //差を算出
+                tf.position = new Vector3(firstPos.x + (dis.x * x), firstPos.y + (dis.y * x),tf.position.z);    //徐々に移動させる
                 moveEnd = false;
-                ts.SendMoveEnd(moveEnd);
+                ts.SendMoveEnd(moveEnd);    //フラグ代入
                 time++;
             }
             else
             {
-                tf.position = new Vector3(movePos.x, movePos.y,tf.position.z);
+                tf.position = new Vector3(movePos.x, movePos.y,tf.position.z);  //座標を代入
                 moveEnd = true;
-                ts.SendMoveEnd(moveEnd);
+                ts.SendMoveEnd(moveEnd);    //フラグ代入
             }                       
-        }
-        else
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        else　//ステージセレクトフラグがオフになると上に移動/////////////////////////////////////////////////////////
         {
             float x = Mathf.Pow((time / moveTime), 3);
             if (time>0)
             {
-                dis = movePos - firstPos;
-                tf.position = new Vector3(firstPos.x - (dis.x * x), firstPos.y + (dis.y * x), tf.position.z);
+                dis = movePos - firstPos;   //差を算出
+                tf.position = new Vector3(firstPos.x - (dis.x * x), firstPos.y + (dis.y * x), tf.position.z);   //徐々に移動させる
                 moveEnd = false;
-                ts.SendMoveEnd(moveEnd);
+                ts.SendMoveEnd(moveEnd);    //フラグ代入
                 time--;
             }
             else
             {
-                tf.position = new Vector3(firstPos.x, firstPos.y,tf.position.z);
+                tf.position = new Vector3(firstPos.x, firstPos.y,tf.position.z);  //座標を代入
                 moveEnd = true;
-                ts.SendMoveEnd(moveEnd);
+                ts.SendMoveEnd(moveEnd);    //フラグ代入
             }
-        }
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
-    //演出に使う予定
-    private void SceneChangeMove()
-    {
-        if(ts.GetIsSceneChangeModeFlag())
-        {
-           
-        }
-    }
-
 
     // Start is called before the first frame update
     void Start()

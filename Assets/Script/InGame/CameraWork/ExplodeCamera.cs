@@ -17,32 +17,34 @@ public class ExplodeCamera : MonoBehaviour
     [SerializeField] private Vector3 clearCameraRot;
 
     private Vector3 pos;
-    //プレイヤーが爆発したときのカメラの動き
+    //プレイヤーが壁とかで爆発したときのカメラの動き
     public Vector3 MissExplodeCamera(ref Vector3 rotation)
     {
-        Rotation(rotation);
+        Rotation(rotation); //回転させる
         rotation = new Vector3(directionX, rotation.y + rotateSpeed, 0);
         return pos;
     }
     //ターゲットにぶつかって爆発した時のカメラ挙動
     public Vector3 HitTargetCamera(ref Vector3 rotation)
     {
-        rotation = hitCameraRot;
+        rotation = hitCameraRot;    //角度に決めた値代入
         return hitCameraPos;
     }
     //クリア時のカメラ
     public Vector3 ClearCamera(ref Vector3 rotation)
     {
-        rotation = clearCameraRot;
+        rotation = clearCameraRot;    //角度に決めた値代入
         return clearCameraPos;
     }
 
     //爆発時のカメラを回す
     private void Rotation(Vector3 rotation)
     {
+        //平面で値を出す
         pos.x = -distance * (float)Math.Sin(ToRadianScript.ToRadian(ref rotation.y));
         pos.z = -distance * (float)Math.Cos(ToRadianScript.ToRadian(ref rotation.y));
 
+        //水平方向と垂直方向で値を出す
         pos.x = pos.x * (float)Math.Cos(ToRadianScript.ToRadian(ref rotation.x));
         pos.z = pos.z * (float)Math.Cos(ToRadianScript.ToRadian(ref rotation.x));
 

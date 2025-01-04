@@ -6,6 +6,7 @@ using UnityEngine;
 public class CompassScript : MonoBehaviour
 {
     Transform tf;
+
     //コンパスがカメラの回転についていかないようにする関数
     private void StopRot()
     {

@@ -8,7 +8,7 @@ public class flameEffectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Å@
     }
 
     // Update is called once per frame

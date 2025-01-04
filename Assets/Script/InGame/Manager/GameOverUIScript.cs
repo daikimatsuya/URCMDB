@@ -11,7 +11,6 @@ public class GameOverUIScript : MonoBehaviour
     [SerializeField] private Transform cursorPos;
     [SerializeField] private TextMeshProUGUI targetHpTex;
 
-
     private GameObject target;
     private TargetScript targetScript;
     private int targetHp;
@@ -19,16 +18,12 @@ public class GameOverUIScript : MonoBehaviour
     //リトライを選択したときにカーソルを移動
     public void MoveRetry()
     {
-
-        cursorPos.localPosition = new Vector3(retryPos, cursorPos.localPosition.y, cursorPos.localPosition.z);
-        
+        cursorPos.localPosition = new Vector3(retryPos, cursorPos.localPosition.y, cursorPos.localPosition.z);  
     }
     //タイトルに戻るを洗濯したときにカーソルを移動
     public void MoveBackTitle()
     {
-
-        cursorPos.localPosition = new Vector3(backTitlePos, cursorPos.localPosition.y, cursorPos.localPosition.z);
-        
+        cursorPos.localPosition = new Vector3(backTitlePos, cursorPos.localPosition.y, cursorPos.localPosition.z);  
     }
     #region 値受け渡し
     public float GetPos()
@@ -48,8 +43,10 @@ public class GameOverUIScript : MonoBehaviour
     {
         if (target != null)
         {
-            SetTargetHp();
-            if (targetHp > 0)
+            SetTargetHp();  //ターゲットの体力取得
+
+            //ターゲットの体力表示///////////////////////
+            if (targetHp > 0)  
             {
                 targetHpTex.text = "Hp" + targetHp;
             }
@@ -57,11 +54,12 @@ public class GameOverUIScript : MonoBehaviour
             {
                 targetHpTex.text = "Clear";
             }
+            //////////////////////////////////////////////
         }
-        else
+        else   //クリア表示//////////////
         {
             targetHpTex.text = "Clear";
-        }
+        }/////////////////////////////////
 
     }
     // Start is called before the first frame update

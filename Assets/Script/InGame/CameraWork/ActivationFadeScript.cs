@@ -31,9 +31,12 @@ public class ActivationFadeScript : MonoBehaviour
         {
             if (TimeCountScript.TimeCounter(ref life))
             {
+                //演出時間が終わったらゲームを開始してオブジェクトを削除
                 gm.SetGameStartFlag(true);
                 Destroy(GameObject.FindWithTag("FadeObject"));
             }
+
+            //フェードさせる
             if (upFade)
             {
                 UpFade();
@@ -49,7 +52,7 @@ public class ActivationFadeScript : MonoBehaviour
         }
 
      
-            SetStart();
+            SetStart();//1フレーム遅らせる
         
     }
     //上に移動する奴を管理
@@ -57,6 +60,7 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if(TimeCountScript.TimeCounter(ref delayBuff))
         {
+            //上に動かす
             MoveFadeObject(moveSpeed);
         }
 
@@ -66,6 +70,7 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if (TimeCountScript.TimeCounter(ref delayBuff))
         {
+            //下に動かす
             MoveFadeObject(-moveSpeed);
         }
     }
@@ -74,12 +79,14 @@ public class ActivationFadeScript : MonoBehaviour
     {
         if (TimeCountScript.TimeCounter(ref deleteTimeBuff))
         {
+            //時間で消していく
             Destroy(this.gameObject);
         }
     }
     //速度を足して座標をトランスフォームにいれる
     private void MoveFadeObject(float speed)
     {
+        //スピードを加算してオブジェクトを移動させる
         speedBuff += speed;
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y + speedBuff, tf.localPosition.z);
     }
@@ -91,25 +98,24 @@ public class ActivationFadeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //コンポーネント取得
         tf = GetComponent<Transform>();
         gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
 
 
         start = false;
 
-        if (upFade)
-        {
-            delayBuff = (int)(moveDelay * 60);
-        }
-        if (downFade)
-        {
-            delayBuff = (int)(moveDelay * 60);
-        }
+        //制限時間をフレームで設定
         if (deleteFade)
         {
-            deleteTimeBuff = (int)(deleteTime * 60);
+            TimeCountScript.SetTime(ref deleteTimeBuff, deleteTime);
         }
-        life = life * 60;
+        else
+        {
+            TimeCountScript.SetTime(ref delayBuff, moveDelay);
+        }
+
+        TimeCountScript.SetTime(ref life, life);
         
     }
 

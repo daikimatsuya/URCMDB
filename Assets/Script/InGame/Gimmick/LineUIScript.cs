@@ -20,39 +20,44 @@ public class LineUIScript : MonoBehaviour
     //予測線設置
     public void SetLine(Vector3 Pos,Vector3 targetLength,float time)
     {
+        //照準があうまでブレさせる///////////////////////////////////////////////////////////////////////////////////////////
         float randX = (Random.Range(-time * randPow, time * randPow));
         float randY = (Random.Range(-time * randPow, time * randPow));
         float randZ = (Random.Range(-time * randPow, time * randPow));
         line.SetPosition(0, new Vector3( targetLength.x+randX , targetLength.y+randY,targetLength.z + randZ));
         pos.position = Pos;
-        if(Physics.Raycast(pos.position,Vector3.Normalize(targetLength),out hit, Vector3.Magnitude(targetLength)))
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        if(Physics.Raycast(pos.position,Vector3.Normalize(targetLength),out hit, Vector3.Magnitude(targetLength)))  //レイキャストでプレイヤーと砲身の間に障害物があるかを確認////////////////
         {
-            if (!hit.collider.CompareTag("Player"))
+            if (!hit.collider.CompareTag("Player")) //プレイヤーに一番初めにあたったら//////
             {
                 isShade = true;
-            }
+            }/////////////////////////////////////////////////////////////////////////////////////
             else 
             {
                 isShade = false;
             }
-        }
+        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     //予測線削除
     public void Death()
     {
-        Destroy(this.gameObject);
+        Destroy(this.gameObject);   //オブジェクト削除
     }
     //色を赤に変更
     public void SetRed()
     {
+        //赤にする
         line.startColor = Color.red;
         line.endColor = Color.red;
+        ///////////
     }
     //色を赤と黄で点滅
     public void SetWarning()
     {
-        if (timeBuff <= 0)
+        if (TimeCountScript.TimeCounter(ref timeBuff))  //時間で点滅させる///////////
         {
             if (red)
             {
@@ -68,37 +73,29 @@ public class LineUIScript : MonoBehaviour
                 SetTime();
                 red = true;
             }
-        }
-        timeBuff--;
+        }////////////////////////////////////////////////////////////////////////////////////
     }
     //色を透明にする
     public void SetVoid()
     {
+        //透明にさせる
         line.startColor = new Color(0, 0, 0, 0);
         line.endColor = new Color(0, 0, 0, 0);    
+        ///////////////
     }
     //時間を初期化
     private void SetTime()
     {
-        timeBuff = (int)(colorChangeTime * 60);
+        TimeCountScript.SetTime(ref timeBuff, colorChangeTime);
     }
     //プレイヤーが撃てるかどうかを取得
     public bool GetShade()
     {
         return isShade;
     }
-    public void OnTriggerStay(Collider other)
-    {
-        //if (other.tag != "Player")
-        //{
-        //      brock=true;
-        //}
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        //playerPos=GameObject.FindWithTag("Player").GetComponent<Transform>();
         pos=GetComponent<Transform>();
         line = GetComponent<LineRenderer>();
 

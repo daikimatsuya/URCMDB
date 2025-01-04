@@ -20,36 +20,34 @@ public class RockFallScript : MonoBehaviour
     //管理
     private void FallRockController()
     {
-        spawnPos = tf.position;
-        if (intervalBuff < 0) 
+        spawnPos = tf.position; //現在地を代入
+        if (TimeCountScript.TimeCounter(ref intervalBuff)) 
         {
-            SpawnRock();
+            SpawnRock();    //岩生成
         }
-        IntervalTimer();
+
     }
     //岩生成
     private void SpawnRock()
     {
+        //生成する範囲とサイズセット
         float randX = Random.Range(0, spawnWidth.x);
         float randY = Random.Range(0, spawnWidth.y);
         randX -= spawnWidth.x / 2;
         randY -= spawnWidth.y / 2;
         float randScale=Random.Range(rockSize.x, rockSize.y);
+        //////////////////////////////
 
-        GameObject _=Instantiate(rock);
-        _.transform.position = new Vector3(spawnPos.x + randX, spawnPos.y, spawnPos.z + randY);
-        _.transform.localScale = new Vector3(_.transform.localScale.x * randScale, _.transform.localScale.y * randScale, _.transform.localScale.z * randScale);
-        RoclScript rs=_.GetComponent<RoclScript>();
-        rs.GetBreakArea(breakArea);
-        rs.GetFallSpeed(fallSpeed);
+        GameObject _=Instantiate(rock); //岩生成
+        _.transform.position = new Vector3(spawnPos.x + randX, spawnPos.y, spawnPos.z + randY); //座標代入
+        _.transform.localScale = new Vector3(_.transform.localScale.x * randScale, _.transform.localScale.y * randScale, _.transform.localScale.z * randScale); //サイズ代入
+        RoclScript rs=_.GetComponent<RoclScript>(); //コンポーネント取得
+        rs.SetBreakArea(breakArea); //破壊座標代入
+        rs.SetFallSpeed(fallSpeed); //速度代入
 
-        intervalBuff = (int)(spawnInterval * 60);
+        TimeCountScript.SetTime(ref intervalBuff, spawnInterval);
     }
-    //インターバル管理
-    private void IntervalTimer()
-    {
-        intervalBuff--;
-    }
+
     void Start()
     {
         tf=GetComponent<Transform>();

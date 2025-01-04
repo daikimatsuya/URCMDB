@@ -2,28 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ブースト時のエフェクト管理
 public class BoostEffectScript : MonoBehaviour
 {
     [SerializeField] private float lifeTime;
     private int lifeTimeBuff;
 
     private bool deleteFlag=false;
+
+    //フラグ管理
     public void CountTime()
     {
-        if(lifeTimeBuff<=0)
+        if(TimeCountScript.TimeCounter(ref lifeTimeBuff))
         {
             deleteFlag = true;
         }
-        TimeCountScript.TimeCounter(ref lifeTimeBuff);
     }
+    //生存時間セット
     public void SetTime()
     {
         TimeCountScript.SetTime(ref lifeTimeBuff, lifeTime);
     }
+    //デリートフラグを返す
     public bool IsDelete()
     {
         return deleteFlag;
     }
+    //デリート
     public void Break()
     {
         Destroy(this.gameObject);

@@ -15,25 +15,24 @@ public class WeatherUIScript : MonoBehaviour
     //天気アイコン変更
     private void SetMaterial()
     {
-
         WeatherIcon.sprite = rain;
     }
     //降水確率表示
     private void SetChanceOfRain(int chanceOfRain)
     {
-        chanceOfRainTex=this.chanceOfRain.GetComponent<TextMeshProUGUI>();
-        chanceOfRainTex.text = chanceOfRain + "%";
+        chanceOfRainTex=this.chanceOfRain.GetComponent<TextMeshProUGUI>();  //降水確率を取得
+        chanceOfRainTex.text = chanceOfRain + "%";  //降水確率表示
     }
     //UI表示変更
     public void SetWeatherScript(SelectWeatherScript sws)
     {
         if (sws != null)
         {
-            if (sws.GetIsRain())
+            if (sws.GetIsRain())    //雨だったら
             {
-                SetMaterial();
+                SetMaterial();  //アイコンのマテリアルを雨マークに変更
             }
-            SetChanceOfRain(sws.GetChanceOfRain());
+            SetChanceOfRain(sws.GetChanceOfRain()); //降水確率表示
         }
     }
     

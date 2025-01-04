@@ -6,13 +6,10 @@ using UnityEngine;
 //スピードアップリング管理
 public class SpeedUpRingScript : MonoBehaviour
 {
-
     [SerializeField] private float shrinkSpeed;
     [SerializeField] private float ringSize;
     [SerializeField] private float offsetTime;
     [SerializeField] private GameObject marker;
-
-
 
     private bool isGet;
 
@@ -23,37 +20,35 @@ public class SpeedUpRingScript : MonoBehaviour
     private GameManagerScript gm;
     //管理
     private void SpeedUpRingController()
-    {
-        
-        ON();
-        Off();
+    {   
+        ON();   //起動管理
+        Off();  //オフ管理
     }
     //消す
     private void Off()
     {
-        if (isGet)
+        if (isGet)  //取得されたら機能を消す//////////
         {
-            tf.localScale = new Vector3(0, 0, 0);
+            tf.localScale = new Vector3(0, 0, 0);   //サイズを０にする
             if(ms!=null)
             {
-                ms.Delete();
+                ms.Delete();    //マーカー削除
             }
-        }
+        }//////////////////////////////////////////////
     }
     //再表示
     private void ON()
     {
-        if (gm.IsPlayerDead()==true)
+        if (gm.IsPlayerDead()==true)    //プレイヤーが爆発したら機能を起動
         {
-            isGet = false;
-            tf.localScale = new Vector3(1, ringSize, ringSize);
-            collider_.enabled = true;
+            isGet = false;  //取得フラグを消す
+            tf.localScale = new Vector3(1, ringSize, ringSize); //サイズ初期化
+            collider_.enabled = true;   //コライダーオン
             if(ms==null)
             {
-                CreateMarker();
-            }
-            
-        }
+                CreateMarker(); //マーカー生成
+            }        
+        }//////////////////////////////////////////////////////////////////////
     }
     //マーカー生成
     private void CreateMarker()
@@ -61,13 +56,11 @@ public class SpeedUpRingScript : MonoBehaviour
         GameObject _ = Instantiate(marker);
         ms = _.GetComponent<MarkerScript>();
         ms.Move(tf.position);
-
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-
             isGet = true;
             collider_.enabled = false;
         }
