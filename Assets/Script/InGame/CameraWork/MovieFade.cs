@@ -23,7 +23,6 @@ public class MovieFade : MonoBehaviour
     //このスクリプトを動かす関数
     public void MovieFadeController()
     {
-
         isEffectEnd = false;
 
         //上下の帯の演出の位置操作

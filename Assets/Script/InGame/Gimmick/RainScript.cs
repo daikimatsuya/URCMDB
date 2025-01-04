@@ -17,7 +17,7 @@ public class RainScript : MonoBehaviour
     }
 
     //ƒJƒƒ‰‚ÌÀ•Wæ“¾
-    public void SetCameraTransform(Transform cameraPos)
+    public void SetCameraTransform(in Transform cameraPos)
     {
          this.cameraPos = cameraPos;  //À•W‘ã“ü
     }

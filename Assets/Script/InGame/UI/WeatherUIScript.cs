@@ -24,7 +24,7 @@ public class WeatherUIScript : MonoBehaviour
         chanceOfRainTex.text = chanceOfRain + "%";  //降水確率表示
     }
     //UI表示変更
-    public void SetWeatherScript(SelectWeatherScript sws)
+    public void SetWeatherScript(in SelectWeatherScript sws)
     {
         if (sws != null)
         {

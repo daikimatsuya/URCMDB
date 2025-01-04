@@ -24,7 +24,7 @@ public class SelectWeatherScript : MonoBehaviour
     public Light Light { get; set; }
 
     //‹CŒóŠÇ—
-    public void WeatherSetting(CameraManager cm)
+    public void WeatherSetting(in CameraManager cm)
     {
         if(!end)
         {

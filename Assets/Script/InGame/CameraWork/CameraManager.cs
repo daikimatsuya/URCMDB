@@ -20,7 +20,6 @@ public class CameraManager : MonoBehaviour
     private MovieFade mf;
     private PlayerScript player;
   
-
     private bool isExplodeEffectFade;
     private bool isPlayerDead;
 

@@ -118,7 +118,7 @@ public class MoveOnRailScript : MonoBehaviour
     }
 
     //ラインセット
-    public void SetRail(LineRenderer rail)
+    public void SetRail(in LineRenderer rail)
     {
         this.rail = rail;   //レールセット
         knot = 0;   //中継地点数初期化

@@ -51,10 +51,7 @@ public class ActivationFadeScript : MonoBehaviour
                 DeleteFade();
             }
         }
-
-     
-            SetStart();//1フレーム遅らせる
-        
+        SetStart();//1フレーム遅らせる
     }
     //上に移動する奴を管理
     private void UpFade()

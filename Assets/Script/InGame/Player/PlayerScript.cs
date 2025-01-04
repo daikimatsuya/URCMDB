@@ -361,11 +361,11 @@ public class PlayerScript : MonoBehaviour
         ///////////////////////////////////////////
     }
     #regionÅ@íléÛÇØìnÇµ
-    public void SetLaunchpad(LaunchPointScript lp)
+    public void SetLaunchpad(in LaunchPointScript lp)
     {
         this.lp = lp;
     }
-    public void SetGameManager(GameManagerScript gm)
+    public void SetGameManager(in GameManagerScript gm)
     {
         this.gm = gm;
     }
@@ -398,7 +398,6 @@ public class PlayerScript : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         playerHp = 0;
-
     }
     public void OnTriggerEnter(Collider other)
     {

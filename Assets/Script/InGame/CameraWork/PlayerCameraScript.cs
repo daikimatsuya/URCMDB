@@ -173,7 +173,7 @@ public class PlayerCameraScript : MonoBehaviour
 
     #region 値受け渡し
     //プレイヤーのトランスフォーム取得用プレイヤースクリプトも取得
-    public void SetPlayer(Transform tf,PlayerScript ps)
+    public void SetPlayer(in Transform tf,in PlayerScript ps)
     {
         playerPos = tf;
         if (sc == null)
@@ -183,7 +183,7 @@ public class PlayerCameraScript : MonoBehaviour
         sc.SetPlayer(ps);
     }
     //MovieFade取得用
-    public void SetMF(MovieFade mf)
+    public void SetMF(in MovieFade mf)
     {
         this.mf = mf;
     }

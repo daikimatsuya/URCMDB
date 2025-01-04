@@ -26,7 +26,7 @@ public class SensorUIScript : MonoBehaviour
         SensorChecker(right,hit.right, hitChildren.right);  //右センサー表示
     }
     //センサーUIのフラグチェック
-    private void SensorChecker(Image image,bool flag,bool flagChild)
+    private void SensorChecker(in Image image,bool flag,bool flagChild)
     {
         if (flag)
         {
@@ -58,17 +58,17 @@ public class SensorUIScript : MonoBehaviour
         }
     }
     //センサーUIを透明にする
-    private void SetSafe(Image image)
+    private void SetSafe(in Image image)
     {
         image.color = Color.clear;
     }
     //センサーUIを緑にする
-    private void SetGreen(Image image)
+    private void SetGreen(in Image image)
     {
         image.color = Color.green;
     }
     //センサーUIを赤にする
-    private void SetCloseToObject(Image image)
+    private void SetCloseToObject(in Image image)
     {
         image.color = Color.red;
     }
