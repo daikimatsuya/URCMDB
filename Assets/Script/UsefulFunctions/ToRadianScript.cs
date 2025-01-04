@@ -8,6 +8,6 @@ public class ToRadianScript : MonoBehaviour
     //デグをラッドに変換
     static public double ToRadian(ref float angle)
     {
-        return angle * Math.PI / 180f;
+        return angle * Math.PI / 180f;  //degreeをradianに変換
     }
 }

@@ -15,14 +15,10 @@ public class TitleScript : MonoBehaviour
     private string stage;
     private bool isShoot;
 
-
-
     [SerializeField] private bool isCameraMove;
     [SerializeField] private float betTime;
 
     public Light Light { get; set; }
-
-
 
     //タイトル管理
     private void TitleController()
@@ -33,47 +29,48 @@ public class TitleScript : MonoBehaviour
     private void Shoot()
     {
 
-        if (!isCameraMove)
+        if (!isCameraMove)  //ステージセレクトモードになってないときにボタンを押すとカメラが移動///
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isCameraMove = true;
             }
             return;
-        }
+        }////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if (!isStageSelect)
+        if (!isStageSelect) //カメラの移動が終わるまでリターンさせる///////
         {
             return;
-        }
+        }//////////////////////////////////////////////////////////////////////
 
-        if (stage == "")
+        if (stage == "")    //選択されているステージがタイトルだったらタイトル画面に戻す////
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                ResetTitle();
+                ResetTitle();   //タイトルに戻る
                 return;
             }
             isSceneChangeMode = false;
             return;
-        }
+        }////////////////////////////////////////////////////////////////////////////////////////
         else
         {
             isSceneChangeMode = true;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isShoot = true;
+            isShoot = true; //ステージチェンジ演出開始
         }
     }
     //タイトル画面に戻す
     private void ResetTitle()
     {
+        //ステージセレクトモード用のフラグを初期化
         isCameraMove = false;
         isStageSelect = false;
         isSceneChangeMode=false;
-
         ts.SetResetFlag(true);
+        /////////////////////////////////////////////
     }
     //シーンチェンジ
     public void SceneChange()

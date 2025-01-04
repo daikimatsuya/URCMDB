@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.Networking;
 using System;
 
@@ -129,37 +128,43 @@ public class WebAPIScript : MonoBehaviour
     static WebJson webJson;
 
     //Jsonから天気情報取得
-
     public static IEnumerator WEBMethod()
     {
-        UnityWebRequest unityWebRequest = UnityWebRequest.Get(url);
-        yield return unityWebRequest.SendWebRequest();
+        UnityWebRequest unityWebRequest = UnityWebRequest.Get(url); //URL先から情報を取得
+        yield return unityWebRequest.SendWebRequest();  //情報を取得できるまで待つ
 
         if(unityWebRequest.result!=UnityWebRequest.Result.Success)
         {
         }
         else
         {
-            webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);
+            webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);  //情報を格納
+
+            //確認用デバッグログ
             Debug.Log(webJson.forecasts[0].chanceOfRain.T00_06);
             Debug.Log(webJson.forecasts[0].chanceOfRain.T06_12);
             Debug.Log(webJson.forecasts[0].chanceOfRain.T12_18);
             Debug.Log(webJson.forecasts[0].chanceOfRain.T18_24);
+            //////////////////////
         }
     }
+    //初期化
     public static void Initiaraze()
     {
-        if (webJson == null)
+        if (webJson == null)    //情報が入っていなかったら取得する/////
         {
              WEBMethod();
-        }
+        }//////////////////////////////////////////////////////////////////
     }
+    //降水確率を文字列で取得
     public static string GetStringChanceOfRain()
     {
-        if(webJson == null)
+        if(webJson == null) //情報が入っていなかったらnullを返す///
         {
             return null;
-        }
+        }///////////////////////////////////////////////////////////////
+
+        //時間帯によって別の時間の降水確率を返す
         if (webJson.forecasts[0].chanceOfRain.T00_06 != "--%")
         {
             return webJson.forecasts[0].chanceOfRain.T00_06;
@@ -173,14 +178,19 @@ public class WebAPIScript : MonoBehaviour
             return webJson.forecasts[0].chanceOfRain.T12_18;
         }
         return webJson.forecasts[0].chanceOfRain.T18_24;
+        ///////////////////////////////////////////
     }
+    //降水確率をintで取得
     public static int GetIntChanceOfRain()
     {
-        string buff = GetStringChanceOfRain();
-        if(buff == null)
+        string buff = GetStringChanceOfRain();  //文字列で降水確率を格納
+
+        if(buff == null)    //値が入っていなかったらありえない数値を返す////
         {
             return 255;
-        }
+        }//////////////////////////////////////////////////////////////////////
+
+        //各降水確率に応じて数字を返す////////////
         if (buff == "0%")
         {
             return 0;
@@ -222,6 +232,7 @@ public class WebAPIScript : MonoBehaviour
             return 90;
         }
         return 99;
+        //////////////////////////////////////////
     }
     // Start is called before the first frame update
 

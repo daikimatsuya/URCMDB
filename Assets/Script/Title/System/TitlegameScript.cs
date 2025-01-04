@@ -16,61 +16,57 @@ public class TitlegameScript : MonoBehaviour
     private bool isResetAction;
     private bool isMiniPlayerDead;
     private bool isGameStart;
-    private bool isGoalAction;
-   
+    private bool isGoalAction; 
     private int resetDelay;
-
-    //miniGameScrollScript mgss;
 
     //ミニゲーム管理
     private void TitleGameController()
     {
+        //ミニゲームスタートフラグ管理
         if(Input.GetKeyUp(KeyCode.F)) 
         { 
-            isGameStart = true;
+            isGameStart = true; //デバッグ用
         }
-        if (startCountBuff<=0)
+        if (TimeCountScript.TimeCounter(ref startCountBuff))
         {
             isGameStart = true;
         }
-        if (isReset)
+        ////////////////////////////////
+        
+        if (isReset)    //リセットフラグがオンになったら///////////
         {
-
-            if(resetDelay<=0)
+            if(TimeCountScript.TimeCounter(ref resetDelay))   //リセットまでの時間///
             {
-                ResetFlags();
+                ResetFlags();   //フラグ類をリセットさせる
                 isReset = false;
-            }
-            resetDelay--;
-        }
+            }/////////////////////////////////////////////
+
+        }///////////////////////////////////////////////////////////
         ResetTimer();
-        startCountBuff--;
     }
     //フラグ関連リセット
     public void ResetFlags()
     {
+        //フラグリセット
         isMoveStart = false;
         isMiniPlayerDead = false;
         isGameStart = false;
         isGoalAction = false;
+        ////////////////
 
-        startCountBuff = (int)(minigameStartCount * 60);
+        TimeCountScript.SetTime(ref startCountBuff, minigameStartCount);
     }
     //タイマーリセット
     private void ResetTimer()
     {
-        if(isMiniPlayerDead)
+        if(isMiniPlayerDead)    //ミニゲーム用プレイヤーが死んだら/////////
         {
-            if(intervalBuff<=0)
+            if(TimeCountScript.TimeCounter(ref intervalBuff))
             {
-                isResetAction = true;
-                intervalBuff = (int)(resetInterval * 60);
+                isResetAction = true;   //リセット用フラグ起動
+                TimeCountScript.SetTime(ref intervalBuff, resetInterval);
             }
-            else
-            {
-                intervalBuff--;
-            }
-        }
+        }//////////////////////////////////////////////////////////////////////
     }
     #region　値受け渡し
     public bool GetResetFlag()

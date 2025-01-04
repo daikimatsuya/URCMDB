@@ -14,7 +14,6 @@ public class StageSelectScript : MonoBehaviour
     [SerializeField] private float fadeTime;
     private int fadeTimeBuff;
 
-
     private bool rotateEnd;
     private int stageChangeCount;
     private bool fadeStart;
@@ -23,67 +22,68 @@ public class StageSelectScript : MonoBehaviour
     //ステージセレクト管理
     private void SelectController()
     {
-        if (fadeTimeBuff <= 0)
+        if (fadeTimeBuff <= 0)  //フェード時間が経過したらシーンを変える///
         {
             ts.SceneChange();
-        }
+        }////////////////////////////////////////////////////////////////////////
 
-        if (ts.GetStageSelectFlag())   
+        if (ts.GetStageSelectFlag())   //ステージ選択画面になったらステージ数をカウントする////////////
         {
             StageSelect();
-        }
+        }///////////////////////////////////////////////////////////////////////////////////////////////////
+
         else
         {
-            StageSelectReset();
+            StageSelectReset(); //カウントしたステージ数をリセットする
         }
 
-        ts.SetStage(stage[stageCount]);
+        ts.SetStage(stage[stageCount]); //カウントしたステージ数を代入
 
         if (fadeStart)
         {
-            fadeTimeBuff--;
+            fadeTimeBuff--; //フェードが始まったらカウントダウン開始
         }
     }
     //選択ステージ数加算減算
     private void StageSelect()
     {
-        if (rotateEnd)
+        if (rotateEnd)  //ステージの回転が終わっていたら////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0))  //左向きのステージ切り替えキーを一回または一定時間以上押していたら///////////
             {
-                stageChangeCount--;
-                if (stageCount > 0)
+                stageChangeCount--; //ステージの回転カウントを-1
+                if (stageCount > 0) //選択しているステージが１以上なら//////
                 {
-                    stageCount--;
-                }
+                    stageCount--;   //ステージカウントを-1
+                }////////////////////////////////////////////////////////////////
                 else
                 {
-                    stageCount = maxStage;
+                    stageCount = maxStage;  //ステージカウントを最大値に
                 }
-                coolTimeBuff = (int)(stageSelectCoolTime * 60);
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && coolTimeBuff == 0))
+               TimeCountScript.SetTime(ref coolTimeBuff, stageSelectCoolTime);
+            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && coolTimeBuff == 0))  //右向きのステージ切り替えキーを一回または一定時間以上押していたら///////////
             {
-                stageChangeCount++;
-                if (stageCount < maxStage)
+                stageChangeCount++; //ステージの回転カウントを+1
+                if (stageCount < maxStage)//選択しているステージが最大値未満なら//////
                 {
-                    stageCount++;
-                }
+                    stageCount++; //ステージカウントを-1
+                }////////////////////////////////////////////////////////////////////////////
                 else
                 {
-                    stageCount = 0;
+                    stageCount = 0;   //ステージカウントを0に
                 }
-                coolTimeBuff = (int)(stageSelectCoolTime * 60);
-            }
+                TimeCountScript.SetTime(ref coolTimeBuff, stageSelectCoolTime);
+            }/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             coolTimeBuff--;
-        }
+        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     }
     //ステージ選択リセット
     private void StageSelectReset()
     {
         stageCount = 0;
-        //stageChangeCount = 0;
     }
  
     #region 値受け渡し

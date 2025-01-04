@@ -11,7 +11,7 @@ public class ComplementingRotationScript : MonoBehaviour
         //Œ»Ý‚ÌŠp“x‚Æ–Ú•WŠp“x‚Ì·‚ðŒvŽZ
         int rot;
         rot = (int)(targetRot-objectRot);
-        //end
+        ///////////////////////////////////
 
         //”½‘Î•ûŒü‚É‰ñ‚Á‚½‚Ù‚¤‚ª‹ß‚¢ê‡‚Ì·‚ðC³
         if (rot > 180)
@@ -22,14 +22,14 @@ public class ComplementingRotationScript : MonoBehaviour
         {
             rot = 360 + rot;
         }
-        //end
+        /////////////////////////////////////////////
 
-        //Šp“x‰ÁŽZ
+        //Šp“x‰ÁŽZ////////////////////
         if (rot == 0)
         {
             return 0;
         }
-
+        
         if(rot < 0)
         {
             if (rot > rotateSpeed)
@@ -44,7 +44,7 @@ public class ComplementingRotationScript : MonoBehaviour
             return rotateSpeed;
         }
         return rot;
-        //end
+        /////////////////////////////
     }
 
 }

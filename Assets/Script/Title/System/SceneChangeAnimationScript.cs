@@ -13,10 +13,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
     private float rotationTimeBuff;
     [SerializeField] private float missileMovepeed;
 
-
     TitleScript ts;
-
-
 
     private float padRotBuff;
     private bool isShot;
@@ -25,30 +22,26 @@ public class SceneChangeAnimationScript : MonoBehaviour
     //演出管理
     private void AnimationController()
     {
-        UpDown();
+        UpDown();   //発射台が上下する
     }
+    //発射台を上下させる
     private void UpDown()
     {
-        if (ts.GetIsSceneChangeModeFlag())
+        if (ts.GetIsSceneChangeModeFlag())  //上下移動フラグがオンの時//////////////////////////////////////////////////////////////////////////////////////
+        {
+            if (TimeCountScript.TimeCounter(ref rotationTimeBuff))
+            {
+                padRotBuff += rotationSpeed;    //回転角に速度を足す
+                pad.transform.localEulerAngles = new Vector3(padRotBuff, pad.transform.localEulerAngles.y, pad.transform.localEulerAngles.z);   //トランスフォームに代入
+            }
+        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        else   //上下移動フラグがオフの時
         {
             if (rotationTimeBuff < (int)(rotationTime * 60))
             {
-
-            }
-            if (rotationTimeBuff>0)
-            {
-                padRotBuff += rotationSpeed;
-                pad.transform.localEulerAngles = new Vector3(padRotBuff, pad.transform.localEulerAngles.y, pad.transform.localEulerAngles.z);
-
-                rotationTimeBuff--;
-            }
-        }
-        else
-        {
-            if (rotationTimeBuff < (int)(rotationTime * 60))
-            {
-                padRotBuff -= rotationSpeed;
-                pad.transform.localEulerAngles = new Vector3(padRotBuff, pad.transform.localEulerAngles.y, pad.transform.localEulerAngles.z);
+                padRotBuff -= rotationSpeed;    //回転角に速度を減算
+                pad.transform.localEulerAngles = new Vector3(padRotBuff, pad.transform.localEulerAngles.y, pad.transform.localEulerAngles.z);  //トランスフォームに代入
 
                 rotationTimeBuff++;
             }
