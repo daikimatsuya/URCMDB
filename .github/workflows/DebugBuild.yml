@@ -5,7 +5,7 @@ on:
       - mastar
 env:
   #リポジトリのルートディレクトリを基点としたソリューションファイルパス
-  SOLUTION_FILE_PATH: ooyas/source/repos/URCMDB/URCMDB.sln
+  SOLUTION_FILE_PATH: C:\ユーザー\ooyas/source/repos/URCMDB/URCMDB.sln
   #　Visual Studioの構成(Debug / Release)
   CONFIGURATION: Debug
 
