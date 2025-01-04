@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Usefull;
 
 //インゲームでプレイヤーにくっついているカメラ管理
 public class PlayerCameraScript : MonoBehaviour

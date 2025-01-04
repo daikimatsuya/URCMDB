@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //ステージ選択からインゲームに遷移するときのミサイルの挙動管理
 public class SceneChangeMissleActionScript : MonoBehaviour

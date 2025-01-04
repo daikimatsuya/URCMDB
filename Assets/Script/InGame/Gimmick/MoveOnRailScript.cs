@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Usefull;
 
 //オブジェクトがライン上を動くようにする
 public class MoveOnRailScript : MonoBehaviour
