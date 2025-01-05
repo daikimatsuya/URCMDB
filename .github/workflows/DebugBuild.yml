@@ -5,7 +5,7 @@ on:
       - master
 
 env:
-  SOLUTION_FILE_PATH: URCMDB\URCMDB.sln
+  SOLUTION_FILE_PATH: C/User/ooyas/source/repos/URCMDB\URCMDB.sln
   CONFIGURATION: Debug
 
 jobs:
