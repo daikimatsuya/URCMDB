@@ -30,7 +30,7 @@ public class SceneChangeAnimationScript : MonoBehaviour
     {
         if (ts.GetIsSceneChangeModeFlag())  //上下移動フラグがオンの時//////////////////////////////////////////////////////////////////////////////////////
         {
-            if (TimeCountScript.TimeCounter(ref rotationTimeBuff))
+            if (!TimeCountScript.TimeCounter(ref rotationTimeBuff))
             {
                 padRotBuff += rotationSpeed;    //回転角に速度を足す
                 pad.transform.localEulerAngles = new Vector3(padRotBuff, pad.transform.localEulerAngles.y, pad.transform.localEulerAngles.z);   //トランスフォームに代入
