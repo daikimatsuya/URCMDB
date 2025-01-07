@@ -13,6 +13,7 @@ public class LidStoneScript : MonoBehaviour
         {
             shortcut.SetActive(true);
             detour.SetActive(false);
+            Destroy(this.gameObject);
         }
     }
     // Start is called before the first frame update
