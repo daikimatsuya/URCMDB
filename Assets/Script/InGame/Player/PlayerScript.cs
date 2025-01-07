@@ -368,10 +368,8 @@ public class PlayerScript : MonoBehaviour
     //プレイヤーの角度を発射台に合わせる
     private void SetPreShootAngle()
     {
-
-        tf.position = lp.GetPos();
-        tf.localEulerAngles = new Vector3(0, 180, 0);
-
+        tf.position = lp.GetPos();  //ポジション取得
+        tf.localEulerAngles = new Vector3(0, 180, 0);   //角度を初期化
     }
 
 
