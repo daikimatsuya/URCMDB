@@ -75,7 +75,7 @@ public class PlayerScript : MonoBehaviour
         }//////////////////////////////////////////////////////////////////////////
         else
         {
-            SetPreShootAngle();
+            SetPreShootAngle(); //発射前の角度調整
         }
 
         gm.PlayerRotSet(rowling);   //プレイヤーの角度を代入
