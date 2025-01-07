@@ -427,7 +427,6 @@ GameObject:
   - component: {fileID: 6134079238162218372}
   - component: {fileID: 2753524726407870468}
   - component: {fileID: 4124254585597605610}
-  - component: {fileID: 2836093146751896801}
   - component: {fileID: 6686797341329164120}
   - component: {fileID: 2271356350191301224}
   m_Layer: 0
@@ -489,18 +488,6 @@ MonoBehaviour:
   obtainVoluntarilyRail: 1
   rotSpeed: 1
   railName: Rail
---- !u!114 &2836093146751896801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6134079238162218373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a47d9c8e6040548890fbff16cf732e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &6686797341329164120
 BoxCollider:
   m_ObjectHideFlags: 0
