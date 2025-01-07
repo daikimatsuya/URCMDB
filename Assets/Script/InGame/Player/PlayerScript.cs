@@ -73,8 +73,13 @@ public class PlayerScript : MonoBehaviour
             BlurIntnsityController();   //加速表現ブラー管理
            
         }//////////////////////////////////////////////////////////////////////////
+        else
+        {
+            SetPreShootAngle();
+        }
 
         gm.PlayerRotSet(rowling);   //プレイヤーの角度を代入
+
     }
     //速度を足してトランスフォームのバッファに入れる
     private void Move()
@@ -360,6 +365,16 @@ public class PlayerScript : MonoBehaviour
         }
         ///////////////////////////////////////////
     }
+    //プレイヤーの角度を発射台に合わせる
+    private void SetPreShootAngle()
+    {
+
+        tf.position = lp.GetPos();
+        tf.localEulerAngles = new Vector3(0, 180, 0);
+
+    }
+
+
     #region　値受け渡し
     public void SetLaunchpad(in LaunchPointScript lp)
     {
@@ -451,19 +466,14 @@ public class PlayerScript : MonoBehaviour
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);
-        //effectTimer = 0;
         isFire = false;
         isControl = false;
         ringSpeed = 0;
         tf.position=lp.GetPos();
 
-        //rowling.x = -lp.GetRowling().x;
-        //rowling.y = lp.GetRowling().y + 180;
-        tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
+
         lp.SetStart(false);
         gm.SetIsHitTarget(false);
-        //isInStage = true;
-        //RockOned = false;
 
     }
 
