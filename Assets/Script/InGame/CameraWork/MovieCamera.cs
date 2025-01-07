@@ -56,7 +56,7 @@ public class MovieCamera : MonoBehaviour
         }
         if (isMove) //‰‰o‚³‚¹‚é/////////////////////////////////////////////////////
         {
-            if (TimeCountScript.TimeCounter(ref moveTimeBuff))
+            if (!TimeCountScript.TimeCounter(ref moveTimeBuff))
             {
                 //À•WˆÚ“®
                 posBuff += moveSpeed;
