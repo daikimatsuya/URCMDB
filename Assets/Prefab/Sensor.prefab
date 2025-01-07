@@ -54,6 +54,7 @@ MonoBehaviour:
   right: 0
   children: 1
   master: 0
+  ignoreTags: []
 --- !u!33 &404364483821719919
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -187,6 +188,7 @@ MonoBehaviour:
   right: 0
   children: 1
   master: 0
+  ignoreTags: []
 --- !u!33 &943164166991452045
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -321,6 +323,7 @@ MonoBehaviour:
   right: 0
   children: 0
   master: 0
+  ignoreTags: []
 --- !u!33 &9172301340563989921
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -455,6 +458,7 @@ MonoBehaviour:
   right: 0
   children: 0
   master: 0
+  ignoreTags: []
 --- !u!33 &6627625654532497969
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -589,6 +593,7 @@ MonoBehaviour:
   right: 1
   children: 0
   master: 0
+  ignoreTags: []
 --- !u!33 &8383929081820308840
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -722,6 +727,7 @@ MonoBehaviour:
   right: 1
   children: 1
   master: 0
+  ignoreTags: []
 --- !u!33 &4048552436751741515
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -856,6 +862,7 @@ MonoBehaviour:
   right: 0
   children: 0
   master: 0
+  ignoreTags: []
 --- !u!33 &60584990324346364
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -989,6 +996,16 @@ MonoBehaviour:
   right: 0
   children: 0
   master: 1
+  ignoreTags:
+  - SensorChildren
+  - stage
+  - SpeedUpRing
+  - Monitor
+  - Player
+  - Boat
+  - Drone
+  - MissileAircraft
+  - Rail
 --- !u!1 &7038058958946336389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1060,7 @@ MonoBehaviour:
   right: 0
   children: 1
   master: 0
+  ignoreTags: []
 --- !u!33 &6453168945334954773
 MeshFilter:
   m_ObjectHideFlags: 0

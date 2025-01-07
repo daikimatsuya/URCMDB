@@ -39,6 +39,7 @@ TagManager:
   - Drone
   - Rail
   - EnemyRail
+  - MissileAircraft
   layers:
   - Default
   - TransparentFX

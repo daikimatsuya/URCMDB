@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//rレールのショートカット開通させるときのやつ
 public class LidStoneScript : MonoBehaviour
 {
     [SerializeField] GameObject shortcut;
     [SerializeField] GameObject detour;
 
+    //プレイヤーがぶつかってきたらショートカット開通させて消える
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
