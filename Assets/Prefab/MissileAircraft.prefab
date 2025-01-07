@@ -488,6 +488,7 @@ MonoBehaviour:
   distansMagnification: 1
   obtainVoluntarilyRail: 1
   rotSpeed: 1
+  railName: Rail
 --- !u!114 &2836093146751896801
 MonoBehaviour:
   m_ObjectHideFlags: 0

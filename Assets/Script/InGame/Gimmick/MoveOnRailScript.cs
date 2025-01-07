@@ -12,6 +12,7 @@ public class MoveOnRailScript : MonoBehaviour
     [SerializeField] float distansMagnification;
     [SerializeField] bool obtainVoluntarilyRail;
     [SerializeField] float rotSpeed;
+    [SerializeField] string railName;
 
     private LineRenderer rail;
     private bool moveEnd;
@@ -131,7 +132,7 @@ public class MoveOnRailScript : MonoBehaviour
         {
             return;
         }
-        if (other.CompareTag("Rail"))
+        if (other.CompareTag(railName))
         {
             rail = null;
             rail=other.gameObject.GetComponent<LineRenderer>();
