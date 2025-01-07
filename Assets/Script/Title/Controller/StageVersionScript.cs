@@ -34,6 +34,10 @@ public class StageVersionScript : MonoBehaviour
         stage[(int)sss.GetStageCount()].SetActive(true);    //現在のステージの説明を表示
     }
     // Start is called before the first frame update
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         sss=GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
