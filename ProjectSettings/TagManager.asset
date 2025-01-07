@@ -38,6 +38,7 @@ TagManager:
   - Boat
   - Drone
   - Rail
+  - EnemyRail
   layers:
   - Default
   - TransparentFX

@@ -110,7 +110,7 @@ public class MoveOnRailScript : MonoBehaviour
     private void Rolling()
     {
         //–Ú•WŠp“x‚Ü‚Å‰ñ“]‚³‚¹‚é
-        rotBuff.x += ComplementingRotationScript.Rotate(rotSpeed, targetAngles.x, rotBuff.x);
+        rotBuff.x += ComplementingRotationScript.Rotate(rotSpeed,0, rotBuff.x);
         rotBuff.y += ComplementingRotationScript.Rotate(rotSpeed, targetAngles.y, rotBuff.y);
         rotBuff.z += ComplementingRotationScript.Rotate(rotSpeed, targetAngles.z, rotBuff.z);
         /////////////////////////
