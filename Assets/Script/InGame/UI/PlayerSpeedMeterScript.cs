@@ -11,6 +11,7 @@ public class PlayerSpeedMeterScript : MonoBehaviour
     private TextMeshProUGUI speed;
     [SerializeField] private GameObject playerSpeedBuff;
     private TextMeshProUGUI speedBuff;
+    private bool viewFlag;
 
     //プレイヤーの速度表示
     public void SetPlayerSpeed(float  speed,float speedBuff)
@@ -19,18 +20,25 @@ public class PlayerSpeedMeterScript : MonoBehaviour
         this.speedBuff.text = "+"+(speedBuff-speed) + "M/S"; //プレイヤーの移動速度を表示
         if (speedBuff - speed <= 0)
         {
-            playerSpeedBuff.SetActive(false);
+            viewFlag = false;
         }
         else
         {
-            playerSpeedBuff.SetActive(true);
+            viewFlag = true;
         }
     }
     //UIオンオフ切り替え
     public void SetSpeedMeterActive(bool flag)
     {
         this.playerSpeed.SetActive(flag);
-        this.playerSpeedBuff.SetActive(flag);
+        if (!viewFlag)
+        {
+            this.playerSpeedBuff.SetActive(false);
+        }
+        else
+        {
+            this.playerSpeedBuff.SetActive(flag);
+        }
     }
     // Start is called before the first frame update
     void Start()
