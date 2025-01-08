@@ -14,8 +14,6 @@ public class UIScript : MonoBehaviour
     private Vector3 playerRot;
     private Vector3 targetPos;
     private TextMeshProUGUI pmsTex;
-    private TextMeshProUGUI playerSpeedTex;
-    private TextMeshProUGUI playerSpeedBuffTex;
     private bool targetMarkerflag;
     private Camera mainCamera;
     private RectTransform markerCanvas;
@@ -24,14 +22,12 @@ public class UIScript : MonoBehaviour
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
     [SerializeField] private GameObject pms;
-    [SerializeField] private GameObject playerSpeed;
-    [SerializeField] private GameObject playerSpeedBuff;
-
     [SerializeField] private GameObject yawUI;
     [SerializeField] private GameObject yawUI2;
     [SerializeField] private GameObject rowImage;
     [SerializeField] private WeatherUIScript weatherUIScript;
     [SerializeField] private SensorUIScript sensorUIScript;
+    [SerializeField] private PlayerSpeedMeterScript playerSpeedMeterScript;
 
     //UI全般管理関数
     private void UIController()
@@ -40,10 +36,11 @@ public class UIScript : MonoBehaviour
         YawUIController();  //プレイヤーのX軸の角度表示
         PMSMode();  //PMS表示
         IsGameOver();   //ゲームオーバーのUI表示
-        PlayerSpeedUI();    //プレイヤーの速度表示
+        //PlayerSpeedUI();    //プレイヤーの速度表示
         TargetMarkerUI();   //ターゲットマーカー表示
         ActiveChecker();    //ゲーム画面に表示するCanvasのフラグ管理
         sensorUIScript.SensorUIController();    //センサーのUI表示
+       playerSpeedMeterScript.SetPlayerSpeed((int)gm.GetPlayerSpeed(),(int)gm.GetPlayerSpeedBuff());    //プレイヤーのスピードメーター表示
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
@@ -52,8 +49,7 @@ public class UIScript : MonoBehaviour
         {
             targetMarker.SetActive(false);
             pms.SetActive(false);
-            playerSpeed.SetActive(false);
-            playerSpeedBuff.SetActive(false);
+            playerSpeedMeterScript.SetSpeedMeterActive(false);
             yawUI.SetActive(false);
             yawUI2.SetActive(false);
             rowImage.SetActive(false);
@@ -66,11 +62,9 @@ public class UIScript : MonoBehaviour
             if(targetMarkerflag)
             {
                 targetMarker.SetActive(true);
-            }
-            
+            }     
             pms.SetActive(true);
-            playerSpeed.SetActive(true);
-            playerSpeedBuff.SetActive(true);
+            playerSpeedMeterScript.SetSpeedMeterActive(true);
             yawUI.SetActive(true);
             yawUI2.SetActive(true);
             rowImage.SetActive(true);
@@ -140,13 +134,7 @@ public class UIScript : MonoBehaviour
             pmsTex.text = "PMS:OFF";
         }
     }
-    //プレイヤーのスピードをUIに表示
-    private void PlayerSpeedUI()
-    {
-        playerSpeedTex.text = (int)gm.GetPlayerSpeed() + "M/S"; //プレイヤーの基本速度表示
-        playerSpeedBuffTex.text = (int)gm.GetPlayerSpeedBuff() + "M/S"; //プレイヤーの移動速度を表示
 
-    }
     //ターゲットの位置をUIに表示
     private void TargetMarkerUI()
     {
@@ -185,10 +173,7 @@ public class UIScript : MonoBehaviour
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
         markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
         targetMarker = GameObject.FindWithTag("TargetMarker");
-
         pmsTex = pms.GetComponent<TextMeshProUGUI>();
-        playerSpeedTex = playerSpeed.GetComponent<TextMeshProUGUI>();
-        playerSpeedBuffTex = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
 
         //wus = weatherUI.GetComponent<WeatherUIScript>();
         weatherUIScript.SetWeatherScript(gm.GetWeatherScript());

@@ -453,6 +453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7686268837892536620}
+  - component: {fileID: 7397663940561711781}
   m_Layer: 5
   m_Name: PlayerSpeedMeter
   m_TagString: Untagged
@@ -482,6 +483,20 @@ RectTransform:
   m_AnchoredPosition: {x: 420, y: -269}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7397663940561711781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848229192998725688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196a8c6d40e950440a513ffe5fd69773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: {fileID: 1293755923754871431}
+  playerSpeedBuff: {fileID: 3241218769236592264}
 --- !u!1 &3179233195731408671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,6 +1533,7 @@ MonoBehaviour:
   rowImage: {fileID: 3179233195731408671}
   weatherUIScript: {fileID: 2794693474302689765}
   sensorUIScript: {fileID: 3168890276080293006}
+  playerSpeedMeterScript: {fileID: 7397663940561711781}
 --- !u!1001 &436174275405967200
 PrefabInstance:
   m_ObjectHideFlags: 0
