@@ -78,7 +78,7 @@ public class PlayerScript : MonoBehaviour
             SetPreShootAngle(); //発射前の角度調整
         }
 
-        gm.PlayerRotSet(rowling);   //プレイヤーの角度を代入
+        gm.PlayerRotSet(tf.eulerAngles);   //プレイヤーの角度を代入
 
     }
     //速度を足してトランスフォームのバッファに入れる

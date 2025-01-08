@@ -82,6 +82,14 @@ public class UIScript : MonoBehaviour
     private void GetPlayerRot()
     {
         playerRot = gm.GetPlayerRot();
+        if (playerRot.x > 270)
+        {
+            playerRot.x -= 360;
+        }
+        if (playerRot.x <= -270)
+        {
+            playerRot.x += 360;
+        }
     }
     //ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ðUI‚É‚¢‚ê‚é
     private void YawUIController()
