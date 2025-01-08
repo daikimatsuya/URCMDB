@@ -646,7 +646,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278255382
-  m_fontColor: {r: 0.08627451, g: 1, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 0, b: 0.105882354, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1526,8 +1526,6 @@ MonoBehaviour:
   YawUIMag: 4
   gameOverUIPos: {x: 0, y: 0, z: 0}
   pms: {fileID: 3836077525650319097}
-  playerSpeed: {fileID: 1293755923754871431}
-  playerSpeedBuff: {fileID: 3241218769236592264}
   yawUI: {fileID: 8062726808229489935}
   yawUI2: {fileID: 2669244137733249811}
   rowImage: {fileID: 3179233195731408671}

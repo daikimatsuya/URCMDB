@@ -16,7 +16,15 @@ public class PlayerSpeedMeterScript : MonoBehaviour
     public void SetPlayerSpeed(float  speed,float speedBuff)
     {
         this.speed.text = speed + "M/S"; //プレイヤーの基本速度表示
-        this.speedBuff.text = speedBuff + "M/S"; //プレイヤーの移動速度を表示
+        this.speedBuff.text = "+"+(speedBuff-speed) + "M/S"; //プレイヤーの移動速度を表示
+        if (speedBuff - speed <= 0)
+        {
+            playerSpeedBuff.SetActive(false);
+        }
+        else
+        {
+            playerSpeedBuff.SetActive(true);
+        }
     }
     //UIオンオフ切り替え
     public void SetSpeedMeterActive(bool flag)
