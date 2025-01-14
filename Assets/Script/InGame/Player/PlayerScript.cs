@@ -58,8 +58,7 @@ public class PlayerScript : MonoBehaviour
     private bool quickMove;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
-    private float beforeTriggerAxisLeft;
-    private float beforeTriggerAxisRight;
+
 
     //プレイヤー管理関数
     private void PlayerController()
@@ -263,7 +262,7 @@ public class PlayerScript : MonoBehaviour
             rowling.y = lp.GetRowling().y + 180;
             ////////////
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 isFire = true;  //発射フラグオン
                 lp.Shoot(); //発射台のコントロールをオフ
@@ -274,43 +273,13 @@ public class PlayerScript : MonoBehaviour
         PMS=gm.GetPMS();
         tf.eulerAngles = new Vector3(rowling.x, rowling.y, 0);  //角度をトランスフォームに代入
     }
-    //コントローラーのトリガーがいつ押されたのかを取得
-    private bool GetAxisDown(string leftOrRight)
-    {
-        bool isGetDown = false;
-        float axis = 0;
 
-        if(leftOrRight == "LeftTrigger")
-        {
-            axis = Input.GetAxis("LeftTrigger");    //トリガーの値を取得
-            if (axis > 0.0f && beforeTriggerAxisLeft == 0.0f)   //前フレームと比較/////////
-            {
-                isGetDown = true;   //今フレーム押されていたらトゥルーに
-
-            }/////////////////////////////////////////////////////////////////////////////////
-
-            beforeTriggerAxisLeft = axis;   //今フレームの値を前フレームに代入
-        }
-        else if(leftOrRight == "RightTrigger")
-        {
-            axis = Input.GetAxis("RightTrigger");   //トリガーの値を取得
-            if (axis > 0.0f && beforeTriggerAxisRight == 0.0f)   //前フレームと比較/////////
-            {
-                isGetDown =true;    //今フレーム押されていたらトゥルーに
-
-            }///////////////////////////////////////////////////////////////////////////////////
-
-            beforeTriggerAxisRight = axis;  //今フレームの値を前フレームに代入
-        }
-
-        return isGetDown;
-    }
     //加減速処理
     private void Acceleration()
     {
         if (isFire) //移動中////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (Input.GetKeyDown(KeyCode.Space)||GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
+            if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
             {
                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
                 CreateBoostEffect();    //加速時演出生成
