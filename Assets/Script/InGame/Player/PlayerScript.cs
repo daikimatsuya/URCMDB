@@ -58,6 +58,9 @@ public class PlayerScript : MonoBehaviour
     private bool quickMove;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
+    private float beforeTriggerAxisLeft;
+    private float beforeTriggerAxisRight;
+
     //プレイヤー管理関数
     private void PlayerController()
     {
@@ -113,7 +116,7 @@ public class PlayerScript : MonoBehaviour
 
         if (isControl) //プレイヤーを操作できる//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)||Input.GetAxis("LeftTrigger")==1)
             {
                 quickMove = true;
             }
@@ -271,23 +274,54 @@ public class PlayerScript : MonoBehaviour
         PMS=gm.GetPMS();
         tf.eulerAngles = new Vector3(rowling.x, rowling.y, 0);  //角度をトランスフォームに代入
     }
+    //コントローラーのトリガーがいつ押されたのかを取得
+    private bool GetAxisDown(string leftOrRight)
+    {
+        bool isGetDown = false;
+        float axis = 0;
+
+        if(leftOrRight == "LeftTrigger")
+        {
+            axis = Input.GetAxis("LeftTrigger");    //トリガーの値を取得
+            if (axis > 0.0f && beforeTriggerAxisLeft == 0.0f)   //前フレームと比較/////////
+            {
+                isGetDown = true;   //今フレーム押されていたらトゥルーに
+
+            }/////////////////////////////////////////////////////////////////////////////////
+
+            beforeTriggerAxisLeft = axis;   //今フレームの値を前フレームに代入
+        }
+        else if(leftOrRight == "RightTrigger")
+        {
+            axis = Input.GetAxis("RightTrigger");   //トリガーの値を取得
+            if (axis > 0.0f && beforeTriggerAxisRight == 0.0f)   //前フレームと比較/////////
+            {
+                isGetDown =true;    //今フレーム押されていたらトゥルーに
+
+            }///////////////////////////////////////////////////////////////////////////////////
+
+            beforeTriggerAxisRight = axis;  //今フレームの値を前フレームに代入
+        }
+
+        return isGetDown;
+    }
     //加減速処理
     private void Acceleration()
     {
-        if (isFire) //移動中///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (isFire) //移動中////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (Input.GetKeyDown(KeyCode.Space))    //一時的なブースト//////////////////////////////
+            if (Input.GetKeyDown(KeyCode.Space)||GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
             {
                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
                 CreateBoostEffect();    //加速時演出生成
                 blurIntnsity = maxBlurIntensity;    //加速演出ブラーに値を代入
-            }/////////////////////////////////////////////////////////////////////////////////////////////
+            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (Input.GetKey(KeyCode.Space))    //基本速度加速/////////////////////////
+            if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
             {
                 playerSpeed += accelerate;  //基本速度に加算
                 minBlurIntnsity = accelelatedBlurIntensity; //加速演出ブラーに値を代入
-            }/////////////////////////////////////////////////////////////////////////////
+            }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if(boostSpeed > 0)  //一時加速がある間はブラーに値を入れる////////////////////////////
             {
@@ -315,7 +349,7 @@ public class PlayerScript : MonoBehaviour
 
             boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
 
-        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if(isControl)
         {
