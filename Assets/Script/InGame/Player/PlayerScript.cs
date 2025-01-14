@@ -59,7 +59,6 @@ public class PlayerScript : MonoBehaviour
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
 
-
     //プレイヤー管理関数
     private void PlayerController()
     {
@@ -74,7 +73,7 @@ public class PlayerScript : MonoBehaviour
             CountDown();    //生存時間管理
             EffectController(); //演出管理
             BlurIntnsityController();   //加速表現ブラー管理
-           
+
         }//////////////////////////////////////////////////////////////////////////
         else
         {

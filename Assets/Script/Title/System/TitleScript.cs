@@ -24,6 +24,7 @@ public class TitleScript : MonoBehaviour
     private void TitleController()
     {
         Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
+        Usefull.GetControllerScript.SearchController();//コントローラーが接続されているかを確認
         Shoot();
     }
     //フラグ関連処理

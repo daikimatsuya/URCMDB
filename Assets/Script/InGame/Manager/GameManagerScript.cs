@@ -158,7 +158,7 @@ public class GameManagerScript : MonoBehaviour
     //PMSÇÃÉIÉìÉIÉt
     private void ChangePMS()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)||Input.GetKeyDown("joystick button 3"))
         {
             if (PMS)    //PMSä«óù//////////////////
             {
