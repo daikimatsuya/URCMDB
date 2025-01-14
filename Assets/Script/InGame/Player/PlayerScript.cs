@@ -297,7 +297,7 @@ public class PlayerScript : MonoBehaviour
                 minBlurIntnsity = boostedBlurIntensity;
             }//////////////////////////////////////////////////////////////////////////////////////////
 
-            else if (!Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTigger")==0)
+            else if (!Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")==0)
             {
                 minBlurIntnsity = 0;
             }

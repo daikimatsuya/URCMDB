@@ -56,6 +56,7 @@ public class GameManagerScript : MonoBehaviour
     //タイトルに戻るときにシーンをロード
     public void BackTitle()
     {
+        Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(title);
     }
     //プレイヤーの生存確認と生成

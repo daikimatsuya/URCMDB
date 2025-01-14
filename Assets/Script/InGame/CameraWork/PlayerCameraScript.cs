@@ -23,6 +23,7 @@ public class PlayerCameraScript : MonoBehaviour
     [SerializeField] private float rotSpeed;
     [SerializeField] private float maxRot;
     private float rot;
+    float rotBuff;
 
 
     //カメラが飛んでいるプレイヤーの後ろに追従する
@@ -32,20 +33,23 @@ public class PlayerCameraScript : MonoBehaviour
         {
             tf.rotation = playerPos.rotation;   //プレイヤーの回転角を取得
             Vector3 deff = Vector3.zero;
+            rotBuff = rot;
 
             //入力によりずれを加算
+
+            //キーボード操作//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
-                if (rot < maxRot)
+                if (rot > -maxRot)
                 {
-                    rot += rotSpeed;
+                    rotBuff -= rotSpeed;
                 }
             }
             if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
             {
-                if (rot > -maxRot)
+                if (rot < maxRot)
                 {
-                    rot -= rotSpeed;
+                    rotBuff += rotSpeed;
                 }
             }
             if ((Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))) 
@@ -59,17 +63,48 @@ public class PlayerCameraScript : MonoBehaviour
                     rot += rotSpeed;
                 }
             }
-            if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.A)&& !Input.GetKey(KeyCode.D)) 
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //コントローラー操作//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (Input.GetAxis("LeftStickX") != 0)
             {
-                if (rot > 0)
+                rotBuff += rotSpeed * Input.GetAxis("LeftStickX");
+                if (rotBuff > maxRot)
                 {
-                    rot -= rotSpeed;
+                    rotBuff = maxRot;
                 }
-                if (rot < 0)
+                if (rotBuff < -maxRot)
                 {
-                    rot += rotSpeed;
+                    rotBuff = -maxRot;
                 }
             }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+
+            if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)&&Input.GetAxis("LeftStickX")==0)
+            {
+                if(rot < 0)
+                {
+                    rotBuff += rotSpeed;
+                    if(rotBuff >= 0)
+                    {
+                        rotBuff = 0;
+                    }
+                }
+                if(rot > 0)
+                {
+                    rotBuff -= rotSpeed;
+                    if(rotBuff <= 0)
+                    {
+                        rotBuff = 0;
+                    }
+                }
+            }
+
+            rot = rotBuff;
+    
+
             //////////////////////////
 
 
