@@ -13,11 +13,6 @@ namespace Usefull
         private static float beforeTriggerAxisLeftBuff;
         private static float beforeTriggerAxisRightBuff;
 
-        private static float beforeTriggerAxisLeftScene;
-        private static float beforeTriggerAxisRightScene;
-        private static float beforeTriggerAxisLeftSceneBuff;
-        private static float beforeTriggerAxisRightSceneBuff;
-
         private static float intervalLeft=0.1f;
         private static float intervalLeftBuff;
         private static float intervalRight=0.1f;

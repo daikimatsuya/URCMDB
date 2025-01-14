@@ -32,6 +32,7 @@ public class UIScript : MonoBehaviour
     //UI全般管理関数
     private void UIController()
     {
+
         GetPlayerRot(); //プレイヤーの角度取得
         YawUIController();  //プレイヤーのX軸の角度表示
         PMSMode();  //PMS表示
@@ -98,27 +99,31 @@ public class UIScript : MonoBehaviour
             
             gameOverUI.transform.localPosition = gameOverUIPos;
 
-            //モード変更///////////////////////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-            {
-                goUs.MoveRetry();   //モードをリトライに
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-            {
-               goUs.MoveBackTitle();    //モードをバックタイトルに
-            }
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
+            
+            if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))//決定////////
             {
                 if (goUs.GetPos() < -1)
                 {
                     gm.Retry(); //リトライ
                 }
-                else if(goUs.GetPos() > 1)
+                else if (goUs.GetPos() > 1)
                 {
                     gm.BackTitle(); //タイトルに戻る
                 }
+            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //モード変更///////////////////////////////////////////////////////////////////////////////////
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)||Usefull.GetStickScript.GetAxisDown("LeftStickX")<-0.1f)
+            {
+                goUs.MoveRetry();   //モードをリトライに
             }
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)|| Usefull.GetStickScript.GetAxisDown("LeftStickX") > 0.1f)
+            {
+               goUs.MoveBackTitle();    //モードをバックタイトルに
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
             goUs.TargetHpUI();  //ターゲットの残り体力を表示
         }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
