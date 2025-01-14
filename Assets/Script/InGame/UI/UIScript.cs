@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Usefull;
 
 //インゲーム内のUIの処理
 public class UIScript : MonoBehaviour
@@ -18,6 +19,7 @@ public class UIScript : MonoBehaviour
     private Camera mainCamera;
     private RectTransform markerCanvas;
     private GameObject targetMarker;
+    private bool canSelect;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -28,6 +30,8 @@ public class UIScript : MonoBehaviour
     [SerializeField] private WeatherUIScript weatherUIScript;
     [SerializeField] private SensorUIScript sensorUIScript;
     [SerializeField] private PlayerSpeedMeterScript playerSpeedMeterScript;
+    [SerializeField] private float gameOverUIInterval;
+    private int gameOverUIIntervalBuff;
 
     //UI全般管理関数
     private void UIController()
@@ -113,15 +117,22 @@ public class UIScript : MonoBehaviour
             }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //モード変更///////////////////////////////////////////////////////////////////////////////////
-
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)||Usefull.GetStickScript.GetAxisDown("LeftStickX")<-0.1f)
+            if (TimeCountScript.TimeCounter(ref gameOverUIIntervalBuff))
             {
-                goUs.MoveRetry();   //モードをリトライに
+                canSelect = true;
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)|| Usefull.GetStickScript.GetAxisDown("LeftStickX") > 0.1f)
+            if (canSelect)
             {
-               goUs.MoveBackTitle();    //モードをバックタイトルに
+                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Usefull.GetStickScript.GetAxisDown("LeftStickX") < -0.1f)
+                {
+                    goUs.MoveRetry();   //モードをリトライに
+                }
+                if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Usefull.GetStickScript.GetAxisDown("LeftStickX") > 0.1f)
+                {
+                    goUs.MoveBackTitle();    //モードをバックタイトルに
+                }
             }
+            
             ///////////////////////////////////////////////////////////////////////////////////////////////
 
             goUs.TargetHpUI();  //ターゲットの残り体力を表示
@@ -180,6 +191,8 @@ public class UIScript : MonoBehaviour
         targetMarker = GameObject.FindWithTag("TargetMarker");
         pmsTex = pms.GetComponent<TextMeshProUGUI>();
 
+        Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
+        canSelect = false;
         //wus = weatherUI.GetComponent<WeatherUIScript>();
         weatherUIScript.SetWeatherScript(gm.GetWeatherScript());
 
