@@ -42,6 +42,7 @@ public class GameManagerScript : MonoBehaviour
     {
         Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
         Usefull.GetStickScript.AxisUpdate();
+        Usefull.GetControllerScript.SearchController();
         ChangePMS();    //PMS管理
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
