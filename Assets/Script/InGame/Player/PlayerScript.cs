@@ -55,6 +55,7 @@ public class PlayerScript : MonoBehaviour
     private bool isControl;
     private float ringSpeed;
     private bool PMS;
+    private bool quickMove;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
     //プレイヤー管理関数
@@ -108,51 +109,96 @@ public class PlayerScript : MonoBehaviour
     //プレイヤーの操作で向いてる方向を変える
     private void Operation()
     {
+        Vector2 rowlingBuff = Vector2.zero;
+
         if (isControl) //プレイヤーを操作できる//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if(!Input.GetKey(KeyCode.LeftShift)&&!Input.GetKey(KeyCode.RightShift)) //回転速度半減/////////////////////
+            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            {
+                quickMove = true;
+            }
+            else
+            {
+                quickMove= false;
+            }
+            if(!quickMove) //回転速度半減/////////////////////
             {
                 //操作でプレイヤーの角度加算///////////////////////////////////////////////////
+
+                //コントローラー操作/////////////////////
+
+                float axisY = Input.GetAxis("LeftStickY");
+                rowlingBuff.x = (rowlingSpeedY / speedCut) * axisY;
+
+                float axisX = Input.GetAxis("LeftStickX");
+                rowlingBuff.y = (rowlingSpeedX / speedCut) * axisX;
+
+                //////////////////////////////////////////
+
+                //キーボード操作////////////////////////////
                 if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
                 {
-                    rowling.x -= rowlingSpeedY/speedCut;
+                    rowlingBuff.x = -(rowlingSpeedY/speedCut);
                 }
                 if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
                 {
-                    rowling.x += rowlingSpeedY/speedCut;
+                    rowlingBuff.x = rowlingSpeedY/speedCut;
                 }
                 if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 {
-                    rowling.y -= rowlingSpeedX/speedCut;
+                    rowlingBuff.y = -(rowlingSpeedX/speedCut);
                 }
                 if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                 {
-                    rowling.y += rowlingSpeedX/speedCut;
+                    rowlingBuff.y = rowlingSpeedX/speedCut;
                 }
+                /////////////////////////////////////////////
+
+
+
+
                 /////////////////////////////////////////////////////////////////////////////////
-                ///
+
             }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             else
             {
                 //操作でプレイヤーの角度加算///////////////////////////////////////////////////
+
+                //コントローラー操作/////////////////////
+
+                float axisY = Input.GetAxis("LeftStickY");
+                rowlingBuff.x = rowlingSpeedY * axisY;
+
+                float axisX = Input.GetAxis("LeftStickX");
+                rowlingBuff.y = rowlingSpeedX * axisX;
+
+                //////////////////////////////////////////
+
+                //キーボード操作//////////////////////////
                 if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
                 {
-                    rowling.x -= rowlingSpeedY;
+                    rowlingBuff.x = -rowlingSpeedY;
                 }
                 if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
                 {
-                    rowling.x += rowlingSpeedY;
+                    rowlingBuff.x = rowlingSpeedY;
                 }
                 if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 {
-                    rowling.y -= rowlingSpeedX;
+                    rowlingBuff.y = -rowlingSpeedX;
                 }
                 if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                 {
-                    rowling.y += rowlingSpeedX;
+                    rowlingBuff.y = rowlingSpeedX;
                 }
+                ///////////////////////////////////////////
+
+
+
                 /////////////////////////////////////////////////////////////////////////////////
             }
+
+            rowling += rowlingBuff;
 
             //X軸の回転が裏返らないように調整する
             if (rowling.x > 270)
