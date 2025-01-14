@@ -1310,6 +1310,10 @@ PrefabInstance:
       propertyPath: explodeTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5095967265551719216, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4279959807
+      objectReference: {fileID: 0}
     - target: {fileID: 5751812665510938201, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_LocalPosition.y
       value: 260

@@ -40,6 +40,7 @@ public class GameManagerScript : MonoBehaviour
     //ゲームシステムを動かす
     private void GameManagerController()
     {
+        Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
         ChangePMS();    //PMS管理
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
@@ -48,6 +49,7 @@ public class GameManagerScript : MonoBehaviour
     //リトライするときにシーンをロード
     public void Retry()
     {
+        Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(stage);
     }
     //タイトルに戻るときにシーンをロード
@@ -66,7 +68,7 @@ public class GameManagerScript : MonoBehaviour
             isCanShot = false;
             /////////////
             ///
-            if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff))
+            if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 SetPlayerSpawnFlag();   //プレイヤーを生成するフラグ管理
             }

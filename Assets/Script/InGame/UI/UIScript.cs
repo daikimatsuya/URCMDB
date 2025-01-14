@@ -108,7 +108,7 @@ public class UIScript : MonoBehaviour
                goUs.MoveBackTitle();    //モードをバックタイトルに
             }
             ///////////////////////////////////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 if (goUs.GetPos() < -1)
                 {
