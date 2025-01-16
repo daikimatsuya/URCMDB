@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour
     private SelectWeatherScript sws;
     private LaunchPointScript lp;
     private GameObject launchPad;
+    
 
     private bool playerDead;
     private Vector3 playerRot;
@@ -36,6 +37,7 @@ public class GameManagerScript : MonoBehaviour
     private bool playerSpawnFlag;
     private bool isHitTarget;
     private bool isTargetBreak;
+    private bool isTutorial;
 
     //ゲームシステムを動かす
     private void GameManagerController()
@@ -126,6 +128,7 @@ public class GameManagerScript : MonoBehaviour
         ps.SetLaunchpad(lp);    //発射台位置情報代入
         cm.SetPlayer(ps);   //カメラにプレイヤーを登録
         playerMissile--;    //残機減少
+
 
         player.transform.SetParent(launchPad.transform);    //プレイヤーと発射台を親子付け
 

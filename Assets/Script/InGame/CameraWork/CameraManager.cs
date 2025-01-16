@@ -120,7 +120,7 @@ public class CameraManager : MonoBehaviour
     }
 
     //プレイヤー取得用
-    public void SetPlayer(PlayerScript player)
+    public void SetPlayer(in PlayerScript player)
     {
         if (pcs == null)
         {

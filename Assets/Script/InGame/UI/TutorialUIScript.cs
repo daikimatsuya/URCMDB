@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class TutorialScript : MonoBehaviour
+public class TutorialUIScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] keyboard;
     [SerializeField] private GameObject[] controller;
 
     private int tutorialNumber;
 
-    private void TutorialController()
+    private void TutorialUIController()
     {
 
     }
