@@ -31,6 +31,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private SensorUIScript sensorUIScript;
     [SerializeField] private PlayerSpeedMeterScript playerSpeedMeterScript;
     [SerializeField] private float gameOverUIInterval;
+    [SerializeField] private TutorialUIScript tUIs;
     private int gameOverUIIntervalBuff;
 
     //UI全般管理関数
@@ -41,11 +42,11 @@ public class UIScript : MonoBehaviour
         YawUIController();  //プレイヤーのX軸の角度表示
         PMSMode();  //PMS表示
         IsGameOver();   //ゲームオーバーのUI表示
-        //PlayerSpeedUI();    //プレイヤーの速度表示
         TargetMarkerUI();   //ターゲットマーカー表示
         ActiveChecker();    //ゲーム画面に表示するCanvasのフラグ管理
         sensorUIScript.SensorUIController();    //センサーのUI表示
        playerSpeedMeterScript.SetPlayerSpeed((int)gm.GetPlayerSpeed(),(int)gm.GetPlayerSpeedBuff());    //プレイヤーのスピードメーター表示
+        TutorialUI();   //チュートリアルUIを動かす
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
@@ -174,6 +175,15 @@ public class UIScript : MonoBehaviour
             targetMarker.SetActive(true);
         }
         ////////////////////////////////////////////////////////////
+    }
+    
+    //チュートリアルUIを動かすよう
+    private void TutorialUI()
+    {
+        if(tUIs!=null)
+        {
+            tUIs.TutorialUIController();
+        }
     }
     // Start is called before the first frame update
     void Start()

@@ -9,17 +9,34 @@ public class TutorialUIScript : MonoBehaviour
     [SerializeField] private GameObject[] controller;
 
     private int tutorialNumber;
+    private TutorialScript ts;
 
-    private void TutorialUIController()
+    public void TutorialUIController()
+    {
+        ts.TutorialContoroller();   //情報更新
+
+
+    }
+
+    private void ShotTutorial()
     {
 
     }
-    public void NextTutorial()
+    private void ControlleTutorial()
+    {
+
+    }
+    private void BoostTutorial()
+    {
+
+    }
+    private void NextTutorial()
     {
         tutorialNumber++;
     }
-    // Start is called before the first frame update
-    void Start()
+
+    //チュートリアル表示をリセットさせる
+    private void ResetTutorial()
     {
         tutorialNumber = 0;
         for (int i = 0; i < keyboard.Length; i++)
@@ -31,6 +48,15 @@ public class TutorialUIScript : MonoBehaviour
             controller[i].SetActive(false);
         }
     }
+    // Start is called before the first frame update
+    void Start()
+    {
+        ResetTutorial();
+        ts=GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
+
+    }
+
+
 
     // Update is called once per frame
     void Update()

@@ -5,45 +5,158 @@ using UnityEngine;
 //チュートリアルを管理
 public class TutorialScript : MonoBehaviour
 {
-    private PlayerScript player;
+    private PlayerScript ps;
+
+    private float tutorialCompletion;
+    private float maxCompletion;
+    private float playerAcce;
+    private Vector3 playerRot;
+    private bool isControlled;
+    private bool isBoost;
+    private bool isShot;
+    private bool isAcce;
+    private bool isPMS;
+    private bool isQuick;
 
     //チュートリアル管理用
-    private void TutorialContoroller()
+    public void TutorialContoroller()
     {
-        if(player == null)
+        if(ps != null)
         {
-            SetPlayer();
+            CheckPlayerRot();   //プレイヤーが操作されているのかを確認する
+            CheckPlayerBoost();  //プレイヤーがブーストしているのかを確認する
+            CheckPlayerShot();  //プレイヤーが射出されているかを確認する
+            CheckPlayerAcce();  //プレイヤーが加速しているのかを確認する
+            CheckPMS(); //プレイヤーのPMSを確認する
         }
         else
         {
-
+            SetPlayer();    //プレイヤーを取得する
+            ResetFlags();   //フラグ類をリセットする
+            if (ps != null)
+            {
+                playerRot=ps.GetPlayerRot();    //値を代入
+                playerAcce = ps.GetPlayerSpeedBuffFloat();  //値を代入
+            }
         }
     }
-    //スティック入力検知用
-    private bool DetectStick()
+
+    //プレイヤーの角度を比較
+    private void CheckPlayerRot()
     {
-        if(Input.GetAxis("LeftStickX")!=0&&Input.GetAxis("LeftStickY")!=0)
+        Vector3 rotBuff=ps.GetPlayerRot();
+        if (rotBuff != playerRot)
         {
-            return true;
+            isControlled = true;
         }
-        return false;
+        else
+        {
+            isControlled = false;
+        }
+        playerRot = rotBuff;
     }
 
-    //右トリガー入力検知用
-    private bool DetectRTrigger()
+    //プレイヤーのブーストを確認
+    private void CheckPlayerBoost()
     {
-        if (Input.GetAxis("RightTrigger") != 0)
+        float acceBuff = ps.GetPlayerSpeedBuffFloat();
+        if(acceBuff!=0)
         {
-            return true;
+            isBoost = true;
         }
-        return false;
+        else
+        {
+            isBoost = false;
+        }
     }
 
+    //プレイヤーが射出されているのかを確認
+    private void CheckPlayerShot()
+    {
+        if (ps.GetIsFire())
+        {
+            isShot = true;
+        }
+        else
+        {
+            isControlled = false;
+        }
+    }
+
+    //プレイヤーの加速を確認
+    private void CheckPlayerAcce()
+    {
+        if(Input.GetAxis("RightTrigger")!=0)
+        {
+            isAcce = true;
+        }
+        else
+        {
+            isAcce = false;
+        }
+    }
+
+    //プレイヤーのPMSを確認
+    private void CheckPMS()
+    {
+        if (ps.GetPMS())
+        {
+            isPMS = true;
+        }
+        else
+        {
+            isPMS = false;
+        }
+    }
+
+    //プレイヤークイックムーブを確認
+    private void CheckQuickMove()
+    {
+        if (Input.GetAxis("LeftTrigger") != 0)
+        {
+            isQuick=true;
+        }
+        else
+        {
+            isQuick = false;
+        }
+    }
+
+    //フラグリセット
+    private void ResetFlags()
+    {
+        isBoost=false;
+        isControlled=false;
+        isShot=false;
+    }
+    #region 値受け渡し
+
+    public bool GetIsControll()
+    {
+        return isControlled;
+    }
+    public bool GetIsBoost()
+    {
+        return isBoost;
+    }
+    public bool GetIsShot()
+    {
+        return isShot;
+    }
+    public bool GetIsAcce()
+    {
+        return isAcce;
+    }
+    public bool GetIsPMS()
+    {
+        return isPMS;
+    }
+    #endregion
 
     //プレイヤー取得用
     private void SetPlayer()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();  
+        ps = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();  
     }
     // Start is called before the first frame update
     void Start()

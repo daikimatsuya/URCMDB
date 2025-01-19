@@ -454,6 +454,14 @@ public class PlayerScript : MonoBehaviour
     {
         return blurIntnsity;
     }
+    public bool GetIsFire()
+    {
+        return isFire;
+    }
+    public bool GetPMS()
+    {
+        return PMS;
+    }
     #endregion
 
     public void OnCollisionEnter(Collision collision)
