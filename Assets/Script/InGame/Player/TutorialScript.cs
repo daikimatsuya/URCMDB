@@ -143,8 +143,8 @@ public class TutorialScript : MonoBehaviour
     //プレイヤーのブーストを確認
     public bool CheckPlayerBoost(in PlayerScript ps)
     {
-        float acceBuff = ps.GetPlayerSpeedBuffFloat();
-        if(acceBuff!=0)
+        float acceBuff = ps.GetPlayerAcce();
+        if(acceBuff>=1)
         {
             return true;
         }

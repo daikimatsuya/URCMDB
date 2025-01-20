@@ -430,6 +430,10 @@ public class PlayerScript : MonoBehaviour
     {
         this.gm = gm;
     }
+    public float GetPlayerAcce()
+    {
+        return accelelateSpeed;
+    }
     public Vector3 GetPlayerSpeed()
     {
         return playerMoveBuff;

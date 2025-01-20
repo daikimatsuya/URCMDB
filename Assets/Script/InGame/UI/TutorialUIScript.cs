@@ -30,7 +30,7 @@ public class TutorialUIScript : MonoBehaviour
     {
         SelectTutorial(in ps);  //UI用情報更新
         ShowUI(Usefull.GetControllerScript.GetIsConectic());    //UI表示
-        //ShowCompletion(ts.GetResetFlag());
+        ShowCompletion(ts.GetResetFlag());
         if (ts.GetResetFlag())
         {
             ResetTutorial();
@@ -76,7 +76,7 @@ public class TutorialUIScript : MonoBehaviour
     private void ShowCompletion(in bool showFlag)
     {
         tutorialCompletion.SetActive(!showFlag);
-        completion.text = "" + ts.GetCompletion();
+        completion.text = ts.GetCompletion() + "%";
     }
 
    
@@ -137,7 +137,7 @@ public class TutorialUIScript : MonoBehaviour
     {
         ResetTutorial();
         ts=GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
-        //completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
+        completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
 
     }
 
