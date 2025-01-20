@@ -210,6 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1741bfbd95fe04b93b7bf6bc76d91c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotTutorialCount: 1
+  boostTutorialCount: 1
+  controlleTutorialCount: 1
+  PMSTutorialCount: 1
+  acceTutorialCount: 1
+  quickMoveTutorialCount: 1
 --- !u!1001 &93788468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1360,6 +1366,10 @@ PrefabInstance:
       propertyPath: wUIs
       value: 
       objectReference: {fileID: 372019081}
+    - target: {fileID: 6206151328695150521, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: tutorialUIScript
+      value: 
+      objectReference: {fileID: 1383885087}
     - target: {fileID: 6215234632937319495, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_LocalPosition.z
       value: 26

@@ -5,47 +5,60 @@ using UnityEngine;
 
 public class TutorialUIScript : MonoBehaviour
 {
+    private enum Tutorial: int
+    {
+        shot,
+        move,
+        boost,
+        quick,
+        acce,
+        pms
+    }
+
     [SerializeField] private GameObject[] keyboard;
     [SerializeField] private GameObject[] controller;
 
-
     private TutorialScript ts;
 
+    //チュートリアルUI管理
     public void TutorialUIController(in PlayerScript ps)
     {
-        SelectTutorial();
-        ShowUI(Usefull.GetControllerScript.GetIsConectic());
+        SelectTutorial(in ps);  //UI用情報更新
+        //ShowUI(Usefull.GetControllerScript.GetIsConectic());    //UI表示
     }
 
-    private void SelectTutorial()
+    //起動するチュートリアルを選択
+    private void SelectTutorial(in PlayerScript ps)
     {
+        switch (ts.GetTutorialNum())
+        {
+            case (int)Tutorial.shot:
+                ts.ShotTutorial(in ps);
+                break;
 
+            case (int)Tutorial.move:
+                ts.ControlleTutorial(in ps);
+                break;
+
+            case (int)Tutorial.boost:
+                ts.BoostTutorial(in ps);
+                break;
+
+            case (int)Tutorial.quick:
+                ts.QuickMoveTutorial(in ps);
+                break;
+
+            case (int)Tutorial.acce:
+                ts.AcceTutorial(in ps);
+                break;
+
+            case (int)Tutorial.pms:
+                ts.PMSTutorial(in ps);
+                break;
+        }
     }
 
-    private void ShotUI(in PlayerScript ps)
-    {
-        ts.ShotTutorial(in ps);
-    }
-    private void BoostUI(in PlayerScript ps)
-    {
-        ts.BoostTutorial(in ps);
-    }
-    private void ControlleUI(in PlayerScript ps)
-    {
-        ts.ControlleTutorial(in ps);
-    }
-    private void PMSUI(in PlayerScript ps)
-    {
-        ts.PMSTutorial(in ps);
-    }
-    private void AcceUI(in PlayerScript ps)
-    {
-        ts.AcceTutorial(in ps);
-    }
-    private void QuickMoveUI(in PlayerScript ps)
-    {
-        ts.QuickMoveTutorial(in ps);
-    }
+   
     private void ShowUI(in bool isConectController)
     {
         if(isConectController)
