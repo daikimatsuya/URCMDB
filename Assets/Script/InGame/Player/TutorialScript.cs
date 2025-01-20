@@ -5,159 +5,179 @@ using UnityEngine;
 //チュートリアルを管理
 public class TutorialScript : MonoBehaviour
 {
-    private PlayerScript ps;
+    private int tutorialNumber = 0;
+    private float tutorialCompletion = 0;
+    private float maxCompletion = 100.0f;
 
-    private float tutorialCompletion;
-    private float maxCompletion;
-    private float playerAcce;
-    private Vector3 playerRot;
-    private bool isControlled;
-    private bool isBoost;
-    private bool isShot;
-    private bool isAcce;
-    private bool isPMS;
-    private bool isQuick;
+    [SerializeField] private float shotTutorialCount;
+    [SerializeField] private float boostTutorialCount;
+    [SerializeField] private float controlleTutorialCount;
+    [SerializeField] private float PMSTutorialCount;
+    [SerializeField] private float acceTutorialCount;
+    [SerializeField] private float quickMoveTutorialCount;
 
-    //チュートリアル管理用
-    public void TutorialContoroller()
+    //射出時のチュートリアル管理
+    public void ShotTutorial(in PlayerScript ps)
     {
-        if(ps != null)
+        ResetTutorial();
+        if (CheckPlayerShot(in ps))
         {
-            CheckPlayerRot();   //プレイヤーが操作されているのかを確認する
-            CheckPlayerBoost();  //プレイヤーがブーストしているのかを確認する
-            CheckPlayerShot();  //プレイヤーが射出されているかを確認する
-            CheckPlayerAcce();  //プレイヤーが加速しているのかを確認する
-            CheckPMS(); //プレイヤーのPMSを確認する
+            tutorialCompletion += shotTutorialCount;
         }
-        else
+    }
+    //ブースト時のチュートリアル管理
+    public void BoostTutorial(in PlayerScript ps)
+    {
+        ResetTutorial();
+        if (CheckPlayerBoost(in ps))
         {
-            SetPlayer();    //プレイヤーを取得する
-            ResetFlags();   //フラグ類をリセットする
-            if (ps != null)
-            {
-                playerRot=ps.GetPlayerRot();    //値を代入
-                playerAcce = ps.GetPlayerSpeedBuffFloat();  //値を代入
-            }
+            tutorialCompletion += boostTutorialCount;
+        }
+    }
+    //操作時のチュートリアル管理
+    public void ControlleTutorial(in PlayerScript ps)
+    {
+        ResetTutorial();
+        if (CheckPlayerControlle(in ps))
+        {
+            tutorialCompletion += controlleTutorialCount;
+        }
+    }    
+    //PMSのチュートリアル管理
+    public void PMSTutorial(in PlayerScript ps)
+    {
+        ResetTutorial();
+        if (CheckPMS(in ps))
+        {
+            tutorialCompletion += PMSTutorialCount;
+        }
+    }   
+    //加速時のチュートリアル管理
+    public void AcceTutorial(in PlayerScript ps)
+    {
+        ResetTutorial();
+        if (CheckPlayerAcce(in ps))
+        {
+            tutorialCompletion += acceTutorialCount;
+        }
+    }
+    //高速旋回時のチュートリアル管理
+    public void QuickMoveTutorial(in PlayerScript ps)
+    {
+        ResetTutorial();
+        if (CheckQuickMove(in ps))
+        {
+            tutorialCompletion += quickMoveTutorialCount;
         }
     }
 
-    //プレイヤーの角度を比較
-    private void CheckPlayerRot()
+
+    //チュートリアルが完了したらリセットをかける
+    private void ResetTutorial()
     {
-        Vector3 rotBuff=ps.GetPlayerRot();
-        if (rotBuff != playerRot)
+        if (tutorialCompletion >= maxCompletion)
         {
-            isControlled = true;
+            tutorialCompletion = 0;
+            tutorialNumber++;
+        }
+    }
+    #region チュートリアルチェッカー
+    //プレイヤーの角度を比較
+    public bool CheckPlayerControlle(in PlayerScript ps)
+    {
+        if (Input.GetAxis("LeftStickX") != 0 || Input.GetAxis("LeftStickY") != 0) 
+        {
+            return true;
         }
         else
         {
-            isControlled = false;
+            return false;
         }
-        playerRot = rotBuff;
+        
     }
 
     //プレイヤーのブーストを確認
-    private void CheckPlayerBoost()
+    public bool CheckPlayerBoost(in PlayerScript ps)
     {
         float acceBuff = ps.GetPlayerSpeedBuffFloat();
         if(acceBuff!=0)
         {
-            isBoost = true;
+            return true;
         }
         else
         {
-            isBoost = false;
+            return false;
         }
     }
 
     //プレイヤーが射出されているのかを確認
-    private void CheckPlayerShot()
+    public bool CheckPlayerShot(in PlayerScript ps)
     {
         if (ps.GetIsFire())
         {
-            isShot = true;
+            return true;
         }
         else
         {
-            isControlled = false;
+            return false;
         }
     }
 
     //プレイヤーの加速を確認
-    private void CheckPlayerAcce()
+    public bool CheckPlayerAcce(in PlayerScript ps)
     {
         if(Input.GetAxis("RightTrigger")!=0)
         {
-            isAcce = true;
+            return true;
         }
         else
         {
-            isAcce = false;
+            return false;
         }
     }
 
     //プレイヤーのPMSを確認
-    private void CheckPMS()
+    public bool CheckPMS(in PlayerScript ps)
     {
         if (ps.GetPMS())
         {
-            isPMS = true;
+            return true;
         }
         else
         {
-            isPMS = false;
+            return false;
         }
     }
 
     //プレイヤークイックムーブを確認
-    private void CheckQuickMove()
+    public bool CheckQuickMove(in PlayerScript ps)
     {
         if (Input.GetAxis("LeftTrigger") != 0)
         {
-            isQuick=true;
+            return true;
         }
         else
         {
-            isQuick = false;
+            return false;
         }
-    }
-
-    //フラグリセット
-    private void ResetFlags()
-    {
-        isBoost=false;
-        isControlled=false;
-        isShot=false;
-    }
-    #region 値受け渡し
-
-    public bool GetIsControll()
-    {
-        return isControlled;
-    }
-    public bool GetIsBoost()
-    {
-        return isBoost;
-    }
-    public bool GetIsShot()
-    {
-        return isShot;
-    }
-    public bool GetIsAcce()
-    {
-        return isAcce;
-    }
-    public bool GetIsPMS()
-    {
-        return isPMS;
     }
     #endregion
 
-    //プレイヤー取得用
-    private void SetPlayer()
+
+    #region 値受け渡し
+
+    public int GetTutorialNum()
     {
-        ps = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();  
+        return tutorialNumber;
     }
+    public int GetCompletion()
+    {
+        return (int)tutorialCompletion;
+    }
+
+    #endregion
+
+
     // Start is called before the first frame update
     void Start()
     {

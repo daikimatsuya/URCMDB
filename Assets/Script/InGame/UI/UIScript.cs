@@ -11,6 +11,7 @@ public class UIScript : MonoBehaviour
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
+    private PlayerScript ps;
 
     private Vector3 playerRot;
     private Vector3 targetPos;
@@ -38,14 +39,17 @@ public class UIScript : MonoBehaviour
     private void UIController()
     {
 
-        GetPlayerRot(); //プレイヤーの角度取得
-        YawUIController();  //プレイヤーのX軸の角度表示
+        if(GetPlayerScript() != null)
+        {
+            GetPlayerRot(); //プレイヤーの角度取得
+            YawUIController();  //プレイヤーのX軸の角度表示
+            playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
+            sensorUIScript.SensorUIController();    //センサーのUI表示
+        }
         PMSMode();  //PMS表示
         IsGameOver();   //ゲームオーバーのUI表示
         TargetMarkerUI();   //ターゲットマーカー表示
         ActiveChecker();    //ゲーム画面に表示するCanvasのフラグ管理
-        sensorUIScript.SensorUIController();    //センサーのUI表示
-       playerSpeedMeterScript.SetPlayerSpeed((int)gm.GetPlayerSpeed(),(int)gm.GetPlayerSpeedBuff());    //プレイヤーのスピードメーター表示
         TutorialUI();   //チュートリアルUIを動かす
     }
     //プレイヤーが死んでいたら消す
@@ -81,7 +85,7 @@ public class UIScript : MonoBehaviour
     //プレイヤーの角度取得
     private void GetPlayerRot()
     {
-        playerRot = gm.GetPlayerRot();
+        playerRot = ps.GetPlayerRot();
         if (playerRot.x > 270)
         {
             playerRot.x -= 360;
@@ -176,13 +180,20 @@ public class UIScript : MonoBehaviour
         }
         ////////////////////////////////////////////////////////////
     }
+
+    //プレイヤー取得用
+    private PlayerScript GetPlayerScript()
+    {
+        ps=gm.GetPlayerScript();
+        return ps;
+    }
     
     //チュートリアルUIを動かすよう
     private void TutorialUI()
     {
         if(tUIs!=null)
         {
-            tUIs.TutorialUIController();
+            tUIs.TutorialUIController(in ps);
         }
     }
     // Start is called before the first frame update

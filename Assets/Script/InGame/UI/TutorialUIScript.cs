@@ -8,37 +8,17 @@ public class TutorialUIScript : MonoBehaviour
     [SerializeField] private GameObject[] keyboard;
     [SerializeField] private GameObject[] controller;
 
-    private int tutorialNumber;
+
     private TutorialScript ts;
 
-    public void TutorialUIController()
-    {
-        ts.TutorialContoroller();   //情報更新
-
-
-    }
-
-    private void ShotTutorial()
+    public void TutorialUIController(in PlayerScript ps)
     {
 
-    }
-    private void ControlleTutorial()
-    {
-
-    }
-    private void BoostTutorial()
-    {
-
-    }
-    private void NextTutorial()
-    {
-        tutorialNumber++;
     }
 
     //チュートリアル表示をリセットさせる
     private void ResetTutorial()
     {
-        tutorialNumber = 0;
         for (int i = 0; i < keyboard.Length; i++)
         {
             keyboard[i].SetActive(false);

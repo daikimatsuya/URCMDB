@@ -262,7 +262,10 @@ public class GameManagerScript : MonoBehaviour
     {
         isCanShot = start;
     }
-
+    public PlayerScript GetPlayerScript()
+    {
+        return ps;
+    }
     #endregion
     private void Awake()
     {
