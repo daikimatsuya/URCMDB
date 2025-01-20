@@ -8,6 +8,7 @@ public class TutorialScript : MonoBehaviour
     private int tutorialNumber = 0;
     private float tutorialCompletion = 0;
     private float maxCompletion = 100.0f;
+    private bool isReset;
 
     [SerializeField] private float shotTutorialCount;
     [SerializeField] private float boostTutorialCount;
@@ -19,6 +20,7 @@ public class TutorialScript : MonoBehaviour
     //射出時のチュートリアル管理
     public void ShotTutorial(in PlayerScript ps)
     {
+        ResetAll(in ps);
         ResetTutorial();
         if (CheckPlayerShot(in ps))
         {
@@ -32,6 +34,7 @@ public class TutorialScript : MonoBehaviour
     //ブースト時のチュートリアル管理
     public void BoostTutorial(in PlayerScript ps)
     {
+        ResetAll(in ps);
         ResetTutorial();
         if (CheckPlayerBoost(in ps))
         {
@@ -45,6 +48,7 @@ public class TutorialScript : MonoBehaviour
     //操作時のチュートリアル管理
     public void ControlleTutorial(in PlayerScript ps)
     {
+        ResetAll(in ps);
         ResetTutorial();
         if (CheckPlayerControlle(in ps))
         {
@@ -58,6 +62,7 @@ public class TutorialScript : MonoBehaviour
     //PMSのチュートリアル管理
     public void PMSTutorial(in PlayerScript ps)
     {
+        ResetAll(in ps);
         ResetTutorial();
         if (CheckPMS(in ps))
         {
@@ -71,6 +76,7 @@ public class TutorialScript : MonoBehaviour
     //加速時のチュートリアル管理
     public void AcceTutorial(in PlayerScript ps)
     {
+        ResetAll(in ps);
         ResetTutorial();
         if (CheckPlayerAcce(in ps))
         {
@@ -84,6 +90,7 @@ public class TutorialScript : MonoBehaviour
     //高速旋回時のチュートリアル管理
     public void QuickMoveTutorial(in PlayerScript ps)
     {
+        ResetAll(in ps);
         ResetTutorial();
         if (CheckQuickMove(in ps)&&CheckPlayerControlle(in ps))
         {
@@ -105,6 +112,19 @@ public class TutorialScript : MonoBehaviour
             tutorialNumber++;
         }
     }
+    //プレイヤーが死んだら全部リセットさせる
+    public void ResetAll(in PlayerScript ps)
+    {
+        if (ps == null)
+        {
+            isReset = true;
+            tutorialNumber = 0;
+            tutorialCompletion = 0;
+            return;
+        }
+        isReset = false;
+    }
+
     #region チュートリアルチェッカー
     //プレイヤーの角度を比較
     public bool CheckPlayerControlle(in PlayerScript ps)
@@ -198,7 +218,10 @@ public class TutorialScript : MonoBehaviour
     {
         return (int)tutorialCompletion;
     }
-
+    public bool GetResetFlag()
+    {
+        return isReset;
+    }
     #endregion
 
 

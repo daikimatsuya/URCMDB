@@ -444,6 +444,10 @@ public class PlayerScript : MonoBehaviour
     }
     public Vector3 GetPlayerRot()
     {
+        if (tf == null)
+        {
+            tf = GetComponent<Transform>();
+        }
         return tf.eulerAngles;
     }
     public bool GetControll()

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialUIScript : MonoBehaviour
 {
@@ -12,11 +14,14 @@ public class TutorialUIScript : MonoBehaviour
         boost,
         quick,
         acce,
-        pms
+        pms,
+        finish
     }
 
     [SerializeField] private GameObject[] keyboard;
     [SerializeField] private GameObject[] controller;
+    [SerializeField] private GameObject tutorialCompletion;
+    private TextMeshProUGUI completion;
 
     private TutorialScript ts;
 
@@ -25,6 +30,11 @@ public class TutorialUIScript : MonoBehaviour
     {
         SelectTutorial(in ps);  //UI用情報更新
         ShowUI(Usefull.GetControllerScript.GetIsConectic());    //UI表示
+        //ShowCompletion(ts.GetResetFlag());
+        if (ts.GetResetFlag())
+        {
+            ResetTutorial();
+        }
     }
 
     //起動するチュートリアルを選択
@@ -55,7 +65,18 @@ public class TutorialUIScript : MonoBehaviour
             case (int)Tutorial.pms:
                 ts.PMSTutorial(in ps);
                 break;
+
+            case (int)Tutorial.finish:
+                ts.ResetAll(in ps);
+                break;
         }
+    }
+
+    //チュートリアル達成度表示
+    private void ShowCompletion(in bool showFlag)
+    {
+        tutorialCompletion.SetActive(!showFlag);
+        completion.text = "" + ts.GetCompletion();
     }
 
    
@@ -116,6 +137,7 @@ public class TutorialUIScript : MonoBehaviour
     {
         ResetTutorial();
         ts=GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
+        //completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
 
     }
 
