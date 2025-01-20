@@ -211,10 +211,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotTutorialCount: 3
-  boostTutorialCount: 0.1
+  boostTutorialCount: 0.4
   controlleTutorialCount: 0.2
   PMSTutorialCount: 1
-  acceTutorialCount: 0.5
+  acceTutorialCount: 0.2
   quickMoveTutorialCount: 0.2
 --- !u!1001 &93788468
 PrefabInstance:
