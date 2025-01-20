@@ -8,7 +8,7 @@ public class TutorialUIScript : MonoBehaviour
     private enum Tutorial: int
     {
         shot,
-        move,
+        controll,
         boost,
         quick,
         acce,
@@ -24,7 +24,7 @@ public class TutorialUIScript : MonoBehaviour
     public void TutorialUIController(in PlayerScript ps)
     {
         SelectTutorial(in ps);  //UI用情報更新
-        //ShowUI(Usefull.GetControllerScript.GetIsConectic());    //UI表示
+        ShowUI(Usefull.GetControllerScript.GetIsConectic());    //UI表示
     }
 
     //起動するチュートリアルを選択
@@ -36,7 +36,7 @@ public class TutorialUIScript : MonoBehaviour
                 ts.ShotTutorial(in ps);
                 break;
 
-            case (int)Tutorial.move:
+            case (int)Tutorial.controll:
                 ts.ControlleTutorial(in ps);
                 break;
 
@@ -63,11 +63,37 @@ public class TutorialUIScript : MonoBehaviour
     {
         if(isConectController)
         {
+            if (controller.Length == 0)
+            {
+                return;
+            }
+            if(controller.Length <=ts.GetTutorialNum())
+            {
+                controller[controller.Length-1].SetActive(true);
+                controller[controller.Length-2].SetActive(false);
+                return;
+            }
+            if(ts.GetTutorialNum() == 0)
+            {
+                controller[controller.Length-1].SetActive(false);
+            }
+            else
+            {
+                controller[ts.GetTutorialNum()-1].SetActive(false);
+            }
             controller[ts.GetTutorialNum()].SetActive(true);
 
         }
         else
         {
+            if (keyboard.Length == 0)
+            {
+                return;
+            }
+            if (keyboard.Length < ts.GetTutorialNum())
+            {
+                keyboard[keyboard.Length].SetActive(true);
+            }
             keyboard[ts.GetTutorialNum()].SetActive(true);
 
         }
