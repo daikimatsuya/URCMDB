@@ -32,7 +32,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private SensorUIScript sensorUIScript;
     [SerializeField] private PlayerSpeedMeterScript playerSpeedMeterScript;
     [SerializeField] private float gameOverUIInterval;
-    [SerializeField] private TutorialUIScript tUIs;
+    [SerializeField] private TutorialUIScript tutorialUIScript;
     private int gameOverUIIntervalBuff;
 
     //UI全般管理関数
@@ -191,9 +191,9 @@ public class UIScript : MonoBehaviour
     //チュートリアルUIを動かすよう
     private void TutorialUI()
     {
-        if(tUIs!=null)
+        if(tutorialUIScript!=null)
         {
-            tUIs.TutorialUIController(in ps);
+            tutorialUIScript.TutorialUIController(in ps);
         }
     }
     // Start is called before the first frame update

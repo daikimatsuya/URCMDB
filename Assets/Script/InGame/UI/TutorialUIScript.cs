@@ -13,7 +13,51 @@ public class TutorialUIScript : MonoBehaviour
 
     public void TutorialUIController(in PlayerScript ps)
     {
+        SelectTutorial();
+        ShowUI(Usefull.GetControllerScript.GetIsConectic());
+    }
 
+    private void SelectTutorial()
+    {
+
+    }
+
+    private void ShotUI(in PlayerScript ps)
+    {
+        ts.ShotTutorial(in ps);
+    }
+    private void BoostUI(in PlayerScript ps)
+    {
+        ts.BoostTutorial(in ps);
+    }
+    private void ControlleUI(in PlayerScript ps)
+    {
+        ts.ControlleTutorial(in ps);
+    }
+    private void PMSUI(in PlayerScript ps)
+    {
+        ts.PMSTutorial(in ps);
+    }
+    private void AcceUI(in PlayerScript ps)
+    {
+        ts.AcceTutorial(in ps);
+    }
+    private void QuickMoveUI(in PlayerScript ps)
+    {
+        ts.QuickMoveTutorial(in ps);
+    }
+    private void ShowUI(in bool isConectController)
+    {
+        if(isConectController)
+        {
+            controller[ts.GetTutorialNum()].SetActive(true);
+
+        }
+        else
+        {
+            keyboard[ts.GetTutorialNum()].SetActive(true);
+
+        }
     }
 
     //チュートリアル表示をリセットさせる

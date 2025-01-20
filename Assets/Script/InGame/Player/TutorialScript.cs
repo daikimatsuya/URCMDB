@@ -23,6 +23,10 @@ public class TutorialScript : MonoBehaviour
         if (CheckPlayerShot(in ps))
         {
             tutorialCompletion += shotTutorialCount;
+            if(tutorialCompletion > maxCompletion)
+            {
+                tutorialCompletion = maxCompletion;
+            }
         }
     }
     //ブースト時のチュートリアル管理
@@ -32,6 +36,10 @@ public class TutorialScript : MonoBehaviour
         if (CheckPlayerBoost(in ps))
         {
             tutorialCompletion += boostTutorialCount;
+            if (tutorialCompletion > maxCompletion)
+            {
+                tutorialCompletion = maxCompletion;
+            }
         }
     }
     //操作時のチュートリアル管理
@@ -41,6 +49,10 @@ public class TutorialScript : MonoBehaviour
         if (CheckPlayerControlle(in ps))
         {
             tutorialCompletion += controlleTutorialCount;
+            if (tutorialCompletion > maxCompletion)
+            {
+                tutorialCompletion = maxCompletion;
+            }
         }
     }    
     //PMSのチュートリアル管理
@@ -50,6 +62,10 @@ public class TutorialScript : MonoBehaviour
         if (CheckPMS(in ps))
         {
             tutorialCompletion += PMSTutorialCount;
+            if (tutorialCompletion > maxCompletion)
+            {
+                tutorialCompletion = maxCompletion;
+            }
         }
     }   
     //加速時のチュートリアル管理
@@ -59,15 +75,23 @@ public class TutorialScript : MonoBehaviour
         if (CheckPlayerAcce(in ps))
         {
             tutorialCompletion += acceTutorialCount;
+            if (tutorialCompletion > maxCompletion)
+            {
+                tutorialCompletion = maxCompletion;
+            }
         }
     }
     //高速旋回時のチュートリアル管理
     public void QuickMoveTutorial(in PlayerScript ps)
     {
         ResetTutorial();
-        if (CheckQuickMove(in ps))
+        if (CheckQuickMove(in ps)&&CheckPlayerControlle(in ps))
         {
             tutorialCompletion += quickMoveTutorialCount;
+            if (tutorialCompletion > maxCompletion)
+            {
+                tutorialCompletion = maxCompletion;
+            }
         }
     }
 
