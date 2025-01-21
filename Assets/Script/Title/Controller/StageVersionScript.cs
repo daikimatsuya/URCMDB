@@ -33,6 +33,15 @@ public class StageVersionScript : MonoBehaviour
 
         stage[(int)sss.GetStageCount()].SetActive(true);    //現在のステージの説明を表示
     }
+
+    //すべてのステージ説明を消す
+    private void SetFalfeMonitor()
+    {
+        for(int i=0;i<stage.Length;i++)
+        {
+            stage[i].SetActive(false);
+        }
+    }
     // Start is called before the first frame update
     private void Awake()
     {
@@ -41,6 +50,7 @@ public class StageVersionScript : MonoBehaviour
     void Start()
     {
         sss=GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
+        SetFalfeMonitor();
         ViewVersion();
     }
 

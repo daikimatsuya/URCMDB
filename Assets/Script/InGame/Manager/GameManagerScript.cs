@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour
     private SelectWeatherScript sws;
     private LaunchPointScript lp;
     private GameObject launchPad;
+    
 
     private bool playerDead;
     private Vector3 playerRot;
@@ -36,10 +37,14 @@ public class GameManagerScript : MonoBehaviour
     private bool playerSpawnFlag;
     private bool isHitTarget;
     private bool isTargetBreak;
+    private bool isTutorial;
 
     //ゲームシステムを動かす
     private void GameManagerController()
     {
+        Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
+        Usefull.GetStickScript.AxisUpdate();//スティック入力情報を更新
+        Usefull.GetControllerScript.SearchController();//コントローラー接続確認
         ChangePMS();    //PMS管理
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
@@ -48,11 +53,13 @@ public class GameManagerScript : MonoBehaviour
     //リトライするときにシーンをロード
     public void Retry()
     {
+        Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(stage);
     }
     //タイトルに戻るときにシーンをロード
     public void BackTitle()
     {
+        Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(title);
     }
     //プレイヤーの生存確認と生成
@@ -66,7 +73,7 @@ public class GameManagerScript : MonoBehaviour
             isCanShot = false;
             /////////////
             ///
-            if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff))
+            if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 SetPlayerSpawnFlag();   //プレイヤーを生成するフラグ管理
             }
@@ -122,6 +129,7 @@ public class GameManagerScript : MonoBehaviour
         cm.SetPlayer(ps);   //カメラにプレイヤーを登録
         playerMissile--;    //残機減少
 
+
         player.transform.SetParent(launchPad.transform);    //プレイヤーと発射台を親子付け
 
         SetRespawnTimer();  //プレイヤー生成用タイマーセット
@@ -154,7 +162,7 @@ public class GameManagerScript : MonoBehaviour
     //PMSのオンオフ
     private void ChangePMS()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)||Input.GetKeyDown("joystick button 3"))
         {
             if (PMS)    //PMS管理//////////////////
             {
@@ -254,7 +262,10 @@ public class GameManagerScript : MonoBehaviour
     {
         isCanShot = start;
     }
-
+    public PlayerScript GetPlayerScript()
+    {
+        return ps;
+    }
     #endregion
     private void Awake()
     {

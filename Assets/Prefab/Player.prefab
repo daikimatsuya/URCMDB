@@ -74,7 +74,7 @@ MonoBehaviour:
   correctionRowring: 17
   playerBoostTuner: 3
   speedUpRingTuner: 0.3
-  boostBrakeTuner: 300
+  boostBrakeTuner: 100
   speedUpRingBrakeTuner: 0.003
 --- !u!33 &7870347104334944395
 MeshFilter:

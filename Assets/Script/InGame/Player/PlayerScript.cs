@@ -55,7 +55,9 @@ public class PlayerScript : MonoBehaviour
     private bool isControl;
     private float ringSpeed;
     private bool PMS;
+    private bool quickMove;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
+
 
     //プレイヤー管理関数
     private void PlayerController()
@@ -71,10 +73,15 @@ public class PlayerScript : MonoBehaviour
             CountDown();    //生存時間管理
             EffectController(); //演出管理
             BlurIntnsityController();   //加速表現ブラー管理
-           
-        }//////////////////////////////////////////////////////////////////////////
 
-        gm.PlayerRotSet(rowling);   //プレイヤーの角度を代入
+        }//////////////////////////////////////////////////////////////////////////
+        else
+        {
+            SetPreShootAngle(); //発射前の角度調整
+        }
+
+        gm.PlayerRotSet(tf.eulerAngles);   //プレイヤーの角度を代入
+
     }
     //速度を足してトランスフォームのバッファに入れる
     private void Move()
@@ -103,51 +110,96 @@ public class PlayerScript : MonoBehaviour
     //プレイヤーの操作で向いてる方向を変える
     private void Operation()
     {
+        Vector2 rowlingBuff = Vector2.zero;
+
         if (isControl) //プレイヤーを操作できる//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if(!Input.GetKey(KeyCode.LeftShift)&&!Input.GetKey(KeyCode.RightShift)) //回転速度半減/////////////////////
+            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)||Input.GetAxis("LeftTrigger")==1)
+            {
+                quickMove = true;
+            }
+            else
+            {
+                quickMove= false;
+            }
+            if(!quickMove) //回転速度半減/////////////////////
             {
                 //操作でプレイヤーの角度加算///////////////////////////////////////////////////
+
+                //コントローラー操作/////////////////////
+
+                float axisY = Input.GetAxis("LeftStickY");
+                rowlingBuff.x = (rowlingSpeedY / speedCut) * axisY;
+
+                float axisX = Input.GetAxis("LeftStickX");
+                rowlingBuff.y = (rowlingSpeedX / speedCut) * axisX;
+
+                //////////////////////////////////////////
+
+                //キーボード操作////////////////////////////
                 if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
                 {
-                    rowling.x -= rowlingSpeedY/speedCut;
+                    rowlingBuff.x = -(rowlingSpeedY/speedCut);
                 }
                 if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
                 {
-                    rowling.x += rowlingSpeedY/speedCut;
+                    rowlingBuff.x = rowlingSpeedY/speedCut;
                 }
                 if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 {
-                    rowling.y -= rowlingSpeedX/speedCut;
+                    rowlingBuff.y = -(rowlingSpeedX/speedCut);
                 }
                 if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                 {
-                    rowling.y += rowlingSpeedX/speedCut;
+                    rowlingBuff.y = rowlingSpeedX/speedCut;
                 }
+                /////////////////////////////////////////////
+
+
+
+
                 /////////////////////////////////////////////////////////////////////////////////
-                ///
+
             }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             else
             {
                 //操作でプレイヤーの角度加算///////////////////////////////////////////////////
+
+                //コントローラー操作/////////////////////
+
+                float axisY = Input.GetAxis("LeftStickY");
+                rowlingBuff.x = rowlingSpeedY * axisY;
+
+                float axisX = Input.GetAxis("LeftStickX");
+                rowlingBuff.y = rowlingSpeedX * axisX;
+
+                //////////////////////////////////////////
+
+                //キーボード操作//////////////////////////
                 if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
                 {
-                    rowling.x -= rowlingSpeedY;
+                    rowlingBuff.x = -rowlingSpeedY;
                 }
                 if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
                 {
-                    rowling.x += rowlingSpeedY;
+                    rowlingBuff.x = rowlingSpeedY;
                 }
                 if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
                 {
-                    rowling.y -= rowlingSpeedX;
+                    rowlingBuff.y = -rowlingSpeedX;
                 }
                 if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                 {
-                    rowling.y += rowlingSpeedX;
+                    rowlingBuff.y = rowlingSpeedX;
                 }
+                ///////////////////////////////////////////
+
+
+
                 /////////////////////////////////////////////////////////////////////////////////
             }
+
+            rowling += rowlingBuff;
 
             //X軸の回転が裏返らないように調整する
             if (rowling.x > 270)
@@ -209,7 +261,7 @@ public class PlayerScript : MonoBehaviour
             rowling.y = lp.GetRowling().y + 180;
             ////////////
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 isFire = true;  //発射フラグオン
                 lp.Shoot(); //発射台のコントロールをオフ
@@ -220,30 +272,31 @@ public class PlayerScript : MonoBehaviour
         PMS=gm.GetPMS();
         tf.eulerAngles = new Vector3(rowling.x, rowling.y, 0);  //角度をトランスフォームに代入
     }
+
     //加減速処理
     private void Acceleration()
     {
-        if (isFire) //移動中///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (isFire) //移動中////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (Input.GetKeyDown(KeyCode.Space))    //一時的なブースト//////////////////////////////
+            if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
             {
                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
                 CreateBoostEffect();    //加速時演出生成
                 blurIntnsity = maxBlurIntensity;    //加速演出ブラーに値を代入
-            }/////////////////////////////////////////////////////////////////////////////////////////////
+            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (Input.GetKey(KeyCode.Space))    //基本速度加速/////////////////////////
+            if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
             {
                 playerSpeed += accelerate;  //基本速度に加算
                 minBlurIntnsity = accelelatedBlurIntensity; //加速演出ブラーに値を代入
-            }/////////////////////////////////////////////////////////////////////////////
+            }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if(boostSpeed > 0)  //一時加速がある間はブラーに値を入れる////////////////////////////
             {
                 minBlurIntnsity = boostedBlurIntensity;
             }//////////////////////////////////////////////////////////////////////////////////////////
 
-            else if (!Input.GetKey(KeyCode.Space))
+            else if (!Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")==0)
             {
                 minBlurIntnsity = 0;
             }
@@ -264,7 +317,7 @@ public class PlayerScript : MonoBehaviour
 
             boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
 
-        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if(isControl)
         {
@@ -360,6 +413,14 @@ public class PlayerScript : MonoBehaviour
         }
         ///////////////////////////////////////////
     }
+    //プレイヤーの角度を発射台に合わせる
+    private void SetPreShootAngle()
+    {
+        tf.position = lp.GetPos();  //ポジション取得
+        tf.localEulerAngles = new Vector3(0, 180, 0);   //角度を初期化
+    }
+
+
     #region　値受け渡し
     public void SetLaunchpad(in LaunchPointScript lp)
     {
@@ -368,6 +429,10 @@ public class PlayerScript : MonoBehaviour
     public void SetGameManager(in GameManagerScript gm)
     {
         this.gm = gm;
+    }
+    public float GetPlayerAcce()
+    {
+        return accelelateSpeed;
     }
     public Vector3 GetPlayerSpeed()
     {
@@ -383,6 +448,10 @@ public class PlayerScript : MonoBehaviour
     }
     public Vector3 GetPlayerRot()
     {
+        if (tf == null)
+        {
+            tf = GetComponent<Transform>();
+        }
         return tf.eulerAngles;
     }
     public bool GetControll()
@@ -392,6 +461,14 @@ public class PlayerScript : MonoBehaviour
     public float GetBlurIntensity()
     {
         return blurIntnsity;
+    }
+    public bool GetIsFire()
+    {
+        return isFire;
+    }
+    public bool GetPMS()
+    {
+        return PMS;
     }
     #endregion
 
@@ -451,19 +528,14 @@ public class PlayerScript : MonoBehaviour
         gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);
-        //effectTimer = 0;
         isFire = false;
         isControl = false;
         ringSpeed = 0;
         tf.position=lp.GetPos();
 
-        //rowling.x = -lp.GetRowling().x;
-        //rowling.y = lp.GetRowling().y + 180;
-        tf.localEulerAngles = new Vector3(rowling.x, rowling.y, tf.localEulerAngles.z);
+
         lp.SetStart(false);
         gm.SetIsHitTarget(false);
-        //isInStage = true;
-        //RockOned = false;
 
     }
 

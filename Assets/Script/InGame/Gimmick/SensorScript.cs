@@ -10,6 +10,8 @@ public class SensorScript : MonoBehaviour
     [SerializeField] bool right;
     [SerializeField] bool children;
     [SerializeField] bool master;
+    [SerializeField] string[] ignoreTags;
+    
 
     [System.Serializable] enum Script
     {
@@ -84,6 +86,11 @@ public class SensorScript : MonoBehaviour
         }/////////////////////////////////////////////////////////////////////
         return hit; //マスター以外ならフラグを返す
     }
+    //あたってもいいもののタグ取得用
+    public string[] GetIgnoreTag()
+    {
+        return ignoreTags;
+    }
     public HIT GetHitChild()
     {
         if (children)   //子オブジェクトセンサーならフラグを返す///
@@ -111,33 +118,12 @@ public class SensorScript : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //あたってもいいものは無視する///////////////////////
-        if (other.CompareTag("SensorChildren"))
+        for(int i=0;i< ignoreTags.Length; i++)
         {
-            return;
-        }
-        if (other.CompareTag("stage"))
-        {
-            return;
-        }
-        if (other.CompareTag("SpeedUpRing"))
-        {
-            return;
-        }
-        if (other.CompareTag("Monitor"))
-        {
-            return;
-        }
-        if (other.CompareTag("Player"))
-        {
-            return;
-        }
-        if (other.CompareTag("Boat"))
-        {
-            return;
-        }
-        if (other.CompareTag("Drone"))
-        {
-            return;
+            if (other.CompareTag(ignoreTags[i]))
+            {
+                return;
+            }
         }
         ////////////////////////////////////////////////////////////
         
@@ -156,6 +142,12 @@ public class SensorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!master)
+        {
+            SensorScript ss=GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
+            ignoreTags=ss.GetIgnoreTag(); ;
+        }
+
         if (children)
         {     
             return;

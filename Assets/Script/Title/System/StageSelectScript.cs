@@ -50,7 +50,7 @@ public class StageSelectScript : MonoBehaviour
     {
         if (rotateEnd)  //ステージの回転が終わっていたら////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff == 0))  //左向きのステージ切り替えキーを一回または一定時間以上押していたら///////////
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || (Input.GetAxis("LeftStickX") < 0 || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff <= 0)  //左向きのステージ切り替えキーを一回または一定時間以上押していたら///////////
             {
                 stageChangeCount--; //ステージの回転カウントを-1
                 if (stageCount > 0) //選択しているステージが１以上なら//////
@@ -64,7 +64,7 @@ public class StageSelectScript : MonoBehaviour
                TimeCountScript.SetTime(ref coolTimeBuff, stageSelectCoolTime);
             }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && coolTimeBuff == 0))  //右向きのステージ切り替えキーを一回または一定時間以上押していたら///////////
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || (Input.GetAxis("LeftStickX")>0||Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && coolTimeBuff <= 0)  //右向きのステージ切り替えキーを一回または一定時間以上押していたら///////////
             {
                 stageChangeCount++; //ステージの回転カウントを+1
                 if (stageCount < maxStage)//選択しているステージが最大値未満なら//////
