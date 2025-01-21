@@ -11,7 +11,7 @@ namespace Usefull
         {
             var controllerNames = Input.GetJoystickNames();
 
-            if (controllerNames==null)
+            if (controllerNames[0] =="")
             {
                 isControllerConectic = false;
             }

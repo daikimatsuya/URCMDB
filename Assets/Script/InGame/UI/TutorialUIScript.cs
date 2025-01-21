@@ -23,12 +23,14 @@ public class TutorialUIScript : MonoBehaviour
     private TextMeshProUGUI completion;
 
     private TutorialScript ts;
+    private bool conectController;
 
     //チュートリアルUI管理
     public void TutorialUIController(in PlayerScript ps)
     {
+        CheckController();
         SelectTutorial(in ps);  //UI用情報更新
-        ShowUI(Usefull.GetControllerScript.GetIsConectic());    //UI表示
+        ShowUI(conectController);    //UI表示
         ShowCompletion(ts.GetResetFlag());
         if (ts.GetResetFlag())
         {
@@ -46,7 +48,7 @@ public class TutorialUIScript : MonoBehaviour
                 break;
 
             case (int)Tutorial.controll:
-                ts.ControlleTutorial(in ps);
+                ts.ControlleTutorial(in ps,conectController);
                 break;
 
             case (int)Tutorial.boost:
@@ -54,11 +56,11 @@ public class TutorialUIScript : MonoBehaviour
                 break;
 
             case (int)Tutorial.quick:
-                ts.QuickMoveTutorial(in ps);
+                ts.QuickMoveTutorial(in ps, conectController);
                 break;
 
             case (int)Tutorial.acce:
-                ts.AcceTutorial(in ps);
+                ts.AcceTutorial(in ps, conectController);
                 break;
 
             case (int)Tutorial.pms:
@@ -83,6 +85,7 @@ public class TutorialUIScript : MonoBehaviour
     {
         if(isConectController)
         {
+
             if (controller.Length == 0)
             {
                 return;
@@ -106,19 +109,40 @@ public class TutorialUIScript : MonoBehaviour
         }
         else
         {
+
             if (keyboard.Length == 0)
             {
                 return;
             }
-            if (keyboard.Length < ts.GetTutorialNum())
+            if (keyboard.Length <= ts.GetTutorialNum())
             {
-                keyboard[keyboard.Length].SetActive(true);
+                keyboard[keyboard.Length - 1].SetActive(true);
+                keyboard[keyboard.Length - 2].SetActive(false);
+                return;
+            }
+            if (ts.GetTutorialNum() == 0)
+            {
+                keyboard[keyboard.Length - 1].SetActive(false);
+            }
+            else
+            {
+                keyboard[ts.GetTutorialNum() - 1].SetActive(false);
             }
             keyboard[ts.GetTutorialNum()].SetActive(true);
 
         }
     }
 
+    //コントローラーの接続をチェック
+    private void CheckController()
+    {
+        bool buff = conectController;
+        conectController = Usefull.GetControllerScript.GetIsConectic();
+        if (buff != conectController)
+        {
+            ResetTutorial();
+        }
+    }
     //チュートリアル表示をリセットさせる
     private void ResetTutorial()
     {
@@ -137,6 +161,7 @@ public class TutorialUIScript : MonoBehaviour
         ResetTutorial();
         ts=GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
         completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
+        conectController = Usefull.GetControllerScript.GetIsConectic();
 
     }
 

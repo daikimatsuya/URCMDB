@@ -46,11 +46,11 @@ public class TutorialScript : MonoBehaviour
         }
     }
     //操作時のチュートリアル管理
-    public void ControlleTutorial(in PlayerScript ps)
+    public void ControlleTutorial(in PlayerScript ps, in bool isConectController)
     {
         ResetAll(in ps);
         ResetTutorial();
-        if (CheckPlayerControlle(in ps))
+        if (CheckPlayerControlle(in ps, in isConectController))
         {
             tutorialCompletion += controlleTutorialCount;
             if (tutorialCompletion > maxCompletion)
@@ -74,11 +74,11 @@ public class TutorialScript : MonoBehaviour
         }
     }   
     //加速時のチュートリアル管理
-    public void AcceTutorial(in PlayerScript ps)
+    public void AcceTutorial(in PlayerScript ps, in bool isConectController)
     {
         ResetAll(in ps);
         ResetTutorial();
-        if (CheckPlayerAcce(in ps))
+        if (CheckPlayerAcce(in ps, in isConectController))
         {
             tutorialCompletion += acceTutorialCount;
             if (tutorialCompletion > maxCompletion)
@@ -88,11 +88,11 @@ public class TutorialScript : MonoBehaviour
         }
     }
     //高速旋回時のチュートリアル管理
-    public void QuickMoveTutorial(in PlayerScript ps)
+    public void QuickMoveTutorial(in PlayerScript ps,in bool isConectController)
     {
         ResetAll(in ps);
         ResetTutorial();
-        if (CheckQuickMove(in ps)&&CheckPlayerControlle(in ps))
+        if (CheckQuickMove(in ps, in isConectController)&&CheckPlayerControlle(in ps,in isConectController))
         {
             tutorialCompletion += quickMoveTutorialCount;
             if (tutorialCompletion > maxCompletion)
@@ -127,17 +127,18 @@ public class TutorialScript : MonoBehaviour
 
     #region チュートリアルチェッカー
     //プレイヤーの角度を比較
-    public bool CheckPlayerControlle(in PlayerScript ps)
+    public bool CheckPlayerControlle(in PlayerScript ps,in bool isConectController)
     {
-        if (Input.GetAxis("LeftStickX") != 0 || Input.GetAxis("LeftStickY") != 0) 
-        {
-            return true;
-        }
-        else
+        if(!isConectController)
         {
             return false;
         }
-        
+        if (Input.GetAxis("LeftStickX") == 0 && Input.GetAxis("LeftStickY") == 0) 
+        {
+            return false;
+        }
+
+        return true;
     }
 
     //プレイヤーのブーストを確認
@@ -168,16 +169,19 @@ public class TutorialScript : MonoBehaviour
     }
 
     //プレイヤーの加速を確認
-    public bool CheckPlayerAcce(in PlayerScript ps)
+    public bool CheckPlayerAcce(in PlayerScript ps,in bool isConectController)
     {
-        if(Input.GetAxis("RightTrigger")!=0)
-        {
-            return true;
-        }
-        else
+        if (!isConectController)
         {
             return false;
         }
+        if(Input.GetAxis("RightTrigger")==0)
+        {
+            return false;
+        }
+        
+        return true;
+        
     }
 
     //プレイヤーのPMSを確認
@@ -194,16 +198,19 @@ public class TutorialScript : MonoBehaviour
     }
 
     //プレイヤークイックムーブを確認
-    public bool CheckQuickMove(in PlayerScript ps)
+    public bool CheckQuickMove(in PlayerScript ps,in bool isConectController)
     {
-        if (Input.GetAxis("LeftTrigger") != 0)
-        {
-            return true;
-        }
-        else
+        if(!isConectController)
         {
             return false;
         }
+        if (Input.GetAxis("LeftTrigger") == 0)
+        {
+            return false;
+        }
+        
+        return true;
+        
     }
     #endregion
 
