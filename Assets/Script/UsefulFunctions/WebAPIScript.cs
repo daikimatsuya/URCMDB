@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
+using System.IO;
+
 
 namespace Usefull
 {
@@ -130,6 +132,8 @@ namespace Usefull
         #endregion
         static WebJson webJson;
 
+        private static string filename = ".json";
+
         //Jsonから天気情報取得
         public static IEnumerator WEBMethod()
         {
@@ -142,6 +146,8 @@ namespace Usefull
             else
             {
                 webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);  //情報を格納
+
+                //SaveJson(webJson,filename);
 
                 //確認用デバッグログ
                 Debug.Log(webJson.forecasts[0].chanceOfRain.T00_06);
@@ -237,17 +243,23 @@ namespace Usefull
             return 99;
             //////////////////////////////////////////
         }
-        // Start is called before the first frame update
 
-        void Start()
+        //降水確率をJsonで保存する
+        private static void SaveJson(WebJson data,string fileName)
         {
-            StartCoroutine(WEBMethod());
+            string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
+
+            string json = JsonUtility.ToJson(data);
+            StreamWriter sw = new StreamWriter(filePath, false);
+            sw.WriteLine(json);
+            sw.Close();
+        }
+        //降水確率を保存したJsonから読み取る
+        private void ReadJson()
+        {
+
         }
 
-        // Update is called once per frame
-        void Update()
-        {
 
-        }
     }
 }
