@@ -133,6 +133,8 @@ namespace Usefull
         static WebJson webJson;
 
         private static string filename = "chanceOfRain.json";
+        private static bool shouldRain=false;
+        private static bool shouldSun=false;
 
         //Jsonから天気情報取得
         public static IEnumerator WEBMethod()
@@ -210,6 +212,14 @@ namespace Usefull
         {
             string buff = GetStringChanceOfRain();  //文字列で降水確率を格納
 
+            if (shouldRain)
+            {
+                return 100;
+            }
+            if (shouldSun)
+            {
+                return 0;
+            }
             if (buff == null)    //値が入っていなかったらありえない数値を返す////
             {
                 return 255;
@@ -258,6 +268,24 @@ namespace Usefull
             }
             return 99;
             //////////////////////////////////////////
+        }
+        //雨にする
+        public static void SetRain()
+        {
+            shouldRain = true;
+            shouldSun = false;
+        }
+        //晴れにする
+        public static void SetSun()
+        {
+            shouldSun = true;
+            shouldRain = false;
+        }
+        //天気が現実に即する
+        public static void SetRial()
+        {
+            shouldSun = false;
+            shouldRain = false;
         }
 
         //降水確率をJsonで保存する
