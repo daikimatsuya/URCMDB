@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour
     private SelectWeatherScript sws;
     private LaunchPointScript lp;
     private GameObject launchPad;
+    private UIScript us;
     
 
     private bool playerDead;
@@ -44,11 +45,12 @@ public class GameManagerScript : MonoBehaviour
     {
         Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
         Usefull.GetStickScript.AxisUpdate();//スティック入力情報を更新
-        Usefull.GetControllerScript.SearchController();//コントローラー接続確認
+        Usefull.GetControllerScript.SearchController();//コントローラー接続確認更新
         ChangePMS();    //PMS管理
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
         BreakTimeContoller();   //クリア後のタイマー管理
+        SceneChanges(); //シーン変更
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {
@@ -66,6 +68,17 @@ public class GameManagerScript : MonoBehaviour
     {
         Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(title);
+    }
+    private void SceneChanges()
+    {
+        if(us.GetRetryFlag())
+        {
+            Retry();
+        }
+        if(us.GetBacktitleFlag())
+        {
+            BackTitle();
+        }
     }
     //プレイヤーの生存確認と生成
     private void PlayerCheck()
@@ -132,6 +145,7 @@ public class GameManagerScript : MonoBehaviour
         ps = player.GetComponent<PlayerScript>();   //コンポーネント取得
         ps.SetLaunchpad(lp);    //発射台位置情報代入
         cm.SetPlayer(ps);   //カメラにプレイヤーを登録
+        us.SetPlayer(ps);   //UIにプレイヤーを登録
         playerMissile--;    //残機減少
 
 
@@ -193,6 +207,7 @@ public class GameManagerScript : MonoBehaviour
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         launchPad = GameObject.FindWithTag("LaunchPoint");
         lp = launchPad.GetComponent<LaunchPointScript>();
+        us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
 
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
@@ -216,10 +231,6 @@ public class GameManagerScript : MonoBehaviour
     public void PlayerRotSet(Vector3 rot)
     {
        playerRot = rot;
-    }
-    public Vector3 GetPlayerRot()
-    {
-        return playerRot;
     }
     public bool GetGameOverFlag()
     {
@@ -246,10 +257,7 @@ public class GameManagerScript : MonoBehaviour
     {
         return isClear;
     }
-    public float GetPlayerSpeed()
-    {
-        return playerSpeed;
-    }
+
     public float GetPlayerSpeedBuff()
     {
         return playerSpeedBuff;
@@ -267,10 +275,7 @@ public class GameManagerScript : MonoBehaviour
     {
         isCanShot = start;
     }
-    public PlayerScript GetPlayerScript()
-    {
-        return ps;
-    }
+
     #endregion
     private void Awake()
     {

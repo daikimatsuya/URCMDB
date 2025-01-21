@@ -7,11 +7,12 @@ using Usefull;
 //インゲーム内のUIの処理
 public class UIScript : MonoBehaviour
 {
-    private GameManagerScript gm;
+    //private GameManagerScript gm;
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
     private PlayerScript ps;
+    private TargetScript ts;
 
     private Vector3 playerRot;
     private Vector3 targetPos;
@@ -21,6 +22,8 @@ public class UIScript : MonoBehaviour
     private RectTransform markerCanvas;
     private GameObject targetMarker;
     private bool canSelect;
+    private bool retryFlag=false;
+    private bool backtitleFlag = false;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -39,7 +42,7 @@ public class UIScript : MonoBehaviour
     private void UIController()
     {
 
-        if(GetPlayerScript() != null)
+        if(ps != null)
         {
             GetPlayerRot(); //プレイヤーの角度取得
             YawUIController();  //プレイヤーのX軸の角度表示
@@ -55,7 +58,7 @@ public class UIScript : MonoBehaviour
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
     {
-        if (gm.IsPlayerDead())  //プレイヤーが死んでいるときに表示するUI///////////////////////
+        if (ps==null)  //プレイヤーが死んでいるときに表示するUI///////////////////////
         {
             targetMarker.SetActive(false);
             pms.SetActive(false);
@@ -103,7 +106,7 @@ public class UIScript : MonoBehaviour
     //ゲームオーバー時のUI管理
     private void IsGameOver()
     {
-        if(gm.GetGameOverFlag())    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
+        if(ts==null)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
         {
             
             gameOverUI.transform.localPosition = gameOverUIPos;
@@ -113,11 +116,11 @@ public class UIScript : MonoBehaviour
             {
                 if (goUs.GetPos() < -1)
                 {
-                    gm.Retry(); //リトライ
+                    retryFlag = true; //リトライ
                 }
                 else if (goUs.GetPos() > 1)
                 {
-                    gm.BackTitle(); //タイトルに戻る
+                    backtitleFlag = true; //タイトルに戻る
                 }
             }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -181,13 +184,27 @@ public class UIScript : MonoBehaviour
         ////////////////////////////////////////////////////////////
     }
 
+    #region 値受け渡し
+
     //プレイヤー取得用
-    private PlayerScript GetPlayerScript()
+    public void SetPlayer(in PlayerScript ps)
     {
-        ps=gm.GetPlayerScript();
-        return ps;
+        this.ps = ps;
     }
-    
+    //ターゲット取得用
+    public void SetTarget(in TargetScript ts)
+    {
+        this.ts = ts;
+    }
+    public bool GetRetryFlag()
+    {
+        return retryFlag;
+    }
+    public bool GetBacktitleFlag()
+    {
+        return backtitleFlag;
+    }
+    #endregion
     //チュートリアルUIを動かすよう
     private void TutorialUI()
     {
@@ -204,7 +221,7 @@ public class UIScript : MonoBehaviour
         //canvasPos = GetComponent<RectTransform>();
         mainCamera=GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
-        gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+       
         yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
