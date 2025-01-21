@@ -132,7 +132,7 @@ namespace Usefull
         #endregion
         static WebJson webJson;
 
-        private static string filename = ".json";
+        private static string filename = "chanceOfRain.json";
 
         //Jsonから天気情報取得
         public static IEnumerator WEBMethod()
@@ -142,12 +142,13 @@ namespace Usefull
 
             if (unityWebRequest.result != UnityWebRequest.Result.Success)
             {
+
             }
             else
             {
                 webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);  //情報を格納
 
-                //SaveJson(webJson,filename);
+                SaveJson(webJson,filename);
 
                 //確認用デバッグログ
                 Debug.Log(webJson.forecasts[0].chanceOfRain.T00_06);
@@ -155,6 +156,21 @@ namespace Usefull
                 Debug.Log(webJson.forecasts[0].chanceOfRain.T12_18);
                 Debug.Log(webJson.forecasts[0].chanceOfRain.T18_24);
                 //////////////////////
+            }
+
+            if (webJson == null)
+            {
+                webJson = ReadJson(filename);
+                if(webJson != null)
+                {
+                    //確認用デバッグログ
+                    Debug.Log("Read");
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T00_06);
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T06_12);
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T12_18);
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T18_24);
+                    //////////////////////
+                }
             }
         }
         //初期化
@@ -255,11 +271,25 @@ namespace Usefull
             sw.Close();
         }
         //降水確率を保存したJsonから読み取る
-        private void ReadJson()
+        private static WebJson ReadJson(string fileName)
         {
+            string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
+            if (File.Exists(filePath))
+            {
+                StreamReader sr = new StreamReader(filePath);
+                string json = sr.ReadToEnd();
+                sr.Close();
 
+                return JsonUtility.FromJson<WebJson>(json);
+
+
+            }
+            return null;
         }
-
+        void Start()
+        {
+            StartCoroutine(WEBMethod());
+        }
 
     }
 }
