@@ -265,25 +265,23 @@ namespace Usefull
         {
             string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
 
-            string json = JsonUtility.ToJson(data);
+            string json = JsonUtility.ToJson(data); //変換
             StreamWriter sw = new StreamWriter(filePath, false);
-            sw.WriteLine(json);
-            sw.Close();
+            sw.WriteLine(json); //書き込み
+            sw.Close(); //終了
         }
         //降水確率を保存したJsonから読み取る
         private static WebJson ReadJson(string fileName)
         {
             string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
-            if (File.Exists(filePath))
+            if (File.Exists(filePath))  //ファイル確認/////////////////
             {
-                StreamReader sr = new StreamReader(filePath);
+                StreamReader sr = new StreamReader(filePath);   
                 string json = sr.ReadToEnd();
                 sr.Close();
 
                 return JsonUtility.FromJson<WebJson>(json);
-
-
-            }
+            }/////////////////////////////////////////////////////////
             return null;
         }
         void Start()
