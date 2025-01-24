@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
+using System.IO;
+
 
 namespace Usefull
 {
@@ -130,6 +132,10 @@ namespace Usefull
         #endregion
         static WebJson webJson;
 
+        private static string filename = "chanceOfRain.json";
+        private static bool shouldRain=false;
+        private static bool shouldSun=false;
+
         //Jsonから天気情報取得
         public static IEnumerator WEBMethod()
         {
@@ -138,10 +144,13 @@ namespace Usefull
 
             if (unityWebRequest.result != UnityWebRequest.Result.Success)
             {
+
             }
             else
             {
                 webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);  //情報を格納
+
+                SaveJson(webJson,filename);
 
                 //確認用デバッグログ
                 Debug.Log(webJson.forecasts[0].chanceOfRain.T00_06);
@@ -149,6 +158,21 @@ namespace Usefull
                 Debug.Log(webJson.forecasts[0].chanceOfRain.T12_18);
                 Debug.Log(webJson.forecasts[0].chanceOfRain.T18_24);
                 //////////////////////
+            }
+
+            if (webJson == null)
+            {
+                webJson = ReadJson(filename);
+                if(webJson != null)
+                {
+                    //確認用デバッグログ
+                    Debug.Log("Read");
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T00_06);
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T06_12);
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T12_18);
+                    Debug.Log(webJson.forecasts[0].chanceOfRain.T18_24);
+                    //////////////////////
+                }
             }
         }
         //初期化
@@ -188,6 +212,14 @@ namespace Usefull
         {
             string buff = GetStringChanceOfRain();  //文字列で降水確率を格納
 
+            if (shouldRain)
+            {
+                return 100;
+            }
+            if (shouldSun)
+            {
+                return 0;
+            }
             if (buff == null)    //値が入っていなかったらありえない数値を返す////
             {
                 return 255;
@@ -237,17 +269,53 @@ namespace Usefull
             return 99;
             //////////////////////////////////////////
         }
-        // Start is called before the first frame update
+        //雨にする
+        public static void SetRain()
+        {
+            shouldRain = true;
+            shouldSun = false;
+        }
+        //晴れにする
+        public static void SetSun()
+        {
+            shouldSun = true;
+            shouldRain = false;
+        }
+        //天気が現実に即する
+        public static void SetRial()
+        {
+            shouldSun = false;
+            shouldRain = false;
+        }
 
+        //降水確率をJsonで保存する
+        private static void SaveJson(WebJson data,string fileName)
+        {
+            string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
+
+            string json = JsonUtility.ToJson(data); //変換
+            StreamWriter sw = new StreamWriter(filePath, false);
+            sw.WriteLine(json); //書き込み
+            sw.Close(); //終了
+        }
+        //降水確率を保存したJsonから読み取る
+        private static WebJson ReadJson(string fileName)
+        {
+            string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
+            if (File.Exists(filePath))  //ファイル確認/////////////////
+            {
+                StreamReader sr = new StreamReader(filePath);   
+                string json = sr.ReadToEnd();
+                sr.Close();
+
+                return JsonUtility.FromJson<WebJson>(json);
+            }/////////////////////////////////////////////////////////
+            return null;
+        }
         void Start()
         {
             StartCoroutine(WEBMethod());
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

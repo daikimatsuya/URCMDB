@@ -25,6 +25,7 @@ public class TitleScript : MonoBehaviour
     {
         Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
         Usefull.GetControllerScript.SearchController();//コントローラーが接続されているかを確認
+        SetWeather();   //天候を操る
         Shoot();
     }
     //フラグ関連処理
@@ -73,6 +74,22 @@ public class TitleScript : MonoBehaviour
         isSceneChangeMode=false;
         ts.SetResetFlag(true);
         /////////////////////////////////////////////
+    }
+    //天気を人為的に変える
+    private void SetWeather()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Usefull.WebAPIScript.SetRain();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Usefull.WebAPIScript.SetSun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Usefull.WebAPIScript.SetRial();
+        }
     }
     //シーンチェンジ
     public void SceneChange()

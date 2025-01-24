@@ -49,6 +49,11 @@ public class GameManagerScript : MonoBehaviour
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
         BreakTimeContoller();   //クリア後のタイマー管理
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
+        {
+            BackTitle();
+        }
     }
     //リトライするときにシーンをロード
     public void Retry()
