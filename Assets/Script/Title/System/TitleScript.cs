@@ -23,6 +23,8 @@ public class TitleScript : MonoBehaviour
     //タイトル管理
     private void TitleController()
     {
+        Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
+        Usefull.GetControllerScript.SearchController();//コントローラーが接続されているかを確認
         Shoot();
     }
     //フラグ関連処理
@@ -31,7 +33,7 @@ public class TitleScript : MonoBehaviour
 
         if (!isCameraMove)  //ステージセレクトモードになってないときにボタンを押すとカメラが移動///
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 isCameraMove = true;
             }
@@ -45,7 +47,7 @@ public class TitleScript : MonoBehaviour
 
         if (stage == "")    //選択されているステージがタイトルだったらタイトル画面に戻す////
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 ResetTitle();   //タイトルに戻る
                 return;
@@ -57,7 +59,7 @@ public class TitleScript : MonoBehaviour
         {
             isSceneChangeMode = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
             isShoot = true; //ステージチェンジ演出開始
         }
@@ -75,6 +77,7 @@ public class TitleScript : MonoBehaviour
     //シーンチェンジ
     public void SceneChange()
     {
+        Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(stage);
     }
 

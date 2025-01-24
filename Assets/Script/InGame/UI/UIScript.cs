@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Usefull;
 
 //インゲーム内のUIの処理
 public class UIScript : MonoBehaviour
@@ -10,40 +11,46 @@ public class UIScript : MonoBehaviour
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
+    private PlayerScript ps;
 
     private Vector3 playerRot;
     private Vector3 targetPos;
     private TextMeshProUGUI pmsTex;
-    private TextMeshProUGUI playerSpeedTex;
-    private TextMeshProUGUI playerSpeedBuffTex;
     private bool targetMarkerflag;
     private Camera mainCamera;
     private RectTransform markerCanvas;
     private GameObject targetMarker;
+    private bool canSelect;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
     [SerializeField] private GameObject pms;
-    [SerializeField] private GameObject playerSpeed;
-    [SerializeField] private GameObject playerSpeedBuff;
-
     [SerializeField] private GameObject yawUI;
     [SerializeField] private GameObject yawUI2;
     [SerializeField] private GameObject rowImage;
     [SerializeField] private WeatherUIScript weatherUIScript;
     [SerializeField] private SensorUIScript sensorUIScript;
+    [SerializeField] private PlayerSpeedMeterScript playerSpeedMeterScript;
+    [SerializeField] private float gameOverUIInterval;
+    [SerializeField] private TutorialUIScript tutorialUIScript;
+    private int gameOverUIIntervalBuff;
 
     //UI全般管理関数
     private void UIController()
     {
-        GetPlayerRot(); //プレイヤーの角度取得
-        YawUIController();  //プレイヤーのX軸の角度表示
+
+        if(GetPlayerScript() != null)
+        {
+            GetPlayerRot(); //プレイヤーの角度取得
+            YawUIController();  //プレイヤーのX軸の角度表示
+            playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
+            sensorUIScript.SensorUIController();    //センサーのUI表示
+        }
         PMSMode();  //PMS表示
         IsGameOver();   //ゲームオーバーのUI表示
-        PlayerSpeedUI();    //プレイヤーの速度表示
         TargetMarkerUI();   //ターゲットマーカー表示
         ActiveChecker();    //ゲーム画面に表示するCanvasのフラグ管理
-        sensorUIScript.SensorUIController();    //センサーのUI表示
+        TutorialUI();   //チュートリアルUIを動かす
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
@@ -52,8 +59,7 @@ public class UIScript : MonoBehaviour
         {
             targetMarker.SetActive(false);
             pms.SetActive(false);
-            playerSpeed.SetActive(false);
-            playerSpeedBuff.SetActive(false);
+            playerSpeedMeterScript.SetSpeedMeterActive(false);
             yawUI.SetActive(false);
             yawUI2.SetActive(false);
             rowImage.SetActive(false);
@@ -66,11 +72,9 @@ public class UIScript : MonoBehaviour
             if(targetMarkerflag)
             {
                 targetMarker.SetActive(true);
-            }
-            
+            }     
             pms.SetActive(true);
-            playerSpeed.SetActive(true);
-            playerSpeedBuff.SetActive(true);
+            playerSpeedMeterScript.SetSpeedMeterActive(true);
             yawUI.SetActive(true);
             yawUI2.SetActive(true);
             rowImage.SetActive(true);
@@ -81,7 +85,15 @@ public class UIScript : MonoBehaviour
     //プレイヤーの角度取得
     private void GetPlayerRot()
     {
-        playerRot = gm.GetPlayerRot();
+        playerRot = ps.GetPlayerRot();
+        if (playerRot.x > 270)
+        {
+            playerRot.x -= 360;
+        }
+        if (playerRot.x <= -270)
+        {
+            playerRot.x += 360;
+        }
     }
     //プレイヤーの向きをUIにいれる
     private void YawUIController()
@@ -96,27 +108,38 @@ public class UIScript : MonoBehaviour
             
             gameOverUI.transform.localPosition = gameOverUIPos;
 
-            //モード変更///////////////////////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-            {
-                goUs.MoveRetry();   //モードをリトライに
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-            {
-               goUs.MoveBackTitle();    //モードをバックタイトルに
-            }
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            if (Input.GetKeyDown(KeyCode.Space))
+            
+            if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))//決定////////
             {
                 if (goUs.GetPos() < -1)
                 {
                     gm.Retry(); //リトライ
                 }
-                else if(goUs.GetPos() > 1)
+                else if (goUs.GetPos() > 1)
                 {
                     gm.BackTitle(); //タイトルに戻る
                 }
+            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //モード変更///////////////////////////////////////////////////////////////////////////////////
+            if (TimeCountScript.TimeCounter(ref gameOverUIIntervalBuff))
+            {
+                canSelect = true;
             }
+            if (canSelect)
+            {
+                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Usefull.GetStickScript.GetAxisDown("LeftStickX") < -0.1f)
+                {
+                    goUs.MoveRetry();   //モードをリトライに
+                }
+                if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Usefull.GetStickScript.GetAxisDown("LeftStickX") > 0.1f)
+                {
+                    goUs.MoveBackTitle();    //モードをバックタイトルに
+                }
+            }
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
             goUs.TargetHpUI();  //ターゲットの残り体力を表示
         }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
@@ -132,13 +155,7 @@ public class UIScript : MonoBehaviour
             pmsTex.text = "PMS:OFF";
         }
     }
-    //プレイヤーのスピードをUIに表示
-    private void PlayerSpeedUI()
-    {
-        playerSpeedTex.text = (int)gm.GetPlayerSpeed() + "M/S"; //プレイヤーの基本速度表示
-        playerSpeedBuffTex.text = (int)gm.GetPlayerSpeedBuff() + "M/S"; //プレイヤーの移動速度を表示
 
-    }
     //ターゲットの位置をUIに表示
     private void TargetMarkerUI()
     {
@@ -163,6 +180,22 @@ public class UIScript : MonoBehaviour
         }
         ////////////////////////////////////////////////////////////
     }
+
+    //プレイヤー取得用
+    private PlayerScript GetPlayerScript()
+    {
+        ps=gm.GetPlayerScript();
+        return ps;
+    }
+    
+    //チュートリアルUIを動かすよう
+    private void TutorialUI()
+    {
+        if(tutorialUIScript!=null)
+        {
+            tutorialUIScript.TutorialUIController(in ps);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -177,11 +210,10 @@ public class UIScript : MonoBehaviour
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
         markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
         targetMarker = GameObject.FindWithTag("TargetMarker");
-
         pmsTex = pms.GetComponent<TextMeshProUGUI>();
-        playerSpeedTex = playerSpeed.GetComponent<TextMeshProUGUI>();
-        playerSpeedBuffTex = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
 
+        Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
+        canSelect = false;
         //wus = weatherUI.GetComponent<WeatherUIScript>();
         weatherUIScript.SetWeatherScript(gm.GetWeatherScript());
 

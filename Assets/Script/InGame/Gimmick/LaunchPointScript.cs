@@ -31,22 +31,40 @@ public class LaunchPointScript : MonoBehaviour
     private void Move()
     {
         //入力で角度を加算///////////////////////////////////////////////////////////////////
+
+        Vector2 rowlingBuff = Vector2.zero;
+
+        //コントローラー操作/////////////////////
+
+        float axisY = Input.GetAxis("LeftStickY");
+        rowlingBuff.x = rowlingSpeedY  * -axisY;
+
+        float axisX = Input.GetAxis("LeftStickX");
+        rowlingBuff.y = rowlingSpeedX * axisX;
+
+        //////////////////////////////////////////
+
+        //キーボード操作//////////////////////////////////////////////////////////
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            rowling.x += rowlingSpeedY;
+            rowlingBuff.x = rowlingSpeedY;
         }
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
-            rowling.x -= rowlingSpeedY;
+            rowlingBuff.x = -rowlingSpeedY;
         }
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            rowling.y -= rowlingSpeedX;
+            rowlingBuff.y = -rowlingSpeedX;
         }
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            rowling.y += rowlingSpeedX;
+            rowlingBuff.y = rowlingSpeedX;
         }
+        /////////////////////////////////////////////////////////////////////////
+
+        rowling += rowlingBuff;
+
         //////////////////////////////////////////////////////////////////////////////////////
         
         //角度を補正///////////////////////////

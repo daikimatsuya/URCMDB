@@ -20,7 +20,7 @@ public class WeatherUIScript : MonoBehaviour
     //降水確率表示
     private void SetChanceOfRain(int chanceOfRain)
     {
-        chanceOfRainTex=this.chanceOfRain.GetComponent<TextMeshProUGUI>();  //降水確率を取得
+        chanceOfRainTex=this.chanceOfRain.GetComponent<TextMeshProUGUI>();  //降水確率表示用のコンポーネントを取得
         chanceOfRainTex.text = chanceOfRain + "%";  //降水確率表示
     }
     //UI表示変更

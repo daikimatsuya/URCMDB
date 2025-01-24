@@ -12,6 +12,7 @@ public class MoveOnRailScript : MonoBehaviour
     [SerializeField] float distansMagnification;
     [SerializeField] bool obtainVoluntarilyRail;
     [SerializeField] float rotSpeed;
+    [SerializeField] string railName;
 
     private LineRenderer rail;
     private bool moveEnd;
@@ -109,9 +110,9 @@ public class MoveOnRailScript : MonoBehaviour
     private void Rolling()
     {
         //–Ú•WŠp“x‚Ü‚Å‰ñ“]‚³‚¹‚é
-        rotBuff.x += crs.Rotate(rotSpeed, targetAngles.x, rotBuff.x);
-        rotBuff.y += crs.Rotate(rotSpeed, targetAngles.y, rotBuff.y);
-        rotBuff.z += crs.Rotate(rotSpeed, targetAngles.z, rotBuff.z);
+        rotBuff.x += ComplementingRotationScript.Rotate(rotSpeed,0, rotBuff.x);
+        rotBuff.y += ComplementingRotationScript.Rotate(rotSpeed, targetAngles.y, rotBuff.y);
+        rotBuff.z += ComplementingRotationScript.Rotate(rotSpeed, targetAngles.z, rotBuff.z);
         /////////////////////////
 
         tf.eulerAngles = rotBuff;   //Šp“x‚ð‘ã“ü
@@ -131,7 +132,7 @@ public class MoveOnRailScript : MonoBehaviour
         {
             return;
         }
-        if (other.CompareTag("Rail"))
+        if (other.CompareTag(railName))
         {
             rail = null;
             rail=other.gameObject.GetComponent<LineRenderer>();
@@ -143,7 +144,6 @@ public class MoveOnRailScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
-        crs=GetComponent<ComplementingRotationScript>();
 
         rb.velocity=new Vector3(moveSpeed,0,0);
 

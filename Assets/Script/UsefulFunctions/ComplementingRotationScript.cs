@@ -8,7 +8,7 @@ namespace Usefull
     public class ComplementingRotationScript : MonoBehaviour
     {
         //‰ñ“]•âŠÔ
-        public float Rotate(float rotateSpeed, float targetRot, float objectRot)
+        static public float Rotate(float rotateSpeed, float targetRot, float objectRot)
         {
             //Œ»İ‚ÌŠp“x‚Æ–Ú•WŠp“x‚Ì·‚ğŒvZ
             int rot;

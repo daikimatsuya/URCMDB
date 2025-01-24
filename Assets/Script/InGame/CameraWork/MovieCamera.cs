@@ -49,14 +49,14 @@ public class MovieCamera : MonoBehaviour
     //移動させる関数
     private void Move()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
             //演出スキップ
             isSkip = true;
         }
         if (isMove) //演出させる/////////////////////////////////////////////////////
         {
-            if (TimeCountScript.TimeCounter(ref moveTimeBuff))
+            if (!TimeCountScript.TimeCounter(ref moveTimeBuff))
             {
                 //座標移動
                 posBuff += moveSpeed;

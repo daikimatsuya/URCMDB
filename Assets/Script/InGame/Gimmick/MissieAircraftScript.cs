@@ -25,6 +25,7 @@ public class MissieAircraftScript : MonoBehaviour
     //前方ハッチ開閉管理
     private void HatchController()
     {
+        HatchFlagController();
         if(isEnd)   //移動完了していたreturnを返す///
         {
             return;
@@ -48,6 +49,19 @@ public class MissieAircraftScript : MonoBehaviour
             isEnd = true;
         }
     }
+
+    //ハッチ開閉管理
+    private void HatchFlagController()
+    {
+        if (transform.Find("Player(Clone)"))
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SetFlag(true);
+            }
+        }
+    }
+
     //ハッチの開閉速度算出
     private void SetSpeed()
     {
