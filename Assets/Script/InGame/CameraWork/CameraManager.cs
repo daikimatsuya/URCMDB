@@ -116,6 +116,10 @@ public class CameraManager : MonoBehaviour
     #region ’lŽó‚¯“n‚µ
     public PlayerCameraScript GetPlayerCamera()
     {
+        if (pcs == null)
+        {
+            pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
+        }
         return pcs;
     }
 
