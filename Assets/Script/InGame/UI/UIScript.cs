@@ -7,7 +7,6 @@ using Usefull;
 //ƒCƒ“ƒQ[ƒ€“à‚ÌUI‚Ìˆ—
 public class UIScript : MonoBehaviour
 {
-    //private GameManagerScript gm;
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
