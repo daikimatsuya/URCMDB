@@ -191,6 +191,7 @@ public class GameManagerScript : MonoBehaviour
             {
                 PMS = true;
             }//////////////////////////////////////
+            us.SetPMS(PMS);
         }
     }
 
@@ -208,7 +209,9 @@ public class GameManagerScript : MonoBehaviour
         launchPad = GameObject.FindWithTag("LaunchPoint");
         lp = launchPad.GetComponent<LaunchPointScript>();
         us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
-
+        us.SetTarget(in targetPos);
+        sws.WeatherSetting(cm);
+        us.SetWeatherScript(sws);
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
         PlayerSpawn();
@@ -257,16 +260,6 @@ public class GameManagerScript : MonoBehaviour
     {
         return isClear;
     }
-
-    public float GetPlayerSpeedBuff()
-    {
-        return playerSpeedBuff;
-    }
-    public Vector3 GetTargetPos()
-    {
-        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
-        return targetPos.position;
-    }
     public bool GetCanShotFlag()
     {
         return isCanShot;
@@ -280,7 +273,7 @@ public class GameManagerScript : MonoBehaviour
     private void Awake()
     {
         InitialSet();
-        sws.WeatherSetting(cm);
+
     }
     // Start is called before the first frame update
     void Start()

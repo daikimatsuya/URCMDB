@@ -12,7 +12,6 @@ public class UIScript : MonoBehaviour
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
     private PlayerScript ps;
-    private TargetScript ts;
 
     private Vector3 playerRot;
     private Vector3 targetPos;
@@ -24,6 +23,7 @@ public class UIScript : MonoBehaviour
     private bool canSelect;
     private bool retryFlag=false;
     private bool backtitleFlag = false;
+    private bool isPMS;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -42,7 +42,7 @@ public class UIScript : MonoBehaviour
     private void UIController()
     {
 
-        if(ps != null)
+        if (ps != null)
         {
             GetPlayerRot(); //プレイヤーの角度取得
             YawUIController();  //プレイヤーのX軸の角度表示
@@ -106,7 +106,7 @@ public class UIScript : MonoBehaviour
     //ゲームオーバー時のUI管理
     private void IsGameOver()
     {
-        if(ts==null)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
+        if(targetPos==null)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
         {
             
             gameOverUI.transform.localPosition = gameOverUIPos;
@@ -149,7 +149,7 @@ public class UIScript : MonoBehaviour
     //PMSのオンオフ表示
     private void PMSMode()
     {
-        if (gm.GetPMS())
+        if (isPMS)
         {
             pmsTex.text = "PMS:ON";
         }
@@ -192,9 +192,9 @@ public class UIScript : MonoBehaviour
         this.ps = ps;
     }
     //ターゲット取得用
-    public void SetTarget(in TargetScript ts)
+    public void SetTarget(in Transform targetPos)
     {
-        this.ts = ts;
+        this.targetPos = targetPos.position;
     }
     public bool GetRetryFlag()
     {
@@ -204,7 +204,17 @@ public class UIScript : MonoBehaviour
     {
         return backtitleFlag;
     }
+    public void SetWeatherScript(in SelectWeatherScript sws)
+    {
+        weatherUIScript.SetWeatherScript(sws);
+    }
+    public void SetPMS(in bool isPMS)
+    {
+        this.isPMS = isPMS;
+    }
     #endregion
+
+
     //チュートリアルUIを動かすよう
     private void TutorialUI()
     {
@@ -231,10 +241,6 @@ public class UIScript : MonoBehaviour
 
         Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
         canSelect = false;
-        //wus = weatherUI.GetComponent<WeatherUIScript>();
-        weatherUIScript.SetWeatherScript(gm.GetWeatherScript());
-
-        targetPos = gm.GetTargetPos();
     }
 
     // Update is called once per frame

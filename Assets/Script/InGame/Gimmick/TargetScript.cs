@@ -56,11 +56,18 @@ public class TargetScript : MonoBehaviour
             Destroy(this.gameObject);   //オブジェクト削除
         }
     }
+
+    #region 値受け渡し
     //HP渡し
     public float GetHp()
     {
         return hp;
     }
+    public Vector3 GetPos()
+    {
+        return this.transform.position;
+    }
+    #endregion
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")

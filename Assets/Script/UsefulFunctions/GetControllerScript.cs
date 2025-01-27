@@ -10,7 +10,11 @@ namespace Usefull
         static public void SearchController()
         {
             var controllerNames = Input.GetJoystickNames();
-
+            if (controllerNames.Length == 0)
+            {
+                isControllerConectic = false;
+                return;
+            }
             if (controllerNames[0] =="")
             {
                 isControllerConectic = false;
