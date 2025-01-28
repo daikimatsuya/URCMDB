@@ -88,7 +88,7 @@ public class SensorUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ss=GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
+       
     }
 
     // Update is called once per frame

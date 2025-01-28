@@ -135,7 +135,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (cm == null)     //CameraManagerが無かったら取得する//
         {
-            InitialSet();
+            AwakeGameManger();
         }///////////////////////////////////////////////////////////////
 
         player = Instantiate(playerPrefab); //プレイヤー生成
@@ -193,9 +193,14 @@ public class GameManagerScript : MonoBehaviour
     }
 
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
-    private void InitialSet()
+    private void AwakeGameManger()
     {
         Application.targetFrameRate = 60;
+        us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
+
+    }
+    private void StartGameManager()
+    {
         PMS = false;
         gameOverFlag = false;
         isClear = false;
@@ -205,14 +210,13 @@ public class GameManagerScript : MonoBehaviour
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         launchPad = GameObject.FindWithTag("LaunchPoint");
         lp = launchPad.GetComponent<LaunchPointScript>();
-        us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
+
         us.SetTarget(in targetPos);
         sws.WeatherSetting(cm);
         us.SetWeatherScript(sws);
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
         PlayerSpawn();
-
     }
     #region 値受け渡し
     public SelectWeatherScript GetWeatherScript()
@@ -260,13 +264,13 @@ public class GameManagerScript : MonoBehaviour
     #endregion
     private void Awake()
     {
-        InitialSet();
+        AwakeGameManger();
 
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        StartGameManager();
 
     }
 

@@ -38,6 +38,26 @@ public class UIScript : MonoBehaviour
     [SerializeField] private TutorialUIScript tutorialUIScript;
     private int gameOverUIIntervalBuff;
 
+    //早期に初期化
+    public void AwakeUIScript()
+    {
+        yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
+        pmsTex = pms.GetComponent<TextMeshProUGUI>();
+        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        targetMarker = GameObject.FindWithTag("TargetMarker");
+
+        playerSpeedMeterScript.StartPlayerSpeedMeterScript();
+    }
+    //初期化
+    public void StartUIScript()
+    {
+        gameOverUI = GameObject.FindWithTag("GameOverUI");
+        goUs = gameOverUI.GetComponent<GameOverUIScript>();
+        Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
+        canSelect = false;
+    }
+
     //UI全般管理関数
     public void UIController()
     {
@@ -162,6 +182,10 @@ public class UIScript : MonoBehaviour
     //ターゲットの位置をUIに表示
     private void TargetMarkerUI()
     {
+        if (!targetTransform)
+        {
+            return;
+        }
         //マーカーの座標を算出
         Vector2 pos;
         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetTransform.position);
@@ -225,29 +249,6 @@ public class UIScript : MonoBehaviour
         {
             tutorialUIScript.TutorialUIController(in ps);
         }
-    }
-    public void AwakeUIScript()
-    {
-        yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
-        pmsTex = pms.GetComponent<TextMeshProUGUI>();
-        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        targetMarker = GameObject.FindWithTag("TargetMarker");
-
-        playerSpeedMeterScript.StartPlayerSpeedMeterScript();
-    }
-    public void StartUIScript()
-    {
-
-        gameOverUI = GameObject.FindWithTag("GameOverUI");
-        goUs = gameOverUI.GetComponent<GameOverUIScript>();
-
-
-
-        Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
-        canSelect = false;
-
-
     }
 
     private void Awake()
