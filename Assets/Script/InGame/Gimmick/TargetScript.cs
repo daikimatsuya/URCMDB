@@ -11,9 +11,12 @@ public class TargetScript : MonoBehaviour
     [SerializeField] GameObject explode;
     [SerializeField] private float  explodeTime;
     [SerializeField] private float brokePercent;
+    [SerializeField] private float brokeTime;
+    private int brokeTimeBuff;
     private int explodeTimeBuff;
 
-    private GameManagerScript gm;
+    private bool isHit;
+    private bool isBreak;
 
     //ターゲット管理
     private void TargetController()
@@ -48,7 +51,11 @@ public class TargetScript : MonoBehaviour
     //消滅させる
     private void IsBreak()
     {
-        if(gm.GetTargetBreakFlag())
+        if (!isBreak)
+        {
+            return;
+        }
+        if(Usefull.TimeCountScript.TimeCounter(ref brokeTimeBuff))
         {
             GameObject _ = Instantiate(explode);    //爆発エフェクト生成
             _.transform.position = this.transform.position;  //座標代入
@@ -67,6 +74,14 @@ public class TargetScript : MonoBehaviour
     {
         return this.transform.position;
     }
+    public bool GetHit()
+    {
+        return isHit;
+    }
+    public bool GetBreak()
+    {
+        return isBreak;
+    }
     #endregion
     public void OnCollisionEnter(Collision collision)
     {
@@ -77,16 +92,16 @@ public class TargetScript : MonoBehaviour
             ModelBroken();
             if (hp <= 0)
             {
-                gm.SetClearFlag();
+                isBreak = true;
             }
-            gm.SetIsHitTarget(true);
+            isHit = true;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+        Usefull.TimeCountScript.SetTime(ref brokeTimeBuff, brokeTime);
         maxHp = hp;
     }
 

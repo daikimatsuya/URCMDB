@@ -538,8 +538,6 @@ public class PlayerScript : MonoBehaviour
 
 
         lp.SetStart(false);
-        gm.SetIsHitTarget(false);
-
     }
 
     // Update is called once per frame

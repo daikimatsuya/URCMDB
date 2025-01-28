@@ -27,12 +27,10 @@ public class GameManagerScript : MonoBehaviour
     private LaunchPointScript lp;
     private GameObject launchPad;
     private UIScript us;
-    
+    private TargetScript ts;
 
     private bool playerDead;
     private bool gameOverFlag;
-    private bool isClear;
-    private bool isCanShot;
     private bool playerSpawnFlag;
     private bool isHitTarget;
     private bool isTargetBreak;
@@ -48,7 +46,6 @@ public class GameManagerScript : MonoBehaviour
         ChangePMS();    //PMS管理
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
-        BreakTimeContoller();   //クリア後のタイマー管理
         SceneChanges(); //シーン変更
         us.SetIsGameOver(in gameOverFlag);
         us.UIController();  //UI管理
@@ -89,7 +86,6 @@ public class GameManagerScript : MonoBehaviour
         {
             //フラグ管理
             playerDead = true;
-            isCanShot = false;
             /////////////
             ///
             if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
@@ -121,7 +117,12 @@ public class GameManagerScript : MonoBehaviour
     private void SetPlayerSpawnFlag()
     {
         playerSpawnFlag = true;
-        if (isClear)    //クリアしてたら/////
+        if (!ts)
+        {
+            playerMissile = 0;
+            return;
+        }
+        if (ts.GetBreak())    //クリアしてたら/////
         {
             playerMissile = 0;
         }///////////////////////////////////
@@ -151,21 +152,6 @@ public class GameManagerScript : MonoBehaviour
         player.transform.SetParent(launchPad.transform);    //プレイヤーと発射台を親子付け
 
         SetRespawnTimer();  //プレイヤー生成用タイマーセット
-    }
-    //クリア時のターゲット破壊フラグ管理
-    private void BreakTimeContoller()
-    {
-        if (!isClear)
-        {
-            return;
-        }
-
-        if (TimeCountScript.TimeCounter(ref breakTimeBuff))
-        {
-            isTargetBreak = true;
-            playerMissile = 0;
-        }
-        
     }
     //開始演出生成
     private void CreateFadeObject()
@@ -206,11 +192,13 @@ public class GameManagerScript : MonoBehaviour
     {
         PMS = false;
         gameOverFlag = false;
-        isClear = false;
 
         sws = GetComponent<SelectWeatherScript>();
-        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
+        GameObject target = GameObject.FindWithTag("Target");
+        targetPos = target.GetComponent<Transform>();
+        ts = target.GetComponent<TargetScript>();
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+        cm.SetTarget(ts);
         launchPad = GameObject.FindWithTag("LaunchPoint");
         lp = launchPad.GetComponent<LaunchPointScript>();
 
@@ -233,32 +221,6 @@ public class GameManagerScript : MonoBehaviour
     {
         return playerDead;
     }
-    public bool GetTargetBreakFlag()
-    {
-        return isTargetBreak;
-    }
-
-    public void SetClearFlag()
-    {
-        isClear = true;
-    }
-    public void SetIsHitTarget(bool flag)
-    {
-        isHitTarget = flag;
-    }
-    public bool GetIsHitTarget()
-    {
-        return isHitTarget;
-    }
-    public bool GetTargetDead()
-    {
-        return isClear;
-    }
-    public void SetGameStartFlag(bool start)
-    {
-        isCanShot = start;
-    }
-
     #endregion
     private void Awake()
     {
