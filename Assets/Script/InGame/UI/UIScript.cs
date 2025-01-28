@@ -68,12 +68,13 @@ public class UIScript : MonoBehaviour
             YawUIController();  //プレイヤーのX軸の角度表示
             playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
             sensorUIScript.SensorUIController();    //センサーのUI表示
+            TutorialUI();   //チュートリアルUIを動かす
         }
         PMSMode();  //PMS表示
         IsGameOver();   //ゲームオーバーのUI表示
         TargetMarkerUI();   //ターゲットマーカー表示
         ActiveChecker();    //ゲーム画面に表示するCanvasのフラグ管理
-        TutorialUI();   //チュートリアルUIを動かす
+
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
@@ -235,10 +236,7 @@ public class UIScript : MonoBehaviour
     {
         weatherUIScript.SetWeatherScript(sws);
     }
-    public void SetPMS(in bool isPMS)
-    {
-        this.isPMS = isPMS;
-    }
+
     #endregion
 
 

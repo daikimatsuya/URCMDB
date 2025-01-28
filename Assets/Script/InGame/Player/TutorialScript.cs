@@ -68,14 +68,14 @@ public class TutorialScript : MonoBehaviour
         ResetAll(in ps);    //プレイヤーが死んだらリセット
         ResetTutorial();    //このチュートリアルが終わったら次に進む
 
-        if (CheckPMS(in ps))    //PMSがオンだったらチュートリアルが進行///
+        if (CheckPMS())    //PMSがオンだったらチュートリアルが進行///
         {
             tutorialCompletion += PMSTutorialCount;
             if (tutorialCompletion > maxCompletion)
             {
                 tutorialCompletion = maxCompletion;
             }
-        }//////////////////////////////////////////////////////////////////////
+        }////////////////////////////////////////////////////////////////
     }   
     //加速時のチュートリアル管理
     public void AcceTutorial(in PlayerScript ps, in bool isConectController)
@@ -188,9 +188,9 @@ public class TutorialScript : MonoBehaviour
     }
 
     //プレイヤーのPMSを確認
-    public bool CheckPMS(in PlayerScript ps)
+    public bool CheckPMS()
     {
-        return ps.GetPMS();   //PMSのフラグをそのまま返す
+        return Usefull.PMSScript.GetPMS();
 
     }
 

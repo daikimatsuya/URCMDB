@@ -43,7 +43,6 @@ public class GameManagerScript : MonoBehaviour
         Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
         Usefull.GetStickScript.AxisUpdate();//スティック入力情報を更新
         Usefull.GetControllerScript.SearchController();//コントローラー接続確認更新
-        ChangePMS();    //PMS管理
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
         SceneChanges(); //シーン変更
@@ -143,8 +142,10 @@ public class GameManagerScript : MonoBehaviour
 
         player = Instantiate(playerPrefab); //プレイヤー生成
         ps = player.GetComponent<PlayerScript>();   //コンポーネント取得
+
         ps.SetFadeObject(in afs);
         ps.SetLaunchpad(lp);    //発射台位置情報代入
+        ps.StartPlayer();
         cm.SetPlayer(ps);   //カメラにプレイヤーを登録
         us.SetPlayer(ps);   //UIにプレイヤーを登録
         playerMissile--;    //残機減少
@@ -163,34 +164,19 @@ public class GameManagerScript : MonoBehaviour
         __.transform.localPosition = Vector3.zero;  //座標修正
         __.transform.localEulerAngles = new Vector3(0, 0, 0);   //角度修正
     }
-    //PMSのオンオフ
-    private void ChangePMS()
-    {
-        if (Input.GetKeyDown(KeyCode.P)||Input.GetKeyDown("joystick button 3"))
-        {
-            if (PMS)    //PMS管理//////////////////
-            {
-                PMS = false;
-            }
-            else
-            {
-                PMS = true;
-            }//////////////////////////////////////
-            us.SetPMS(PMS);
-        }
-    }
+
 
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void AwakeGameManger()
     {
         Application.targetFrameRate = 60;
+        Usefull.PMSScript.SetPMS(false);
         us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
         uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
 
     }
     private void StartGameManager()
     {
-        PMS = false;
         gameOverFlag = false;
 
         sws = GetComponent<SelectWeatherScript>();
