@@ -7,11 +7,9 @@ using Usefull;
 public class ActivationFadeScript : MonoBehaviour
 {
     [SerializeField] private bool start;
-
     [SerializeField] private bool upFade;
     [SerializeField] private bool downFade;
     [SerializeField] private bool deleteFade;
-
     [SerializeField] private float moveSpeed;
     [SerializeField] private float moveDelay;
     private int delayBuff=0;
@@ -20,9 +18,11 @@ public class ActivationFadeScript : MonoBehaviour
     [SerializeField]private float life;
     [SerializeField] private float playerMoveTime;
 
+    private bool isGameStart=false;
+
     Transform tf;
 
-    private GameManagerScript gm;
+    //private GameManagerScript gm;
     private float speedBuff;
 
     //演出の管理関数
@@ -33,7 +33,7 @@ public class ActivationFadeScript : MonoBehaviour
             if (TimeCountScript.TimeCounter(ref life))
             {
                 //演出時間が終わったらゲームを開始してオブジェクトを削除
-                gm.SetGameStartFlag(true);
+                isGameStart = true;
                 Destroy(GameObject.FindWithTag("FadeObject"));
             }
 
@@ -93,13 +93,17 @@ public class ActivationFadeScript : MonoBehaviour
     {
         start = true;
     }
+    #region 値受け渡し
+    public bool GetGameStartFlag()
+    {
+        return isGameStart;
+    }
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
         //コンポーネント取得
         tf = GetComponent<Transform>();
-        gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
-
 
         start = false;
 

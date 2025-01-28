@@ -19,6 +19,7 @@ public class GameManagerScript : MonoBehaviour
     private int respawnTimerBuff;
 
     private PlayerScript ps;
+    private ActivationFadeScript afs;
     private Transform targetPos;
     private CameraManager cm;
     private GameObject player;
@@ -36,6 +37,7 @@ public class GameManagerScript : MonoBehaviour
     private bool isHitTarget;
     private bool isTargetBreak;
     private bool isTutorial;
+    private Transform uiTransform;
 
     //ゲームシステムを動かす
     private void GameManagerController()
@@ -168,8 +170,9 @@ public class GameManagerScript : MonoBehaviour
     //開始演出生成
     private void CreateFadeObject()
     {
-        Transform uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
+       
         GameObject __ = Instantiate(fadeObjectPrefab);  //フェードオブジェクト生成
+        afs = __.GetComponent<ActivationFadeScript>();
         __.transform.SetParent(uiTransform);    //UICanvasに親子付け
         __.transform.localScale = Vector3.one;  //スケール修正
         __.transform.localPosition = Vector3.zero;  //座標修正
@@ -197,6 +200,7 @@ public class GameManagerScript : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
+        uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
 
     }
     private void StartGameManager()
@@ -217,6 +221,7 @@ public class GameManagerScript : MonoBehaviour
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
         PlayerSpawn();
+        CreateFadeObject();
     }
     #region 値受け渡し
     public SelectWeatherScript GetWeatherScript()
@@ -254,7 +259,7 @@ public class GameManagerScript : MonoBehaviour
     }
     public bool GetCanShotFlag()
     {
-        return isCanShot;
+        return false;
     }
     public void SetGameStartFlag(bool start)
     {
