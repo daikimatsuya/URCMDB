@@ -18,7 +18,6 @@ public class ActivationFadeScript : MonoBehaviour
     [SerializeField]private float life;
     [SerializeField] private float playerMoveTime;
 
-    private bool isGameStart=false;
 
     Transform tf;
 
@@ -33,7 +32,6 @@ public class ActivationFadeScript : MonoBehaviour
             if (TimeCountScript.TimeCounter(ref life))
             {
                 //演出時間が終わったらゲームを開始してオブジェクトを削除
-                isGameStart = true;
                 Destroy(GameObject.FindWithTag("FadeObject"));
             }
 
@@ -93,12 +91,7 @@ public class ActivationFadeScript : MonoBehaviour
     {
         start = true;
     }
-    #region 値受け渡し
-    public bool GetGameStartFlag()
-    {
-        return isGameStart;
-    }
-    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
