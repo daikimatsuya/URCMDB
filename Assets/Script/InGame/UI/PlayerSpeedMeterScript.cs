@@ -40,11 +40,15 @@ public class PlayerSpeedMeterScript : MonoBehaviour
             this.playerSpeedBuff.SetActive(flag);
         }
     }
+    public void StartPlayerSpeedMeterScript()
+    {
+        speed = playerSpeed.GetComponent<TextMeshProUGUI>();
+        speedBuff = playerSpeedBuff.GetComponent<TextMeshProUGUI>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        speed=playerSpeed.GetComponent<TextMeshProUGUI>();
-        speedBuff=playerSpeedBuff.GetComponent<TextMeshProUGUI>();
+
     }
 
     // Update is called once per frame

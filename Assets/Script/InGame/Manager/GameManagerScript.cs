@@ -49,7 +49,7 @@ public class GameManagerScript : MonoBehaviour
         BreakTimeContoller();   //クリア後のタイマー管理
         SceneChanges(); //シーン変更
         us.SetIsGameOver(in gameOverFlag);
-        //us.UIController();  //UI管理
+        us.UIController();  //UI管理
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {

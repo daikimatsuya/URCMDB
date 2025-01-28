@@ -226,29 +226,42 @@ public class UIScript : MonoBehaviour
             tutorialUIScript.TutorialUIController(in ps);
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    public void AwakeUIScript()
     {
-        Application.targetFrameRate = 60;
-
-        //canvasPos = GetComponent<RectTransform>();
-        mainCamera=GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-
-       
         yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
-        gameOverUI = GameObject.FindWithTag("GameOverUI");
-        goUs=gameOverUI.GetComponent<GameOverUIScript>();
-        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
-        targetMarker = GameObject.FindWithTag("TargetMarker");
         pmsTex = pms.GetComponent<TextMeshProUGUI>();
+        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        targetMarker = GameObject.FindWithTag("TargetMarker");
+
+        playerSpeedMeterScript.StartPlayerSpeedMeterScript();
+    }
+    public void StartUIScript()
+    {
+
+        gameOverUI = GameObject.FindWithTag("GameOverUI");
+        goUs = gameOverUI.GetComponent<GameOverUIScript>();
+
+
 
         Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
         canSelect = false;
+
+
+    }
+
+    private void Awake()
+    {
+        AwakeUIScript();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartUIScript();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UIController();
     }
 }

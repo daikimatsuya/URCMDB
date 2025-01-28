@@ -165,12 +165,16 @@ public class TutorialUIScript : MonoBehaviour
         /////////////////////////////////////////////
     }
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         ResetTutorial();
-        ts=GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
+        ts = GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
         completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
         conectController = Usefull.GetControllerScript.GetIsConectic();
+    }
+    void Start()
+    {
+
 
     }
 
