@@ -12,7 +12,7 @@ public class MonitorScript : MonoBehaviour
 
     private float initialPosY;
     private float initialRotY;
-    private GameManagerScript gm;
+    private bool isInGame;
 
     Transform tf;
     RollingScript rs;
@@ -20,10 +20,9 @@ public class MonitorScript : MonoBehaviour
     //モニターオブジェクト管理
     private void MonitorController()
     {
-
         Move(); //ちょっと上下に動かす
 
-        if (gm == null) //インゲームじゃなかったらreturnを返す//////
+        if (!isInGame) //インゲームじゃなかったらreturnを返す//////
         {
             return;
         }////////////////////////////////////////////////////////////////
@@ -75,9 +74,9 @@ public class MonitorScript : MonoBehaviour
         initialRotY = tf.eulerAngles.y;
         rs = GetComponent<RollingScript>();
         rs.enabled = false;
-        if (GameObject.FindWithTag("GameController") != null)
+        if (GameObject.FindWithTag("GameController"))
         {
-            gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+            isInGame = true;
         }
     }
 

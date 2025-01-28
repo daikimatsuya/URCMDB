@@ -19,7 +19,7 @@ public class GameManagerScript : MonoBehaviour
     private int respawnTimerBuff;
 
     private PlayerScript ps;
-    private GameObject afs;
+    private GameObject activatingFadeObject;
     private Transform targetPos;
     private CameraManager cm;
     private GameObject player;
@@ -143,7 +143,7 @@ public class GameManagerScript : MonoBehaviour
         player = Instantiate(playerPrefab); //プレイヤー生成
         ps = player.GetComponent<PlayerScript>();   //コンポーネント取得
 
-        ps.SetFadeObject(in afs);
+        ps.SetFadeObject(in activatingFadeObject);
         ps.SetLaunchpad(lp);    //発射台位置情報代入
         ps.StartPlayer();
         cm.SetPlayer(ps);   //カメラにプレイヤーを登録
@@ -158,7 +158,7 @@ public class GameManagerScript : MonoBehaviour
     private void CreateFadeObject()
     {    
         GameObject __ = Instantiate(fadeObjectPrefab);  //フェードオブジェクト生成
-        afs = __;
+        activatingFadeObject = __;
         __.transform.SetParent(uiTransform);    //UICanvasに親子付け
         __.transform.localScale = Vector3.one;  //スケール修正
         __.transform.localPosition = Vector3.zero;  //座標修正
