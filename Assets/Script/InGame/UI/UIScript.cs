@@ -7,20 +7,23 @@ using Usefull;
 //インゲーム内のUIの処理
 public class UIScript : MonoBehaviour
 {
-    private GameManagerScript gm;
     private Transform yawUItf;
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
     private PlayerScript ps;
 
     private Vector3 playerRot;
-    private Vector3 targetPos;
+    private Transform targetTransform;
     private TextMeshProUGUI pmsTex;
     private bool targetMarkerflag;
     private Camera mainCamera;
     private RectTransform markerCanvas;
     private GameObject targetMarker;
     private bool canSelect;
+    private bool retryFlag=false;
+    private bool backtitleFlag = false;
+    private bool isPMS;
+    private bool isGameOver;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -36,10 +39,10 @@ public class UIScript : MonoBehaviour
     private int gameOverUIIntervalBuff;
 
     //UI全般管理関数
-    private void UIController()
+    public void UIController()
     {
 
-        if(GetPlayerScript() != null)
+        if (ps != null)
         {
             GetPlayerRot(); //プレイヤーの角度取得
             YawUIController();  //プレイヤーのX軸の角度表示
@@ -55,7 +58,7 @@ public class UIScript : MonoBehaviour
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
     {
-        if (gm.IsPlayerDead())  //プレイヤーが死んでいるときに表示するUI///////////////////////
+        if (ps==null)  //プレイヤーが死んでいるときに表示するUI///////////////////////
         {
             targetMarker.SetActive(false);
             pms.SetActive(false);
@@ -103,7 +106,7 @@ public class UIScript : MonoBehaviour
     //ゲームオーバー時のUI管理
     private void IsGameOver()
     {
-        if(gm.GetGameOverFlag())    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
+        if(isGameOver)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
         {
             
             gameOverUI.transform.localPosition = gameOverUIPos;
@@ -113,11 +116,11 @@ public class UIScript : MonoBehaviour
             {
                 if (goUs.GetPos() < -1)
                 {
-                    gm.Retry(); //リトライ
+                    retryFlag = true; //リトライ
                 }
                 else if (goUs.GetPos() > 1)
                 {
-                    gm.BackTitle(); //タイトルに戻る
+                    backtitleFlag = true; //タイトルに戻る
                 }
             }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -146,7 +149,7 @@ public class UIScript : MonoBehaviour
     //PMSのオンオフ表示
     private void PMSMode()
     {
-        if (gm.GetPMS())
+        if (isPMS)
         {
             pmsTex.text = "PMS:ON";
         }
@@ -161,14 +164,14 @@ public class UIScript : MonoBehaviour
     {
         //マーカーの座標を算出
         Vector2 pos;
-        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetPos);
+        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetTransform.position);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(markerCanvas, screenPos, mainCamera, out pos);
         targetMarker.transform.localPosition = pos;
         ///////////////////////
         
 
         //ターゲットがカメラの画角に収まっているときに表示させる
-        if (Vector3.Dot(mainCamera.transform.forward, (targetPos - mainCamera.transform.position)) < 0)
+        if (Vector3.Dot(mainCamera.transform.forward, (targetTransform.position - mainCamera.transform.position)) < 0)
         {
             targetMarkerflag = false;
             targetMarker.SetActive(false);
@@ -181,13 +184,40 @@ public class UIScript : MonoBehaviour
         ////////////////////////////////////////////////////////////
     }
 
-    //プレイヤー取得用
-    private PlayerScript GetPlayerScript()
+    #region 値受け渡し
+    public void SetIsGameOver(in bool  isGameOver)
     {
-        ps=gm.GetPlayerScript();
-        return ps;
+        this.isGameOver = isGameOver;
     }
-    
+    //プレイヤー取得用
+    public void SetPlayer(in PlayerScript ps)
+    {
+        this.ps = ps;
+    }
+    //ターゲット取得用
+    public void SetTarget(in Transform targetPos)
+    {
+        this.targetTransform = targetPos;
+    }
+    public bool GetRetryFlag()
+    {
+        return retryFlag;
+    }
+    public bool GetBacktitleFlag()
+    {
+        return backtitleFlag;
+    }
+    public void SetWeatherScript(in SelectWeatherScript sws)
+    {
+        weatherUIScript.SetWeatherScript(sws);
+    }
+    public void SetPMS(in bool isPMS)
+    {
+        this.isPMS = isPMS;
+    }
+    #endregion
+
+
     //チュートリアルUIを動かすよう
     private void TutorialUI()
     {
@@ -204,7 +234,7 @@ public class UIScript : MonoBehaviour
         //canvasPos = GetComponent<RectTransform>();
         mainCamera=GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
-        gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
+       
         yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs=gameOverUI.GetComponent<GameOverUIScript>();
@@ -214,10 +244,6 @@ public class UIScript : MonoBehaviour
 
         Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
         canSelect = false;
-        //wus = weatherUI.GetComponent<WeatherUIScript>();
-        weatherUIScript.SetWeatherScript(gm.GetWeatherScript());
-
-        targetPos = gm.GetTargetPos();
     }
 
     // Update is called once per frame

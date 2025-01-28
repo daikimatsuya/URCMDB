@@ -25,12 +25,10 @@ public class GameManagerScript : MonoBehaviour
     private SelectWeatherScript sws;
     private LaunchPointScript lp;
     private GameObject launchPad;
+    private UIScript us;
     
 
     private bool playerDead;
-    private Vector3 playerRot;
-    private float playerSpeed;
-    private float playerSpeedBuff;
     private bool gameOverFlag;
     private bool isClear;
     private bool isCanShot;
@@ -44,11 +42,14 @@ public class GameManagerScript : MonoBehaviour
     {
         Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
         Usefull.GetStickScript.AxisUpdate();//スティック入力情報を更新
-        Usefull.GetControllerScript.SearchController();//コントローラー接続確認
+        Usefull.GetControllerScript.SearchController();//コントローラー接続確認更新
         ChangePMS();    //PMS管理
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
         cm.CameraController();  //カメラ管理
         BreakTimeContoller();   //クリア後のタイマー管理
+        SceneChanges(); //シーン変更
+        us.SetIsGameOver(in gameOverFlag);
+        //us.UIController();  //UI管理
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {
@@ -66,6 +67,17 @@ public class GameManagerScript : MonoBehaviour
     {
         Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(title);
+    }
+    private void SceneChanges()
+    {
+        if(us.GetRetryFlag())
+        {
+            Retry();
+        }
+        if(us.GetBacktitleFlag())
+        {
+            BackTitle();
+        }
     }
     //プレイヤーの生存確認と生成
     private void PlayerCheck()
@@ -101,8 +113,6 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             playerDead= false;
-            playerSpeed = ps.GetPlayerSpeedFloat(); //プレイヤーの速度取得
-            playerSpeedBuff = ps.GetPlayerSpeedBuffFloat(); //プレイヤーの移動速度取得
         }
     }
     //プレイヤーが死んだ後に一定時間後にリスポーンさせるフラグセット
@@ -132,6 +142,7 @@ public class GameManagerScript : MonoBehaviour
         ps = player.GetComponent<PlayerScript>();   //コンポーネント取得
         ps.SetLaunchpad(lp);    //発射台位置情報代入
         cm.SetPlayer(ps);   //カメラにプレイヤーを登録
+        us.SetPlayer(ps);   //UIにプレイヤーを登録
         playerMissile--;    //残機減少
 
 
@@ -177,6 +188,7 @@ public class GameManagerScript : MonoBehaviour
             {
                 PMS = true;
             }//////////////////////////////////////
+            us.SetPMS(PMS);
         }
     }
 
@@ -193,7 +205,10 @@ public class GameManagerScript : MonoBehaviour
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         launchPad = GameObject.FindWithTag("LaunchPoint");
         lp = launchPad.GetComponent<LaunchPointScript>();
-
+        us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
+        us.SetTarget(in targetPos);
+        sws.WeatherSetting(cm);
+        us.SetWeatherScript(sws);
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
 
         PlayerSpawn();
@@ -211,19 +226,6 @@ public class GameManagerScript : MonoBehaviour
     public bool IsPlayerDead()
     {
         return playerDead;
-    }
-
-    public void PlayerRotSet(Vector3 rot)
-    {
-       playerRot = rot;
-    }
-    public Vector3 GetPlayerRot()
-    {
-        return playerRot;
-    }
-    public bool GetGameOverFlag()
-    {
-        return gameOverFlag;
     }
     public bool GetTargetBreakFlag()
     {
@@ -246,19 +248,6 @@ public class GameManagerScript : MonoBehaviour
     {
         return isClear;
     }
-    public float GetPlayerSpeed()
-    {
-        return playerSpeed;
-    }
-    public float GetPlayerSpeedBuff()
-    {
-        return playerSpeedBuff;
-    }
-    public Vector3 GetTargetPos()
-    {
-        targetPos = GameObject.FindWithTag("Target").GetComponent<Transform>();
-        return targetPos.position;
-    }
     public bool GetCanShotFlag()
     {
         return isCanShot;
@@ -267,15 +256,12 @@ public class GameManagerScript : MonoBehaviour
     {
         isCanShot = start;
     }
-    public PlayerScript GetPlayerScript()
-    {
-        return ps;
-    }
+
     #endregion
     private void Awake()
     {
         InitialSet();
-        sws.WeatherSetting(cm);
+
     }
     // Start is called before the first frame update
     void Start()

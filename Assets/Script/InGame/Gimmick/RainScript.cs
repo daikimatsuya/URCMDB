@@ -13,6 +13,10 @@ public class RainScript : MonoBehaviour
     //ˆÚ“®‚³‚¹‚é
     private void Move()
     {
+        if(cameraPos == null)
+        {
+            return;
+        }
         tf.position = new Vector3(cameraPos.position.x, cameraPos.position.y + minDistance, cameraPos.position.z);  //ˆÚ“®
     }
 
