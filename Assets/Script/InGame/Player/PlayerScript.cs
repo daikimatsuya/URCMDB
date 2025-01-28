@@ -15,7 +15,7 @@ public class PlayerScript : MonoBehaviour
 
     private LaunchPointScript lp;
     private GameObject dust;
-    private GameObject afs;
+    private GameObject activateFadeObject;
 
     [SerializeField] private float time;
     [SerializeField] private float playerHp;
@@ -62,7 +62,7 @@ public class PlayerScript : MonoBehaviour
     //プレイヤー管理関数
     private void PlayerController()
     {
-        if (afs==null)    //発射できるようになったら//////////////////
+        if (activateFadeObject==null)    //発射できるようになったら//////////////////
         {
             lp.SetStart(true);//スタートフラグをオン
             SpeedControllDebager();//デバッグ用
@@ -439,7 +439,7 @@ public class PlayerScript : MonoBehaviour
     #region　値受け渡し
     public void SetFadeObject(in GameObject afs)
     {
-        this.afs = afs;
+        this.activateFadeObject = afs;
     }
     public void SetLaunchpad(in LaunchPointScript lp)
     {
