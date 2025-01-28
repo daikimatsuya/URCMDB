@@ -29,9 +29,6 @@ public class GameManagerScript : MonoBehaviour
     
 
     private bool playerDead;
-    private Vector3 playerRot;
-    private float playerSpeed;
-    private float playerSpeedBuff;
     private bool gameOverFlag;
     private bool isClear;
     private bool isCanShot;
@@ -51,6 +48,8 @@ public class GameManagerScript : MonoBehaviour
         cm.CameraController();  //カメラ管理
         BreakTimeContoller();   //クリア後のタイマー管理
         SceneChanges(); //シーン変更
+        us.SetIsGameOver(in gameOverFlag);
+        //us.UIController();  //UI管理
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {
@@ -114,8 +113,6 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             playerDead= false;
-            playerSpeed = ps.GetPlayerSpeedFloat(); //プレイヤーの速度取得
-            playerSpeedBuff = ps.GetPlayerSpeedBuffFloat(); //プレイヤーの移動速度取得
         }
     }
     //プレイヤーが死んだ後に一定時間後にリスポーンさせるフラグセット
@@ -229,15 +226,6 @@ public class GameManagerScript : MonoBehaviour
     public bool IsPlayerDead()
     {
         return playerDead;
-    }
-
-    public void PlayerRotSet(Vector3 rot)
-    {
-       playerRot = rot;
-    }
-    public bool GetGameOverFlag()
-    {
-        return gameOverFlag;
     }
     public bool GetTargetBreakFlag()
     {

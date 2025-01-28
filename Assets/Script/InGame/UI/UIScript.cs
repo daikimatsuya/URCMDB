@@ -13,7 +13,7 @@ public class UIScript : MonoBehaviour
     private PlayerScript ps;
 
     private Vector3 playerRot;
-    private Vector3 targetPos;
+    private Transform targetTransform;
     private TextMeshProUGUI pmsTex;
     private bool targetMarkerflag;
     private Camera mainCamera;
@@ -23,6 +23,7 @@ public class UIScript : MonoBehaviour
     private bool retryFlag=false;
     private bool backtitleFlag = false;
     private bool isPMS;
+    private bool isGameOver;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -38,7 +39,7 @@ public class UIScript : MonoBehaviour
     private int gameOverUIIntervalBuff;
 
     //UI全般管理関数
-    private void UIController()
+    public void UIController()
     {
 
         if (ps != null)
@@ -105,7 +106,7 @@ public class UIScript : MonoBehaviour
     //ゲームオーバー時のUI管理
     private void IsGameOver()
     {
-        if(targetPos==null)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
+        if(isGameOver)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
         {
             
             gameOverUI.transform.localPosition = gameOverUIPos;
@@ -163,14 +164,14 @@ public class UIScript : MonoBehaviour
     {
         //マーカーの座標を算出
         Vector2 pos;
-        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetPos);
+        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetTransform.position);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(markerCanvas, screenPos, mainCamera, out pos);
         targetMarker.transform.localPosition = pos;
         ///////////////////////
         
 
         //ターゲットがカメラの画角に収まっているときに表示させる
-        if (Vector3.Dot(mainCamera.transform.forward, (targetPos - mainCamera.transform.position)) < 0)
+        if (Vector3.Dot(mainCamera.transform.forward, (targetTransform.position - mainCamera.transform.position)) < 0)
         {
             targetMarkerflag = false;
             targetMarker.SetActive(false);
@@ -184,7 +185,10 @@ public class UIScript : MonoBehaviour
     }
 
     #region 値受け渡し
-
+    public void SetIsGameOver(in bool  isGameOver)
+    {
+        this.isGameOver = isGameOver;
+    }
     //プレイヤー取得用
     public void SetPlayer(in PlayerScript ps)
     {
@@ -193,7 +197,7 @@ public class UIScript : MonoBehaviour
     //ターゲット取得用
     public void SetTarget(in Transform targetPos)
     {
-        this.targetPos = targetPos.position;
+        this.targetTransform = targetPos;
     }
     public bool GetRetryFlag()
     {
