@@ -385,22 +385,25 @@ public class PlayerScript : MonoBehaviour
     //火花削除管理
     private void EffectController()
     {
-        if (boostEffectList != null)    //リストにオブジェクトが入っていたら///////////////////
+        if (boostEffectList == null)    //リストにオブジェクトが入ってなかったらリターン//////
         {
-            for (int i = 0; i < boostEffectList.Count;)
-            {
-                if (boostEffectList[i].IsDelete())  //破壊フラグがオンになっていたら
-                {
-                    boostEffectList[i].Break(); //オブジェクトを削除
-                    boostEffectList.Remove(boostEffectList[i]); //リストから削除
-                }/////////////////////////////////////////////////////////////////////
-                else
-                {
-                    boostEffectList[i].CountTime(); //生存時間を現象
-                    i++;
-                }
-            }
+            return;
         }////////////////////////////////////////////////////////////////////////////////////////
+
+        for (int i = 0; i < boostEffectList.Count;)
+        {
+            if (boostEffectList[i].IsDelete())  //破壊フラグがオンになっていたら
+            {
+                boostEffectList[i].Break(); //オブジェクトを削除
+                boostEffectList.Remove(boostEffectList[i]); //リストから削除
+            }/////////////////////////////////////////////////////////////////////
+            else
+            {
+                boostEffectList[i].CountTime(); //生存時間を現象
+                i++;
+            }
+        }
+       
     }
     //プレイヤーの爆発までのカウントダウン
     private void CountDown()

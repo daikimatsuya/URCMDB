@@ -15,15 +15,7 @@ namespace Usefull
         [SerializeField] private bool z;
 
         Transform tf;
-        private void Yakekuso(Vector3 vec)
-        {
-            if (vec == tf.localEulerAngles)
-            {
-                return;
-            }
-            tf.localEulerAngles = vec;
-            Yakekuso(vec);
-        }
+
         //回転した座標をトランスフォームに入れる
         private void Rolling()
         {

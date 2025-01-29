@@ -28,14 +28,13 @@ public class GameManagerScript : MonoBehaviour
     private GameObject launchPad;
     private UIScript us;
     private TargetScript ts;
+    private ListManager lm;
+    private Transform uiTransform;
 
     private bool playerDead;
     private bool gameOverFlag;
     private bool playerSpawnFlag;
-    private bool isHitTarget;
-    private bool isTargetBreak;
-    private bool isTutorial;
-    private Transform uiTransform;
+
 
     //ゲームシステムを動かす
     private void GameManagerController()
@@ -48,6 +47,7 @@ public class GameManagerScript : MonoBehaviour
         SceneChanges(); //シーン変更
         us.SetIsGameOver(in gameOverFlag);
         us.UIController();  //UI管理
+        lm.ListManagerController(ps);   //リスト群管理
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {
@@ -170,32 +170,39 @@ public class GameManagerScript : MonoBehaviour
     private void AwakeGameManger()
     {
         Application.targetFrameRate = 60;
-        Usefull.PMSScript.SetPMS(false);
-        us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
-        uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
 
+        GetComponents();    //コンポーネント群取得
+
+        Usefull.PMSScript.SetPMS(false);
+        lm.AwakeListManager();
     }
     private void StartGameManager()
     {
         gameOverFlag = false;
-
-        sws = GetComponent<SelectWeatherScript>();
-        GameObject target = GameObject.FindWithTag("Target");
-        targetPos = target.GetComponent<Transform>();
-        ts = target.GetComponent<TargetScript>();
-        cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
         cm.SetTarget(ts);
-        launchPad = GameObject.FindWithTag("LaunchPoint");
-        lp = launchPad.GetComponent<LaunchPointScript>();
-
         us.SetTarget(in targetPos);
         sws.WeatherSetting(cm);
         us.SetWeatherScript(sws);
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
-
         CreateFadeObject();
         PlayerSpawn();
+    }
+    private void GetComponents()
+    {
+        us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
+        uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
 
+        GameObject target = GameObject.FindWithTag("Target");
+        targetPos = target.GetComponent<Transform>();
+        ts = target.GetComponent<TargetScript>();
+
+        cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+
+        launchPad = GameObject.FindWithTag("LaunchPoint");
+        lp = launchPad.GetComponent<LaunchPointScript>();
+        sws = GetComponent<SelectWeatherScript>();
+
+        lm = GetComponent<ListManager>();
     }
     #region 値受け渡し
 
