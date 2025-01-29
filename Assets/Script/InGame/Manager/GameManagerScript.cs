@@ -31,7 +31,6 @@ public class GameManagerScript : MonoBehaviour
     private ListManager lm;
     private Transform uiTransform;
 
-    private bool playerDead;
     private bool gameOverFlag;
     private bool playerSpawnFlag;
 
@@ -84,7 +83,7 @@ public class GameManagerScript : MonoBehaviour
         if (player==null)   //取得したプレイヤーがゲーム内にないことを確認/////////////////////////////////////////////////////////////
         {
             //フラグ管理
-            playerDead = true;
+
             /////////////
             ///
             if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
@@ -109,7 +108,7 @@ public class GameManagerScript : MonoBehaviour
         }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         else
         {
-            playerDead= false;
+
         }
     }
     //プレイヤーが死んだ後に一定時間後にリスポーンさせるフラグセット
@@ -137,7 +136,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (cm == null)     //CameraManagerが無かったら取得する//
         {
-            AwakeGameManger();
+            //AwakeGameManger();
         }///////////////////////////////////////////////////////////////
 
         player = Instantiate(playerPrefab); //プレイヤー生成
@@ -165,14 +164,11 @@ public class GameManagerScript : MonoBehaviour
         __.transform.localEulerAngles = new Vector3(0, 0, 0);   //角度修正
     }
 
-
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void AwakeGameManger()
     {
         Application.targetFrameRate = 60;
-
         GetComponents();    //コンポーネント群取得
-
         Usefull.PMSScript.SetPMS(false);
         lm.AwakeListManager();
     }
@@ -191,30 +187,16 @@ public class GameManagerScript : MonoBehaviour
     {
         us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
         uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
-
         GameObject target = GameObject.FindWithTag("Target");
         targetPos = target.GetComponent<Transform>();
         ts = target.GetComponent<TargetScript>();
-
         cm = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
-
         launchPad = GameObject.FindWithTag("LaunchPoint");
         lp = launchPad.GetComponent<LaunchPointScript>();
         sws = GetComponent<SelectWeatherScript>();
-
         lm = GetComponent<ListManager>();
     }
-    #region 値受け渡し
 
-    public bool GetPMS()
-    {
-        return PMS;
-    }
-    public bool IsPlayerDead()
-    {
-        return playerDead;
-    }
-    #endregion
     private void Awake()
     {
         AwakeGameManger();
