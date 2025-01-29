@@ -17,38 +17,32 @@ public class SpeedUpRingScript : MonoBehaviour
     CapsuleCollider  collider_;
     Transform tf;
 
-    private GameManagerScript gm;
-    //管理
-    private void SpeedUpRingController()
-    {   
-        ON();   //起動管理
-        Off();  //オフ管理
-    }
+
     //消す
-    private void Off()
+    public void Off()
     {
-        if (isGet)  //取得されたら機能を消す//////////
+        if (!isGet)  //取得されたら機能を消す//////////
         {
-            tf.localScale = new Vector3(0, 0, 0);   //サイズを０にする
-            if(ms!=null)
-            {
-                ms.Delete();    //マーカー削除
-            }
+            return;
         }//////////////////////////////////////////////
+
+        tf.localScale = new Vector3(0, 0, 0);   //サイズを０にする
+        if(ms!=null)
+        {
+            ms.Delete();    //マーカー削除
+        }
+
     }
     //再表示
-    private void ON()
+    public void ON()
     {
-        if (gm.IsPlayerDead()==true)    //プレイヤーが爆発したら機能を起動
+        isGet = false;  //取得フラグを消す
+        tf.localScale = new Vector3(1, ringSize, ringSize); //サイズ初期化
+        collider_.enabled = true;   //コライダーオン
+        if(ms==null)
         {
-            isGet = false;  //取得フラグを消す
-            tf.localScale = new Vector3(1, ringSize, ringSize); //サイズ初期化
-            collider_.enabled = true;   //コライダーオン
-            if(ms==null)
-            {
-                CreateMarker(); //マーカー生成
-            }        
-        }//////////////////////////////////////////////////////////////////////
+            CreateMarker(); //マーカー生成
+        }        
     }
     //マーカー生成
     private void CreateMarker()
@@ -65,21 +59,14 @@ public class SpeedUpRingScript : MonoBehaviour
             collider_.enabled = false;
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    public void StartSpeedUpRing()
     {
-        gm=GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         tf = GetComponent<Transform>();
-        collider_=GetComponent<CapsuleCollider>();
+        collider_ = GetComponent<CapsuleCollider>();
         tf.localScale = new Vector3(1, ringSize, ringSize);
 
         isGet = false;
         CreateMarker();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        SpeedUpRingController();  
-    }
 }

@@ -20,6 +20,10 @@ public class SensorUIScript : MonoBehaviour
     public void SensorUIController()
     {
         SetHit();   //センサー情報取得
+        if (hit == null || hitChildren == null)
+        {
+            return;
+        }
         SensorChecker(up,hit.up,hitChildren.up);    //上センサー表示
         SensorChecker(down,hit.down,hitChildren.down);  //下センサー表示
         SensorChecker(left,hit.left, hitChildren.left); //左センサー表示
@@ -84,7 +88,7 @@ public class SensorUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ss=GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
+       
     }
 
     // Update is called once per frame

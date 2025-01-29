@@ -153,9 +153,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1440127536129786337}
+  - component: {fileID: 2852727210956646882}
   m_Layer: 0
   m_Name: SpeedUpRing
-  m_TagString: Untagged
+  m_TagString: SpeedUpRingList
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +176,18 @@ Transform:
   m_Father: {fileID: 6626572279754210095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2852727210956646882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923794060665623684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206757286a85ab94b9b868feda82ab44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7345697181810363128
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,9 +197,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8653074958100875511}
+  - component: {fileID: 2733792482787963769}
   m_Layer: 0
   m_Name: Signboard
-  m_TagString: Untagged
+  m_TagString: MonitorList
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,6 +220,18 @@ Transform:
   m_Father: {fileID: 6566983059578203607}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2733792482787963769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345697181810363128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 741e6e9fa21170945b6bc0fc9b191cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7359579967553193505
 GameObject:
   m_ObjectHideFlags: 0

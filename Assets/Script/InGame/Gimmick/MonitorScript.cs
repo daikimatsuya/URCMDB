@@ -12,32 +12,18 @@ public class MonitorScript : MonoBehaviour
 
     private float initialPosY;
     private float initialRotY;
-    private GameManagerScript gm;
 
     Transform tf;
     RollingScript rs;
 
-    //モニターオブジェクト管理
-    private void MonitorController()
+    //リセットさせる
+    public void ResetPos()
     {
-
-        Move(); //ちょっと上下に動かす
-
-        if (gm == null) //インゲームじゃなかったらreturnを返す//////
-        {
-            return;
-        }////////////////////////////////////////////////////////////////
-
-        if (gm.IsPlayerDead())  //プレイヤーが死んでいたら///
-        {
-            tf.eulerAngles = new Vector3(0, initialRotY, 0);    //角度初期化
-            rs.enabled = false; //回転を停止
-        }////////////////////////////////////////////////////////
-
+        tf.eulerAngles = new Vector3(0, initialRotY, 0);    //角度初期化
+        rs.enabled = false; //回転を停止
     }
-
     //上下に動かす
-    private void Move()
+    public void Move()
     {
         //上下に動かす////////
         if(PosYBuff<-moveY)
@@ -55,6 +41,16 @@ public class MonitorScript : MonoBehaviour
         
         tf.position=new Vector3(tf.position.x,initialPosY+PosYBuff,tf.position.z);  //トランスフォームに代入
     }
+
+    //モニター初期化
+    public void StartMonitor()
+    {
+        tf = GetComponent<Transform>();
+        initialPosY = tf.position.y;
+        initialRotY = tf.eulerAngles.y;
+        rs = GetComponent<RollingScript>();
+        rs.enabled = false;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("stage"))
@@ -67,23 +63,5 @@ public class MonitorScript : MonoBehaviour
         }
         rs.enabled = true;  //プレイヤーにぶつかったら回す
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        tf = GetComponent<Transform>();
-        initialPosY = tf.position.y;
-        initialRotY = tf.eulerAngles.y;
-        rs = GetComponent<RollingScript>();
-        rs.enabled = false;
-        if (GameObject.FindWithTag("GameController") != null)
-        {
-            gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
-        }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        MonitorController();
-    }
 }

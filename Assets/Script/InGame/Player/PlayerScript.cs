@@ -14,8 +14,8 @@ public class PlayerScript : MonoBehaviour
     Transform tf;
 
     private LaunchPointScript lp;
-    private GameManagerScript gm;
     private GameObject dust;
+    private GameObject activateFadeObject;
 
     [SerializeField] private float time;
     [SerializeField] private float playerHp;
@@ -62,11 +62,12 @@ public class PlayerScript : MonoBehaviour
     //プレイヤー管理関数
     private void PlayerController()
     {
-        if (gm.GetCanShotFlag())    //発射できるようになったら//////////////////
+        if (activateFadeObject==null)    //発射できるようになったら//////////////////
         {
             lp.SetStart(true);//スタートフラグをオン
             SpeedControllDebager();//デバッグ用
             Booooooomb();   //爆発処理
+            ChangePMS();    //PMS管理
             Operation();    //プレイヤー操作
             Acceleration(); //加速管理
             Move(); //移動
@@ -267,8 +268,24 @@ public class PlayerScript : MonoBehaviour
             }
         }/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        PMS=gm.GetPMS();
         tf.eulerAngles = new Vector3(rowling.x, rowling.y, 0);  //角度をトランスフォームに代入
+    }
+
+    //PMSのオンオフ
+    private void ChangePMS()
+    {
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown("joystick button 3"))
+        {
+            if (PMS)    //PMS管理//////////////////
+            {
+                PMS = false;
+            }
+            else
+            {
+                PMS = true;
+            }//////////////////////////////////////
+            Usefull.PMSScript.SetPMS(PMS);
+        }
     }
 
     //加減速処理
@@ -368,22 +385,25 @@ public class PlayerScript : MonoBehaviour
     //火花削除管理
     private void EffectController()
     {
-        if (boostEffectList != null)    //リストにオブジェクトが入っていたら///////////////////
+        if (boostEffectList == null)    //リストにオブジェクトが入ってなかったらリターン//////
         {
-            for (int i = 0; i < boostEffectList.Count;)
-            {
-                if (boostEffectList[i].IsDelete())  //破壊フラグがオンになっていたら
-                {
-                    boostEffectList[i].Break(); //オブジェクトを削除
-                    boostEffectList.Remove(boostEffectList[i]); //リストから削除
-                }/////////////////////////////////////////////////////////////////////
-                else
-                {
-                    boostEffectList[i].CountTime(); //生存時間を現象
-                    i++;
-                }
-            }
+            return;
         }////////////////////////////////////////////////////////////////////////////////////////
+
+        for (int i = 0; i < boostEffectList.Count;)
+        {
+            if (boostEffectList[i].IsDelete())  //破壊フラグがオンになっていたら
+            {
+                boostEffectList[i].Break(); //オブジェクトを削除
+                boostEffectList.Remove(boostEffectList[i]); //リストから削除
+            }/////////////////////////////////////////////////////////////////////
+            else
+            {
+                boostEffectList[i].CountTime(); //生存時間を現象
+                i++;
+            }
+        }
+       
     }
     //プレイヤーの爆発までのカウントダウン
     private void CountDown()
@@ -420,14 +440,15 @@ public class PlayerScript : MonoBehaviour
 
 
     #region　値受け渡し
+    public void SetFadeObject(in GameObject afs)
+    {
+        this.activateFadeObject = afs;
+    }
     public void SetLaunchpad(in LaunchPointScript lp)
     {
         this.lp = lp;
     }
-    public void SetGameManager(in GameManagerScript gm)
-    {
-        this.gm = gm;
-    }
+
     public float GetPlayerAcce()
     {
         return accelelateSpeed;
@@ -463,10 +484,6 @@ public class PlayerScript : MonoBehaviour
     public bool GetIsFire()
     {
         return isFire;
-    }
-    public bool GetPMS()
-    {
-        return PMS;
     }
     #endregion
 
@@ -512,29 +529,31 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void StartPlayer()
     {
-        PMS = false;
+
         TimeCountScript.SetTime(ref time, time);
         blurIntnsity = 0.0f;
 
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
 
-        gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);
         isFire = false;
         isControl = false;
         ringSpeed = 0;
-        tf.position=lp.GetPos();
+        tf.position = lp.GetPos();
 
 
         lp.SetStart(false);
-        gm.SetIsHitTarget(false);
+        PMS = Usefull.PMSScript.GetPMS();
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+       
     }
 
     // Update is called once per frame

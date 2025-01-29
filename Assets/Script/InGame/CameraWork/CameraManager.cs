@@ -16,12 +16,13 @@ public class CameraManager : MonoBehaviour
 
     private PlayerCameraScript pcs;
     private GameObject mainCanvas;
-    private GameManagerScript gm;
     private MovieFade mf;
-    private PlayerScript player;
+    private PlayerScript ps;
+    private TargetScript ts;
   
     private bool isExplodeEffectFade;
     private bool isPlayerDead;
+    private bool isTargetBreak;
 
     //カメラ管理
     public  void CameraController()
@@ -34,7 +35,7 @@ public class CameraManager : MonoBehaviour
         }//////////////////////////////////////////////////////////////
 
 
-        if (player == null) //プレイヤーオブジェクトがない時///////
+        if (ps == null) //プレイヤーオブジェクトがない時///////
         {
             isPlayerDead = true;   
             watarEffect.SetActive(false);   //水中のエフェクト停止
@@ -47,7 +48,7 @@ public class CameraManager : MonoBehaviour
             {
                 isPlayerDead= false;
 
-                if (player.GetControll())   //プレイヤーが操作できるとき////
+                if (ps.GetControll())   //プレイヤーが操作できるとき////
                 {
                     pcs.FollowPlayerInShoot();  //プレイヤーを追従
                 }/////////////////////////////////////////////////////////////
@@ -70,16 +71,22 @@ public class CameraManager : MonoBehaviour
     //爆発時のカメラ
     private void ExplodeCameraController()
     {
-        if(gm.GetIsHitTarget()) //目標にあたった時/////////////
+        if (ts)
         {
-            if (gm.GetTargetDead()) //目標が破壊されたとき/
-            {
-                pcs.ClearCamera();
-                return;
-            }///////////////////////////////////////////////////
+            isTargetBreak = ts.GetBreak();
+        }
+        if (isTargetBreak) //目標が破壊されたとき////////////////////
+        {
+            pcs.ClearCamera();
+            return;
+        }///////////////////////////////////////////////////
+
+        if (ts.GetHit()) //目標にあたった時/////////////
+        {
+
             pcs.HitExplodeCamera();
             return;
-        }////////////////////////////////////////////////////////
+        }///////////////////////////////////////////////
         pcs.MissExplodeCamera();    
     }
     //水に入った時の演出管理
@@ -122,6 +129,10 @@ public class CameraManager : MonoBehaviour
         }
         return pcs;
     }
+    public void SetTarget(in TargetScript target)
+    {
+        ts = target;
+    }
 
     //プレイヤー取得用
     public void SetPlayer(in PlayerScript player)
@@ -131,15 +142,14 @@ public class CameraManager : MonoBehaviour
             pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
         }
 
-        this.player = player;
-        pcs.SetPlayer(this.player.transform,this.player);
+        this.ps = player;
+        pcs.SetPlayer(this.ps.transform,this.ps);
     }
 
     #endregion
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
-    private void InitialSet()
+    private void StartCameraManager()
     {
-        gm = GameObject.FindWithTag("GameController").GetComponent<GameManagerScript>();
         GameObject _ = GameObject.FindWithTag("GameCamera");
         pcs = _.GetComponent<PlayerCameraScript>();
         mf = GetComponent<MovieFade>();
@@ -154,8 +164,7 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        InitialSet();
+        StartCameraManager();
     }
 
     // Update is called once per frame

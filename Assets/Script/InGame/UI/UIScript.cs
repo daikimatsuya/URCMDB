@@ -38,6 +38,26 @@ public class UIScript : MonoBehaviour
     [SerializeField] private TutorialUIScript tutorialUIScript;
     private int gameOverUIIntervalBuff;
 
+    //早期に初期化
+    public void AwakeUIScript()
+    {
+        yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
+        pmsTex = pms.GetComponent<TextMeshProUGUI>();
+        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        targetMarker = GameObject.FindWithTag("TargetMarker");
+
+        playerSpeedMeterScript.StartPlayerSpeedMeterScript();
+    }
+    //初期化
+    public void StartUIScript()
+    {
+        gameOverUI = GameObject.FindWithTag("GameOverUI");
+        goUs = gameOverUI.GetComponent<GameOverUIScript>();
+        Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
+        canSelect = false;
+    }
+
     //UI全般管理関数
     public void UIController()
     {
@@ -48,12 +68,13 @@ public class UIScript : MonoBehaviour
             YawUIController();  //プレイヤーのX軸の角度表示
             playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
             sensorUIScript.SensorUIController();    //センサーのUI表示
+            TutorialUI();   //チュートリアルUIを動かす
         }
         PMSMode();  //PMS表示
         IsGameOver();   //ゲームオーバーのUI表示
         TargetMarkerUI();   //ターゲットマーカー表示
         ActiveChecker();    //ゲーム画面に表示するCanvasのフラグ管理
-        TutorialUI();   //チュートリアルUIを動かす
+
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker()
@@ -162,6 +183,10 @@ public class UIScript : MonoBehaviour
     //ターゲットの位置をUIに表示
     private void TargetMarkerUI()
     {
+        if (!targetTransform)
+        {
+            return;
+        }
         //マーカーの座標を算出
         Vector2 pos;
         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetTransform.position);
@@ -211,10 +236,7 @@ public class UIScript : MonoBehaviour
     {
         weatherUIScript.SetWeatherScript(sws);
     }
-    public void SetPMS(in bool isPMS)
-    {
-        this.isPMS = isPMS;
-    }
+
     #endregion
 
 
@@ -226,29 +248,19 @@ public class UIScript : MonoBehaviour
             tutorialUIScript.TutorialUIController(in ps);
         }
     }
+
+    private void Awake()
+    {
+        AwakeUIScript();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
-
-        //canvasPos = GetComponent<RectTransform>();
-        mainCamera=GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-
-       
-        yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
-        gameOverUI = GameObject.FindWithTag("GameOverUI");
-        goUs=gameOverUI.GetComponent<GameOverUIScript>();
-        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
-        targetMarker = GameObject.FindWithTag("TargetMarker");
-        pmsTex = pms.GetComponent<TextMeshProUGUI>();
-
-        Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
-        canSelect = false;
+        StartUIScript();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UIController();
     }
 }

@@ -8425,6 +8425,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5413475155911359194, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5932047349487227020, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: m_Name
       value: Monitor (1)
@@ -9876,6 +9880,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7546449016565979953, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
       propertyPath: moveSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5413475155911359194, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5932047349487227020, guid: 193c23e1e9293224fa8e763ecdadc8f2, type: 3}
