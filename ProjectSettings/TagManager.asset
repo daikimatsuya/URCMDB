@@ -41,6 +41,7 @@ TagManager:
   - EnemyRail
   - MissileAircraft
   - MonitorList
+  - SpeedUpRingList
   layers:
   - Default
   - TransparentFX

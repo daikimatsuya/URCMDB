@@ -5,16 +5,20 @@ using UnityEngine;
 public class ListManager : MonoBehaviour
 {
     private MonitorListScript mls;
+    private SpeedUpRingListScript surls;
    
     public void ListManagerController(in PlayerScript ps)
     {
-        mls.MonitorListController();
-        mls.SetPlayer(in ps);
+        mls.MonitorListController(in ps);   //ゲーム内モニター管理
+        surls.SpeedUpRingListController(in ps); //スピードアップリング管理
     }
     public void AwakeListManager()
     {
         mls = GameObject.FindWithTag("MonitorList").GetComponent<MonitorListScript>();
         mls.AwakeMonitorList();
+
+        surls = GameObject.FindWithTag("SpeedUpRingList").GetComponent<SpeedUpRingListScript>();
+        surls.AwakeSpeedUpRingList();
     }
 
 }

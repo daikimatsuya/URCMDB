@@ -5,9 +5,9 @@ using UnityEngine;
 public class MonitorListScript : MonoBehaviour
 {
     private List<MonitorScript> monitorList = new List<MonitorScript>();
-    private PlayerScript ps;
 
-    public void MonitorListController()
+
+    public void MonitorListController(in PlayerScript ps)
     {
         if (monitorList == null)
         {
@@ -36,12 +36,5 @@ public class MonitorListScript : MonoBehaviour
             i++;
         }
     }
-    #regionÅ@íléÛÇØìnÇµ
-
-    public void SetPlayer(in PlayerScript ps)
-    {
-        this.ps = ps;
-    }
-    #endregion
 
 }
