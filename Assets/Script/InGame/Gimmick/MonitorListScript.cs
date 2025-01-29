@@ -6,7 +6,7 @@ public class MonitorListScript : MonoBehaviour
 {
     private List<MonitorScript> monitorList = new List<MonitorScript>();
 
-
+    //モニター群管理
     public void MonitorListController(in PlayerScript ps)
     {
         if (monitorList == null)
@@ -23,9 +23,10 @@ public class MonitorListScript : MonoBehaviour
         }
         for (int i = 0; i < monitorList.Count; i++)
         {
-            monitorList[i].ResetPos();
+            monitorList[i].ResetPos();  //リセット
         }
     }
+    //早期初期化
     public void AwakeMonitorList()
     {
         int i = 0;

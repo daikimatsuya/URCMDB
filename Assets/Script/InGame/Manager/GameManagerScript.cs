@@ -82,10 +82,7 @@ public class GameManagerScript : MonoBehaviour
 
         if (player==null)   //取得したプレイヤーがゲーム内にないことを確認/////////////////////////////////////////////////////////////
         {
-            //フラグ管理
 
-            /////////////
-            ///
             if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 SetPlayerSpawnFlag();   //プレイヤーを生成するフラグ管理
@@ -134,11 +131,6 @@ public class GameManagerScript : MonoBehaviour
     //プレイヤー生成
     private void PlayerSpawn()
     {
-        if (cm == null)     //CameraManagerが無かったら取得する//
-        {
-            //AwakeGameManger();
-        }///////////////////////////////////////////////////////////////
-
         player = Instantiate(playerPrefab); //プレイヤー生成
         ps = player.GetComponent<PlayerScript>();   //コンポーネント取得
 

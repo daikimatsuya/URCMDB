@@ -6,6 +6,7 @@ public class SpeedUpRingListScript : MonoBehaviour
 {
     private List<SpeedUpRingScript> speedUpRingList = new List<SpeedUpRingScript>();
     
+    //スピードアップリング管理
     public void SpeedUpRingListController(in PlayerScript ps)
     {
         if (speedUpRingList == null)
@@ -14,7 +15,7 @@ public class SpeedUpRingListScript : MonoBehaviour
         }
         for (int i = 0; i < speedUpRingList.Count; i++)
         {
-            speedUpRingList[i].Off();
+            speedUpRingList[i].Off();   //触れたらオフにする
         }
         if (ps != null)
         {
@@ -22,9 +23,11 @@ public class SpeedUpRingListScript : MonoBehaviour
         }
         for (int i = 0; i < speedUpRingList.Count; i++)
         {
-            speedUpRingList[i].ON();
+            speedUpRingList[i].ON();    //リセット
         }
     }
+
+    //早期初期化
     public void AwakeSpeedUpRingList()
     {
         int i = 0;

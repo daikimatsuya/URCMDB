@@ -16,7 +16,7 @@ public class MonitorScript : MonoBehaviour
     Transform tf;
     RollingScript rs;
 
-
+    //リセットさせる
     public void ResetPos()
     {
         tf.eulerAngles = new Vector3(0, initialRotY, 0);    //角度初期化
@@ -42,6 +42,7 @@ public class MonitorScript : MonoBehaviour
         tf.position=new Vector3(tf.position.x,initialPosY+PosYBuff,tf.position.z);  //トランスフォームに代入
     }
 
+    //モニター初期化
     public void StartMonitor()
     {
         tf = GetComponent<Transform>();
