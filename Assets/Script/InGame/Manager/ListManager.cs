@@ -7,6 +7,7 @@ public class ListManager : MonoBehaviour
     private MonitorListScript mls;
     private SpeedUpRingListScript surls;
     private FallRockListScript frls;
+    private FunListScript fls;
    
     //リスト更新
     public void ListManagerController(in PlayerScript ps)
@@ -14,6 +15,7 @@ public class ListManager : MonoBehaviour
         mls.MonitorListController(in ps);   //ゲーム内モニター管理
         surls.SpeedUpRingListController(in ps); //スピードアップリング管理
         frls.RockFallListController();  //岩落とす奴管理
+        fls.FunListController();    //ファン管理
     }
     //早期初期化
     public void AwakeListManager()
@@ -26,6 +28,9 @@ public class ListManager : MonoBehaviour
 
         frls=GameObject.FindWithTag("RockFallList").GetComponent<FallRockListScript>(); 
         frls.AwakeFallRockList();
+
+        fls=GameObject.FindWithTag("FunList").GetComponent <FunListScript>();
+        fls.AwakeFunList();
     }
 
 }

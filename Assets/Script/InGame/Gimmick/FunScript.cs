@@ -11,22 +11,16 @@ public class FunScript : MonoBehaviour
 
     private Vector3 rotation;
     //ファンを回転させる
-    private void RotateFun()
+    public void RotateFun()
     {
         rotation = new Vector3(rotation.x+rotateSpeed,rotation.y,rotation.z);   //回転
         tf.localEulerAngles = rotation; //トランスフォームに代入
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartFun()
     {
         tf = GetComponent<Transform>();
         rotation = tf.localEulerAngles;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        RotateFun();
-    }
 }

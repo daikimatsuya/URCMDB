@@ -43,6 +43,7 @@ TagManager:
   - MonitorList
   - SpeedUpRingList
   - RockFallList
+  - FunList
   layers:
   - Default
   - TransparentFX
