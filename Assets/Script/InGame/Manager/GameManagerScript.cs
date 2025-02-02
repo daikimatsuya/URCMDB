@@ -33,6 +33,7 @@ public class GameManagerScript : MonoBehaviour
 
     private bool gameOverFlag;
     private bool playerSpawnFlag;
+    private bool isPose;
 
 
     //ゲームシステムを動かす
@@ -42,29 +43,60 @@ public class GameManagerScript : MonoBehaviour
         Usefull.GetStickScript.AxisUpdate();//スティック入力情報を更新
         Usefull.GetControllerScript.SearchController();//コントローラー接続確認更新
         PlayerCheck();  //プレイヤーがゲームにいるかを確認
-        cm.CameraController();  //カメラ管理
+
         SceneChanges(); //シーン変更
         us.SetIsGameOver(in gameOverFlag);
         us.UIController();  //UI管理
-        lm.ListManagerController(ps);   //リスト群管理
-        if (ts!=null)
-        {
-            ts.TargetController();  //ターゲット管理
-        }
-        if(ps!=null)
-        {
-            ps.PlayerController();  //プレイヤー管理
-        }
-        if (lp != null)
-        {
-            lp.LaunchPointController(); //発射台管理
-        }
+
+        InGameController(isPose); //ゲームを動かす
+       
         
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {
-            BackTitle();
+            isPose=true;
         }
+    }
+    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
+    private void AwakeGameManger()
+    {
+        Application.targetFrameRate = 60;
+        GetComponents();    //コンポーネント群取得
+        Usefull.PMSScript.SetPMS(false);
+        lm.AwakeListManager();
+        lp.AwakeLaunchPoint();
+    }
+    private void StartGameManager()
+    {
+        gameOverFlag = false;
+        cm.SetTarget(ts);
+        us.SetTarget(in targetPos);
+        sws.WeatherSetting(cm);
+        us.SetWeatherScript(sws);
+        TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
+        CreateFadeObject();
+        PlayerSpawn();
+        ts.StartTarget();
+        isPose = false;
+    }
+    private void InGameController(in bool isPose)
+    {
+        lm.ListManagerController(ps,isPose);   //リスト群管理
+        if (isPose)
+        {
+            return;
+        }
+        if (ts != null)
+        {
+            ts.TargetController();  //ターゲット管理
+        }
+        if (ps != null)
+        {
+            ps.PlayerController();  //プレイヤー管理
+        }
+
+        lp.LaunchPointController(); //発射台管理       
+        cm.CameraController();  //カメラ管理
     }
     //リトライするときにシーンをロード
     public void Retry()
@@ -170,27 +202,7 @@ public class GameManagerScript : MonoBehaviour
         __.transform.localEulerAngles = new Vector3(0, 0, 0);   //角度修正
     }
 
-    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
-    private void AwakeGameManger()
-    {
-        Application.targetFrameRate = 60;
-        GetComponents();    //コンポーネント群取得
-        Usefull.PMSScript.SetPMS(false);
-        lm.AwakeListManager();
-        lp.AwakeLaunchPoint();
-    }
-    private void StartGameManager()
-    {
-        gameOverFlag = false;
-        cm.SetTarget(ts);
-        us.SetTarget(in targetPos);
-        sws.WeatherSetting(cm);
-        us.SetWeatherScript(sws);
-        TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
-        CreateFadeObject();
-        PlayerSpawn();
-        ts.StartTarget();
-    }
+
     private void GetComponents()
     {
         us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();

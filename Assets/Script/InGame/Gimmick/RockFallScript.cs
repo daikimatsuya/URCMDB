@@ -61,15 +61,18 @@ public class RockFallScript : MonoBehaviour
         rockList.Add(rs);   //生成した岩をリストに格納
 
     }
-    public void ListController()
+
+    public void ListController(in bool isPose)
     {
         if (rockList == null)    //リストにオブジェクトが入ってなかったらリターン//////
         {
             return;
         }//////////////////////////////////////////////////////////////////////////////////
 
+
         for (int i = 0; i < rockList.Count;)
         {
+            
             if (rockList[i].GetPos()<breakArea)  //破壊フラグがオンになっていたら
             {
                 rockList[i].BreakRock(); //オブジェクトを削除
@@ -78,7 +81,7 @@ public class RockFallScript : MonoBehaviour
             }/////////////////////////////////////////////////////////////////////
             else
             {
-                rockList[i].Fall(fallSpeed); //生存時間を現象
+                rockList[i].Fall(fallSpeed,isPose);
                 i++;
             }
         }

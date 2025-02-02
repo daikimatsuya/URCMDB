@@ -7,8 +7,12 @@ public class MonitorListScript : MonoBehaviour
     private List<MonitorScript> monitorList = new List<MonitorScript>();
 
     //ÉÇÉjÉ^Å[åQä«óù
-    public void MonitorListController(in PlayerScript ps)
+    public void MonitorListController(in PlayerScript ps,in bool isPose)
     {
+        if (isPose)
+        {
+            return;
+        }
         if (monitorList == null)
         {
             return;

@@ -7,8 +7,12 @@ public class SpeedUpRingListScript : MonoBehaviour
     private List<SpeedUpRingScript> speedUpRingList = new List<SpeedUpRingScript>();
     
     //スピードアップリング管理
-    public void SpeedUpRingListController(in PlayerScript ps)
+    public void SpeedUpRingListController(in PlayerScript ps,in bool isPose)
     {
+        if(isPose)
+        {
+            return;
+        }
         if (speedUpRingList == null)
         {
             return;

@@ -7,7 +7,7 @@ public class FallRockListScript : MonoBehaviour
     private List<RockFallScript> rockFallList = new List<RockFallScript>();
 
     //岩生成オブジェクト管理
-    public void RockFallListController()
+    public void RockFallListController(in bool isPose)
     {
         if (rockFallList == null)
         {
@@ -15,12 +15,14 @@ public class FallRockListScript : MonoBehaviour
         }
         for (int i = 0; i < rockFallList.Count; i++)
         {
-            if (rockFallList[i].GetInterval())
+            rockFallList[i].ListController(in isPose);
+
+            if (!isPose &&rockFallList[i].GetInterval())
             {
                 rockFallList[i].SpawnRock();
                 rockFallList[i].SetTime();
             }
-            rockFallList[i].ListController();   
+
         }
     }
     public void AwakeFallRockList()

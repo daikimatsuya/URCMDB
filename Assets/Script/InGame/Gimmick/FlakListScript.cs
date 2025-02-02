@@ -6,8 +6,12 @@ public class FlakListScript : MonoBehaviour
 {
     private List<FlakScript> flackList = new List<FlakScript>();
 
-    public void FlakListController()
+    public void FlakListController(in bool isPose)
     {
+        if (isPose)
+        {
+            return;
+        }
         if (flackList == null)
         {
             return;

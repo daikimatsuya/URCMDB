@@ -6,8 +6,12 @@ public class FunListScript : MonoBehaviour
 {
     private List<FunScript> funList = new List<FunScript>();
 
-    public void FunListController()
+    public void FunListController(in bool isPose)
     {
+        if (isPose)
+        {
+            return;
+        }
         if (funList == null)
         {
             return;
