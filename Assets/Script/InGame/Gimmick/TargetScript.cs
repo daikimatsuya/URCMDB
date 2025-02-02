@@ -19,7 +19,7 @@ public class TargetScript : MonoBehaviour
     private bool isBreak;
 
     //ターゲット管理
-    private void TargetController()
+    public void TargetController()
     {
         IsBreak();  //破壊管理
         if (hp <= 0)
@@ -98,16 +98,10 @@ public class TargetScript : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartTarget()
     {
         Usefull.TimeCountScript.SetTime(ref brokeTimeBuff, brokeTime);
         maxHp = hp;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        TargetController();
-    }
 }

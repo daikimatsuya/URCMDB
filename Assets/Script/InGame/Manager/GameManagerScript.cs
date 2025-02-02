@@ -47,6 +47,19 @@ public class GameManagerScript : MonoBehaviour
         us.SetIsGameOver(in gameOverFlag);
         us.UIController();  //UI管理
         lm.ListManagerController(ps);   //リスト群管理
+        if (ts!=null)
+        {
+            ts.TargetController();  //ターゲット管理
+        }
+        if(ps!=null)
+        {
+            ps.PlayerController();  //プレイヤー管理
+        }
+        if (lp != null)
+        {
+            lp.LaunchPointController(); //発射台管理
+        }
+        
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {
@@ -164,6 +177,7 @@ public class GameManagerScript : MonoBehaviour
         GetComponents();    //コンポーネント群取得
         Usefull.PMSScript.SetPMS(false);
         lm.AwakeListManager();
+        lp.AwakeLaunchPoint();
     }
     private void StartGameManager()
     {
@@ -175,6 +189,7 @@ public class GameManagerScript : MonoBehaviour
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
         CreateFadeObject();
         PlayerSpawn();
+        ts.StartTarget();
     }
     private void GetComponents()
     {

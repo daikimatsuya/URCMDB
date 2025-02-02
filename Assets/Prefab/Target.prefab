@@ -41,11 +41,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7853775332015311658}
+  - component: {fileID: 6705590748776150910}
   - component: {fileID: 1336758721261733802}
   - component: {fileID: 7380574735439880354}
   - component: {fileID: 5340506709055840048}
   - component: {fileID: 2611195577414574612}
-  - component: {fileID: 6705590748776150910}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Target
@@ -68,6 +68,23 @@ Transform:
   m_Father: {fileID: 8580634092724796725}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &6705590748776150910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906002775282586059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9910f3a85dcacd4893c0288df1d0b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  explode: {fileID: 2981810423162024347, guid: 3338e49f60502a043a6e9e2ba5422c16, type: 3}
+  explodeTime: 3
+  brokePercent: 0
+  brokeTime: 2
 --- !u!33 &1336758721261733802
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -144,20 +161,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0.8}
---- !u!114 &6705590748776150910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8906002775282586059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9910f3a85dcacd4893c0288df1d0b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  explode: {fileID: 2981810423162024347, guid: 3338e49f60502a043a6e9e2ba5422c16, type: 3}
-  explodeTime: 3
-  brokePercent: 0
-  brokeTime: 2

@@ -60,7 +60,7 @@ public class PlayerScript : MonoBehaviour
 
 
     //ÉvÉåÉCÉÑÅ[ä«óùä÷êî
-    private void PlayerController()
+    public void PlayerController()
     {
         if (activateFadeObject==null)    //î≠éÀÇ≈Ç´ÇÈÇÊÇ§Ç…Ç»Ç¡ÇΩÇÁ//////////////////
         {
@@ -550,15 +550,6 @@ public class PlayerScript : MonoBehaviour
         PMS = Usefull.PMSScript.GetPMS();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        PlayerController();
-    }
+
 }
