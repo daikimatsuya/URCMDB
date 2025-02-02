@@ -65,6 +65,7 @@ public class GameManagerScript : MonoBehaviour
         Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(title);
     }
+    //シーン変更用
     private void SceneChanges()
     {
         if(us.GetRetryFlag())
