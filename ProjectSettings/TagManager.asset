@@ -42,6 +42,7 @@ TagManager:
   - MissileAircraft
   - MonitorList
   - SpeedUpRingList
+  - RockFallList
   layers:
   - Default
   - TransparentFX
