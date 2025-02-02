@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Usefull;
 
-//今のところインゲーム関連のデータのやり取りや裏方仕事全般のちのち奇麗にする
+//インゲームを回す
 public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
-//今のところタイトルのデーター受け渡しや裏方の処理のちのち奇麗にする
+//タイトルを回す
 public class TitleScript : MonoBehaviour
 {
     private TitlegameScript ts;
