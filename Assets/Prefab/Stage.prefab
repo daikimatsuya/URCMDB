@@ -302,9 +302,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2778170843627594647}
+  - component: {fileID: 1531760328539123736}
   m_Layer: 0
   m_Name: Flak
-  m_TagString: Untagged
+  m_TagString: FlakList
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,6 +325,18 @@ Transform:
   m_Father: {fileID: 6626572279754210095}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1531760328539123736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746055227363055157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5620228f1be8d44a684b15c4fd6f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &491026323687667628
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class LineUIScript : MonoBehaviour
 
     [SerializeField] private float randPow;
     [SerializeField] private float colorChangeTime;
+    [SerializeField] string[] ignoreTags;
 
     //予測線設置
     public void SetLine(Vector3 Pos,Vector3 targetLength,float time)
@@ -31,13 +32,14 @@ public class LineUIScript : MonoBehaviour
         
         if(Physics.Raycast(pos.position,Vector3.Normalize(targetLength),out hit, Vector3.Magnitude(targetLength)))  //レイキャストでプレイヤーと砲身の間に障害物があるかを確認////////////////
         {
-            if (!hit.collider.CompareTag("Player")) //プレイヤーに一番初めにあたったら//////
+            isShade = false;
+            for (int i = 0; i < ignoreTags.Length; i++)
             {
-                isShade = true;
-            }/////////////////////////////////////////////////////////////////////////////////////
-            else 
-            {
-                isShade = false;
+                if (hit.collider.CompareTag(ignoreTags[i]))
+                {
+                    isShade= true;
+                    return;
+                }
             }
         }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
@@ -94,19 +96,14 @@ public class LineUIScript : MonoBehaviour
     {
         return isShade;
     }
-    // Start is called before the first frame update
-    void Start()
+    public void StartLine()
     {
-        pos=GetComponent<Transform>();
+        pos = GetComponent<Transform>();
         line = GetComponent<LineRenderer>();
 
         SetTime();
         red = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
+
 }

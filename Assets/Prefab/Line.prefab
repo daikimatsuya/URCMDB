@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5843878147992895409}
-  - component: {fileID: 2025208784463914876}
   - component: {fileID: 6543824656179638841}
+  - component: {fileID: 2025208784463914876}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -33,6 +33,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6543824656179638841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275503242035776631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c954f77987025b24a9a7cb5272d4db3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randPow: 0.001
+  colorChangeTime: 0.05
+  ignoreTags:
+  - Untagged
 --- !u!120 &2025208784463914876
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -132,17 +148,3 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!114 &6543824656179638841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6275503242035776631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c954f77987025b24a9a7cb5272d4db3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randPow: 0.001
-  colorChangeTime: 0.05

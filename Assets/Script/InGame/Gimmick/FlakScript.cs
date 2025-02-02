@@ -37,98 +37,86 @@ public class FlakScript : MonoBehaviour
     private Vector3 playerDisNormal;
     private int intervalBuff;
 
-    //砲台の動きコントローラー
-    private void FlakController()
-    {
-        Aim();  //射撃管理
-    }
     //砲台の向きと射撃
-    private void Aim()
+    public void Aim()
     {
-        if(playerPos != null)   //プレイヤーが射程内に入っているか確認////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //偏差予測///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        playerDis=playerPos.position-barrel.position;   //距離算出
+        lineUI.SetLine(barrel.position,playerDis,intervalBuff); //予測線設定
+        Vector3 playerSpeed= playerScript.GetPlayerSpeed(); //プレイヤーの速度取得
+
+        //解の公式を使用して値を算出///////////////////////////////////////////////////////
+        float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);   
+        float b = Vector3.Dot(playerDis, playerSpeed) * 2; 
+        float c = Vector3.Dot(playerDis, playerDis);
+
+        float discriminant = (b * b) - (4 * a * c);
+        if(discriminant < 0)
         {
-            //偏差予測///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            playerDis=playerPos.position-barrel.position;   //距離算出
-            lineUI.SetLine(barrel.position,playerDis,intervalBuff); //予測線設定
-            Vector3 playerSpeed= playerScript.GetPlayerSpeed(); //プレイヤーの速度取得
+            return; //ありえない値の時returnを返す
+        }
+        float t1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
+        float t2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
 
-            //解の公式を使用して値を算出///////////////////////////////////////////////////////
-            float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);   
-            float b = Vector3.Dot(playerDis, playerSpeed) * 2; 
-            float c = Vector3.Dot(playerDis, playerDis);
+        float t = new float[] { t1, t2 }.Where(t => t > 0).Max();
+        ///////////////////////////////////////////////////////////////////////////////////
 
-            float discriminant = (b * b) - (4 * a * c);
-            if(discriminant < 0)
-            {
-                return; //ありえない値の時returnを返す
-            }
-            float t1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
-            float t2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
+        //速度計算///////////////////////////////////////////////////////////////////////////////////////////////////
+        playerDis = new Vector3((playerPos.position.x + (playerSpeed.x * t) - barrel.position.x), (playerPos.position.y + (playerSpeed.y * t) - barrel.position.y), (playerPos.position.z + (playerSpeed.z * t) - barrel.position.z));
+        playerDisNormal = playerDis.normalized;
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //速度から角度を算出//////////////////////////////////////////////////////////////////////
+        float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
+        float vertical = Mathf.Atan2(Mathf.Sqrt( playerDisNormal.x*playerDisNormal.x + playerDisNormal.z*playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
+        body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);  //砲台のボディーを回転
+        barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);   //砲身を回転
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
-            float t = new float[] { t1, t2 }.Where(t => t > 0).Max();
-            ///////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+    }
 
-            //速度計算///////////////////////////////////////////////////////////////////////////////////////////////////
-            playerDis = new Vector3((playerPos.position.x + (playerSpeed.x * t) - barrel.position.x), (playerPos.position.y + (playerSpeed.y * t) - barrel.position.y), (playerPos.position.z + (playerSpeed.z * t) - barrel.position.z));
-            playerDisNormal = playerDis.normalized;
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
-            //速度から角度を算出//////////////////////////////////////////////////////////////////////
-            float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
-            float vertical = Mathf.Atan2(Mathf.Sqrt( playerDisNormal.x*playerDisNormal.x + playerDisNormal.z*playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
-            body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);  //砲台のボディーを回転
-            barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);   //砲身を回転
-            ///////////////////////////////////////////////////////////////////////////////////////////
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            //発射タイマー管理////
-            if (intervalBuff <= 0)
-            {
-                if(autShotSwitch)
-                {
-                    Shot();
-                    TimeCountScript.SetTime(ref intervalBuff, shotInterval);
-                }         
-            }
-            ///////////////////////
-           
-            //プレイヤーが遮蔽に隠れているか
-            if (lineUI.GetShade())
-            {
-                intervalBuff++;
-                lineUI.SetVoid();
-            }
-            else
-            {
-                SetLineColor();
-                intervalBuff--;
-            }
-            ////////////////////////////////
-
-        }/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        else
+    public void LineUIDelete()
+    {
+        if (lineUI != null)
         {
-            TimeCountScript.SetTime(ref intervalBuff, shotInterval);
-
-            if(lineUI != null)
-            {
-                lineUI.Death(); //lineUIを削除
-            }
-            
+            lineUI.Death(); //lineUIを削除
         }
     }
-    //弾丸発生処理
-    private void Shot()
+    public void SetTime()
     {
+        TimeCountScript.SetTime(ref intervalBuff, shotInterval);
+    }
+    public bool GetTime()
+    {
+        if (lineUI.GetShade())
+        {
+            intervalBuff++;
+            lineUI.SetVoid();
+        }
+        else
+        {
+            SetLineColor();
+            intervalBuff--;
+        }
+        if (intervalBuff <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    //弾丸発生処理
+    public void Shot()
+    {
+        TimeCountScript.SetTime(ref intervalBuff, shotInterval);
         GameObject _=Instantiate(bullet);   //弾丸生成
         _.transform.localPosition = new Vector3(bulletPoint.position.x, bulletPoint.position.y, bulletPoint.position.z);    //ポジションを代入
         _.transform.localEulerAngles = new Vector3(-barrel.localEulerAngles.x, body.localEulerAngles.z + 180, 0);   //角度を代入
         FlakBulletScript fb=_.GetComponent<FlakBulletScript>(); //コンポーネント取得
-        fb.GetAcce(new Vector3(playerDisNormal.x*bulletSpeed,playerDisNormal.y*bulletSpeed,playerDisNormal.z*bulletSpeed)); //加速度代入
+        fb.GetAcce(new Vector3(playerDisNormal.x*bulletSpeed,playerDisNormal.y*bulletSpeed,playerDisNormal.z*bulletSpeed)); //加速度代入     
     }
     //予測線の色管理
-    private void SetLineColor()
+    public void SetLineColor()
     {
         //予測線の色を発射までの時間で変化させる
         if (intervalBuff > voidColorTime) 
@@ -162,6 +150,7 @@ public class FlakScript : MonoBehaviour
             playerScript = other.GetComponent<PlayerScript>();  //コンポーネント取得
             GameObject _ = Instantiate(line);   //予測線生成
             lineUI = _.GetComponent<LineUIScript>();    //コンポーネント取得
+            lineUI.StartLine();
             _.transform.position = barrel.position; //位置を砲身に移動
         }
     }
@@ -174,13 +163,19 @@ public class FlakScript : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    #region 値受け渡し
+    public Transform GetPlayerPos()
+    {
+        return playerPos;
+    }
+    #endregion
+
+    public void StartFlak() 
     {
         //コンポーネント取得
-        pos=GetComponent<Transform>();
+        pos = GetComponent<Transform>();
         linePos = line.GetComponent<Transform>();
-        lineScript=line.GetComponent<LineUIScript>();
+        lineScript = line.GetComponent<LineUIScript>();
         //////////////////////
 
         //時間設定
@@ -193,9 +188,5 @@ public class FlakScript : MonoBehaviour
         CreateMarker();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        FlakController();
-    }
+
 }

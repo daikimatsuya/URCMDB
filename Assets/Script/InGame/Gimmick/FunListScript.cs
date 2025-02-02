@@ -14,7 +14,7 @@ public class FunListScript : MonoBehaviour
         }
         for (int i = 0; i < funList.Count; i++)
         {
-            funList[i].RotateFun();   //G‚ê‚½‚çƒIƒt‚É‚·‚é
+            funList[i].RotateFun(); 
         }
     }
     public void AwakeFunList()

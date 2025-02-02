@@ -44,6 +44,7 @@ TagManager:
   - SpeedUpRingList
   - RockFallList
   - FunList
+  - FlakList
   layers:
   - Default
   - TransparentFX
