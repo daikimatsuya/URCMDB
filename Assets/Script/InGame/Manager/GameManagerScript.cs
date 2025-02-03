@@ -121,7 +121,7 @@ public class GameManagerScript : MonoBehaviour
     //ポーズフラグ切り替え
     private void PoseChange()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha9)||Input.GetKeyDown("joystick button 7"))   //ポーズフラグ切り替え
+        if (Input.GetKeyDown(KeyCode.Escape)||Input.GetKeyDown("joystick button 7"))   //ポーズフラグ切り替え
         {
             if (isPose)
             {
