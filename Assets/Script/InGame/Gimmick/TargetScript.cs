@@ -19,8 +19,12 @@ public class TargetScript : MonoBehaviour
     private bool isBreak;
 
     //ターゲット管理
-    public void TargetController()
+    public void TargetController(in bool isPose)
     {
+        if(isPose)
+        {
+            return;
+        }
         IsBreak();  //破壊管理
         if (hp <= 0)
         {

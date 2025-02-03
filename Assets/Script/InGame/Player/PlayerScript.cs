@@ -60,8 +60,13 @@ public class PlayerScript : MonoBehaviour
 
 
     //プレイヤー管理関数
-    public void PlayerController()
+    public void PlayerController(in bool isPose)
     {
+        if(isPose)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
         if (activateFadeObject==null)    //発射できるようになったら//////////////////
         {
             lp.SetStart(true);//スタートフラグをオン

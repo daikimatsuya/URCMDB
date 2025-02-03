@@ -82,17 +82,14 @@ public class GameManagerScript : MonoBehaviour
     private void InGameController(in bool isPose)
     {
         lm.ListManagerController(ps,isPose);   //リスト群管理
-        if (isPose)
-        {
-            return;
-        }
+
         if (ts != null)
         {
-            ts.TargetController();  //ターゲット管理
+            ts.TargetController(in isPose);  //ターゲット管理
         }
         if (ps != null)
         {
-            ps.PlayerController();  //プレイヤー管理
+            ps.PlayerController(in isPose);  //プレイヤー管理
         }
 
         lp.LaunchPointController(); //発射台管理       
