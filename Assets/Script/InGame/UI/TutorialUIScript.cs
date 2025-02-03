@@ -26,9 +26,9 @@ public class TutorialUIScript : MonoBehaviour
     private bool conectController;
 
     //チュートリアルUI管理
-    public void TutorialUIController(in PlayerScript ps)
+    public void TutorialUIController(in PlayerScript ps,in bool isConect)
     {
-        CheckController();  //コントローラーの接続を確認
+        CheckController(in isConect);  //コントローラーの接続を確認
         SelectTutorial(in ps);  //UI用情報更新
         ShowUI(conectController);    //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
@@ -140,10 +140,10 @@ public class TutorialUIScript : MonoBehaviour
     }
 
     //コントローラーの接続をチェック
-    private void CheckController()
+    private void CheckController(in bool isConect)
     {
         bool buff = conectController;
-        conectController = Usefull.GetControllerScript.GetIsConectic(); //コントローラーの接続情報取得
+        conectController = isConect; //コントローラーの接続情報取得
 
         if (buff != conectController)   //抜かれた瞬間と接続した瞬間に表示ＵＩをリセットする//////
         {

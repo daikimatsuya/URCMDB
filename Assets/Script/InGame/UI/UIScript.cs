@@ -25,6 +25,7 @@ public class UIScript : MonoBehaviour
     private bool isPMS;
     private bool isGameOver;
     private Vector3 initialGameOverPos;
+    private bool isControllerConect;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -36,8 +37,10 @@ public class UIScript : MonoBehaviour
     [SerializeField] private SensorUIScript sensorUIScript;
     [SerializeField] private PlayerSpeedMeterScript playerSpeedMeterScript;
     [SerializeField] private float gameOverUIInterval;
-    [SerializeField] private TutorialUIScript tutorialUIScript;
     private int gameOverUIIntervalBuff;
+    [SerializeField] private TutorialUIScript tutorialUIScript;
+    [SerializeField] private PoseMenuScript poseKeyUI;
+
 
     //早期に初期化
     public void AwakeUIScript()
@@ -53,30 +56,31 @@ public class UIScript : MonoBehaviour
     //初期化
     public void StartUIScript()
     {
-
         goUs = gameOverUI.GetComponent<GameOverUIScript>();
         initialGameOverPos = gameOverUI.transform.localPosition;
         Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
         canSelect = false;
+        CheckController();
+        poseKeyUI.StartPoseMenu(in isControllerConect);
     }
 
     //UI全般管理関数
     public void UIController(in bool isPose)
     {
-
+        CheckController();
         if (ps != null)
         {
             GetPlayerRot(); //プレイヤーの角度取得
             YawUIController();  //プレイヤーのX軸の角度表示
             playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
             sensorUIScript.SensorUIController();    //センサーのUI表示
-            TutorialUI();   //チュートリアルUIを動かす
+            TutorialUI(isControllerConect);   //チュートリアルUIを動かす
         }
         PMSMode();  //PMS表示
         IsGameOver(isPose);   //ゲームオーバーのUI表示
         TargetMarkerUI();   //ターゲットマーカー表示
         ActiveChecker(isPose);    //ゲーム画面に表示するCanvasのフラグ管理
-
+        poseKeyUI.ViewPoseMenu(in isControllerConect);
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker(in bool isPose)
@@ -91,6 +95,7 @@ public class UIScript : MonoBehaviour
             rowImage.SetActive(false);
             weatherUIScript.SetWeatherUIActive(false);
             sensorUIScript.SetSensorActive(false);
+            poseKeyUI.SetPoseActive(false);
         }///////////////////////////////////////////////////////////////////////////////////////////
 
         else   //プレイヤーが生きているときに表示するUI/////////////////////////////////////////
@@ -106,6 +111,7 @@ public class UIScript : MonoBehaviour
             rowImage.SetActive(true);
            weatherUIScript.SetWeatherUIActive(true);
             sensorUIScript.SetSensorActive(true);
+            poseKeyUI.SetPoseActive(true);
         }///////////////////////////////////////////////////////////////////////////////////////////
     }
     //プレイヤーの角度取得
@@ -216,6 +222,10 @@ public class UIScript : MonoBehaviour
         }
         ////////////////////////////////////////////////////////////
     }
+    private void CheckController()
+    {
+        isControllerConect=Usefull.GetControllerScript.GetIsConectic();
+    }
 
     #region 値受け渡し
     public void SetIsGameOver(in bool  isGameOver)
@@ -249,11 +259,11 @@ public class UIScript : MonoBehaviour
 
 
     //チュートリアルUIを動かすよう
-    private void TutorialUI()
+    private void TutorialUI(in bool isConect)
     {
         if(tutorialUIScript!=null)
         {
-            tutorialUIScript.TutorialUIController(in ps);
+            tutorialUIScript.TutorialUIController(in ps,in isConect);
         }
     }
 
