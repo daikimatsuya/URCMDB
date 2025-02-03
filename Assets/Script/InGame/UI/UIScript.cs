@@ -24,6 +24,7 @@ public class UIScript : MonoBehaviour
     private bool backtitleFlag = false;
     private bool isPMS;
     private bool isGameOver;
+    private Vector3 initialGameOverPos;
 
     [SerializeField] private float YawUIMag;
     [SerializeField] private Vector3 gameOverUIPos;
@@ -54,12 +55,13 @@ public class UIScript : MonoBehaviour
     {
         gameOverUI = GameObject.FindWithTag("GameOverUI");
         goUs = gameOverUI.GetComponent<GameOverUIScript>();
+        initialGameOverPos = gameOverUI.transform.localPosition;
         Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
         canSelect = false;
     }
 
     //UI全般管理関数
-    public void UIController()
+    public void UIController(in bool isPose)
     {
 
         if (ps != null)
@@ -71,15 +73,15 @@ public class UIScript : MonoBehaviour
             TutorialUI();   //チュートリアルUIを動かす
         }
         PMSMode();  //PMS表示
-        IsGameOver();   //ゲームオーバーのUI表示
+        IsGameOver(isPose);   //ゲームオーバーのUI表示
         TargetMarkerUI();   //ターゲットマーカー表示
-        ActiveChecker();    //ゲーム画面に表示するCanvasのフラグ管理
+        ActiveChecker(isPose);    //ゲーム画面に表示するCanvasのフラグ管理
 
     }
     //プレイヤーが死んでいたら消す
-    private void ActiveChecker()
+    private void ActiveChecker(in bool isPose)
     {
-        if (ps==null)  //プレイヤーが死んでいるときに表示するUI///////////////////////
+        if (ps==null||isPose)  //プレイヤーが死んでいるときに表示するUI///////////////////////
         {
             targetMarker.SetActive(false);
             pms.SetActive(false);
@@ -125,9 +127,9 @@ public class UIScript : MonoBehaviour
         yawUItf.localPosition = new Vector3(yawUItf.localPosition.x, playerRot.x*-YawUIMag, 0);
     }
     //ゲームオーバー時のUI管理
-    private void IsGameOver()
+    private void IsGameOver(in bool isPose)
     {
-        if(isGameOver)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
+        if(isGameOver||isPose)    //ゲームオーバーになっているとき////////////////////////////////////////////////////////////////
         {
             
             gameOverUI.transform.localPosition = gameOverUIPos;
@@ -166,6 +168,10 @@ public class UIScript : MonoBehaviour
 
             goUs.TargetHpUI();  //ターゲットの残り体力を表示
         }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        else
+        {
+            gameOverUI.transform.localPosition = initialGameOverPos;
+        }
     }
     //PMSのオンオフ表示
     private void PMSMode()

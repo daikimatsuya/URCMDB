@@ -46,7 +46,7 @@ public class GameManagerScript : MonoBehaviour
 
         SceneChanges(); //シーン変更
         us.SetIsGameOver(in gameOverFlag);
-        us.UIController();  //UI管理
+
 
         InGameController(isPose); //ゲームを動かす
        
@@ -90,6 +90,7 @@ public class GameManagerScript : MonoBehaviour
     }
     private void InGameController(in bool isPose)
     {
+        us.UIController(isPose);  //UI管理
         lm.ListManagerController(ps,isPose);   //リスト群管理
 
         if (ts != null)
