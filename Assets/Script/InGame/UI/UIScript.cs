@@ -171,6 +171,7 @@ public class UIScript : MonoBehaviour
         else
         {
             gameOverUI.transform.localPosition = initialGameOverPos;
+            goUs.ResetPos();
         }
     }
     //PMSのオンオフ表示

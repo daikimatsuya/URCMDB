@@ -37,6 +37,10 @@ public class GameOverUIScript : MonoBehaviour
             targetHp = (int)targetScript.GetHp();
         }
     }
+    public void ResetPos()
+    {
+        cursorPos.localPosition = new Vector3(0, cursorPos.localPosition.y, cursorPos.localPosition.z);
+    }
     #endregion
     //ターゲットのHPを表示
     public void TargetHpUI()
