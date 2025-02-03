@@ -58,11 +58,13 @@ public class GameManagerScript : MonoBehaviour
         Usefull.PMSScript.SetPMS(false);
         lm.AwakeListManager();
         lp.AwakeLaunchPoint();
+        us.AwakeUIScript();
     }
     private void StartGameManager()
     {
         gameOverFlag = false;
         cm.SetTarget(ts);
+        us.StartUIScript();
         us.SetTarget(in targetPos);
         sws.WeatherSetting(cm);
         us.SetWeatherScript(sws);

@@ -47,13 +47,13 @@ public class UIScript : MonoBehaviour
         markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         targetMarker = GameObject.FindWithTag("TargetMarker");
-
+        gameOverUI = GameObject.FindWithTag("GameOverUI");
         playerSpeedMeterScript.StartPlayerSpeedMeterScript();
     }
     //èâä˙âª
     public void StartUIScript()
     {
-        gameOverUI = GameObject.FindWithTag("GameOverUI");
+
         goUs = gameOverUI.GetComponent<GameOverUIScript>();
         initialGameOverPos = gameOverUI.transform.localPosition;
         Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
@@ -257,18 +257,4 @@ public class UIScript : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        AwakeUIScript();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartUIScript();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }
