@@ -25,8 +25,9 @@ public class CameraManager : MonoBehaviour
     private bool isTargetBreak;
 
     //カメラ管理
-    public  void CameraController()
+    public  void CameraController(in bool isPose)
     {
+
         mf.MovieFadeController();   //カメラのフェード
 
         if (isPlayerDead )  //プレイヤーが爆発したか////////////////
@@ -50,7 +51,8 @@ public class CameraManager : MonoBehaviour
 
                 if (ps.GetControll())   //プレイヤーが操作できるとき////
                 {
-                    pcs.FollowPlayerInShoot();  //プレイヤーを追従
+                    
+                    pcs.FollowPlayerInShoot(in isPose);  //プレイヤーを追従
                 }/////////////////////////////////////////////////////////////
 
                 else   //プレイヤーが発射台に固定されてる時///

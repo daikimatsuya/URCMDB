@@ -54,8 +54,17 @@ public class GameManagerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
         {
-            isPose=true;
+            if (isPose)
+            {
+                isPose = false;
+            }
+            else
+            {
+                isPose = true;
+            }
+            
         }
+        
     }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void AwakeGameManger()
@@ -93,7 +102,7 @@ public class GameManagerScript : MonoBehaviour
         }
 
         lp.LaunchPointController(); //発射台管理       
-        cm.CameraController();  //カメラ管理
+        cm.CameraController(in isPose);  //カメラ管理
     }
     //リトライするときにシーンをロード
     public void Retry()
