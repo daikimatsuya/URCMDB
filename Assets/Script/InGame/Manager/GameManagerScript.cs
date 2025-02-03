@@ -42,28 +42,12 @@ public class GameManagerScript : MonoBehaviour
         Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
         Usefull.GetStickScript.AxisUpdate();//スティック入力情報を更新
         Usefull.GetControllerScript.SearchController();//コントローラー接続確認更新
-        PlayerCheck();  //プレイヤーがゲームにいるかを確認
 
         SceneChanges(); //シーン変更
         us.SetIsGameOver(in gameOverFlag);
-
-
         InGameController(isPose); //ゲームを動かす
-       
-        
+        PoseChange();   //ポーズ設定切り替え
 
-        if (Input.GetKeyDown(KeyCode.Alpha9))   //ちゃんとしたポーズメニュー作るまでのつなぎ
-        {
-            if (isPose)
-            {
-                isPose = false;
-            }
-            else
-            {
-                isPose = true;
-            }
-            
-        }
         
     }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
@@ -88,8 +72,11 @@ public class GameManagerScript : MonoBehaviour
         ts.StartTarget();
         isPose = false;
     }
+
+    //ゲームを動かす
     private void InGameController(in bool isPose)
     {
+        PlayerCheck();  //プレイヤーがゲームにいるかを確認
         us.UIController(isPose);  //UI管理
         lm.ListManagerController(ps,isPose);   //リスト群管理
 
@@ -129,37 +116,51 @@ public class GameManagerScript : MonoBehaviour
             BackTitle();
         }
     }
+    //ポーズフラグ切り替え
+    private void PoseChange()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha9)||Input.GetKeyDown("joystick button 7"))   //ポーズフラグ切り替え
+        {
+            if (isPose)
+            {
+                isPose = false;
+            }
+            else
+            {
+                isPose = true;
+            }
+
+        }
+    }
     //プレイヤーの生存確認と生成
     private void PlayerCheck()
     {
 
-        if (player==null)   //取得したプレイヤーがゲーム内にないことを確認/////////////////////////////////////////////////////////////
+        if (player!=null)   //取得したプレイヤーがゲーム内にないことを確認////
         {
+            return;
+        }////////////////////////////////////////////////////////////////////////
 
-            if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
-            {
-                SetPlayerSpawnFlag();   //プレイヤーを生成するフラグ管理
-            }
-            
-            if(playerSpawnFlag)  //プレイヤー生成フラグ//////////////////////
-            {
-                if (playerMissile > 0)
-                {
-                    CreateFadeObject(); //プレイヤー生成時の演出生成
-                    PlayerSpawn();  //プレイヤー生成
-                    playerSpawnFlag = false;
-                }
-                else
-                {
-                    gameOverFlag = true;
-                }
-            }/////////////////////////////////////////////////////////////////
-
-        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
+        {
+            SetPlayerSpawnFlag();   //プレイヤーを生成するフラグ管理
+        }
+        
+        if(!playerSpawnFlag)  //プレイヤー生成フラグ確認//////////////
+        {
+            return;
+        }/////////////////////////////////////////////////////////////////
+        if (playerMissile > 0)
+        {
+            CreateFadeObject(); //プレイヤー生成時の演出生成
+            PlayerSpawn();  //プレイヤー生成
+            playerSpawnFlag = false;
+        }
         else
         {
-
+            gameOverFlag = true;
         }
+
     }
     //プレイヤーが死んだ後に一定時間後にリスポーンさせるフラグセット
     private void SetPlayerSpawnFlag()

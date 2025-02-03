@@ -168,11 +168,12 @@ public class UIScript : MonoBehaviour
 
             goUs.TargetHpUI();  //ターゲットの残り体力を表示
         }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        else
+        
+        else   //UIメニューをリセットさせる///////////////////////////////////
         {
             gameOverUI.transform.localPosition = initialGameOverPos;
             goUs.ResetPos();
-        }
+        }///////////////////////////////////////////////////////////////////////
     }
     //PMSのオンオフ表示
     private void PMSMode()

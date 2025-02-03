@@ -25,6 +25,11 @@ public class GameOverUIScript : MonoBehaviour
     {
         cursorPos.localPosition = new Vector3(backTitlePos, cursorPos.localPosition.y, cursorPos.localPosition.z);  
     }
+    //カーソル位置をリセット
+    public void ResetPos()
+    {
+        cursorPos.localPosition = new Vector3(0, cursorPos.localPosition.y, cursorPos.localPosition.z);
+    }
     #region 値受け渡し
     public float GetPos()
     {
@@ -37,10 +42,7 @@ public class GameOverUIScript : MonoBehaviour
             targetHp = (int)targetScript.GetHp();
         }
     }
-    public void ResetPos()
-    {
-        cursorPos.localPosition = new Vector3(0, cursorPos.localPosition.y, cursorPos.localPosition.z);
-    }
+
     #endregion
     //ターゲットのHPを表示
     public void TargetHpUI()
