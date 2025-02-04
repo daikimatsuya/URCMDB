@@ -16960,6 +16960,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 55d0f308ebc1fbe418cdbe5f733e399f, type: 2}
+    - target: {fileID: 7163309283020890112, guid: b8a74589a923eda49bab9cb02c76fc45, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7163309283020890113, guid: b8a74589a923eda49bab9cb02c76fc45, type: 3}
       propertyPath: m_LocalScale.x
       value: 15
@@ -17039,6 +17043,10 @@ PrefabInstance:
     - target: {fileID: 7394028174667236680, guid: b8a74589a923eda49bab9cb02c76fc45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549349796236346551, guid: b8a74589a923eda49bab9cb02c76fc45, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a74589a923eda49bab9cb02c76fc45, type: 3}
