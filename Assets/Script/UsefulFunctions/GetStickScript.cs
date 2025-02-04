@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Usefull
 {
-    public class GetStickScript : MonoBehaviour
+    public class GetStickScript
     {
         private static float beforeStickAxisX;
         private static float beforeStickAxisY;

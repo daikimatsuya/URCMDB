@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Usefull
 {
     //トリガーが今フレームで押されたのかを判別
-    public class GetTriggerScript : MonoBehaviour
+    public class GetTriggerScript
     {
         private static float beforeTriggerAxisLeft;
         private static float beforeTriggerAxisRight;

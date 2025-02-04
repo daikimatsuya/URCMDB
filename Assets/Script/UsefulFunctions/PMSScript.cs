@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Usefull
 {
-    public class PMSScript : MonoBehaviour
+    public class PMSScript
     {
         static bool isPMS;
         static public void SetPMS(in bool pms)

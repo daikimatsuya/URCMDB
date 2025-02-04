@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Usefull
 {
     //回転するオブジェクトの回転を補完する
-    public class ComplementingRotationScript : MonoBehaviour
+    public class ComplementingRotationScript
     {
         //回転補間
         static public float Rotate(float rotateSpeed, float targetRot, float objectRot)

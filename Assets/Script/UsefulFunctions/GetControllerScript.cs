@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Usefull
 {
-    public class GetControllerScript : MonoBehaviour
+    public class GetControllerScript
     {
         static private bool isControllerConectic;
         static public void SearchController()
