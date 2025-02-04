@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Usefull
 {
-    public class ToRadianScript : MonoBehaviour
+    public class ToRadianScript
     {
         //デグをラッドに変換
         static public double ToRadian(ref float angle)

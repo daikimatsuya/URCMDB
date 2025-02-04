@@ -1177,7 +1177,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MissileAircraft
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3976095281988110077, guid: 9dc3583918c20a243b4f0d074d109421, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9dc3583918c20a243b4f0d074d109421, type: 3}
 --- !u!1001 &8674058925430177966
 PrefabInstance:

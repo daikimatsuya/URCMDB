@@ -6,67 +6,33 @@ namespace Usefull
 {
 
     //くっつけたオブジェクトを回転させる
-    public class RollingScript : MonoBehaviour
+    public class RollingScript 
     {
-        [SerializeField] private float rowSpeed;
-        private float rowSpeedBuff;
-        [SerializeField] private bool x;
-        [SerializeField] private bool y;
-        [SerializeField] private bool z;
-
-        Transform tf;
-
         //回転した座標をトランスフォームに入れる
-        private void Rolling()
+        public void Rolling(Transform tf,float rowSpeed,in string rotationAxis)
         {
 
-            if (x)//x軸を回転させる
+            if (rotationAxis=="x")//x軸を回転させる
             {
-                float buff = tf.localEulerAngles.x + rowSpeedBuff;
+                float buff = tf.localEulerAngles.x + rowSpeed;
                 Vector3 testBuff = new Vector3(buff, 0, 0);
 
                 tf.localEulerAngles = Vector3.zero;
                 tf.localEulerAngles = testBuff;//ここの代入がなぜかバグってる
-                                               //Yakekuso(testBuff);
-
-                //tf.localRotation = Quaternion.Euler(testBuff);
+                return;
             }
-            if (y)//y軸を回転させる
+            if (rotationAxis=="y")//y軸を回転させる
             {
-                tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y + rowSpeedBuff, tf.localEulerAngles.z);
+                tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y + rowSpeed, tf.localEulerAngles.z);
+                return;
             }
-            if (z)//z軸を回転させる
+            if (rotationAxis=="z")//z軸を回転させる
             {
-                tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y, tf.localEulerAngles.z + rowSpeedBuff);
+                tf.localEulerAngles = new Vector3(tf.localEulerAngles.x, tf.localEulerAngles.y, tf.localEulerAngles.z + rowSpeed);
+                return;
             }
 
         }
-        //回転速度を外部からセット
-        public void SetRowSpeed(float rowSpeed)
-        {
-            this.rowSpeedBuff = rowSpeed;
-        }
-        //回転速度を返す
-        public float GetRowSpeed()
-        {
-            return rowSpeed;
-        }
-        //回転速度を初期値にリセット
-        public void ResetRowSpeed()
-        {
-            rowSpeedBuff = rowSpeed;
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-            tf = GetComponent<Transform>();
-            rowSpeedBuff = rowSpeed;
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-            Rolling();
-        }
     }
 }

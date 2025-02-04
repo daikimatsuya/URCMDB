@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111974306064711781}
+  - component: {fileID: 705386714628384787}
   m_Layer: 0
   m_Name: drone
   m_TagString: Drone
@@ -36,6 +37,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &705386714628384787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111974306064711802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b344fe401724cb4399e2ae7f58e4015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propellerTf:
+  - {fileID: 2111974306539363236}
+  - {fileID: 2111974306695702681}
+  - {fileID: 2111974306747266905}
+  - {fileID: 2111974306596920234}
+  propllerRotSpeed: 50
 --- !u!1 &2111974306539363237
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +64,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111974306539363236}
-  - component: {fileID: 2111974306539363239}
   m_Layer: 0
   m_Name: propeller
   m_TagString: Untagged
@@ -69,22 +87,6 @@ Transform:
   m_Father: {fileID: 2111974306064711781}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2111974306539363239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111974306539363237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b4f4ae4f141ab45ba37b08551276fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rowSpeed: -55
-  x: 0
-  y: 1
-  z: 0
 --- !u!1 &2111974306596920235
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +96,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111974306596920234}
-  - component: {fileID: 2111974306596920277}
   m_Layer: 0
   m_Name: propeller (3)
   m_TagString: Untagged
@@ -118,22 +119,6 @@ Transform:
   m_Father: {fileID: 2111974306064711781}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2111974306596920277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111974306596920235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b4f4ae4f141ab45ba37b08551276fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rowSpeed: 55
-  x: 0
-  y: 1
-  z: 0
 --- !u!1 &2111974306695702686
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111974306695702681}
-  - component: {fileID: 2111974306695702680}
   m_Layer: 0
   m_Name: propeller (1)
   m_TagString: Untagged
@@ -167,22 +151,6 @@ Transform:
   m_Father: {fileID: 2111974306064711781}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2111974306695702680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111974306695702686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b4f4ae4f141ab45ba37b08551276fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rowSpeed: -55
-  x: 0
-  y: 1
-  z: 0
 --- !u!1 &2111974306747266910
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +160,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111974306747266905}
-  - component: {fileID: 2111974306747266904}
   m_Layer: 0
   m_Name: propeller (2)
   m_TagString: Untagged
@@ -216,22 +183,6 @@ Transform:
   m_Father: {fileID: 2111974306064711781}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2111974306747266904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111974306747266910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b4f4ae4f141ab45ba37b08551276fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rowSpeed: 55
-  x: 0
-  y: 1
-  z: 0
 --- !u!1 &2111974306873419611
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,8 +196,8 @@ GameObject:
   - component: {fileID: 2111974306873419588}
   - component: {fileID: 2111974306873419589}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Drone
+  m_Name: propeller1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,7 +294,7 @@ GameObject:
   - component: {fileID: 2111974306925575818}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Drone
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,8 +390,8 @@ GameObject:
   - component: {fileID: 2111974307179954255}
   - component: {fileID: 2111974307179954252}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Drone
+  m_Name: propeller1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,8 +487,8 @@ GameObject:
   - component: {fileID: 2111974307370278184}
   - component: {fileID: 2111974307370278185}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Drone
+  m_Name: propeller
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -633,8 +584,8 @@ GameObject:
   - component: {fileID: 2111974307538580712}
   - component: {fileID: 2111974307538580713}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Drone
+  m_Name: propeller1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

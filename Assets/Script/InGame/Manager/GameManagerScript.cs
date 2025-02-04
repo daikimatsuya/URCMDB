@@ -224,7 +224,6 @@ public class GameManagerScript : MonoBehaviour
         launchPad = GameObject.FindWithTag("LaunchPoint");
         lp = launchPad.GetComponent<LaunchPointScript>();
         sws = GetComponent<SelectWeatherScript>();
-        //lm = GetComponent<ListManager>();
         lm = new ListManager();
     }
 

@@ -8,10 +8,12 @@ public class MonitorScript : MonoBehaviour
 {
     [SerializeField] private float moveY;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotateSpeed;
     private float PosYBuff;
 
     private float initialPosY;
     private float initialRotY;
+    private bool rotateFlag=false;
 
     Transform tf;
     RollingScript rs;
@@ -19,27 +21,31 @@ public class MonitorScript : MonoBehaviour
     //リセットさせる
     public void ResetPos()
     {
+        rotateFlag = false;
         tf.eulerAngles = new Vector3(0, initialRotY, 0);    //角度初期化
-        rs.enabled = false; //回転を停止
     }
     //上下に動かす
     public void Move()
     {
         //上下に動かす////////
-        if(PosYBuff<-moveY)
+        if (PosYBuff < -moveY)
         {
             PosYBuff = -moveY;
             moveSpeed *= -1;
         }
-        else if(PosYBuff>moveY) 
+        else if (PosYBuff > moveY)
         {
-            PosYBuff=moveY;
+            PosYBuff = moveY;
             moveSpeed *= -1;
         }
         PosYBuff += moveSpeed;
         ////////////////////////
-        
-        tf.position=new Vector3(tf.position.x,initialPosY+PosYBuff,tf.position.z);  //トランスフォームに代入
+
+        tf.position = new Vector3(tf.position.x, initialPosY + PosYBuff, tf.position.z);  //トランスフォームに代入
+        if (rotateFlag)
+        {
+            rs.Rolling(tf, rotateSpeed, "y");
+        }
     }
 
     //モニター初期化
@@ -48,8 +54,7 @@ public class MonitorScript : MonoBehaviour
         tf = GetComponent<Transform>();
         initialPosY = tf.position.y;
         initialRotY = tf.eulerAngles.y;
-        rs = GetComponent<RollingScript>();
-        rs.enabled = false;
+        rs=new RollingScript();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -61,7 +66,7 @@ public class MonitorScript : MonoBehaviour
         {
             return;
         }
-        rs.enabled = true;  //プレイヤーにぶつかったら回す
+        rotateFlag = true;
     }
 
 }
