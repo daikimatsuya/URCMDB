@@ -24,7 +24,7 @@ public class FunListScript : MonoBehaviour
     public void AwakeFunList()
     {
         int i = 0;
-        foreach (Transform children in this.gameObject.transform)
+        foreach (Transform children in GameObject.FindWithTag("FunList").transform)
         {
             funList.Add(children.GetChild(0).GetComponent<FunScript>());
             funList[i].StartFun();

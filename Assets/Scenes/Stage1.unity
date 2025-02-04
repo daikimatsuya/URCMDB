@@ -1322,7 +1322,8 @@ PrefabInstance:
       propertyPath: rainTexture
       value: 
       objectReference: {fileID: 21300000, guid: aacf0a8bb2b1b52479151faf6ae1b1ac, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2812800406001324698, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
 --- !u!114 &372019081 stripped
 MonoBehaviour:

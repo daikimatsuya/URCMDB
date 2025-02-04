@@ -33,8 +33,9 @@ public class MonitorListScript : MonoBehaviour
     //‘Šú‰Šú‰»
     public void AwakeMonitorList()
     {
+
         int i = 0;
-        foreach(Transform children in this.gameObject.transform)
+        foreach(Transform children in GameObject.FindWithTag("MonitorList").transform)
         {
             monitorList.Add(children.GetComponent<MonitorScript>());
             monitorList[i].StartMonitor();

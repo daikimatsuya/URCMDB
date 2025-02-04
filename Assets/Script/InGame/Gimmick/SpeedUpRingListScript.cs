@@ -35,7 +35,7 @@ public class SpeedUpRingListScript : MonoBehaviour
     public void AwakeSpeedUpRingList()
     {
         int i = 0;
-        foreach (Transform children in this.gameObject.transform)
+        foreach (Transform children in GameObject.FindWithTag("SpeedUpRingList").transform)
         {
             speedUpRingList.Add(children.GetComponent<SpeedUpRingScript>());
             speedUpRingList[i].StartSpeedUpRing();

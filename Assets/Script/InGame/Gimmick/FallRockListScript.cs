@@ -28,7 +28,7 @@ public class FallRockListScript : MonoBehaviour
     public void AwakeFallRockList()
     {
         int i = 0;
-        foreach (Transform children in this.gameObject.transform)
+        foreach (Transform children in GameObject.FindWithTag("RockFallList").transform)
         {
             rockFallList.Add(children.GetComponent<RockFallScript>());
             rockFallList[i].StartRockFall();
