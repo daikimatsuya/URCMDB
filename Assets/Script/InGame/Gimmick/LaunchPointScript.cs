@@ -17,8 +17,12 @@ public class LaunchPointScript : MonoBehaviour
 
 
     //”­Ë‘äŠÇ—ŠÖ”
-    public void LaunchPointController()
+    public void LaunchPointController(in bool isPose)
     {
+        if(isPose)
+        {
+            return;
+        }
         if (isStart)
         {
             if (isControll) //‘€ì‚Å‚«‚é‚æ‚¤‚É‚È‚Á‚Ä‚¢‚½‚ç////

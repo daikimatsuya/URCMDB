@@ -91,7 +91,7 @@ public class GameManagerScript : MonoBehaviour
             ps.PlayerController(in isPose);  //プレイヤー管理
         }
 
-        lp.LaunchPointController(); //発射台管理       
+        lp.LaunchPointController(in isPose); //発射台管理       
         cm.CameraController(in isPose);  //カメラ管理
     }
     //リトライするときにシーンをロード
