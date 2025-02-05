@@ -234,22 +234,12 @@ public class PlayerCameraScript : MonoBehaviour
     }
     #endregion
 
-    private void Awake()
+    public void AwakePlayerCamera()
     {
         tf = GetComponent<Transform>();
         mc = GetComponent<MovieCamera>();
         ec = GetComponent<ExplodeCamera>();
         sc = GetComponent<ShaderController>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

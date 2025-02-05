@@ -15,7 +15,7 @@ public class FallRockListScript : MonoBehaviour
         }
         for (int i = 0; i < rockFallList.Count; i++)
         {
-            rockFallList[i].ListController(in isPose);
+            rockFallList[i].RockController(in isPose);
 
             if (!isPose &&rockFallList[i].GetInterval())
             {

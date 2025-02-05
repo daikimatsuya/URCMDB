@@ -36,6 +36,7 @@ public class FlakScript : MonoBehaviour
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
     private int intervalBuff;
+    List<FlakBulletScript> flakBulletList = new List<FlakBulletScript>();
 
     //–C‘ä‚ÌŒü‚«‚ÆËŒ‚
     public void Aim()
@@ -81,6 +82,17 @@ public class FlakScript : MonoBehaviour
         if (lineUI != null)
         {
             lineUI.Death(); //lineUI‚ğíœ
+        }
+    }
+    public void BulletController()
+    {
+        if (flakBulletList == null)
+        {
+            return;
+        }
+        for(int i = 0; i < flakBulletList.Count; i++)
+        {
+
         }
     }
     public void SetTime()

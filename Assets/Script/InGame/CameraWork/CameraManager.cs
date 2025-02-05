@@ -149,17 +149,22 @@ public class CameraManager : MonoBehaviour
     }
 
     #endregion
-    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
-    public void StartCameraManager()
+    public void AwakeCameraManager()
     {
         GameObject _ = GameObject.FindWithTag("GameCamera");
         pcs = _.GetComponent<PlayerCameraScript>();
+        pcs.AwakePlayerCamera();
+        mainCanvas = GameObject.FindWithTag("UICanvas");
         mf = GetComponent<MovieFade>();
+    }
+    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
+    public void StartCameraManager()
+    {
+
+
         mf.SetShadeLevel(1);
         pcs.SetMF(mf);
-        //pcs.SetMoviewFade(mf);
         TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
-        mainCanvas = GameObject.FindWithTag("UICanvas");
         mainCanvas.SetActive(false);
         watarEffect.SetActive(false);
     }

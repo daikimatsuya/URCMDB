@@ -168,9 +168,5 @@ public class MovieFade : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //MovieFadeController();
-    }
+
 }

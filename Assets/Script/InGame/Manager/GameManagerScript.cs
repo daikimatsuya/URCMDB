@@ -58,6 +58,7 @@ public class GameManagerScript : MonoBehaviour
         lm.AwakeListManager();
         lp.AwakeLaunchPoint();
         us.AwakeUIScript();
+        cm.AwakeCameraManager();
     }
     private void StartGameManager()
     {

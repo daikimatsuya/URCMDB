@@ -151,9 +151,4 @@ public class MovieCamera : MonoBehaviour
         fadeoutTime *= 60;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

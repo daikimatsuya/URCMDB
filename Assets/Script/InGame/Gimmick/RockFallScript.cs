@@ -62,7 +62,7 @@ public class RockFallScript : MonoBehaviour
 
     }
 
-    public void ListController(in bool isPose)
+    public void RockController(in bool isPose)
     {
         if (rockList == null)    //リストにオブジェクトが入ってなかったらリターン//////
         {

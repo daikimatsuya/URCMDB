@@ -11,9 +11,12 @@ public class FlakBulletScript : MonoBehaviour
 
     private Vector3 speed;
     private MarkerScript ms;
-    
+
+
     [SerializeField] private float deleteTime;
     [SerializeField] private GameObject marker;
+
+
 
     //ñCíeä«óù
     private void BulletController()
@@ -22,7 +25,7 @@ public class FlakBulletScript : MonoBehaviour
         Delete();   //çÌèúä«óù
     }
     //à⁄ìÆ
-    private void Move()
+    public void Move()
     {
         rb.velocity = speed;    //ë¨ìxâ¡éZ
 
@@ -51,14 +54,18 @@ public class FlakBulletScript : MonoBehaviour
         ms.Move(pos.position);  //í«è]Ç≥ÇπÇÈ
 
     }
-    // Start is called before the first frame update
-    void Start()
+    public void StartFlakBullet()
     {
-        rb= GetComponent<Rigidbody>();
-        pos= GetComponent<Transform>(); 
+        rb = GetComponent<Rigidbody>();
+        pos = GetComponent<Transform>();
         deleteTime = deleteTime * 60;
 
         CreateMarker();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartFlakBullet();
     }
 
     // Update is called once per frame

@@ -29,7 +29,6 @@ public class DroneListScript : MonoBehaviour
         foreach (GameObject drone in drones)
         {
             droneList.Add(drone.GetComponent<DroneScript>());
-            Debug.Log(drone.name);
             droneList[i].StartDrone();
             i++;
         }
