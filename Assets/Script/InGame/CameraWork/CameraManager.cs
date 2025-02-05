@@ -150,7 +150,7 @@ public class CameraManager : MonoBehaviour
 
     #endregion
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
-    private void StartCameraManager()
+    public void StartCameraManager()
     {
         GameObject _ = GameObject.FindWithTag("GameCamera");
         pcs = _.GetComponent<PlayerCameraScript>();
@@ -163,15 +163,5 @@ public class CameraManager : MonoBehaviour
         mainCanvas.SetActive(false);
         watarEffect.SetActive(false);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCameraManager();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

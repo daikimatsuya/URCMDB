@@ -10,7 +10,6 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject fadeObjectPrefab;
     [SerializeField] private int playerMissile;
-    [SerializeField] private bool PMS;
     [SerializeField] private string stage;
     [SerializeField] private string title;
     [SerializeField] private float breakTime;
@@ -39,14 +38,14 @@ public class GameManagerScript : MonoBehaviour
     //ゲームシステムを動かす
     private void GameManagerController()
     {
-        Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
-        Usefull.GetStickScript.AxisUpdate();//スティック入力情報を更新
-        Usefull.GetControllerScript.SearchController();//コントローラー接続確認更新
+        Usefull.GetTriggerScript.AxisUpdate();                 //トリガーの入力情報を更新
+        Usefull.GetStickScript.AxisUpdate();                    //スティック入力情報を更新
+        Usefull.GetControllerScript.SearchController();     //コントローラー接続確認更新
 
-        SceneChanges(); //シーン変更
-        us.SetIsGameOver(in gameOverFlag);
-        InGameController(isPose); //ゲームを動かす
-        PoseChange();   //ポーズ設定切り替え
+        SceneChanges();                                               //シーン変更
+        us.SetIsGameOver(in gameOverFlag);                 //ゲームオーバーフラグ挿入
+        InGameController(isPose);                                  //ゲームを動かす
+        PoseChange();                                                   //ポーズ設定切り替え
 
         
     }
@@ -54,7 +53,7 @@ public class GameManagerScript : MonoBehaviour
     private void AwakeGameManger()
     {
         Application.targetFrameRate = 60;
-        GetComponents();    //コンポーネント群取得
+        GetComponents();                                //コンポーネント群取得
         Usefull.PMSScript.SetPMS(false);
         lm.AwakeListManager();
         lp.AwakeLaunchPoint();
@@ -63,6 +62,7 @@ public class GameManagerScript : MonoBehaviour
     private void StartGameManager()
     {
         gameOverFlag = false;
+        cm.StartCameraManager();
         cm.SetTarget(ts);
         us.StartUIScript();
         us.SetTarget(in targetPos);
@@ -78,21 +78,21 @@ public class GameManagerScript : MonoBehaviour
     //ゲームを動かす
     private void InGameController(in bool isPose)
     {
-        PlayerCheck();  //プレイヤーがゲームにいるかを確認
-        us.UIController(isPose);  //UI管理
+        PlayerCheck();                                   //プレイヤーがゲームにいるかを確認
+        us.UIController(isPose);                      //UI管理
         lm.ListManagerController(ps,isPose);   //リスト群管理
 
         if (ts != null)
         {
-            ts.TargetController(in isPose);  //ターゲット管理
+            ts.TargetController(in isPose);        //ターゲット管理
         }
         if (ps != null)
         {
-            ps.PlayerController(in isPose);  //プレイヤー管理
+            ps.PlayerController(in isPose);        //プレイヤー管理
         }
 
-        lp.LaunchPointController(in isPose); //発射台管理       
-        cm.CameraController(in isPose);  //カメラ管理
+        lp.LaunchPointController(in isPose);    //発射台管理       
+        cm.CameraController(in isPose);        //カメラ管理
     }
     //リトライするときにシーンをロード
     public void Retry()
@@ -138,14 +138,14 @@ public class GameManagerScript : MonoBehaviour
     private void PlayerCheck()
     {
 
-        if (player!=null)   //取得したプレイヤーがゲーム内にないことを確認////
+        if (player!=null)   //プレイヤーがゲーム内にいなかったらリターン//////
         {
             return;
         }////////////////////////////////////////////////////////////////////////
 
         if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
-            SetPlayerSpawnFlag();   //プレイヤーを生成するフラグ管理
+            SetPlayerSpawnFlag();       //プレイヤーを生成するフラグ管理
         }
         
         if(!playerSpawnFlag)  //プレイヤー生成フラグ確認//////////////
@@ -154,8 +154,8 @@ public class GameManagerScript : MonoBehaviour
         }/////////////////////////////////////////////////////////////////
         if (playerMissile > 0)
         {
-            CreateFadeObject(); //プレイヤー生成時の演出生成
-            PlayerSpawn();  //プレイヤー生成
+            CreateFadeObject();         //プレイヤー生成時の演出生成
+            PlayerSpawn();                //プレイヤー生成
             playerSpawnFlag = false;
         }
         else
