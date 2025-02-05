@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Usefull;
 
+//ƒhƒƒ“ŠÇ—
 public class DroneScript : MonoBehaviour
 {
     [SerializeField] private Transform[] propellerTf;
@@ -10,6 +11,7 @@ public class DroneScript : MonoBehaviour
 
     private RollingScript rs; 
      
+    //ƒvƒƒyƒ‰‚ğ‰ñ‚·
     public void Roll()
     {
         for (int i = 0; i < propellerTf.Length; i++)
@@ -17,6 +19,7 @@ public class DroneScript : MonoBehaviour
             rs.Rolling(propellerTf[i], propllerRotSpeed, "y");
         } 
     }
+    //‰Šú‰»
     public void StartDrone()
     {
         rs=new RollingScript();

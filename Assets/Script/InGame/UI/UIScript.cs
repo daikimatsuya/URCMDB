@@ -51,12 +51,20 @@ public class UIScript : MonoBehaviour
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         targetMarker = GameObject.FindWithTag("TargetMarker");
         gameOverUI = GameObject.FindWithTag("GameOverUI");
-        playerSpeedMeterScript.StartPlayerSpeedMeterScript();
+      
+
+        if(tutorialUIScript != null)
+        {
+            tutorialUIScript.AwakeTutorialUI();
+        }
+        
     }
     //初期化
     public void StartUIScript()
     {
+        playerSpeedMeterScript.StartPlayerSpeedMeterScript();
         goUs = gameOverUI.GetComponent<GameOverUIScript>();
+        goUs.StartGameOverUI();
         initialGameOverPos = gameOverUI.transform.localPosition;
         Usefull.TimeCountScript.SetTime(ref gameOverUIIntervalBuff, gameOverUIInterval);
         canSelect = false;
@@ -70,17 +78,17 @@ public class UIScript : MonoBehaviour
         CheckController();
         if (ps != null)
         {
-            GetPlayerRot(); //プレイヤーの角度取得
-            YawUIController();  //プレイヤーのX軸の角度表示
+            GetPlayerRot();                                                                                                                                         //プレイヤーの角度取得
+            YawUIController();                                                                                                                                    //プレイヤーのX軸の角度表示
             playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
-            sensorUIScript.SensorUIController();    //センサーのUI表示
-            TutorialUI(isControllerConect);   //チュートリアルUIを動かす
+            sensorUIScript.SensorUIController();                                                                                                         //センサーのUI表示
+            TutorialUI(isControllerConect);                                                                                                                  //チュートリアルUIを動かす
         }
-        PMSMode();  //PMS表示
-        IsGameOver(isPose);   //ゲームオーバーのUI表示
-        TargetMarkerUI();   //ターゲットマーカー表示
-        ActiveChecker(isPose);    //ゲーム画面に表示するCanvasのフラグ管理
-        poseKeyUI.ViewPoseMenu(in isControllerConect);
+        PMSMode();                                                                                                                          //PMS表示
+        IsGameOver(isPose);                                                                                                             //ゲームオーバーのUI表示
+        TargetMarkerUI();                                                                                                                 //ターゲットマーカー表示
+        ActiveChecker(isPose);                                                                                                          //ゲーム画面に表示するCanvasのフラグ管理
+        poseKeyUI.ViewPoseMenu(in isControllerConect);                                                                    //ポーズメニューUI表示
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker(in bool isPose)

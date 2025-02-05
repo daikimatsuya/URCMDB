@@ -69,15 +69,15 @@ public class PlayerScript : MonoBehaviour
         }
         if (activateFadeObject==null)    //発射できるようになったら//////////////////
         {
-            lp.SetStart(true);//スタートフラグをオン
-            SpeedControllDebager();//デバッグ用
-            Booooooomb();   //爆発処理
-            ChangePMS();    //PMS管理
-            Operation();    //プレイヤー操作
-            Acceleration(); //加速管理
-            Move(); //移動
-            CountDown();    //生存時間管理
-            EffectController(); //演出管理
+            lp.SetStart(true);              //スタートフラグをオン
+            SpeedControllDebager();   //デバッグ用
+            Booooooomb();                //爆発処理
+            ChangePMS();                  //PMS管理
+            Operation();                     //プレイヤー操作
+            Acceleration();                 //加速管理
+            Move();                           //移動
+            CountDown();                  //生存時間管理
+            EffectController();            //演出管理
             BlurIntnsityController();   //加速表現ブラー管理
 
         }//////////////////////////////////////////////////////////////////////////
@@ -268,7 +268,7 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
                 isFire = true;  //発射フラグオン
-                lp.Shoot(); //発射台のコントロールをオフ
+                lp.Shoot();     //発射台のコントロールをオフ
 
             }
         }/////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -301,14 +301,16 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
             {
                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
-                CreateBoostEffect();    //加速時演出生成
-                blurIntnsity = maxBlurIntensity;    //加速演出ブラーに値を代入
+                CreateBoostEffect();                                                            //加速時演出生成
+                blurIntnsity = maxBlurIntensity;                                           //加速演出ブラーに値を代入
+
             }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
             {
-                playerSpeed += accelerate;  //基本速度に加算
-                minBlurIntnsity = accelelatedBlurIntensity; //加速演出ブラーに値を代入
+                playerSpeed += accelerate;                         //基本速度に加算
+                minBlurIntnsity = accelelatedBlurIntensity;   //加速演出ブラーに値を代入
+
             }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if(boostSpeed > 0)  //一時加速がある間はブラーに値を入れる////////////////////////////
@@ -369,23 +371,23 @@ public class PlayerScript : MonoBehaviour
     {
         if (playerHp <= 0)
         {
-            lp.Bombed();    //発射台に操作を返す
+            lp.Bombed();                                        //発射台に操作を返す
             GameObject _ = Instantiate(explode);    //爆発エフェクト生成
-            _.transform.position = tf.position; //座標代入
-            Destroy(this.gameObject);   //プレイヤーオブジェクトを削除
+            _.transform.position = tf.position;          //座標代入
+            Destroy(this.gameObject);                     //プレイヤーオブジェクトを削除
         }
     }
     //ブースト時に火花が散るエフェクト生成
     private void CreateBoostEffect()
     {
-        GameObject _ = Instantiate(boostEffect);    //エフェクト生成
-        _.transform.SetParent(tf.transform, true);  //エフェクトをプレイヤーと親子付け
-        _.transform.localPosition = new Vector3(0, 0, firePosZ);    //ポジション代入
-        _.transform.localEulerAngles = new Vector3(0, 180, 0);  //角度代入
-        _.transform.localScale = fireSize;  //サイズ代入
+        GameObject _ = Instantiate(boostEffect);                               //エフェクト生成
+        _.transform.SetParent(tf.transform, true);                              //エフェクトをプレイヤーと親子付け
+        _.transform.localPosition = new Vector3(0, 0, firePosZ);          //ポジション代入
+        _.transform.localEulerAngles = new Vector3(0, 180, 0);          //角度代入
+        _.transform.localScale = fireSize;                                           //サイズ代入
         BoostEffectScript bf=_.GetComponent<BoostEffectScript>();   //コンポーネント取得
-        bf.SetTime();   //生存時間セット
-        boostEffectList.Add(bf);    //リストに入れる
+        bf.SetTime();                                                                       //生存時間セット
+        boostEffectList.Add(bf);                                                        //リストに入れる
     }
     //火花削除管理
     private void EffectController()
@@ -399,8 +401,9 @@ public class PlayerScript : MonoBehaviour
         {
             if (boostEffectList[i].IsDelete())  //破壊フラグがオンになっていたら
             {
-                boostEffectList[i].Break(); //オブジェクトを削除
+                boostEffectList[i].Break();                         //オブジェクトを削除
                 boostEffectList.Remove(boostEffectList[i]); //リストから削除
+
             }/////////////////////////////////////////////////////////////////////
             else
             {
@@ -439,7 +442,7 @@ public class PlayerScript : MonoBehaviour
     //プレイヤーの角度を発射台に合わせる
     private void SetPreShootAngle()
     {
-        tf.position = lp.GetPos();  //ポジション取得
+        tf.position = lp.GetPos();                                 //ポジション取得
         tf.localEulerAngles = new Vector3(0, 180, 0);   //角度を初期化
     }
 
@@ -533,6 +536,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //プレイヤー初期化
     public void StartPlayer()
     {
 
@@ -548,12 +552,8 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position = lp.GetPos();
-
-
         lp.SetStart(false);
         PMS = Usefull.PMSScript.GetPMS();
     }
-
-
 
 }

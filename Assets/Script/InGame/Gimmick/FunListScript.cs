@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ファンをリストで管理する
 public class FunListScript : MonoBehaviour
 {
     private List<FunScript> funList = new List<FunScript>();
 
+    //ファンをリストで管理
     public void FunListController(in bool isPose)
     {
         if (isPose)
@@ -21,6 +23,7 @@ public class FunListScript : MonoBehaviour
             funList[i].RotateFun(); 
         }
     }
+    //早期初期化
     public void AwakeFunList()
     {
         int i = 0;

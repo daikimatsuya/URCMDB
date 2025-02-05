@@ -292,11 +292,10 @@ namespace Usefull
         private static void SaveJson(WebJson data,string fileName)
         {
             string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
-
-            string json = JsonUtility.ToJson(data); //変換
-            StreamWriter sw = new StreamWriter(filePath, false);
-            sw.WriteLine(json); //書き込み
-            sw.Close(); //終了
+            string json = JsonUtility.ToJson(data);                                                                               //変換
+            StreamWriter sw = new StreamWriter(filePath, false);                                                        //streamWriter生成
+            sw.WriteLine(json);                                                                                                         //書き込み
+            sw.Close();                                                                                                                     //終了
         }
         //降水確率を保存したJsonから読み取る
         private static WebJson ReadJson(string fileName)
@@ -304,11 +303,11 @@ namespace Usefull
             string filePath = Application.dataPath + "/" + "Resources" + "/" + "Json" + "/" + filename;   //ファイルパス取得
             if (File.Exists(filePath))  //ファイル確認/////////////////
             {
-                StreamReader sr = new StreamReader(filePath);   
-                string json = sr.ReadToEnd();
-                sr.Close();
+                StreamReader sr = new StreamReader(filePath);       //steamWirter生成
+                string json = sr.ReadToEnd();                                  //読み込み
+                sr.Close();                                                             //終了
 
-                return JsonUtility.FromJson<WebJson>(json);
+                return JsonUtility.FromJson<WebJson>(json);         //値をリターン
             }/////////////////////////////////////////////////////////
             return null;
         }

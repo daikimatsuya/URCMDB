@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ドローンをリストで管理する
 public class DroneListScript : MonoBehaviour
 {
     private List<DroneScript> droneList=new List<DroneScript>();
 
+    //ドローンをリストで管理
     public void DroneListController()
     {
 
@@ -19,6 +21,7 @@ public class DroneListScript : MonoBehaviour
         }
     }
 
+    //早期初期化
     public void AwakeDroneList()
     {
         int i = 0;

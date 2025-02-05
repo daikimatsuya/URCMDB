@@ -62,8 +62,8 @@ public class MoveOnRailScript : MonoBehaviour
     private void SetPosAndRot()
     {
         Vector3 targetPos = SetTargetPos(next); //目標地点座標設定
-        Rolling();  //回転させる
-        Accelerate(targetPos);  //加速
+        Rolling();                                              //回転させる
+        Accelerate(targetPos);                           //加速
     }
     //加速
     private void Accelerate(Vector3 targetPos)
@@ -95,7 +95,7 @@ public class MoveOnRailScript : MonoBehaviour
     //目標地点設定
     private Vector3 SetTargetPos(int next)
     {
-        Vector3 targetPos = rail.GetPosition(next) - tf.position;   //中継地点と現在の差を算出
+        Vector3 targetPos = rail.GetPosition(next) - tf.position;                                       //中継地点と現在の差を算出
 
         //角度を算出
         float horizontal = Mathf.Atan2(targetPos.normalized.x, targetPos.normalized.z) * Mathf.Rad2Deg;
@@ -104,7 +104,7 @@ public class MoveOnRailScript : MonoBehaviour
 
         targetAngles = new Vector3(tf.eulerAngles.x , horizontal - 90 , -(vertical) + 90);  //角度を代入
 
-        return targetPos;   //座標の差を返す
+        return targetPos;                                                                                              //座標の差を返す
     }
     //回転させる
     private void Rolling()
@@ -121,8 +121,8 @@ public class MoveOnRailScript : MonoBehaviour
     //ラインセット
     public void SetRail(in LineRenderer rail)
     {
-        this.rail = rail;   //レールセット
-        knot = 0;   //中継地点数初期化
+        this.rail = rail;         //レールセット
+        knot = 0;                //中継地点数初期化
         moveEnd = false;    //移動フラグ初期化
     }
 
@@ -139,16 +139,21 @@ public class MoveOnRailScript : MonoBehaviour
             SetRail(rail);
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    //初期化
+    public void StartMoveOnRail()
     {
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
 
-        rb.velocity=new Vector3(moveSpeed,0,0);
+        rb.velocity = new Vector3(moveSpeed, 0, 0);
 
         moveEnd = false;
         rotBuff = tf.eulerAngles;
+    }
+    void Start()
+    {
+        StartMoveOnRail();
     }
 
     // Update is called once per frame

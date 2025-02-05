@@ -41,12 +41,16 @@ public class SheidScript : MonoBehaviour
         tf.position = initialPos;   //À•W‚ğ‰Šú’l‚É•ÏX
     }
 
+    public void StartSheid()
+    {
+        tf = GetComponent<Transform>();
+        ts = GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
+        initialPos = tf.position;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        tf = GetComponent<Transform>();
-        ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
-        initialPos = tf.position;
+        StartSheid();
     }
 
     // Update is called once per frame

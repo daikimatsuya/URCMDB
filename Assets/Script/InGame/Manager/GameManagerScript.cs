@@ -189,36 +189,33 @@ public class GameManagerScript : MonoBehaviour
     //プレイヤー生成
     private void PlayerSpawn()
     {
-        player = Instantiate(playerPrefab); //プレイヤー生成
-        ps = player.GetComponent<PlayerScript>();   //コンポーネント取得
-
-        ps.SetFadeObject(in activatingFadeObject);
-        ps.SetLaunchpad(lp);    //発射台位置情報代入
-        ps.StartPlayer();
-        cm.SetPlayer(ps);   //カメラにプレイヤーを登録
-        us.SetPlayer(ps);   //UIにプレイヤーを登録
-        playerMissile--;    //残機減少
-
-        player.transform.SetParent(launchPad.transform);    //プレイヤーと発射台を親子付け
-
-        SetRespawnTimer();  //プレイヤー生成用タイマーセット
+        player = Instantiate(playerPrefab);                         //プレイヤー生成
+        ps = player.GetComponent<PlayerScript>();           //コンポーネント取得
+        ps.SetFadeObject(in activatingFadeObject);             //フェード設定
+        ps.SetLaunchpad(lp);                                            //発射台位置情報代入
+        ps.StartPlayer();                                                   //プレイヤー初期化
+        cm.SetPlayer(ps);                                                 //カメラにプレイヤーを登録
+        us.SetPlayer(ps);                                                  //UIにプレイヤーを登録
+        playerMissile--;                                                     //残機減少
+        player.transform.SetParent(launchPad.transform);   //プレイヤーと発射台を親子付け
+        SetRespawnTimer();                                             //プレイヤー生成用タイマーセット
     }
     //開始演出生成
     private void CreateFadeObject()
     {    
-        GameObject __ = Instantiate(fadeObjectPrefab);  //フェードオブジェクト生成
-        activatingFadeObject = __;
-        __.transform.SetParent(uiTransform);    //UICanvasに親子付け
-        __.transform.localScale = Vector3.one;  //スケール修正
-        __.transform.localPosition = Vector3.zero;  //座標修正
+        GameObject __ = Instantiate(fadeObjectPrefab);           //フェードオブジェクト生成
+        activatingFadeObject = __;                                          //フェードオブジェクトを変数に代入
+        __.transform.SetParent(uiTransform);                           //UICanvasに親子付け
+        __.transform.localScale = Vector3.one;                         //スケール修正
+        __.transform.localPosition = Vector3.zero;                     //座標修正
         __.transform.localEulerAngles = new Vector3(0, 0, 0);   //角度修正
     }
 
-
+    //コンポーネント群を取得
     private void GetComponents()
     {
         us = GameObject.FindWithTag("UICanvas").GetComponent<UIScript>();
-        uiTransform = GameObject.FindWithTag("UICanvas").transform;   //UICanvasのトランスフォームを取得
+        uiTransform = GameObject.FindWithTag("UICanvas").transform;   
         GameObject target = GameObject.FindWithTag("Target");
         targetPos = target.GetComponent<Transform>();
         ts = target.GetComponent<TargetScript>();

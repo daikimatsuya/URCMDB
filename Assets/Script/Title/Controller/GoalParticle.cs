@@ -22,10 +22,14 @@ public class GoalParticle : MonoBehaviour
         }
     }
     // Start is called before the first frame update
+    public void StartGoalParticle()
+    {
+        ts = GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
+        ps = GetComponent<ParticleSystem>();
+    }
     void Start()
     {
-        ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
-        ps=GetComponent<ParticleSystem>();
+        StartGoalParticle();
     }
 
     // Update is called once per frame

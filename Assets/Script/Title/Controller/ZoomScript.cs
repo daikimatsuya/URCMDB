@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Usefull;
 
 //ズームするような動きを管理
 public class ZoomScript : MonoBehaviour
@@ -8,7 +9,6 @@ public class ZoomScript : MonoBehaviour
     [SerializeField] private bool setInitialPos;//初期値に値を足して位置をずらしてから初期値まで動かす
     [SerializeField] private bool zoomIn;
     [SerializeField] private bool zoomOut;
-
     [SerializeField] private float zoomLength;
     private float lengthBuff;
     [SerializeField] private float zoomTime;
@@ -93,14 +93,18 @@ public class ZoomScript : MonoBehaviour
         }///////////////////////////////////////////////////////////////////////////////////////////
     }
     // Start is called before the first frame update
-    void Start()
+    public void StartZoom()
     {
-        tf=GetComponent<Transform>();
+        tf = GetComponent<Transform>();
         initialPos = tf.position;
         PosBuffZ = initialPos.z;
 
-        timeBuff = (int)(zoomTime * 60);
-        lengthBuff= zoomLength /timeBuff;
+        TimeCountScript.SetTime(ref timeBuff, zoomTime);
+        lengthBuff = zoomLength / timeBuff;
+    }
+    void Start()
+    {
+        StartZoom();
     }
 
     // Update is called once per frame

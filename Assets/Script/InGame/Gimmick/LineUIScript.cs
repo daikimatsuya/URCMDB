@@ -96,6 +96,7 @@ public class LineUIScript : MonoBehaviour
     {
         return isShade;
     }
+    //‰Šú‰»
     public void StartLine()
     {
         pos = GetComponent<Transform>();

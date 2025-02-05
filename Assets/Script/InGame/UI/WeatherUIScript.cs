@@ -10,8 +10,7 @@ public class WeatherUIScript : MonoBehaviour
     [SerializeField] private Image WeatherIcon;
     [SerializeField] private GameObject chanceOfRain;
     private TextMeshProUGUI chanceOfRainTex;
-
-    
+   
     //天気アイコン変更
     private void SetMaterial()
     {
@@ -21,7 +20,7 @@ public class WeatherUIScript : MonoBehaviour
     private void SetChanceOfRain(int chanceOfRain)
     {
         chanceOfRainTex=this.chanceOfRain.GetComponent<TextMeshProUGUI>();  //降水確率表示用のコンポーネントを取得
-        chanceOfRainTex.text = chanceOfRain + "%";  //降水確率表示
+        chanceOfRainTex.text = chanceOfRain + "%";                                             //降水確率表示
     }
     //UI表示変更
     public void SetWeatherScript(in SelectWeatherScript sws)
@@ -42,16 +41,4 @@ public class WeatherUIScript : MonoBehaviour
         this.gameObject.SetActive(flag);
     }
 
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

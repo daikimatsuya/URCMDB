@@ -68,16 +68,12 @@ public class GameOverUIScript : MonoBehaviour
         }/////////////////////////////////
 
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    //èâä˙âª
+    public void StartGameOverUI()
     {
         target = GameObject.FindWithTag("Target");
         targetScript = target.GetComponent<TargetScript>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

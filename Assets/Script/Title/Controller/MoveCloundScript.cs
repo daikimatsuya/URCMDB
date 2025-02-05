@@ -39,10 +39,14 @@ public class MoveCloundScript : MonoBehaviour
         tf.localPosition = new Vector3(tf.localPosition.x, posBuff, tf.localPosition.z);
     }
     // Start is called before the first frame update
-    void Start()
+    public void StartMoveCloud()
     {
         tf = GetComponent<Transform>();
         posBuff = tf.localPosition.y;
+    }
+    void Start()
+    {
+        StartMoveCloud();
 
     }
 

@@ -36,10 +36,14 @@ public class ShaderController : MonoBehaviour
         Graphics.Blit(source, destination, material);   //ƒuƒ‰[‚ğ‚©‚¯‚é
     }
     // Start is called before the first frame update
-    void Start()
+    public void StartShaderController()
     {
         material = new Material(radialBlur);
         intensity = 0;
+    }
+    void Start()
+    {
+        StartShaderController();
     }
 
     // Update is called once per frame

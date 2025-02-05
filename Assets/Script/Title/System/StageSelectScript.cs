@@ -118,14 +118,17 @@ public class StageSelectScript : MonoBehaviour
     }
     #endregion
     // Start is called before the first frame update
-    void Start()
+    public void StartStageSelect()
     {
-        ts=GetComponent<TitleScript>();
-
+        ts = GetComponent<TitleScript>();
         stageCount = 0;
         stageChangeCount = 0;
         rotateEnd = true;
         fadeTimeBuff = (int)(fadeTime * 60);
+    }
+    void Start()
+    {
+        StartStageSelect();
     }
 
     // Update is called once per frame

@@ -28,7 +28,7 @@ public class StageRotationScript : MonoBehaviour
          {
              rotateEnd = false;
              sss.SetRotateEnd(rotateEnd);   //‰ñ“]ƒtƒ‰ƒO‚ð‘ã“ü
-             rotateBuff += rotateSpeed; //‰ñ“]‚³‚¹‚é
+             rotateBuff += rotateSpeed;      //‰ñ“]‚³‚¹‚é
              if (rot < rotateBuff)  //‰ñ“]‚µ‚·‚¬‚½Žž///////////////////
              {
                  rotateBuff = rot;
@@ -42,7 +42,7 @@ public class StageRotationScript : MonoBehaviour
          {
              rotateEnd = false;
              sss.SetRotateEnd(rotateEnd);   //‰ñ“]ƒtƒ‰ƒO‚ð‘ã“ü
-            rotateBuff -= rotateSpeed; //‰ñ“]‚³‚¹‚é
+            rotateBuff -= rotateSpeed;        //‰ñ“]‚³‚¹‚é
             if (rot > rotateBuff) //‰ñ“]‚µ‚·‚¬‚½Žž///////////////////
             {
                  rotateBuff = rot;
@@ -58,13 +58,16 @@ public class StageRotationScript : MonoBehaviour
          tf.localEulerAngles = new Vector3(0, rotateBuff, 0);   //‰ñ“]Šp‘ã“ü
 
     }
-    // Start is called before the first frame update
-    void Start()
+    public void StartStageRotation()
     {
         sss = GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
         tf = GetComponent<Transform>();
         rotateBuff = tf.localEulerAngles.y;
-
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartStageRotation();
     }
 
     // Update is called once per frame

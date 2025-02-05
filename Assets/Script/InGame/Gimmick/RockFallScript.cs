@@ -20,11 +20,10 @@ public class RockFallScript : MonoBehaviour
     private Vector3 spawnPos;
     private List<RockScript> rockList = new List<RockScript>();
 
-    // Start is called before the first frame update
+
     //管理
     public void FallRockController()
     {
-
         if (TimeCountScript.TimeCounter(ref intervalBuff)) 
         {
             SpawnRock();    //岩生成
@@ -52,16 +51,17 @@ public class RockFallScript : MonoBehaviour
         float randScale=Random.Range(rockSize.x, rockSize.y);
         //////////////////////////////
 
-        GameObject _=Instantiate(rock); //岩生成
-        _.transform.position = new Vector3(spawnPos.x + randX, spawnPos.y, spawnPos.z + randY); //座標代入
+        GameObject _=Instantiate(rock);                                                                                                                                                                             //岩生成
+        _.transform.position = new Vector3(spawnPos.x + randX, spawnPos.y, spawnPos.z + randY);                                                                                      //座標代入
         _.transform.localScale = new Vector3(_.transform.localScale.x * randScale, _.transform.localScale.y * randScale, _.transform.localScale.z * randScale); //サイズ代入
-        _.transform.SetParent(tf.transform, true);
-        RockScript rs=_.GetComponent<RockScript>(); //コンポーネント取得
-        rs.StartRock();
-        rockList.Add(rs);   //生成した岩をリストに格納
+        _.transform.SetParent(tf.transform, true);                                                                                                                                                               //岩を自身の子に
+        RockScript rs=_.GetComponent<RockScript>();                                                                                                                                                       //コンポーネント取得
+        rs.StartRock();                                                                                                                                                                                                      //岩初期化
+        rockList.Add(rs);                                                                                                                                                                                                   //生成した岩をリストに格納
 
     }
 
+    //岩をリストで管理
     public void RockController(in bool isPose)
     {
         if (rockList == null)    //リストにオブジェクトが入ってなかったらリターン//////
@@ -75,7 +75,7 @@ public class RockFallScript : MonoBehaviour
             
             if (rockList[i].GetPos()<breakArea)  //破壊フラグがオンになっていたら
             {
-                rockList[i].BreakRock(); //オブジェクトを削除
+                rockList[i].BreakRock();         //オブジェクトを削除
                 rockList.Remove(rockList[i]); //リストから削除
 
             }/////////////////////////////////////////////////////////////////////
@@ -86,6 +86,7 @@ public class RockFallScript : MonoBehaviour
             }
         }
     }
+    //初期化
     public void StartRockFall()
     {
         tf = GetComponent<Transform>();

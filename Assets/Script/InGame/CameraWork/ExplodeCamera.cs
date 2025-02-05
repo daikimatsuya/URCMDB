@@ -21,8 +21,8 @@ public class ExplodeCamera : MonoBehaviour
     //プレイヤーが壁とかで爆発したときのカメラの動き
     public Vector3 MissExplodeCamera(ref Vector3 rotation)
     {
-        Rotation(rotation); //回転させる
-        rotation = new Vector3(directionX, rotation.y + rotateSpeed, 0);
+        Rotation(rotation);                                                                         //回転させる
+        rotation = new Vector3(directionX, rotation.y + rotateSpeed, 0);      //必要な値だけ代入
         return pos;
     }
     //ターゲットにぶつかって爆発した時のカメラ挙動

@@ -77,6 +77,7 @@ public class FlakScript : MonoBehaviour
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
     }
 
+    //予測線を消す
     public void LineUIDelete()
     {
         if (lineUI != null)
@@ -84,6 +85,7 @@ public class FlakScript : MonoBehaviour
             lineUI.Death(); //lineUIを削除
         }
     }
+    //弾をリストで管理する
     public void BulletController(in bool isPose)
     {
         if (flakBulletList == null)
@@ -104,10 +106,12 @@ public class FlakScript : MonoBehaviour
             }
         }
     }
+    //クールタイムをセット
     public void SetTime()
     {
         TimeCountScript.SetTime(ref intervalBuff, shotInterval);
     }
+    //クールタイムが終わったかを返す
     public bool GetTime()
     {
         if (lineUI.GetShade())

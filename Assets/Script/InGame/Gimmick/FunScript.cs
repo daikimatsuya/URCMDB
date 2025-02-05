@@ -14,7 +14,7 @@ public class FunScript : MonoBehaviour
     public void RotateFun()
     {
         rotation = new Vector3(rotation.x+rotateSpeed,rotation.y,rotation.z);   //回転
-        tf.localEulerAngles = rotation; //トランスフォームに代入
+        tf.localEulerAngles = rotation;                                                            //トランスフォームに代入
     }
 
     public void StartFun()

@@ -41,11 +41,15 @@ public class ButtobeScript : MonoBehaviour
         tf.localPosition = new Vector3(tf.localPosition.x, initialPosY + posBuff, tf.localPosition.z);
     }
     // Start is called before the first frame update
+    public void StartBottobe()
+    {
+        tf = GetComponent<Transform>();
+        initialPosY = tf.localPosition.y;
+        isUp = true;
+    }
     void Start()
     {
-        tf=GetComponent<Transform>();
-        initialPosY=tf.localPosition.y;
-        isUp=true;
+        StartBottobe();
     }
 
     // Update is called once per frame

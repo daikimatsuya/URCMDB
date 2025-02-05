@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Usefull;
 
+//ミサイルを発射する飛行機を管理する
 public class MissieAircraftScript : MonoBehaviour
 {
     [SerializeField] private GameObject upperHatch;

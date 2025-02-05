@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Usefull
 {
+    //スティックが今入力されたのか判別
     public class GetStickScript
     {
         private static float beforeStickAxisX;
         private static float beforeStickAxisY;
-
         private static float beforeStickAxisXBuff;
         private static float beforeStickAxisYtBuff;
 

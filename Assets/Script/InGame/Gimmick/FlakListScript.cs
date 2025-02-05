@@ -10,7 +10,6 @@ public class FlakListScript : MonoBehaviour
     //高角砲一括管理
     public void FlakListController(in bool isPose)
     {
-
         if (flackList == null)  //オブジェクトがなければリターン/////
         {
             return;

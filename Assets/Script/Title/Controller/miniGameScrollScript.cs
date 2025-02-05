@@ -42,12 +42,16 @@ public class miniGameScrollScript : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void StartMinigameScroll()
     {
         tf = GetComponent<Transform>();
         ts = GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
 
         initialPos = ts.transform.position;
+    }
+    void Start()
+    {
+        StartMinigameScroll();
     }
 
     // Update is called once per frame

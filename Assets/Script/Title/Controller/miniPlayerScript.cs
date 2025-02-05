@@ -17,7 +17,6 @@ public class miniPlayerScript : MonoBehaviour
     private Vector3 initialPos;
     private Vector3 initialRot;
     private Vector3 angles;
-
     private bool isAuto;
     private bool isRolling;
     private bool isMove;
@@ -173,15 +172,19 @@ public class miniPlayerScript : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartMiniplayer()
     {
-        tf=GetComponent<Transform>();
-        ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
+        tf = GetComponent<Transform>();
+        ts = GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
         initialPos = tf.transform.position;
         initialRot = tf.transform.localEulerAngles;
         angles = tf.transform.eulerAngles;
         ResetPlayer();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartMiniplayer();
     }
 
     // Update is called once per frame

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//スピードアップリングをリストで管理
 public class SpeedUpRingListScript : MonoBehaviour
 {
     private List<SpeedUpRingScript> speedUpRingList = new List<SpeedUpRingScript>();

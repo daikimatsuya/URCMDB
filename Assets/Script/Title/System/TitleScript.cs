@@ -23,10 +23,10 @@ public class TitleScript : MonoBehaviour
     //タイトル管理
     private void TitleController()
     {
-        Usefull.GetTriggerScript.AxisUpdate();//トリガーの入力情報を更新
-        Usefull.GetControllerScript.SearchController();//コントローラーが接続されているかを確認
-        SetWeather();   //天候を操る
-        Shoot();
+        Usefull.GetTriggerScript.AxisUpdate();              //トリガーの入力情報を更新
+        Usefull.GetControllerScript.SearchController();  //コントローラーが接続されているかを確認
+        SetWeather();                                                //天候を操る
+        Shoot();                                                        //ステージに発射
     }
     //フラグ関連処理
     private void Shoot()
@@ -139,15 +139,17 @@ public class TitleScript : MonoBehaviour
     }
 
     #endregion
+    private void StartTitle()
+    {
+        Application.targetFrameRate = 60;
+        ts = GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
+        Light = GameObject.FindWithTag("Light").GetComponent<Light>();
+        Light.color = Color.white;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
-
-        ts=GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
-
-        Light = GameObject.FindWithTag("Light").GetComponent<Light>();
-        Light.color = Color.white;
+        StartTitle();
     }
 
     // Update is called once per frame

@@ -68,17 +68,20 @@ public class SceneChangeAnimationScript : MonoBehaviour
         return isFadeStart;
     }
     #endregion
-    // Start is called before the first frame update
-    void Start()
+    public void StartSceneChangeAnimation()
     {
-        ts=GameObject.FindWithTag("TitleManager").GetComponent<TitleScript>();
-        
+        ts = GameObject.FindWithTag("TitleManager").GetComponent<TitleScript>();
+
         padRotBuff = pad.transform.localEulerAngles.x;
         rotationTimeBuff = (int)(rotationTime * 60);
         rotationSpeed = targetRot / rotationTimeBuff;
 
-
         ResetFlags();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartSceneChangeAnimation();
     }
 
     // Update is called once per frame

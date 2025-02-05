@@ -25,13 +25,17 @@ public class CircleFadeObjectScript : MonoBehaviour
         tf.localScale = new Vector3(2, 2,tf.localScale.z + increaseSpeed);  //ÉTÉCÉYÇèkè¨
     }
     // Start is called before the first frame update
-    void Start()
+    public void StartCircleFadeObject()
     {
         scas = GameObject.FindWithTag("LaunchBase").GetComponent<SceneChangeAnimationScript>();
 
-        tf =GetComponent<Transform>();
+        tf = GetComponent<Transform>();
         tf.localScale = Vector3.zero;
-        tf.localPosition=new Vector3(0,initialPosY,0);
+        tf.localPosition = new Vector3(0, initialPosY, 0);
+    }
+    void Start()
+    {
+        StartCircleFadeObject();
     }
 
     // Update is called once per frame

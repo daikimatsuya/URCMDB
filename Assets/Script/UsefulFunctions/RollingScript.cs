@@ -18,7 +18,7 @@ namespace Usefull
                 Vector3 testBuff = new Vector3(buff, 0, 0);
 
                 tf.localEulerAngles = Vector3.zero;
-                tf.localEulerAngles = testBuff;//‚±‚±‚Ì‘ã“ü‚ª‚È‚º‚©ƒoƒO‚Á‚Ä‚é
+                tf.localEulerAngles = testBuff;
                 return;
             }
             if (rotationAxis=="y")//yŽ²‚ð‰ñ“]‚³‚¹‚é

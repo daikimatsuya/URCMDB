@@ -9,10 +9,8 @@ namespace Usefull
     {
         private static float beforeTriggerAxisLeft;
         private static float beforeTriggerAxisRight;
-
         private static float beforeTriggerAxisLeftBuff;
         private static float beforeTriggerAxisRightBuff;
-
         private static float intervalLeft=0.1f;
         private static float intervalLeftBuff;
         private static float intervalRight=0.1f;

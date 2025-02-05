@@ -32,8 +32,8 @@ public class PlayerCameraScript : MonoBehaviour
         if (playerPos != null)  //プレイヤーがゲーム内に存在している時/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
             tf.rotation = playerPos.rotation;   //プレイヤーの回転角を取得
-            Vector3 deff = Vector3.zero;
-            rotBuff = rot;
+            Vector3 deff = Vector3.zero;        //ずれをゼロ
+            rotBuff = rot;                              //Buffにrotを代入
 
             //入力によりずれを加算
             if (!isPose)
@@ -109,7 +109,7 @@ public class PlayerCameraScript : MonoBehaviour
             //////////////////////////
 
 
-            deff = FollowPlayer(playerPos.eulerAngles, rot);    //角度と設定した距離からずれを算出
+            deff = FollowPlayer(playerPos.eulerAngles, rot);                                                                                                       //角度と設定した距離からずれを算出
             tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z); //プレイヤーの座標にずれを加算してトランスフォームに代入
 
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,12 +117,10 @@ public class PlayerCameraScript : MonoBehaviour
     //カメラが発射台にあるプレイヤーの後ろに追従する
     public void FollowPlayerInSet()
     {
-        tf.rotation = playerPos.rotation;   //プレイヤーの回転角を取得
-
+        tf.rotation = playerPos.rotation;                                                                                                                               //プレイヤーの回転角を取得
         Vector3 deff = Vector3.zero;
-        deff = FollowPlayer(playerPos.eulerAngles,0);    //角度と設定した距離からずれを算出
-
-        tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z); //プレイヤーの座標にずれを加算してトランスフォームに代入
+        deff = FollowPlayer(playerPos.eulerAngles,0);                                                                                                           //角度と設定した距離からずれを算出
+        tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);  //プレイヤーの座標にずれを加算してトランスフォームに代入
         rot = 0;
     }
     //追従中のカメラの位置出す
@@ -150,28 +148,28 @@ public class PlayerCameraScript : MonoBehaviour
     public void MovieCut()
     {
         mc.CameraController();  //ゲーム開始時の演出管理
-        Fade(); //フェード管理
+        Fade();                          //フェード管理
     }
     //プレイヤーがターゲット以外で爆発したときのカメラワーク
     public void MissExplodeCamera()
     {
-        cameraRot = transform.localEulerAngles; //トランスフォームの値をvector3へ移動
+        cameraRot = transform.localEulerAngles;                  //トランスフォームの値をvector3へ移動
         tf.position = ec.MissExplodeCamera(ref cameraRot);  //爆発エフェクト
-        tf.localEulerAngles = cameraRot;    //算出した値をトランスフォームに代入
+        tf.localEulerAngles = cameraRot;                              //算出した値をトランスフォームに代入
     }
     //プレイヤーがターゲットにぶつかったとのカメラワーク
     public void HitExplodeCamera()
     {
-        cameraRot= transform.localEulerAngles; //トランスフォームの値をvector3へ移動
+        cameraRot= transform.localEulerAngles;             //トランスフォームの値をvector3へ移動
         tf.position=ec.HitTargetCamera(ref cameraRot);  //爆発エフェクト
-        tf.localEulerAngles = cameraRot;   //算出した値をトランスフォームに代入
+        tf.localEulerAngles = cameraRot;                        //算出した値をトランスフォームに代入
     }
     //クリア時のカメラ
     public void ClearCamera()
     {
-        cameraRot = transform.localEulerAngles; //トランスフォームの値をvector3へ移動
+        cameraRot = transform.localEulerAngles;          //トランスフォームの値をvector3へ移動
         tf.position = ec.ClearCamera(ref cameraRot);    //クリアエフェクト
-        tf.localEulerAngles = cameraRot;   //算出した値をトランスフォームに代入
+        tf.localEulerAngles = cameraRot;                      //算出した値をトランスフォームに代入
     }
     //フェード管理
     private void Fade()

@@ -61,12 +61,16 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void StartSceneChandeMissleAnimation()
     {
         scas = GameObject.FindWithTag("LaunchBase").GetComponent<SceneChangeAnimationScript>();
-        sss=GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
-        tf=GetComponent<Transform>();
-        ts=sss.GetTitleScript();
+        sss = GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
+        tf = GetComponent<Transform>();
+        ts = sss.GetTitleScript();
+    }
+    void Start()
+    {
+        StartSceneChandeMissleAnimation();
     }
 
     // Update is called once per frame

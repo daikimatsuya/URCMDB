@@ -117,12 +117,15 @@ public class TitlegameScript : MonoBehaviour
     }
     #endregion
     // Start is called before the first frame update
-    void Start()
+    public void StartTitleGame()
     {
         isReset = false;
         isResetAction = false;
-
         startCountBuff = (int)(minigameStartCount * 60);
+    }
+    void Start()
+    {
+        StartTitleGame();
     }
 
     // Update is called once per frame

@@ -19,7 +19,7 @@ public class MarkerScript : MonoBehaviour
 
         else   //トランスフォームが取得できていない時
         {
-            tf=GetComponent<Transform>();   //コンポーネント取得
+            tf=GetComponent<Transform>();                               //コンポーネント取得
             tf.position = new Vector3(pos.x, markerPosY, pos.z);    //移動
         }
     }
@@ -28,15 +28,5 @@ public class MarkerScript : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

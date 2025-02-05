@@ -15,7 +15,6 @@ public class LaunchPointScript : MonoBehaviour
     private Vector2 rowling;
     private bool isStart;
 
-
     //”­Ë‘äŠÇ—ŠÖ”
     public void LaunchPointController(in bool isPose)
     {

@@ -20,8 +20,8 @@ namespace Usefull
                 return;
             }//////////////////////////////////////////////////////////////////////
 
-            tf.transform.SetParent(parent); //親子付け
-            tf.localPosition = fixPos;  //ポジションを修正
+            tf.transform.SetParent(parent);     //親子付け
+            tf.localPosition = fixPos;                //ポジションを修正
             tf.localEulerAngles += fixRotate;   //角度を修正
         }
 
@@ -31,15 +31,6 @@ namespace Usefull
             tf = GetComponent<Transform>();
             Parent();
         }
-        void Start()
-        {
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

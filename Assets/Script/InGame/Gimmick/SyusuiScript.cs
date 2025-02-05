@@ -40,7 +40,7 @@ public class SyusuiScript : MonoBehaviour
     private void SyusuiController()
     {
         Chase();    //追跡
-        Move(); //移動
+        Move();     //移動
     }
     //移動
     private void Move()
@@ -69,7 +69,7 @@ public class SyusuiScript : MonoBehaviour
         }/////////////////////////////////////////////////////////////////
         if (isSearch)
         {
-            Aim();  //プレイヤーの方を向く
+            Aim();        //プレイヤーの方を向く
             KeepDis();  //距離を一定に保つ
         }
         else
@@ -80,15 +80,13 @@ public class SyusuiScript : MonoBehaviour
     //プレイヤーのいる方向を取得
     private void Aim()
     {
-        playerDis = playerPos.position - tf.position;   //距離を算出
-        playerDisNormal = playerDis.normalized; //ノーマライズ化
-
-        float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;   //水平方向角度算出
+        playerDis = playerPos.position - tf.position;                                                                                                                                                                           //距離を算出
+        playerDisNormal = playerDis.normalized;                                                                                                                                                                              //ノーマライズ化
+        float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;                                                                                                          //水平方向角度算出
         float vertical = Mathf.Atan2(Mathf.Sqrt(playerDisNormal.x * playerDisNormal.x + playerDisNormal.z * playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg; //垂直方向角度算
-        vertical -= 90;
-        Rowring(horizontal, vertical);  //回転させる
-
-        tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z); //角度代入
+        vertical -= 90;                                                                                                                                                                                                                    //値を修正
+        Rowring(horizontal, vertical);                                                                                                                                                                                               //回転させる
+        tf.localEulerAngles = new Vector3(Row.x, Row.y, Row.z);                                                                                                                                                       //角度代入
     }
     //プレイヤーから離れず近すぎずを維持
     private void KeepDis()
@@ -135,7 +133,7 @@ public class SyusuiScript : MonoBehaviour
     private void LeftBase()
     {
         Vector2 dis = new Vector2(basePos.position.x - tf.position.x,basePos.position.z-tf.position.z); //中心との距離算出
-        float dis2=dis.magnitude;   //距離をfloatに変換
+        float dis2=dis.magnitude;                                                                                                  //距離をfloatに変換
 
         if (dis2 > maxBaseDis)  //許容値よりも離れると引き返す////
         {
@@ -236,14 +234,19 @@ public class SyusuiScript : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    //初期化
+    public void StartSyusui()
     {
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
-        basePos=GameObject.FindWithTag("AirBase").GetComponent<Transform>();
+        basePos = GameObject.FindWithTag("AirBase").GetComponent<Transform>();
 
         Row = tf.localEulerAngles;
         isSearch = false;
+    }
+    void Start()
+    {
+        StartSyusui();
     }
 
     // Update is called once per frame

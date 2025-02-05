@@ -24,10 +24,10 @@ public class SensorUIScript : MonoBehaviour
         {
             return;
         }
-        SensorChecker(up,hit.up,hitChildren.up);    //上センサー表示
+        SensorChecker(up,hit.up,hitChildren.up);               //上センサー表示
         SensorChecker(down,hit.down,hitChildren.down);  //下センサー表示
-        SensorChecker(left,hit.left, hitChildren.left); //左センサー表示
-        SensorChecker(right,hit.right, hitChildren.right);  //右センサー表示
+        SensorChecker(left,hit.left, hitChildren.left);           //左センサー表示
+        SensorChecker(right,hit.right, hitChildren.right);     //右センサー表示
     }
     //センサーUIのフラグチェック
     private void SensorChecker(in Image image,bool flag,bool flagChild)
@@ -57,7 +57,7 @@ public class SensorUIScript : MonoBehaviour
         }
         else
         {
-            hit = ss.GetHit();  //内センサー情報取得
+            hit = ss.GetHit();                    //内センサー情報取得
             hitChildren = ss.GetHitChild(); //外センサー上表取得
         }
     }
@@ -85,15 +85,5 @@ public class SensorUIScript : MonoBehaviour
         right.enabled = flag;
 
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

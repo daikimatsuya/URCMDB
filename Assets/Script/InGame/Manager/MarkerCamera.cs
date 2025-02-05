@@ -16,14 +16,14 @@ public class MarkerCamera : MonoBehaviour
     private void MarkerCameraController()
     {
         SearchPlayer(); //プレイヤー検索 
-        Move(); //移動
+        Move();            //移動
     }
     //カメラ移動
     private void Move()
     {
         if(playerPos!=null)
         {
-            tf.position = new Vector3(playerPos.position.x, pos, playerPos.position.z); //ポジション代入
+            tf.position = new Vector3(playerPos.position.x, pos, playerPos.position.z);                                    //ポジション代入
             tf.eulerAngles = new Vector3(tf.eulerAngles.x, player.transform.eulerAngles.y, tf.eulerAngles.z);   //角度代入
         }
     }
@@ -34,7 +34,7 @@ public class MarkerCamera : MonoBehaviour
         {
             if (GameObject.FindWithTag("Player"))   //プレイヤーオブジェクト検索/////
             {
-                player = GameObject.FindWithTag("Player");  //プレイヤーオブジェクト取得
+                player = GameObject.FindWithTag("Player");           //プレイヤーオブジェクト取得
                 playerPos = player.GetComponent<Transform>();   //コンポーネント取得
 
             }///////////////////////////////////////////////////////////////////////////////

@@ -32,6 +32,7 @@ public class RockScript : MonoBehaviour
     }
 
     #endregion
+    //‰Šú‰»
     public void StartRock()
     {
         rb = GetComponent<Rigidbody>();

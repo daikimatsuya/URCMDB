@@ -160,8 +160,6 @@ public class CameraManager : MonoBehaviour
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     public void StartCameraManager()
     {
-
-
         mf.SetShadeLevel(1);
         pcs.SetMF(mf);
         TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);

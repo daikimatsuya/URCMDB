@@ -140,16 +140,17 @@ public class SensorScript : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    //èâä˙âª
+    public void StartSensor()
     {
         if (!master)
         {
-            SensorScript ss=GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
-            ignoreTags=ss.GetIgnoreTag(); ;
+            SensorScript ss = GameObject.FindWithTag("Sensor").GetComponent<SensorScript>();
+            ignoreTags = ss.GetIgnoreTag(); ;
         }
 
         if (children)
-        {     
+        {
             return;
         }
         if (!master)
@@ -165,15 +166,15 @@ public class SensorScript : MonoBehaviour
         oneBlelowScript[(int)Script.right] = this.gameObject.transform.GetChild(3).gameObject.GetComponent<SensorScript>();
         /////////////////////////////////////
     }
+    void Start()
+    {
+        StartSensor();
+    }
 
     private void FixedUpdate()
     {
         SetSensorChildren(false);
         SetSensor(false);
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
 }

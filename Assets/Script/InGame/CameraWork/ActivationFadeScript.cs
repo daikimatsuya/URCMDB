@@ -92,8 +92,8 @@ public class ActivationFadeScript : MonoBehaviour
         start = true;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    //初期化
+    public void StartActivationFade()
     {
         //コンポーネント取得
         tf = GetComponent<Transform>();
@@ -111,7 +111,10 @@ public class ActivationFadeScript : MonoBehaviour
         }
 
         TimeCountScript.SetTime(ref life, life);
-        
+    }
+    void Start()
+    {
+        StartActivationFade();
     }
 
     // Update is called once per frame

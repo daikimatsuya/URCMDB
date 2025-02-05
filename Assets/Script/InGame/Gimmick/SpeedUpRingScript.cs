@@ -36,9 +36,9 @@ public class SpeedUpRingScript : MonoBehaviour
     //再表示
     public void ON()
     {
-        isGet = false;  //取得フラグを消す
+        isGet = false;                                                      //取得フラグを消す
         tf.localScale = new Vector3(1, ringSize, ringSize); //サイズ初期化
-        collider_.enabled = true;   //コライダーオン
+        collider_.enabled = true;                                     //コライダーオン
         if(ms==null)
         {
             CreateMarker(); //マーカー生成
@@ -59,6 +59,7 @@ public class SpeedUpRingScript : MonoBehaviour
             collider_.enabled = false;
         }
     }
+    //初期化
     public void StartSpeedUpRing()
     {
         tf = GetComponent<Transform>();

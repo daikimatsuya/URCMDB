@@ -28,9 +28,9 @@ public class TutorialUIScript : MonoBehaviour
     //チュートリアルUI管理
     public void TutorialUIController(in PlayerScript ps,in bool isConect)
     {
-        CheckController(in isConect);  //コントローラーの接続を確認
-        SelectTutorial(in ps);  //UI用情報更新
-        ShowUI(conectController);    //UI表示
+        CheckController(in isConect);              //コントローラーの接続を確認
+        SelectTutorial(in ps);                          //UI用情報更新
+        ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
 
         if (ts.GetResetFlag())  //リセットフラグがオンになったらリセットさせる/////
@@ -77,8 +77,8 @@ public class TutorialUIScript : MonoBehaviour
     //チュートリアル達成度表示
     private void ShowCompletion(in bool showFlag)
     {
-        tutorialCompletion.SetActive(!showFlag);    //進行度の表示
-        completion.text = ts.GetCompletion() + "%"; //進行度の値変更
+        tutorialCompletion.SetActive(!showFlag);        //進行度の表示
+        completion.text = ts.GetCompletion() + "%";  //進行度の値変更
     }
 
    
@@ -128,7 +128,7 @@ public class TutorialUIScript : MonoBehaviour
 
             if (ts.GetTutorialNum() == 0)   //チュートリアル番号が０だったら一つ前を非表示にしない///
             {
-                //keyboard[keyboard.Length - 1].SetActive(false);
+
             }///////////////////////////////////////////////////////////////////////////////////////////////
             else
             {
@@ -165,24 +165,14 @@ public class TutorialUIScript : MonoBehaviour
         /////////////////////////////////////////////
     }
     // Start is called before the first frame update
-    private void Awake()
+    //早期初期化
+    public void AwakeTutorialUI()
     {
         ResetTutorial();
         ts = GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
         completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
         conectController = Usefull.GetControllerScript.GetIsConectic();
     }
-    void Start()
-    {
 
 
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

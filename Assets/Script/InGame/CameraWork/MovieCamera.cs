@@ -138,17 +138,21 @@ public class MovieCamera : MonoBehaviour
     }
     #endregion
     // Start is called before the first frame update
-    void Start()
+    public void StartMovieCamera()
     {
         isSkip = false;
         ready = false;
-       
-        tf= GetComponent<Transform>();
+
+        tf = GetComponent<Transform>();
         number = 0;
         SetNext();
         isMove = true;
         isEnd = false;
         fadeoutTime *= 60;
+    }
+    void Start()
+    {
+        StartMovieCamera();
     }
 
 }
