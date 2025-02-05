@@ -158,6 +158,7 @@ public class GameManagerScript : MonoBehaviour
             CreateFadeObject();         //プレイヤー生成時の演出生成
             PlayerSpawn();                //プレイヤー生成
             playerSpawnFlag = false;
+            isPose = false;
         }
         else
         {

@@ -20,7 +20,7 @@ public class ListManager
         frls.RockFallListController(in isPose);                      //岩落とす奴管理
         fls.FunListController(in isPose);                             //ファン管理
         flakls.FlakListController(in isPose);                        //高角砲管理
-        dls.DroneListController(in isPose);                         //ドローン管理
+        dls.DroneListController();                                     //ドローン管理
     }
     //早期初期化
     public void AwakeListManager()

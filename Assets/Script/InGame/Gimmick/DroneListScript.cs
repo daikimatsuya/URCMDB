@@ -6,12 +6,9 @@ public class DroneListScript : MonoBehaviour
 {
     private List<DroneScript> droneList=new List<DroneScript>();
 
-    public void DroneListController(in bool isPose)
+    public void DroneListController()
     {
-        if (isPose)
-        {
-            return;
-        }
+
         if (droneList == null)
         {
             return;

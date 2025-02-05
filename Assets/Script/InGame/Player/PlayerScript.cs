@@ -515,7 +515,6 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             playerHp = 0;
-            other.GetComponent<FlakBulletScript>().Delete();            
         }
         if( other.CompareTag("Rock"))
         {

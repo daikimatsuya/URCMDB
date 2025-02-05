@@ -42,9 +42,9 @@ public class FlakScript : MonoBehaviour
     public void Aim()
     {
         //偏差予測///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        playerDis=playerPos.position-barrel.position;   //距離算出
-        lineUI.SetLine(barrel.position,playerDis,intervalBuff); //予測線設定
-        Vector3 playerSpeed= playerScript.GetPlayerSpeed(); //プレイヤーの速度取得
+        playerDis=playerPos.position-barrel.position;                   //距離算出
+        lineUI.SetLine(barrel.position,playerDis,intervalBuff);       //予測線設定
+        Vector3 playerSpeed= playerScript.GetPlayerSpeed();      //プレイヤーの速度取得
 
         //解の公式を使用して値を算出///////////////////////////////////////////////////////
         float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);   
@@ -70,7 +70,7 @@ public class FlakScript : MonoBehaviour
         //速度から角度を算出//////////////////////////////////////////////////////////////////////
         float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
         float vertical = Mathf.Atan2(Mathf.Sqrt( playerDisNormal.x*playerDisNormal.x + playerDisNormal.z*playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
-        body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);  //砲台のボディーを回転
+        body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);                 //砲台のボディーを回転
         barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);   //砲身を回転
         ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -84,15 +84,24 @@ public class FlakScript : MonoBehaviour
             lineUI.Death(); //lineUIを削除
         }
     }
-    public void BulletController()
+    public void BulletController(in bool isPose)
     {
         if (flakBulletList == null)
         {
             return;
         }
-        for(int i = 0; i < flakBulletList.Count; i++)
+        for (int i = 0; i < flakBulletList.Count;)
         {
-
+            if (flakBulletList[i].GetDeleteFlag())
+            {
+                flakBulletList[i].Delete();
+                flakBulletList.Remove(flakBulletList[i]);
+            }
+            else
+            {
+                flakBulletList[i].Move(in isPose);
+                i++;
+            }
         }
     }
     public void SetTime()
@@ -120,12 +129,14 @@ public class FlakScript : MonoBehaviour
     //弾丸発生処理
     public void Shot()
     {
-        TimeCountScript.SetTime(ref intervalBuff, shotInterval);
-        GameObject _=Instantiate(bullet);   //弾丸生成
-        _.transform.localPosition = new Vector3(bulletPoint.position.x, bulletPoint.position.y, bulletPoint.position.z);    //ポジションを代入
-        _.transform.localEulerAngles = new Vector3(-barrel.localEulerAngles.x, body.localEulerAngles.z + 180, 0);   //角度を代入
-        FlakBulletScript fb=_.GetComponent<FlakBulletScript>(); //コンポーネント取得
-        fb.GetAcce(new Vector3(playerDisNormal.x*bulletSpeed,playerDisNormal.y*bulletSpeed,playerDisNormal.z*bulletSpeed)); //加速度代入     
+        TimeCountScript.SetTime(ref intervalBuff, shotInterval);                                                                                                                 //クールタイムリセット
+        Vector3 speed = new Vector3(playerDisNormal.x * bulletSpeed, playerDisNormal.y * bulletSpeed, playerDisNormal.z * bulletSpeed);   //弾丸の速度算出
+        GameObject _=Instantiate(bullet);                                                                                                                                                //弾丸生成
+        FlakBulletScript fb = _.GetComponent<FlakBulletScript>();                                                                                                             //コンポーネント取得
+        fb.StartFlakBullet(speed);                                                                                                                                                             //弾丸初期化
+        _.transform.localPosition = new Vector3(bulletPoint.position.x, bulletPoint.position.y, bulletPoint.position.z);                                       //ポジションを代入
+        _.transform.localEulerAngles = new Vector3(-barrel.localEulerAngles.x, body.localEulerAngles.z + 180, 0);                                        //角度を代入
+        flakBulletList.Add(fb);                                                                                                                                                                  //弾丸をリストに追加
     }
     //予測線の色管理
     public void SetLineColor()
@@ -149,21 +160,21 @@ public class FlakScript : MonoBehaviour
     //マーカー生成
     private void CreateMarker()
     {
-        GameObject _ = Instantiate(marker); //生成
+        GameObject _ = Instantiate(marker);         //生成
         ms = _.GetComponent<MarkerScript>();    //コンポーネント取得
-        ms.Move(pos.position);  //位置代入
+        ms.Move(pos.position);                              //位置代入
      
     }
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            playerPos = other.transform;    //プレイヤーの位置取得
+            playerPos = other.transform;                                     //プレイヤーの位置取得
             playerScript = other.GetComponent<PlayerScript>();  //コンポーネント取得
-            GameObject _ = Instantiate(line);   //予測線生成
-            lineUI = _.GetComponent<LineUIScript>();    //コンポーネント取得
-            lineUI.StartLine();
-            _.transform.position = barrel.position; //位置を砲身に移動
+            GameObject _ = Instantiate(line);                              //予測線生成
+            lineUI = _.GetComponent<LineUIScript>();                //コンポーネント取得
+            lineUI.StartLine();                                                     //予測線初期化
+            _.transform.position = barrel.position;                        //位置を砲身に移動
         }
     }
     public void OnTriggerExit(Collider other)
@@ -182,6 +193,7 @@ public class FlakScript : MonoBehaviour
     }
     #endregion
 
+    //高角砲初期化
     public void StartFlak() 
     {
         //コンポーネント取得

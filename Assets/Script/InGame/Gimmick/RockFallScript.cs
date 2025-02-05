@@ -77,7 +77,7 @@ public class RockFallScript : MonoBehaviour
             {
                 rockList[i].BreakRock(); //オブジェクトを削除
                 rockList.Remove(rockList[i]); //リストから削除
-                return;
+
             }/////////////////////////////////////////////////////////////////////
             else
             {

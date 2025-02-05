@@ -12,65 +12,46 @@ public class FlakBulletScript : MonoBehaviour
     private Vector3 speed;
     private MarkerScript ms;
 
-
     [SerializeField] private float deleteTime;
     [SerializeField] private GameObject marker;
 
-
-
-    //砲弾管理
-    private void BulletController()
-    {
-        Move(); //移動管理
-        Delete();   //削除管理
-    }
     //移動
-    public void Move()
+    public void Move(in bool isPose)
     {
-        rb.velocity = speed;    //速度加算
-
+        if(isPose)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+        rb.velocity = speed;       //速度加算
         ms.Move(pos.position);  //マーカーアイコンを弾丸に追従させる
     }
     //消去
     public void Delete()
     {
-        if (TimeCountScript.TimeCounter(ref deleteTime))    //生存時間確認//////
-        {
-            ms.Delete();    //マーカーアイコン削除
-            Destroy(this.gameObject);   //オブジェクト削除
-
-        }///////////////////////////////////////////
-    }
-    //速度受け取り
-    public void GetAcce(Vector3 acce)
-    {
-        speed = acce;   //値代入
+        ms.Delete();                        //マーカーアイコン削除
+        Destroy(this.gameObject);    //オブジェクト削除
     }
     //マーカー生成
     private void CreateMarker()
     {
-        GameObject _ = Instantiate(marker); //マーカーアイコン生成
+        GameObject _ = Instantiate(marker);         //マーカーアイコン生成
         ms = _.GetComponent<MarkerScript>();    //スクリプト取得
-        ms.Move(pos.position);  //追従させる
+        ms.Move(pos.position);                              //追従させる
 
     }
-    public void StartFlakBullet()
+    //初期化
+    public void StartFlakBullet(Vector3 speed)
     {
+        this.speed = speed;
         rb = GetComponent<Rigidbody>();
         pos = GetComponent<Transform>();
-        deleteTime = deleteTime * 60;
-
+        TimeCountScript.SetTime(ref deleteTime, deleteTime);
         CreateMarker();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartFlakBullet();
-    }
 
-    // Update is called once per frame
-    void Update()
+    public bool GetDeleteFlag()
     {
-        BulletController();
+        return TimeCountScript.TimeCounter(ref deleteTime);
     }
 }
