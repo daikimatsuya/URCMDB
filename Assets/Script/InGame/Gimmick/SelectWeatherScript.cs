@@ -31,7 +31,7 @@ public class SelectWeatherScript : MonoBehaviour
     {
         if(!end)
         {
-            pcs = cm.GetPlayerCamera(); //コンポーネント取得
+            pcs = cm.GetPlayerCamera();                                     //コンポーネント取得
             chanceOfRain = WebAPIScript.GetIntChanceOfRain();   //降水確率取得
 
             if (chanceOfRain == 255)    //取得できなかったら//////////////////
@@ -58,7 +58,7 @@ public class SelectWeatherScript : MonoBehaviour
         Debug.Log(chanceOfRain);
 
         isRain = true;
-        CreateRain();   //雨生成
+        CreateRain();                     //雨生成
         SetSkyBoxMaterialRain();    //スカイボックとライト変更
     }
     //天気が晴れ
@@ -72,26 +72,26 @@ public class SelectWeatherScript : MonoBehaviour
     //雨生成
     private  void CreateRain()
     {
-        GameObject _ = Instantiate(rain);   //雨生成
+        GameObject _ = Instantiate(rain);                       //雨生成
         RainScript rs = _.GetComponent<RainScript>();   //コンポーネント取得
-        rs.SetCameraTransform(pcs.GetTransform());  //トランスフォームを代入
+        rs.SetCameraTransform(pcs.GetTransform());       //トランスフォームを代入
 
     }
     //skybox変更
     private void SetSkyBoxMaterialSunny()
     {
         Light = GameObject.FindWithTag("Light").GetComponent<Light>();  //ライト取得
-        Light.color = Color.white;  //ライトカラー変更
-        UnityEngine.RenderSettings.skybox = sunSky; //スカイボックス変更
-        SetDefaultSkyBox(); //スカイボックス設定変更
+        Light.color = Color.white;                                                               //ライトカラー変更
+        UnityEngine.RenderSettings.skybox = sunSky;                                 //スカイボックス変更
+        SetDefaultSkyBox();                                                                      //スカイボックス設定変更
     }
     //skybox変更
     private void SetSkyBoxMaterialRain()
     {
         Light = GameObject.FindWithTag("Light").GetComponent<Light>();  //ライト取得
-        Light.color = Color.black;  //ライトカラー変更
-        UnityEngine.RenderSettings.skybox = rainSky;    //スカイボックス変更
-        SetDefaultSkyBox(); //スカイボックス設定変更
+        Light.color = Color.black;                                                                //ライトカラー変更
+        UnityEngine.RenderSettings.skybox = rainSky;                                 //スカイボックス変更
+        SetDefaultSkyBox();                                                                       //スカイボックス設定変更
     }
     //デフォルトのスカイボックス設定
     private void SetDefaultSkyBox()
@@ -123,15 +123,5 @@ public class SelectWeatherScript : MonoBehaviour
     }
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
