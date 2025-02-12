@@ -25,22 +25,22 @@ public class ListManager
     //ëÅä˙èâä˙âª
     public void AwakeListManager()
     {
-        mls=new MonitorListScript();
+        mls=GameObject.FindObjectOfType<MonitorListScript>();
         mls.AwakeMonitorList();
 
-        surls =new SpeedUpRingListScript();
+        surls = GameObject.FindObjectOfType<SpeedUpRingListScript>();
         surls.AwakeSpeedUpRingList();
 
-        frls = new FallRockListScript();
+        frls = GameObject.FindObjectOfType<FallRockListScript>();
         frls.AwakeFallRockList();
 
-        fls = new FunListScript();
+        fls = GameObject.FindObjectOfType<FunListScript>();
         fls.AwakeFunList();
 
-        flakls = new FlakListScript();
+        flakls = GameObject.FindObjectOfType<FlakListScript>();
         flakls.AwakeFlakList();
 
-        dls = new DroneListScript();
+        dls = GameObject.FindObjectOfType<DroneListScript>();
         dls.AwakeDroneList();
     }
 

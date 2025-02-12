@@ -5,7 +5,7 @@ using UnityEngine;
 //‚Šp–CŠÇ—ƒŠƒXƒg
 public class FlakListScript : MonoBehaviour
 {
-    private List<FlakScript> flackList = new List<FlakScript>();
+    private List<FlakScript> flakList;
 
     //‚Šp–CˆêŠ‡ŠÇ—
     public void FlakListController(in bool isPose)
@@ -15,7 +15,8 @@ public class FlakListScript : MonoBehaviour
             return;
         }//////////////////////////////////////////////////////////////
 
-        for (int i = 0; i < flackList.Count; i++)
+
+        for (int i = 0; i < flakList.Count; i++)
         {
             if (!isPose)
             {
@@ -37,12 +38,10 @@ public class FlakListScript : MonoBehaviour
     }
     public void AwakeFlakList()
     {
-        int i = 0;
-        foreach (Transform children in GameObject.FindWithTag("FlakList").transform)   //‘Î‰ƒMƒ~ƒbƒN‚ª‚ ‚ê‚Îæ“¾/////
+        flakList = new List<FlakScript>(FindObjectsOfType<FlakScript>());
+        for (int i = 0; i < flakList.Count; i++)
         {
-            flackList.Add(children.GetComponent<FlakScript>());     //ƒŠƒXƒg‚É’Ç‰Á
-            flackList[i].StartFlak();                                                 //‰Šú‰»
-            i++;
-        }/////////////////////////////////////////////////////////////////////////////////////////////////
+            flakList[i].StartFlak();
+        }
     }
 }

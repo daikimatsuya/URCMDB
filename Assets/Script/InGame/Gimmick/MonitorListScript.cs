@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonitorListScript : MonoBehaviour
 {
-    private List<MonitorScript> monitorList = new List<MonitorScript>();
+    private List<MonitorScript> monitorList;
 
     //ÉÇÉjÉ^Å[åQä«óù
     public void MonitorListController(in PlayerScript ps,in bool isPose)
@@ -13,10 +13,7 @@ public class MonitorListScript : MonoBehaviour
         {
             return;
         }
-        if (monitorList == null)
-        {
-            return;
-        }
+
         for(int i =0;i< monitorList.Count; i++)
         {
             monitorList[i].Move();
@@ -34,12 +31,10 @@ public class MonitorListScript : MonoBehaviour
     public void AwakeMonitorList()
     {
 
-        int i = 0;
-        foreach(Transform children in GameObject.FindWithTag("MonitorList").transform)
+        monitorList = new List<MonitorScript>(FindObjectsOfType<MonitorScript>());
+        for (int i = 0; i < monitorList.Count; i++)
         {
-            monitorList.Add(children.GetComponent<MonitorScript>());
             monitorList[i].StartMonitor();
-            i++;
         }
     }
 

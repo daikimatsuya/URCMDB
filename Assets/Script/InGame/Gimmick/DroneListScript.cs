@@ -5,7 +5,7 @@ using UnityEngine;
 //ドローンをリストで管理する
 public class DroneListScript : MonoBehaviour
 {
-    private List<DroneScript> droneList=new List<DroneScript>();
+    private List<DroneScript> droneList;
 
     //ドローンをリストで管理
     public void DroneListController()
@@ -24,13 +24,10 @@ public class DroneListScript : MonoBehaviour
     //早期初期化
     public void AwakeDroneList()
     {
-        int i = 0;
-        GameObject[] drones = GameObject.FindGameObjectsWithTag("Drone");
-        foreach (GameObject drone in drones)
+        droneList = new List<DroneScript>(FindObjectsOfType<DroneScript>());
+        for (int i = 0; i < droneList.Count; i++)
         {
-            droneList.Add(drone.GetComponent<DroneScript>());
             droneList[i].StartDrone();
-            i++;
         }
     }
 }

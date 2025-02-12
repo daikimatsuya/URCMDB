@@ -59,6 +59,7 @@ MonoBehaviour:
   firstSpeed: 0.8
   playerSpeed: 100
   ringBust: 0.05
+  redRingBust: 2
   accelerate: 0.05
   burst: 100
   rowlingSpeedX: 2
@@ -76,6 +77,7 @@ MonoBehaviour:
   speedUpRingTuner: 0.3
   boostBrakeTuner: 100
   speedUpRingBrakeTuner: 0.003
+  redBrakeTuner: 0.0001
 --- !u!33 &7870347104334944395
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float firstSpeed;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float ringBust;
+
     [SerializeField] private float accelerate;
     [SerializeField] private float burst;
     [SerializeField] private float rowlingSpeedX;
@@ -46,6 +47,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float boostBrakeTuner;
     [SerializeField] private float speedUpRingBrakeTuner;
 
+
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
     private float accelelateSpeed;
@@ -56,6 +58,7 @@ public class PlayerScript : MonoBehaviour
     private float ringSpeed;
     private bool PMS;
     private bool quickMove;
+    private bool redBustFlag;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
 
@@ -296,10 +299,20 @@ public class PlayerScript : MonoBehaviour
     //加減速処理
     private void Acceleration()
     {
-        if (isFire) //移動中////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (!isFire) //移動中////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
+
+            return;
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
+        {
+            if (redBustFlag)
             {
+
+            }
+            else
+            {
+<<<<<<< HEAD
                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
                 CreateBoostEffect();                                                            //加速時演出生成
                 blurIntnsity = maxBlurIntensity;                                           //加速演出ブラーに値を代入
@@ -312,39 +325,52 @@ public class PlayerScript : MonoBehaviour
                 minBlurIntnsity = accelelatedBlurIntensity;   //加速演出ブラーに値を代入
 
             }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if(boostSpeed > 0)  //一時加速がある間はブラーに値を入れる////////////////////////////
-            {
-                minBlurIntnsity = boostedBlurIntensity;
-            }//////////////////////////////////////////////////////////////////////////////////////////
-
-            else if (!Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")==0)
-            {
-                minBlurIntnsity = 0;
+=======
+                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
+                CreateBoostEffect();    //加速時演出生成
+                blurIntnsity = maxBlurIntensity;    //加速演出ブラーに値を代入
             }
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            //一時加速減産//////////////////////////////////////////////
-            accelelateSpeed -= playerSpeed / boostBrakeTuner;
-            ringSpeed -= playerSpeed * speedUpRingBrakeTuner;
-            if (accelelateSpeed <= 0)
-            {
-                accelelateSpeed = 0;
-            }
-            if(ringSpeed <= 0)
-            {
-                ringSpeed = 0;
-            }
-            /////////////////////////////////////////////////////////////
+        if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
+        {
+            playerSpeed += accelerate;  //基本速度に加算
+            minBlurIntnsity = accelelatedBlurIntensity; //加速演出ブラーに値を代入
+        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+>>>>>>> 繝ｪ繧ｹ繝医・菫ｮ豁｣
+
+        if(boostSpeed > 0)  //一時加速がある間はブラーに値を入れる////////////////////////////
+        {
+            minBlurIntnsity = boostedBlurIntensity;
+        }//////////////////////////////////////////////////////////////////////////////////////////
+
+        else if (!Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")==0)
+        {
+            minBlurIntnsity = 0;
+        }
+
+        //一時加速減産//////////////////////////////////////////////
+        accelelateSpeed -= playerSpeed / boostBrakeTuner;
+        ringSpeed -= playerSpeed * speedUpRingBrakeTuner;
+
+        if (accelelateSpeed <= 0)
+        {
+            accelelateSpeed = 0;
+        }
+        if(ringSpeed <= 0)
+        {
+            ringSpeed = 0;
+        }
+        /////////////////////////////////////////////////////////////
             
 
-            boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
+        boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
 
-        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        if(isControl)
+        if (isControl)
         {
             speedBuff = playerSpeed + boostSpeed;   //速度とブーストを加算
         }
+
     }
     //デバッグで速度調節する（後で消す
     private void SpeedControllDebager()
@@ -515,6 +541,13 @@ public class PlayerScript : MonoBehaviour
             blurIntnsity = maxBlurIntensity;
             CreateBoostEffect();
         }
+        if (other.CompareTag("SpeedUpRingRed"))
+        {
+            ringSpeed = playerSpeed * speedUpRingTuner ;
+            playerSpeed += playerSpeed * ringBust;
+            blurIntnsity = maxBlurIntensity;
+            CreateBoostEffect();
+        }
         if (other.CompareTag("Bullet"))
         {
             playerHp = 0;
@@ -552,6 +585,10 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position = lp.GetPos();
+<<<<<<< HEAD
+=======
+        redBustFlag = false;
+>>>>>>> 繝ｪ繧ｹ繝医・菫ｮ豁｣
         lp.SetStart(false);
         PMS = Usefull.PMSScript.GetPMS();
     }

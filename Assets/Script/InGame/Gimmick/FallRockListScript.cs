@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class FallRockListScript : MonoBehaviour
 {
-    private List<RockFallScript> rockFallList = new List<RockFallScript>();
+    private List<RockFallScript> rockFallList;
 
     //岩生成オブジェクト管理
     public void RockFallListController(in bool isPose)
     {
-        if (rockFallList == null)
-        {
-            return;
-        }
+
         for (int i = 0; i < rockFallList.Count; i++)
         {
             rockFallList[i].RockController(in isPose);
@@ -27,12 +24,10 @@ public class FallRockListScript : MonoBehaviour
     }
     public void AwakeFallRockList()
     {
-        int i = 0;
-        foreach (Transform children in GameObject.FindWithTag("RockFallList").transform)
+        rockFallList = new List<RockFallScript>(FindObjectsOfType<RockFallScript>());
+        for (int i = 0; i < rockFallList.Count; i++)
         {
-            rockFallList.Add(children.GetComponent<RockFallScript>());
             rockFallList[i].StartRockFall();
-            i++;
         }
     }
 }
