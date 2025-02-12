@@ -312,7 +312,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-<<<<<<< HEAD
+
                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
                 CreateBoostEffect();                                                            //加速時演出生成
                 blurIntnsity = maxBlurIntensity;                                           //加速演出ブラーに値を代入
@@ -325,11 +325,11 @@ public class PlayerScript : MonoBehaviour
                 minBlurIntnsity = accelelatedBlurIntensity;   //加速演出ブラーに値を代入
 
             }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-=======
+
                  accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
                 CreateBoostEffect();    //加速時演出生成
                 blurIntnsity = maxBlurIntensity;    //加速演出ブラーに値を代入
-            }
+            
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
@@ -337,7 +337,7 @@ public class PlayerScript : MonoBehaviour
             playerSpeed += accelerate;  //基本速度に加算
             minBlurIntnsity = accelelatedBlurIntensity; //加速演出ブラーに値を代入
         }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
->>>>>>> 繝ｪ繧ｹ繝医・菫ｮ豁｣
+
 
         if(boostSpeed > 0)  //一時加速がある間はブラーに値を入れる////////////////////////////
         {
@@ -585,10 +585,9 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position = lp.GetPos();
-<<<<<<< HEAD
-=======
+
         redBustFlag = false;
->>>>>>> 繝ｪ繧ｹ繝医・菫ｮ豁｣
+
         lp.SetStart(false);
         PMS = Usefull.PMSScript.GetPMS();
     }
