@@ -10,7 +10,7 @@ public class FlakListScript : MonoBehaviour
     //高角砲一括管理
     public void FlakListController(in bool isPose)
     {
-        if (flackList == null)  //オブジェクトがなければリターン/////
+        if (flakList == null)  //オブジェクトがなければリターン/////
         {
             return;
         }//////////////////////////////////////////////////////////////
@@ -20,20 +20,20 @@ public class FlakListScript : MonoBehaviour
         {
             if (!isPose)
             {
-                if (flackList[i].GetPlayerPos() == null)    //プレイヤーが射程内にいない////
+                if (flakList[i].GetPlayerPos() == null)    //プレイヤーが射程内にいない////
                 {
-                    flackList[i].SetTime();               //クールタイムリセット
-                    flackList[i].LineUIDelete();        //予測線を削除
+                    flakList[i].SetTime();               //クールタイムリセット
+                    flakList[i].LineUIDelete();        //予測線を削除
                     return;
                 }/////////////////////////////////////////////////////////////////////////////
 
-                flackList[i].Aim(); //プレイヤーを補足
-                if (flackList[i].GetTime()) //クールタイム確認///
+                flakList[i].Aim(); //プレイヤーを補足
+                if (flakList[i].GetTime()) //クールタイム確認///
                 {
-                    flackList[i].Shot();    //射撃
+                    flakList[i].Shot();    //射撃
                 }/////////////////////////////////////////////////
             }
-            flackList[i].BulletController(in isPose);
+                flakList[i].BulletController(in isPose);
         }
     }
     public void AwakeFlakList()
