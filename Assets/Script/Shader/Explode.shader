@@ -12,7 +12,7 @@ Properties
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" }
+        Tags { "RenderType"="Transparent" "Queue"="Overlay" }
         LOD 100
 
         CGINCLUDE
@@ -58,7 +58,9 @@ Properties
 
         Pass
         {
-            Cull front  
+            Cull Off
+            ZWrite Off
+            ZTest LEqual
             Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
                
@@ -98,6 +100,9 @@ Properties
         Pass
         {
 
+            Cull Off
+            ZWrite Off
+            ZTest LEqual
             Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             fixed4 frag (v2f i) : SV_Target
