@@ -1,12 +1,14 @@
-Shader "Simple"
+Shader "Unlit/Texture"
 {
-    Properties
+Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
         _MaskTex("Texture",2D)="white"{}
-        _Dissolve("Dissolve",Range(0,1.1))=0.5
+        _Dissolve("Dissolve",Range(0,1))=0.5
         _Color("DissolveColor",Color)=(1,0,0,1)
         _Threshold("DissolveThreshold",Range(0,1))=0.5
+        _EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
+        _EdgeWidth ("Edge Width", Range(0, 1)) = 0.01
     }
     SubShader
     {
@@ -14,7 +16,6 @@ Shader "Simple"
         LOD 100
 
         CGINCLUDE
-
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
@@ -22,7 +23,7 @@ Shader "Simple"
 
             #include "UnityCG.cginc"
 
-             struct appdata
+            struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
@@ -41,13 +42,14 @@ Shader "Simple"
             float _Dissolve;
             fixed4 _Color;
             float _Threshold;
+            fixed4 _EdgeColor;
+            float _EdgeWidth;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-
                 return o;
             }
 
@@ -55,43 +57,31 @@ Shader "Simple"
 
         Pass
         {
-            Cull front
             CGPROGRAM
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 tiling=_MainTex_ST.xy;
-                float2 offset=_MainTex_ST.zw;
-                float2 tilingMask=_MaskTex_ST.xy;
-                float offsetMask=_MaskTex_ST.zw;
+                float2 tiling = _MainTex_ST.xy;
+                float2 offset = _MainTex_ST.zw;
+                float2 tilingMask = _MaskTex_ST.xy;
+                float offsetMask = _MaskTex_ST.zw;
 
-                fixed4 col =tex2D(_MainTex,i.uv*tiling+offset);
-                fixed4 mask=tex2D(_MaskTex,i.uv*tilingMask+offsetMask);
-                col.rgb = lerp(col.rgb ,1 ,step(col.a ,0));
-                col=lerp(col,_Color,step(mask,_Dissolve+_Threshold));             
-                col.a=lerp(1,0,step(mask,_Dissolve));
-                clip(mask.r-_Dissolve);
+                fixed4 col = tex2D(_MainTex, i.uv * tiling + offset);
+                fixed4 mask = tex2D(_MaskTex, i.uv * tilingMask + offsetMask);
+                
+                // Dissolve effect
+                if (_Dissolve >= 1)
+                {
+                    clip(mask.r - (_Dissolve + 1));
+                }
+                else
+                {
+                    clip(mask.r - (_Dissolve));
+                }
+                clip(col.a - mask.r);
 
-                return col;
-            }
-            ENDCG
-        }
-
-        Pass
-        {
-            CGPROGRAM
-            fixed4 frag (v2f i) : SV_Target
-            {
-                float2 tiling=_MainTex_ST.xy;
-                float2 offset=_MainTex_ST.zw;
-                float2 tilingMask=_MaskTex_ST.xy;
-                float offsetMask=_MaskTex_ST.zw;
-
-                fixed4 col =tex2D(_MainTex,i.uv*tiling+offset);
-                fixed4 mask=tex2D(_MaskTex,i.uv*tilingMask+offsetMask);
-                col.rgb = lerp(col.rgb ,1 ,step(col.a ,0));
-                col=lerp(col,_Color,step(mask,_Dissolve+_Threshold));             
-                col.a=lerp(1,0,step(mask,_Dissolve));
-                clip(mask.r-_Dissolve);
+                // Edge effect
+                float edgeMask = step(_Dissolve, mask.r) - step(_Dissolve + _Threshold, mask.r);
+                col.rgb = col.rgb * (1 - edgeMask) + _EdgeColor.rgb * edgeMask;
 
                 return col;
             }
