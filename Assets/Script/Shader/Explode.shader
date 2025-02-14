@@ -5,7 +5,6 @@ Properties
         _MainTex ("Texture", 2D) = "white" {}
         _MaskTex("Texture",2D)="white"{}
         _Dissolve("Dissolve",Range(0,1))=0.5
-        _Color("DissolveColor",Color)=(1,0,0,1)
         _Threshold("DissolveThreshold",Range(0,1))=0.5
         _EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
         _EdgeWidth ("Edge Width", Range(0, 1)) = 0.01
@@ -57,6 +56,7 @@ Properties
 
         Pass
         {
+            Cull off
             CGPROGRAM
             fixed4 frag (v2f i) : SV_Target
             {
