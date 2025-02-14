@@ -8,10 +8,11 @@ Properties
         _Threshold("DissolveThreshold",Range(0,1))=0.5
         _EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
         _EdgeWidth ("Edge Width", Range(0, 1)) = 0.01
+        _Alfa("Alfa",Range(0,1))=1
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Transparent" }
         LOD 100
 
         CGINCLUDE
@@ -43,6 +44,7 @@ Properties
             float _Threshold;
             fixed4 _EdgeColor;
             float _EdgeWidth;
+            float _Alfa;
 
             v2f vert (appdata v)
             {
@@ -56,7 +58,47 @@ Properties
 
         Pass
         {
-            Cull off
+            Cull front  
+            Blend SrcAlpha OneMinusSrcAlpha
+            CGPROGRAM
+               
+            fixed4 frag (v2f i) : SV_Target
+            {
+                float2 tiling = _MainTex_ST.xy;
+                float2 offset = _MainTex_ST.zw;
+                float2 tilingMask = _MaskTex_ST.xy;
+                float offsetMask = _MaskTex_ST.zw;
+
+                fixed4 col = tex2D(_MainTex, i.uv * tiling + offset);
+                fixed4 colBuff=col;
+                fixed4 mask = tex2D(_MaskTex, i.uv * tilingMask + offsetMask);
+                
+                // Dissolve effect
+                if (_Dissolve >= 1)
+                {
+                clip(mask.r - (_Dissolve + 1));
+                }
+                else
+                {
+                clip(mask.r - (_Dissolve));
+                }
+                clip(colBuff.a - mask.r);
+
+                // Edge effect
+                float edgeMask = step(_Dissolve, mask.r) - step(_Dissolve + _Threshold, mask.r);
+                colBuff.rgb = colBuff.rgb * (1 - edgeMask) + _EdgeColor.rgb * edgeMask;
+
+                col=fixed4(colBuff.r,colBuff.g,colBuff.b,col.a*_Alfa);
+                return col;
+            }
+
+            ENDCG
+         }
+
+        Pass
+        {
+
+            Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             fixed4 frag (v2f i) : SV_Target
             {
@@ -66,6 +108,7 @@ Properties
                 float offsetMask = _MaskTex_ST.zw;
 
                 fixed4 col = tex2D(_MainTex, i.uv * tiling + offset);
+                fixed4 colBuff=col;
                 fixed4 mask = tex2D(_MaskTex, i.uv * tilingMask + offsetMask);
                 
                 // Dissolve effect
@@ -77,12 +120,15 @@ Properties
                 {
                     clip(mask.r - (_Dissolve));
                 }
-                clip(col.a - mask.r);
+                clip(colBuff.a - mask.r);
+
+
 
                 // Edge effect
                 float edgeMask = step(_Dissolve, mask.r) - step(_Dissolve + _Threshold, mask.r);
-                col.rgb = col.rgb * (1 - edgeMask) + _EdgeColor.rgb * edgeMask;
+                colBuff.rgb = colBuff.rgb * (1 - edgeMask) + _EdgeColor.rgb * edgeMask;
 
+                col=fixed4(colBuff.r,colBuff.g,colBuff.b,col.a*_Alfa);
                 return col;
             }
             ENDCG
