@@ -12,4 +12,13 @@ public class ExplodeEffectScript : MonoBehaviour
     {
 
     }
+    public void SizeUp()
+    {
+
+    }
+    public void Transparency()
+    {
+
+    }
+
 }

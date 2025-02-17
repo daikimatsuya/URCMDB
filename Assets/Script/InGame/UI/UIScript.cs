@@ -11,6 +11,7 @@ public class UIScript : MonoBehaviour
     private GameObject gameOverUI;
     private GameOverUIScript goUs;
     private PlayerScript ps;
+    private PlayerControllerScript pcs;
 
     private Vector3 playerRot;
     private Transform targetTransform;
@@ -60,8 +61,10 @@ public class UIScript : MonoBehaviour
         
     }
     //èâä˙âª
-    public void StartUIScript()
+    public void StartUIScript(in PlayerControllerScript pcs)
     {
+        this.pcs = pcs;
+
         playerSpeedMeterScript.StartPlayerSpeedMeterScript();
         goUs = gameOverUI.GetComponent<GameOverUIScript>();
         goUs.StartGameOverUI();
@@ -75,6 +78,7 @@ public class UIScript : MonoBehaviour
     //UIëSî ä«óùä÷êî
     public void UIController(in bool isPose)
     {
+        ps=pcs.GetPlayer();
         CheckController();
         if (ps != null)
         {

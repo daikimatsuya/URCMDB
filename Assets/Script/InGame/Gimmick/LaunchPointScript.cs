@@ -113,6 +113,10 @@ public class LaunchPointScript : MonoBehaviour
     {
         return tf.eulerAngles;
     }
+    public Transform GetTransform()
+    {
+        return tf.transform;
+    }
     #endregion
     public void AwakeLaunchPoint()
     {

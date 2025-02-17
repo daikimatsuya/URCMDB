@@ -19,6 +19,7 @@ public class CameraManager : MonoBehaviour
     private MovieFade mf;
     private PlayerScript ps;
     private TargetScript ts;
+    private PlayerControllerScript playerController;
   
     private bool isExplodeEffectFade;
     private bool isPlayerDead;
@@ -27,7 +28,7 @@ public class CameraManager : MonoBehaviour
     //カメラ管理
     public  void CameraController(in bool isPose)
     {
-
+        ps = playerController.GetPlayer();
         mf.MovieFadeController();   //カメラのフェード
 
         if (isPlayerDead )  //プレイヤーが爆発したか////////////////
@@ -136,32 +137,23 @@ public class CameraManager : MonoBehaviour
         ts = target;
     }
 
-    //プレイヤー取得用
-    public void SetPlayer(in PlayerScript player)
-    {
-        if (pcs == null)
-        {
-            pcs = GameObject.FindWithTag("GameCamera").GetComponent<PlayerCameraScript>();
-        }
-
-        this.ps = player;
-        pcs.SetPlayer(this.ps.transform,this.ps);
-    }
-
     #endregion
-    public void AwakeCameraManager()
+    public void AwakeCameraManager(in PlayerControllerScript player)
     {
         GameObject _ = GameObject.FindWithTag("GameCamera");
         pcs = _.GetComponent<PlayerCameraScript>();
         pcs.AwakePlayerCamera();
         mainCanvas = GameObject.FindWithTag("UICanvas");
         mf = GetComponent<MovieFade>();
+        playerController = player;
     }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     public void StartCameraManager()
     {
         mf.SetShadeLevel(1);
         pcs.SetMF(mf);
+        ps = playerController.GetPlayer();
+        pcs.SetPlayer(ps.transform,ps);
         TimeCountScript.SetTime(ref explodeEffectTimeBuff, explodeEffectTime);
         mainCanvas.SetActive(false);
         watarEffect.SetActive(false);

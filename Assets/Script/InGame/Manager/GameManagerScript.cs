@@ -29,8 +29,9 @@ public class GameManagerScript : MonoBehaviour
     private TargetScript ts;
     private ListManager lm;
     private Transform uiTransform;
+    private PlayerControllerScript pcs;
 
-    private bool gameOverFlag;
+
     private bool playerSpawnFlag;
     private bool isPose;
 
@@ -38,16 +39,15 @@ public class GameManagerScript : MonoBehaviour
     //ゲームシステムを動かす
     private void GameManagerController()
     {
-        Usefull.GetTriggerScript.AxisUpdate();                 //トリガーの入力情報を更新
-        Usefull.GetStickScript.AxisUpdate();                    //スティック入力情報を更新
-        Usefull.GetControllerScript.SearchController();     //コントローラー接続確認更新
+        Usefull.GetTriggerScript.AxisUpdate();                            //トリガーの入力情報を更新
+        Usefull.GetStickScript.AxisUpdate();                               //スティック入力情報を更新
+        Usefull.GetControllerScript.SearchController();                //コントローラー接続確認更新
 
-        SceneChanges();                                               //シーン変更
-        us.SetIsGameOver(in gameOverFlag);                 //ゲームオーバーフラグ挿入
-        InGameController(isPose);                                  //ゲームを動かす
-        PoseChange();                                                   //ポーズ設定切り替え
-
-        
+        SceneChanges();                                                          //シーン変更
+        us.SetIsGameOver(pcs.GetGameOverFlag());                 //ゲームオーバーフラグ挿入
+        InGameController(isPose);                                            //ゲームを動かす
+        PoseChange();                                                             //ポーズ設定切り替え
+       
     }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
     private void AwakeGameManger()
@@ -58,43 +58,40 @@ public class GameManagerScript : MonoBehaviour
         lm.AwakeListManager();
         lp.AwakeLaunchPoint();
         us.AwakeUIScript();
-        cm.AwakeCameraManager();
+        cm.AwakeCameraManager(in pcs);
     }
     private void StartGameManager()
     {
-        gameOverFlag = false;
+
+        pcs.StartPlayerController(in lp, in uiTransform);
         cm.StartCameraManager();
         cm.SetTarget(ts);
-        us.StartUIScript();
+        us.StartUIScript(in pcs);
         us.SetTarget(in targetPos);
         sws.WeatherSetting(cm);
         us.SetWeatherScript(sws);
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
-        CreateFadeObject();
-        PlayerSpawn();
         ts.StartTarget();
         isPose = false;
+        
     }
 
     //ゲームを動かす
     private void InGameController(in bool isPose)
     {
-        PlayerCheck();                                   //プレイヤーがゲームにいるかを確認
-        us.UIController(isPose);                      //UI管理
-        lm.ListManagerController(ps,isPose);   //リスト群管理
+        pcs.PlayerCheck();                                                 //プレイヤーがゲームにいるかを確認
+        us.UIController(isPose);                                         //UI管理
+        lm.ListManagerController(pcs.GetPlayer(),isPose);   //リスト群管理
 
         if (ts != null)
         {
-            ts.TargetController(in isPose);        //ターゲット管理
+            ts.TargetController(in isPose);                            //ターゲット管理
         }
-        if (ps != null)
-        {
-            ps.PlayerController(in isPose);        //プレイヤー管理
-        }
-
-        lp.LaunchPointController(in isPose);    //発射台管理       
-        cm.CameraController(in isPose);        //カメラ管理
+        pcs.PlayerController(in isPose);                              //プレイヤー管理
+        lp.LaunchPointController(in isPose);                       //発射台管理       
+        cm.CameraController(in isPose);                           //カメラ管理
     }
+
     //リトライするときにシーンをロード
     public void Retry()
     {
@@ -135,81 +132,7 @@ public class GameManagerScript : MonoBehaviour
 
         }
     }
-    //プレイヤーの生存確認と生成
-    private void PlayerCheck()
-    {
 
-        if (player!=null)   //プレイヤーがゲーム内にいなかったらリターン//////
-        {
-            return;
-        }////////////////////////////////////////////////////////////////////////
-
-        if (Input.GetKeyDown(KeyCode.Space)|| TimeCountScript.TimeCounter(ref respawnTimerBuff)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
-        {
-            SetPlayerSpawnFlag();       //プレイヤーを生成するフラグ管理
-        }
-        
-        if(!playerSpawnFlag)  //プレイヤー生成フラグ確認//////////////
-        {
-            return;
-        }/////////////////////////////////////////////////////////////////
-        if (playerMissile > 0)
-        {
-            CreateFadeObject();         //プレイヤー生成時の演出生成
-            PlayerSpawn();                //プレイヤー生成
-            playerSpawnFlag = false;
-            isPose = false;
-        }
-        else
-        {
-            gameOverFlag = true;
-        }
-
-    }
-    //プレイヤーが死んだ後に一定時間後にリスポーンさせるフラグセット
-    private void SetPlayerSpawnFlag()
-    {
-        playerSpawnFlag = true;
-        if (!ts)
-        {
-            playerMissile = 0;
-            return;
-        }
-        if (ts.GetBreak())    //クリアしてたら/////
-        {
-            playerMissile = 0;
-        }///////////////////////////////////
-    }
-    //プレイヤーリスポーンタイマーリセット
-    private void SetRespawnTimer()
-    {
-        TimeCountScript.SetTime(ref respawnTimerBuff, respawnTimer);
-    }
-
-    //プレイヤー生成
-    private void PlayerSpawn()
-    {
-        player = Instantiate(playerPrefab);                         //プレイヤー生成
-        ps = player.GetComponent<PlayerScript>();           //コンポーネント取得
-        ps.SetFadeObject(in activatingFadeObject);             //フェード設定
-        ps.SetLaunchpad(lp);                                            //発射台位置情報代入
-        ps.StartPlayer();                                                   //プレイヤー初期化
-        cm.SetPlayer(ps);                                                 //カメラにプレイヤーを登録
-        us.SetPlayer(ps);                                                  //UIにプレイヤーを登録
-        playerMissile--;                                                     //残機減少
-        player.transform.SetParent(launchPad.transform);   //プレイヤーと発射台を親子付け
-        SetRespawnTimer();                                             //プレイヤー生成用タイマーセット
-    }
-    //開始演出生成
-    private void CreateFadeObject()
-    {    
-        GameObject __ = Instantiate(fadeObjectPrefab);           //フェードオブジェクト生成
-        activatingFadeObject = __;                                          //フェードオブジェクトを変数に代入
-        __.transform.SetParent(uiTransform);                           //UICanvasに親子付け
-        __.transform.localScale = Vector3.one;                         //スケール修正
-        __.transform.localPosition = Vector3.zero;                     //座標修正
-        __.transform.localEulerAngles = new Vector3(0, 0, 0);   //角度修正
-    }
 
     //コンポーネント群を取得
     private void GetComponents()
@@ -224,6 +147,7 @@ public class GameManagerScript : MonoBehaviour
         lp = launchPad.GetComponent<LaunchPointScript>();
         sws = GetComponent<SelectWeatherScript>();
         lm = new ListManager();
+        pcs=GetComponent<PlayerControllerScript>();
     }
 
     private void Awake()
