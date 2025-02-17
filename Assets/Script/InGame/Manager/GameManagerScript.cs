@@ -7,21 +7,13 @@ using Usefull;
 //ÉCÉìÉQÅ[ÉÄÇâÒÇ∑
 public class GameManagerScript : MonoBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject fadeObjectPrefab;
-    [SerializeField] private int playerMissile;
     [SerializeField] private string stage;
     [SerializeField] private string title;
     [SerializeField] private float breakTime;
     private int breakTimeBuff;
-    [SerializeField] private float respawnTimer;
-    private int respawnTimerBuff;
 
-    private PlayerScript ps;
-    private GameObject activatingFadeObject;
     private Transform targetPos;
     private CameraManager cm;
-    private GameObject player;
     private SelectWeatherScript sws;
     private LaunchPointScript lp;
     private GameObject launchPad;
@@ -31,8 +23,6 @@ public class GameManagerScript : MonoBehaviour
     private Transform uiTransform;
     private PlayerControllerScript pcs;
 
-
-    private bool playerSpawnFlag;
     private bool isPose;
 
 
