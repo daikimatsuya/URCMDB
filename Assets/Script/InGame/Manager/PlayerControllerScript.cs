@@ -18,10 +18,14 @@ public class PlayerControllerScript : MonoBehaviour
     private bool playerSpawnFlag;
     private bool gameOverFlag;
     private GameObject activatingFadeObject;
+    private LaunchPointScript lp;
+    Transform uiTransform;
     public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform)
     {
+        this.lp = lp;
+        this.uiTransform = uiTransform;
         playerSpawnFlag = true;
-        PlayerSpawn(in lp,in uiTransform);
+        PlayerSpawn(in this.lp,in this.uiTransform);
         gameOverFlag = false;
     }
     public void PlayerController(in bool isPose)
@@ -31,7 +35,7 @@ public class PlayerControllerScript : MonoBehaviour
             ps.PlayerController(in isPose);
             return;
         }
-
+        PlayerSpawn(lp,uiTransform);
     }
     //プレイヤーの生存確認と生成
     public void PlayerCheck()
