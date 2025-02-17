@@ -94,8 +94,8 @@ public class PlayerControllerScript : MonoBehaviour
             return;
         }
 
-        CreatePlayer(in lp);
         CreateFadeObject(in uiTransform);
+        CreatePlayer(in lp);
         missileCount--;                                                     //残機減少
         SetRespawnTimer();                                             //プレイヤー生成用タイマーセット
 
