@@ -7,7 +7,7 @@ Properties
         _Dissolve("Dissolve",Range(0,1))=0.5
         _Threshold("DissolveThreshold",Range(0,1))=0.5
         _EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
-        _EdgeWidth ("Edge Width", Range(0, 1)) = 0.01
+
         _Alfa("Alfa",Range(0,1))=1
     }
     SubShader
@@ -18,7 +18,6 @@ Properties
         CGINCLUDE
             #pragma vertex vert
             #pragma fragment frag
-            // make fog work
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
@@ -43,7 +42,6 @@ Properties
             fixed4 _Color;
             float _Threshold;
             fixed4 _EdgeColor;
-            float _EdgeWidth;
             float _Alfa;
 
             v2f vert (appdata v)
