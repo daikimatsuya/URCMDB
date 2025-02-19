@@ -479,7 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSize: 10000
   expantionTime: 3.8
-  rotSpeed: 2
+  rotSpeed: 1
 --- !u!1 &6085303447242240640
 GameObject:
   m_ObjectHideFlags: 0
