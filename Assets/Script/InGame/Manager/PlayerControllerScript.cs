@@ -11,6 +11,7 @@ public class PlayerControllerScript : MonoBehaviour
     [SerializeField] private float respawnTimer;
     private int respawnTimerBuff;
     [SerializeField] private GameObject fadeObjectPrefab;
+    [SerializeField] private GameObject explodePrefab;
 
     private PlayerScript ps;
 
@@ -55,6 +56,13 @@ public class PlayerControllerScript : MonoBehaviour
             return;
         }/////////////////////////////////////////////////////////////////
 
+    }
+    //爆発エフェクト生成
+    public GameObject CreateExplodeEffect(in Vector3 pos)
+    {
+        GameObject _ = GameObject.Instantiate(explodePrefab);
+        _.transform.position = pos;
+        return _;
     }
 
     //開始演出生成

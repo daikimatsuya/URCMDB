@@ -11,6 +11,7 @@ public class ListManager
     private FunListScript fls;
     private FlakListScript flakls;
     private DroneListScript dls;
+    private ExplodeEffectListScript eel;
     private PlayerControllerScript pcs;
 
     //リスト更新
@@ -22,6 +23,7 @@ public class ListManager
         fls.FunListController(in isPose);                             //ファン管理
         flakls.FlakListController(in isPose);                        //高角砲管理
         dls.DroneListController();                                     //ドローン管理
+        eel.ExplodeEffectListController(in pcs);                  //爆発エフェクト管理
     }
     //早期初期化
     public void AwakeListManager(in PlayerControllerScript pcs)
@@ -45,6 +47,9 @@ public class ListManager
 
         dls = GameObject.FindObjectOfType<DroneListScript>();
         dls.AwakeDroneList();
+
+        eel=GameObject.FindObjectOfType<ExplodeEffectListScript>();
+        eel.AwakeExplodeEffectList();
     }
 
 }
