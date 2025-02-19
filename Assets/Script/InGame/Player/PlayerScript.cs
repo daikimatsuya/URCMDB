@@ -529,6 +529,7 @@ public class PlayerScript : MonoBehaviour
     {
         return tf.position;
     }
+
     #endregion
 
     public void OnCollisionEnter(Collision collision)

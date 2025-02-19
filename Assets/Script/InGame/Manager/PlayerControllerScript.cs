@@ -22,8 +22,10 @@ public class PlayerControllerScript : MonoBehaviour
     private LaunchPointScript lp;
     Transform uiTransform;
     private Vector3 playerdeadPos;
-    public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform)
+    private TargetScript ts;
+    public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform,in TargetScript ts)
     {
+        this.ts = ts;
         this.lp = lp;
         this.uiTransform = uiTransform;
         playerSpawnFlag = true;
@@ -35,11 +37,7 @@ public class PlayerControllerScript : MonoBehaviour
         if (ps)
         {
             ps.PlayerController(in isPose);
-
-
             playerdeadPos=ps.GetPlayerPos();
-
-            
 
             return;
         }
@@ -53,6 +51,14 @@ public class PlayerControllerScript : MonoBehaviour
 
             return;
         }////////////////////////////////////////////////////////////////////////
+        if (ts == null)
+        {
+            missileCount = 0;
+        }
+        if (ts.GetHp() <= 0)
+        {
+            missileCount = 0;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) || TimeCountScript.TimeCounter(ref respawnTimerBuff) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
@@ -134,6 +140,10 @@ public class PlayerControllerScript : MonoBehaviour
     public Vector3 GetPlayerdeadTransform()
     {
         return playerdeadPos;
+    }
+    public void SetClear()
+    {
+        missileCount = 0;
     }
     #endregion
 }

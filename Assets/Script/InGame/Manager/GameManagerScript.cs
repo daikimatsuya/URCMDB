@@ -36,6 +36,7 @@ public class GameManagerScript : MonoBehaviour
 
         SceneChanges();                                                          //シーン変更
         us.SetIsGameOver(pcs.GetGameOverFlag());                 //ゲームオーバーフラグ挿入
+
         InGameController(isPose);                                            //ゲームを動かす
         PoseChange();                                                             //ポーズ設定切り替え
 
@@ -55,7 +56,7 @@ public class GameManagerScript : MonoBehaviour
     }
     private void StartGameManager()
     {
-        pcs.StartPlayerController(in lp, in uiTransform);
+        pcs.StartPlayerController(in lp, in uiTransform,in ts);
         cm.StartCameraManager();
         cm.SetTarget(ts);
         us.StartUIScript(in pcs);
@@ -78,6 +79,10 @@ public class GameManagerScript : MonoBehaviour
         if (ts != null)
         {
             ts.TargetController(in isPose);                            //ターゲット管理
+        }
+        else
+        {
+            pcs.SetClear();
         }
         pcs.PlayerController(in isPose);                              //プレイヤー管理
         lp.LaunchPointController(in isPose);                       //発射台管理       
