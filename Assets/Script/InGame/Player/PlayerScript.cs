@@ -525,6 +525,10 @@ public class PlayerScript : MonoBehaviour
     {
         this.tf = tf;
     }
+    public Vector3 GetPlayerPos()
+    {
+        return tf.position;
+    }
     #endregion
 
     public void OnCollisionEnter(Collision collision)

@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7870347104334944388, guid: 77c5b027360415942bf41ce3ba2cc146, type: 3}
   missileCount: 3
-  respawnTimer: 3
+  respawnTimer: 4
   fadeObjectPrefab: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
   explodePrefab: {fileID: 5106377284683811499, guid: 63e70589b9508c541bff922d90dc105f, type: 3}
 --- !u!114 &6098841261237397159

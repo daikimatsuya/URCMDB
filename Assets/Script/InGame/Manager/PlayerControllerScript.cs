@@ -21,6 +21,7 @@ public class PlayerControllerScript : MonoBehaviour
     private GameObject activatingFadeObject;
     private LaunchPointScript lp;
     Transform uiTransform;
+    private Vector3 playerdeadPos;
     public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform)
     {
         this.lp = lp;
@@ -34,6 +35,12 @@ public class PlayerControllerScript : MonoBehaviour
         if (ps)
         {
             ps.PlayerController(in isPose);
+
+
+            playerdeadPos=ps.GetPlayerPos();
+
+            
+
             return;
         }
         PlayerSpawn(lp,uiTransform);
@@ -43,6 +50,7 @@ public class PlayerControllerScript : MonoBehaviour
     {
         if (player != null)   //プレイヤーがゲーム内にいたらリターン///////////
         {
+
             return;
         }////////////////////////////////////////////////////////////////////////
 
@@ -122,6 +130,10 @@ public class PlayerControllerScript : MonoBehaviour
     public bool GetGameOverFlag()
     {
         return gameOverFlag;
+    }
+    public Vector3 GetPlayerdeadTransform()
+    {
+        return playerdeadPos;
     }
     #endregion
 }

@@ -32,7 +32,7 @@ public class CameraManager : MonoBehaviour
 
         if (isPlayerDead )  //プレイヤーが爆発したか////////////////
         {
-            ExplodeCameraController();  //爆発時のカメラの動き
+            ExplodeCameraController(in ps);  //爆発時のカメラの動き
         }//////////////////////////////////////////////////////////////
 
 
@@ -71,7 +71,7 @@ public class CameraManager : MonoBehaviour
         }
     }
     //爆発時のカメラ
-    private void ExplodeCameraController()
+    private void ExplodeCameraController(in PlayerScript ps)
     {
         if (ts)
         {
@@ -89,7 +89,7 @@ public class CameraManager : MonoBehaviour
             pcs.HitExplodeCamera();
             return;
         }///////////////////////////////////////////////
-        pcs.MissExplodeCamera();    
+        pcs.MissExplodeCamera(playerController.GetPlayerdeadTransform());    
     }
     //水に入った時の演出管理
     private void SetWaterEffect()

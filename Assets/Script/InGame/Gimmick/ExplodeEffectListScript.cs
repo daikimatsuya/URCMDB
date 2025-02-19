@@ -16,6 +16,7 @@ public class ExplodeEffectListScript : MonoBehaviour
             explodeEffectList[i].SizeUp();
             explodeEffectList[i].Rotation();
             explodeEffectList[i].Dissolve();
+            explodeEffectList[i].Edge();
             if (explodeEffectList[i].CountDown())
             {
                 explodeEffectList[i].Break();

@@ -150,10 +150,10 @@ public class PlayerCameraScript : MonoBehaviour
         Fade();                          //フェード管理
     }
     //プレイヤーがターゲット以外で爆発したときのカメラワーク
-    public void MissExplodeCamera()
+    public void MissExplodeCamera(in Vector3 playerPos)
     {
         cameraRot = transform.localEulerAngles;                  //トランスフォームの値をvector3へ移動
-        tf.position = ec.MissExplodeCamera(ref cameraRot);  //爆発エフェクト
+        tf.position = ec.MissExplodeCamera(ref cameraRot,in playerPos);  //爆発エフェクト
         tf.localEulerAngles = cameraRot;                              //算出した値をトランスフォームに代入
     }
     //プレイヤーがターゲットにぶつかったとのカメラワーク
