@@ -10,8 +10,20 @@ public class ExplodeEffectListScript : MonoBehaviour
 
     public void ExplodeEffectListController(in PlayerControllerScript pcs)
     {
+
         CreatePlayerExplode(in pcs);
-        for(int i = 0; i < explodeEffectList.Count;)
+
+        if (pcs.GetPlayer() != null)
+        {
+            for (int i = 0; i < explodeEffectList.Count; i++)
+            {
+                explodeEffectList[i].Break();
+                explodeEffectList.RemoveAt(i);
+            }
+            return;
+        }
+
+        for (int i = 0; i < explodeEffectList.Count;)
         {
             explodeEffectList[i].SizeUp();
             explodeEffectList[i].Rotation();
