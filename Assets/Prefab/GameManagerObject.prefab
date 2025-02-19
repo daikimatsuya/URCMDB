@@ -321,13 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58768f9212e13074ab0e25972def1129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7870347104334944388, guid: 77c5b027360415942bf41ce3ba2cc146, type: 3}
-  fadeObjectPrefab: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
-  playerMissile: 3
   stage: 
   title: Title
   breakTime: 2
-  respawnTimer: 3
 --- !u!114 &830508550687790484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +340,7 @@ MonoBehaviour:
   missileCount: 3
   respawnTimer: 3
   fadeObjectPrefab: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
+  explodePrefab: {fileID: 5106377284683811499, guid: 63e70589b9508c541bff922d90dc105f, type: 3}
 --- !u!114 &6098841261237397159
 MonoBehaviour:
   m_ObjectHideFlags: 0

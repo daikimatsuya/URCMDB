@@ -398,8 +398,6 @@ public class PlayerScript : MonoBehaviour
         if (playerHp <= 0)
         {
             lp.Bombed();                                        //発射台に操作を返す
-            GameObject _ = Instantiate(explode);    //爆発エフェクト生成
-            _.transform.position = tf.position;          //座標代入
             Destroy(this.gameObject);                     //プレイヤーオブジェクトを削除
         }
     }

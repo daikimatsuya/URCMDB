@@ -13,7 +13,9 @@ public class ExplodeEffectListScript : MonoBehaviour
         CreatePlayerExplode(in pcs);
         for(int i = 0; i < explodeEffectList.Count; i++)
         {
-
+            explodeEffectList[i].SizeUp();
+            explodeEffectList[i].Rotation();
+            explodeEffectList[i].Dissolve();
         }
     }
     private void CreatePlayerExplode(in PlayerControllerScript pcs)
@@ -26,7 +28,9 @@ public class ExplodeEffectListScript : MonoBehaviour
         else if(playerExplodeFlag) 
         {
             playerExplodeFlag=false;
-            explodeEffectList.Add( pcs.CreateExplodeEffect(playerPos).GetComponent<ExplodeEffectScript>());
+            ExplodeEffectScript _ = pcs.CreateExplodeEffect(playerPos).GetComponent<ExplodeEffectScript>();
+            _.StartExplodeEffect();
+            explodeEffectList.Add(_);
         }
 
     }
