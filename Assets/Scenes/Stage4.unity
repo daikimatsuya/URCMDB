@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 8.8Flak
       objectReference: {fileID: 0}
+    - target: {fileID: 2220700653041855935, guid: 46bddc8875b585941bb72e170935466e, type: 3}
+      propertyPath: m_TagString
+      value: Flak
+      objectReference: {fileID: 0}
     - target: {fileID: 5225593836773206942, guid: 46bddc8875b585941bb72e170935466e, type: 3}
       propertyPath: m_RootOrder
       value: 0
