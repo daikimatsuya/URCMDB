@@ -519,6 +519,14 @@ public class PlayerScript : MonoBehaviour
     {
         return isFire;
     }
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+    public void SetTransform(in Transform tf)
+    {
+        this.tf = tf;
+    }
     #endregion
 
     public void OnCollisionEnter(Collision collision)

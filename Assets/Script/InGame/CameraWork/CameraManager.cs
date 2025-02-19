@@ -21,7 +21,6 @@ public class CameraManager : MonoBehaviour
     private TargetScript ts;
     private PlayerControllerScript playerController;
   
-    private bool isExplodeEffectFade;
     private bool isPlayerDead;
     private bool isTargetBreak;
 
@@ -53,12 +52,12 @@ public class CameraManager : MonoBehaviour
                 if (ps.GetControll())   //プレイヤーが操作できるとき////
                 {
                     
-                    pcs.FollowPlayerInShoot(in isPose);  //プレイヤーを追従
+                    pcs.FollowPlayerInShoot(in isPose,in ps);  //プレイヤーを追従
                 }/////////////////////////////////////////////////////////////
 
                 else   //プレイヤーが発射台に固定されてる時///
                 {
-                    pcs.FollowPlayerInSet();
+                    pcs.FollowPlayerInSet(in ps);
                 }////////////////////////////////////////////////
 
             }///////////////////////////////////////////////////////////////////////
