@@ -11,11 +11,20 @@ public class ExplodeEffectListScript : MonoBehaviour
     public void ExplodeEffectListController(in PlayerControllerScript pcs)
     {
         CreatePlayerExplode(in pcs);
-        for(int i = 0; i < explodeEffectList.Count; i++)
+        for(int i = 0; i < explodeEffectList.Count;)
         {
             explodeEffectList[i].SizeUp();
             explodeEffectList[i].Rotation();
             explodeEffectList[i].Dissolve();
+            if (explodeEffectList[i].CountDown())
+            {
+                explodeEffectList[i].Break();
+                explodeEffectList.RemoveAt(i);
+            }
+            else
+            {
+                i++;
+            }
         }
     }
     private void CreatePlayerExplode(in PlayerControllerScript pcs)
