@@ -78,9 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0057f9a4c29da454883cadd2fabce010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerPos: {x: 0, y: 0, z: 0}
   directionX: 50
-  distance: 40000
+  distance: 10000
   rotateSpeed: 0.3
   hitCameraPos: {x: 0, y: 0, z: 0}
   hitCameraRot: {x: 0, y: 0, z: 0}
