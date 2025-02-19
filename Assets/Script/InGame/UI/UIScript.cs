@@ -196,6 +196,7 @@ public class UIScript : MonoBehaviour
     //PMSのオンオフ表示
     private void PMSMode()
     {
+        isPMS = PMSScript.GetPMS();
         if (isPMS)
         {
             pmsTex.text = "PMS:ON";
