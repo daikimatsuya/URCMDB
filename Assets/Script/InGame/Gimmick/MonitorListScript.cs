@@ -7,7 +7,7 @@ public class MonitorListScript : MonoBehaviour
     private List<MonitorScript> monitorList;
 
     //ÉÇÉjÉ^Å[åQä«óù
-    public void MonitorListController(in PlayerScript ps,in bool isPose)
+    public void MonitorListController(in PlayerControllerScript pcs,in bool isPose)
     {
         if (isPose)
         {
@@ -18,7 +18,7 @@ public class MonitorListScript : MonoBehaviour
         {
             monitorList[i].Move();
         }
-        if(ps != null)
+        if(pcs.GetPlayer() != null)
         {
             return;
         }

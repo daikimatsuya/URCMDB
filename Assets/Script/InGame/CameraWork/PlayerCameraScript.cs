@@ -209,11 +209,6 @@ public class PlayerCameraScript : MonoBehaviour
     public void SetPlayer(in Transform tf,in PlayerScript ps)
     {
         ps.SetTransform(tf);
-        if (sc == null)
-        {
-            sc = GetComponent<ShaderController>();
-        }
-        sc.SetPlayer(ps);
     }
     //MovieFadeŽæ“¾—p
     public void SetMF(in MovieFade mf)

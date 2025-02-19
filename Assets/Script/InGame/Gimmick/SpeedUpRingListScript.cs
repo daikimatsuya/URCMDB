@@ -8,7 +8,7 @@ public class SpeedUpRingListScript : MonoBehaviour
     private List<SpeedUpRingScript> speedUpRingList ;
     
     //スピードアップリング管理
-    public void SpeedUpRingListController(in PlayerScript ps,in bool isPose)
+    public void SpeedUpRingListController(in PlayerControllerScript pcs,in bool isPose)
     {
         if(isPose)
         {
@@ -22,7 +22,7 @@ public class SpeedUpRingListScript : MonoBehaviour
         {
             speedUpRingList[i].Off();   //触れたらオフにする
         }
-        if (ps != null)
+        if (pcs.GetPlayer() != null)
         {
             return;
         }

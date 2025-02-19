@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     private ListManager lm;
     private Transform uiTransform;
     private PlayerControllerScript pcs;
+    private ShaderController sc;
 
     private bool isPose;
 
@@ -37,6 +38,8 @@ public class GameManagerScript : MonoBehaviour
         us.SetIsGameOver(pcs.GetGameOverFlag());                 //ゲームオーバーフラグ挿入
         InGameController(isPose);                                            //ゲームを動かす
         PoseChange();                                                             //ポーズ設定切り替え
+
+        sc.BlurController();                                                       //ラジカルブラー
        
     }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
@@ -45,14 +48,13 @@ public class GameManagerScript : MonoBehaviour
         Application.targetFrameRate = 60;
         GetComponents();                                //コンポーネント群取得
         Usefull.PMSScript.SetPMS(false);
-        lm.AwakeListManager();
+        lm.AwakeListManager(in pcs);
         lp.AwakeLaunchPoint();
         us.AwakeUIScript();
         cm.AwakeCameraManager(in pcs);
     }
     private void StartGameManager()
     {
-
         pcs.StartPlayerController(in lp, in uiTransform);
         cm.StartCameraManager();
         cm.SetTarget(ts);
@@ -63,7 +65,7 @@ public class GameManagerScript : MonoBehaviour
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
         ts.StartTarget();
         isPose = false;
-        
+        sc.StartShaderController(in pcs);
     }
 
     //ゲームを動かす
@@ -71,7 +73,7 @@ public class GameManagerScript : MonoBehaviour
     {
         pcs.PlayerCheck();                                                 //プレイヤーがゲームにいるかを確認
         us.UIController(isPose);                                         //UI管理
-        lm.ListManagerController(pcs.GetPlayer(),isPose);   //リスト群管理
+        lm.ListManagerController(isPose);                           //リスト群管理
 
         if (ts != null)
         {
@@ -138,6 +140,7 @@ public class GameManagerScript : MonoBehaviour
         sws = GetComponent<SelectWeatherScript>();
         lm = new ListManager();
         pcs=GetComponent<PlayerControllerScript>();
+        sc = GameObject.FindWithTag("GameCamera").GetComponent<ShaderController>();
     }
 
     private void Awake()
