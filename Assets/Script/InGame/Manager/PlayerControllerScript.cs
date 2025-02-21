@@ -148,20 +148,20 @@ public class PlayerControllerScript : MonoBehaviour
             return;
         }
 
-        float buff = ps.GetPlayerAcce() / ps.GetMaxBoost();
-        float buff2 = ps.GetRingBoost() / ps.GetMaxRingBoost();
+        float buff = ps.GetPlayerAcce() / ps.GetMaxBoost();             //ブーストのブラー用の値算出
+        float buff2 = ps.GetRingBoost() / ps.GetMaxRingBoost();     //加速輪のブラー用の値算出
         if (buff2 > 1 - buff)
         {
             buff2 = 1 - buff;
         }
 
-        buff += (buff2*buff2);
+        buff += (buff2*buff2);                                                      //調整して合体
         if (buff > 1)
         {
             buff = 1;
         }
 
-        blurIntnsity = (buff * buff) * maxBlurIntensity;
+        blurIntnsity = (buff * buff) * maxBlurIntensity;                  //ブラーの値を算出
 
         
 
@@ -185,7 +185,7 @@ public class PlayerControllerScript : MonoBehaviour
         {
             blurIntnsity = minBlurIntnsity;
         }
-        sc.SetBlurIntensity(blurIntnsity);
+        sc.SetBlurIntensity(blurIntnsity);          //ブラーの値を代入
     }
 
     #region 値受け渡し
