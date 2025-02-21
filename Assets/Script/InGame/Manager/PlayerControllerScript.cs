@@ -155,13 +155,15 @@ public class PlayerControllerScript : MonoBehaviour
             buff2 = 1 - buff;
         }
 
-        buff += buff2; 
-        if (buff > 1f)
+        buff += (buff2*buff2);
+        if (buff > 1)
         {
-            buff = 1f;
+            buff = 1;
         }
+
         blurIntnsity = (buff * buff) * maxBlurIntensity;
 
+        
 
         if (Input.GetKey(KeyCode.Space) || (!GetTriggerScript.GetAxisDown("Right") && Input.GetAxis("RightTrigger") != 0)) 
         {
@@ -169,7 +171,14 @@ public class PlayerControllerScript : MonoBehaviour
         }
         else
         {
-            minBlurIntnsity = 0f;
+            if (minBlurIntnsity > 0)
+            {
+                minBlurIntnsity -= blurIntensityBrake;
+                if(minBlurIntnsity < 0)
+                {
+                    minBlurIntnsity = 0;
+                }
+            }
         }
 
         if (blurIntnsity <= minBlurIntnsity)

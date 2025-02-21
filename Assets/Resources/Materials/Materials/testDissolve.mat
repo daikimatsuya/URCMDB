@@ -30,10 +30,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve: 0.5
+    - _Alfa: 1
+    - _Dissolve: 0.817
     - _EdgeWidth: 0.01
-    - _Threshold: 0.5
+    - _Threshold: 0.133
     m_Colors:
     - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EdgeColor: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

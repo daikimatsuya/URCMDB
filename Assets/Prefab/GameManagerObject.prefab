@@ -344,7 +344,7 @@ MonoBehaviour:
   maxBlurIntensity: 0.258
   boostedBlurIntensity: 0.077
   accelelatedBlurIntensity: 0.0365
-  blurIntensityBrake: 0.0095
+  blurIntensityBrake: 0.0021
 --- !u!114 &6098841261237397159
 MonoBehaviour:
   m_ObjectHideFlags: 0
