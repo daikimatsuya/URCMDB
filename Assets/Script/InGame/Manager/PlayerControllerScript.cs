@@ -31,6 +31,8 @@ public class PlayerControllerScript : MonoBehaviour
     private TargetScript ts;
     private ShaderController sc;
 
+    const float epsilon=0.000001f;
+
     //初期化
     public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform,in TargetScript ts,in ShaderController sc)
     {
@@ -149,11 +151,16 @@ public class PlayerControllerScript : MonoBehaviour
         }
 
         float buff = ps.GetPlayerAcce() / ps.GetMaxBoost();             //ブーストのブラー用の値算出
-        float buff2 = ps.GetRingBoost() / ps.GetMaxRingBoost();     //加速輪のブラー用の値算出
+        float buff2 = 0;
+        if (ps.GetMaxRingBoost() > epsilon)
+        {
+            buff2 = ps.GetRingBoost() / ps.GetMaxRingBoost();         //加速輪のブラー用の値算出
+        }
         if (buff2 > 1 - buff)
         {
             buff2 = 1 - buff;
         }
+        
 
         buff += (buff2*buff2);                                                      //調整して合体
         if (buff > 1)
