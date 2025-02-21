@@ -141,13 +141,19 @@ public class PlayerControllerScript : MonoBehaviour
     //ƒuƒ‰[ŠÇ—
     public void BlurController()
     {
-        if (ps == null)
+        if (ps==null||!ps.GetIsFire())
         {
             blurIntnsity = 0;
             sc.SetBlurIntensity(blurIntnsity);
             return;
         }
 
+        float buff = ps.GetPlayerAcce() / ps.GetMaxBoost();
+        if (buff > 1)
+        {
+            buff = 1;
+        }
+        blurIntnsity =(buff*buff)*maxBlurIntensity;
 
 
         if (Input.GetKey(KeyCode.Space) || (!GetTriggerScript.GetAxisDown("Right") && Input.GetAxis("RightTrigger") != 0)) 

@@ -270,8 +270,8 @@ public class PlayerScript : MonoBehaviour
 
             }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                 accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
-                CreateBoostEffect();    //加速時演出生成
+            accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
+            CreateBoostEffect();    //加速時演出生成
             
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -390,9 +390,13 @@ public class PlayerScript : MonoBehaviour
     }
 
     #region　値受け渡し
+    public float GetMaxBoost()
+    {
+        return (burst + playerSpeed / playerBoostTuner)+(playerSpeed * speedUpRingTuner);
+    }
     public float GetPlayerAcce()
     {
-        return accelelateSpeed;
+        return boostSpeed;
     }
     public Vector3 GetPlayerSpeed()
     {
