@@ -53,6 +53,7 @@ public class PlayerScript : MonoBehaviour
     private float ringSpeed;
     private bool PMS;
     [SerializeField] private bool redBustFlag;
+    private float redBuff;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
     //プレイヤー管理関数
@@ -254,8 +255,8 @@ public class PlayerScript : MonoBehaviour
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
         {           
-            accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
-            CreateBoostEffect();                                                            //加速時演出生成
+            accelelateSpeed = (burst + playerSpeed / playerBoostTuner)+redBuff;   //加速分算出
+            CreateBoostEffect();                                                                           //加速時演出生成
 
             if (redBustFlag)
             {
@@ -271,8 +272,6 @@ public class PlayerScript : MonoBehaviour
 
             }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
-            CreateBoostEffect();    //加速時演出生成
             
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -299,6 +298,11 @@ public class PlayerScript : MonoBehaviour
         if (!TimeCountScript.TimeCounter(ref redBoostTimeBuff))
         {
             accelelateSpeed +=playerSpeed * redBoostSpeed;
+            redBuff +=playerSpeed * redBoostSpeed;
+        }
+        else
+        {
+            redBuff = 0;
         }
 
         boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
