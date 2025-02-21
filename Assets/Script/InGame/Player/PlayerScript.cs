@@ -53,7 +53,6 @@ public class PlayerScript : MonoBehaviour
     private bool redBustFlag;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
-
     //プレイヤー管理関数
     public void PlayerController(in bool isPose)
     {
@@ -390,9 +389,17 @@ public class PlayerScript : MonoBehaviour
     }
 
     #region　値受け渡し
+    public float GetMaxRingBoost()
+    {
+        return playerSpeed * speedUpRingTuner;
+    }
+    public float GetRingBoost()
+    {
+        return ringSpeed;
+    }
     public float GetMaxBoost()
     {
-        return (burst + playerSpeed / playerBoostTuner)+(playerSpeed * speedUpRingTuner);
+        return (burst + playerSpeed / playerBoostTuner);
     }
     public float GetPlayerAcce()
     {

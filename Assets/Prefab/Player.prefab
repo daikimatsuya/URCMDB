@@ -71,7 +71,7 @@ MonoBehaviour:
   playerBoostTuner: 3
   speedUpRingTuner: 0.77
   boostBrakeTuner: 100
-  speedUpRingBrakeTuner: 0.003
+  speedUpRingBrakeTuner: 0.01
 --- !u!33 &7870347104334944395
 MeshFilter:
   m_ObjectHideFlags: 0

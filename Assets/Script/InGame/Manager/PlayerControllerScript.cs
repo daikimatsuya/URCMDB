@@ -149,11 +149,18 @@ public class PlayerControllerScript : MonoBehaviour
         }
 
         float buff = ps.GetPlayerAcce() / ps.GetMaxBoost();
-        if (buff > 1)
+        float buff2 = ps.GetRingBoost() / ps.GetMaxRingBoost();
+        if (buff2 > 1 - buff)
         {
-            buff = 1;
+            buff2 = 1 - buff;
         }
-        blurIntnsity =(buff*buff)*maxBlurIntensity;
+
+        buff += buff2; 
+        if (buff > 1f)
+        {
+            buff = 1f;
+        }
+        blurIntnsity = (buff * buff) * maxBlurIntensity;
 
 
         if (Input.GetKey(KeyCode.Space) || (!GetTriggerScript.GetAxisDown("Right") && Input.GetAxis("RightTrigger") != 0)) 
