@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject boostEffect;
     [SerializeField] private GameObject explode;
+    [SerializeField] private GameObject redEffect;
     [SerializeField] private float speedBuff;
     [SerializeField] private float firstSpeed;
     [SerializeField] private float playerSpeed;
@@ -75,6 +76,7 @@ public class PlayerScript : MonoBehaviour
             Move();                           //à⁄ìÆ
             CountDown();                  //ê∂ë∂éûä‘ä«óù
             EffectController();            //ââèoä«óù
+            redEffect.SetActive(redBustFlag);
 
         }//////////////////////////////////////////////////////////////////////////
         else
@@ -530,6 +532,7 @@ public class PlayerScript : MonoBehaviour
         PMS = Usefull.PMSScript.GetPMS();
         redBoostTimeBuff = 0;
         redBustFlag = false;
+        redEffect.SetActive(false);
     }
 
 }
