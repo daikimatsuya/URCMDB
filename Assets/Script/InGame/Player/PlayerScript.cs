@@ -301,8 +301,12 @@ public class PlayerScript : MonoBehaviour
             redBuff +=playerSpeed * redBoostSpeed;
         }
         else
-        {
-            redBuff = 0;
+        {        
+            redBuff -= playerSpeed * redBoostSpeed; ;
+            if (redBuff < 0)
+            {
+                redBuff = 0;
+            }
         }
 
         boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
