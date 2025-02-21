@@ -72,6 +72,9 @@ MonoBehaviour:
   speedUpRingTuner: 0.77
   boostBrakeTuner: 100
   speedUpRingBrakeTuner: 0.01
+  redBoostTime: 5
+  redBoostSpeed: 0.02
+  redBustFlag: 0
 --- !u!33 &7870347104334944395
 MeshFilter:
   m_ObjectHideFlags: 0

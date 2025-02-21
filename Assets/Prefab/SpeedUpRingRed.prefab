@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shrinkSpeed: 2
-  ringSize: 10
+  ringSize: 20
   offsetTime: 0.2
   marker: {fileID: 8266175863323519500, guid: 6bc388777247436469176c60f437341a, type: 3}
 --- !u!136 &7004350860084409631

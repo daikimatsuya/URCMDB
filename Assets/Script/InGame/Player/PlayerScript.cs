@@ -39,6 +39,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float speedUpRingTuner;
     [SerializeField] private float boostBrakeTuner;
     [SerializeField] private float speedUpRingBrakeTuner;
+    [SerializeField] private float redBoostTime;
+    private float redBoostTimeBuff;
+    [SerializeField] private float redBoostSpeed;
 
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
@@ -49,8 +52,7 @@ public class PlayerScript : MonoBehaviour
     private bool isControl;
     private float ringSpeed;
     private bool PMS;
-    private bool quickMove;
-    private bool redBustFlag;
+    [SerializeField] private bool redBustFlag;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
     //プレイヤー管理関数
@@ -251,17 +253,17 @@ public class PlayerScript : MonoBehaviour
             return;
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
-        {
+        {           
+            accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
+            CreateBoostEffect();                                                            //加速時演出生成
+
             if (redBustFlag)
             {
-
+                TimeCountScript.SetTime(ref redBoostTimeBuff, redBoostTime);
+                redBustFlag = false;
             }
-            else
-            {
-                accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
-                CreateBoostEffect();                                                            //加速時演出生成
 
-            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
             {
@@ -293,10 +295,14 @@ public class PlayerScript : MonoBehaviour
             ringSpeed = 0;
         }
         /////////////////////////////////////////////////////////////
-            
+        
+        if (!TimeCountScript.TimeCounter(ref redBoostTimeBuff))
+        {
+            accelelateSpeed +=playerSpeed * redBoostSpeed;
+        }
 
         boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
-
+        
         if (isControl)
         {
             speedBuff = playerSpeed + boostSpeed;   //速度とブーストを加算
@@ -473,6 +479,7 @@ public class PlayerScript : MonoBehaviour
             ringSpeed = playerSpeed * speedUpRingTuner ;
             playerSpeed += playerSpeed * ringBust;
             CreateBoostEffect();
+            redBustFlag = true;
         }
         if (other.CompareTag("Bullet"))
         {
@@ -513,6 +520,8 @@ public class PlayerScript : MonoBehaviour
         redBustFlag = false;
         lp.SetStart(false);
         PMS = Usefull.PMSScript.GetPMS();
+        redBoostTimeBuff = 0;
+        redBustFlag = false;
     }
 
 }
