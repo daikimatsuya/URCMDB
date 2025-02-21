@@ -89,7 +89,7 @@ public class CameraManager : MonoBehaviour
             pcs.HitExplodeCamera();
             return;
         }///////////////////////////////////////////////
-        pcs.MissExplodeCamera(playerController.GetPlayerdeadTransform());    
+        pcs.MissExplodeCamera(playerController.GetPlayerdeadPos());    
     }
     //…‚É“ü‚Á‚½‚Ì‰‰oŠÇ—
     private void SetWaterEffect()

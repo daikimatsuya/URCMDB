@@ -12,6 +12,12 @@ public class PlayerControllerScript : MonoBehaviour
     private int respawnTimerBuff;
     [SerializeField] private GameObject fadeObjectPrefab;
     [SerializeField] private GameObject explodePrefab;
+    [SerializeField, Range(0f, 0.3f)] private float maxBlurIntensity;
+    private float blurIntnsity;
+    [SerializeField, Range(0f, 0.2f)] private float boostedBlurIntensity;
+    [SerializeField, Range(0f, 0.1f)] private float accelelatedBlurIntensity;
+    private float minBlurIntnsity;
+    [SerializeField, Range(0f, 0.1f)] private float blurIntensityBrake;
 
     private PlayerScript ps;
 
@@ -23,17 +29,25 @@ public class PlayerControllerScript : MonoBehaviour
     Transform uiTransform;
     private Vector3 playerdeadPos;
     private TargetScript ts;
-    public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform,in TargetScript ts)
+    private ShaderController sc;
+
+    //初期化
+    public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform,in TargetScript ts,in ShaderController sc)
     {
         this.ts = ts;
         this.lp = lp;
+        this.sc = sc;
         this.uiTransform = uiTransform;
         playerSpawnFlag = true;
         PlayerSpawn(in this.lp,in this.uiTransform);
         gameOverFlag = false;
+        blurIntnsity = 0f;
+        minBlurIntnsity = 0f;
     }
+    //プレイヤーを管理
     public void PlayerController(in bool isPose)
     {
+        BlurController();
         if (ps)
         {
             ps.PlayerController(in isPose);
@@ -48,7 +62,6 @@ public class PlayerControllerScript : MonoBehaviour
     {
         if (player != null)   //プレイヤーがゲーム内にいたらリターン///////////
         {
-
             return;
         }////////////////////////////////////////////////////////////////////////
         if (ts == null)
@@ -94,11 +107,8 @@ public class PlayerControllerScript : MonoBehaviour
     {
         player = Instantiate(playerPrefab);                         //プレイヤー生成
         ps = player.GetComponent<PlayerScript>();           //コンポーネント取得
-        ps.SetFadeObject(in activatingFadeObject);             //フェード設定
-        ps.SetLaunchpad(lp);                                            //発射台位置情報代入
-        ps.StartPlayer();                                                   //プレイヤー初期化
-        player.transform.SetParent(lp.GetTransform());      //プレイヤーと発射台を親子付け
-
+        ps.StartPlayer(in lp,in activatingFadeObject);           //プレイヤー初期化
+        player.transform.SetParent(lp.GetTransform());       //プレイヤーと発射台を親子付け
     }
 
     //プレイヤーリスポーンタイマーリセット
@@ -128,6 +138,34 @@ public class PlayerControllerScript : MonoBehaviour
         playerSpawnFlag = false;
     }
 
+    //ブラー管理
+    public void BlurController()
+    {
+        if (ps == null)
+        {
+            blurIntnsity = 0;
+            sc.SetBlurIntensity(blurIntnsity);
+            return;
+        }
+
+
+
+        if (Input.GetKey(KeyCode.Space) || (!GetTriggerScript.GetAxisDown("Right") && Input.GetAxis("RightTrigger") != 0)) 
+        {
+            minBlurIntnsity = accelelatedBlurIntensity;
+        }
+        else
+        {
+            minBlurIntnsity = 0f;
+        }
+
+        if (blurIntnsity <= minBlurIntnsity)
+        {
+            blurIntnsity = minBlurIntnsity;
+        }
+        sc.SetBlurIntensity(blurIntnsity);
+    }
+
     #region 値受け渡し
     public PlayerScript GetPlayer()
     {
@@ -137,7 +175,7 @@ public class PlayerControllerScript : MonoBehaviour
     {
         return gameOverFlag;
     }
-    public Vector3 GetPlayerdeadTransform()
+    public Vector3 GetPlayerdeadPos()
     {
         return playerdeadPos;
     }

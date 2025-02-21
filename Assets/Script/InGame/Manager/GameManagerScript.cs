@@ -56,7 +56,8 @@ public class GameManagerScript : MonoBehaviour
     }
     private void StartGameManager()
     {
-        pcs.StartPlayerController(in lp, in uiTransform,in ts);
+        sc.StartShaderController();
+        pcs.StartPlayerController(in lp, in uiTransform,in ts,in sc);
         cm.StartCameraManager();
         cm.SetTarget(ts);
         us.StartUIScript(in pcs);
@@ -66,7 +67,7 @@ public class GameManagerScript : MonoBehaviour
         TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
         ts.StartTarget();
         isPose = false;
-        sc.StartShaderController(in pcs);
+
     }
 
     //ÉQÅ[ÉÄÇìÆÇ©Ç∑

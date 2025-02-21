@@ -341,6 +341,10 @@ MonoBehaviour:
   respawnTimer: 4
   fadeObjectPrefab: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
   explodePrefab: {fileID: 5106377284683811499, guid: 63e70589b9508c541bff922d90dc105f, type: 3}
+  maxBlurIntensity: 0.258
+  boostedBlurIntensity: 0.077
+  accelelatedBlurIntensity: 0.0365
+  blurIntensityBrake: 0.0095
 --- !u!114 &6098841261237397159
 MonoBehaviour:
   m_ObjectHideFlags: 0
