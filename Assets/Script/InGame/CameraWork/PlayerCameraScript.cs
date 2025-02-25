@@ -9,7 +9,6 @@ using Usefull;
 public class PlayerCameraScript : MonoBehaviour
 {
     private Transform tf;
-    private Transform playerPos;
     private Vector3 cameraRot;
 
 
@@ -27,11 +26,11 @@ public class PlayerCameraScript : MonoBehaviour
 
 
     //カメラが飛んでいるプレイヤーの後ろに追従する
-    public void FollowPlayerInShoot(in bool isPose)
+    public void FollowPlayerInShoot(in bool isPose,in PlayerScript ps)
     {
-        if (playerPos != null)  //プレイヤーがゲーム内に存在している時/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (ps != null)  //プレイヤーがゲーム内に存在している時/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            tf.rotation = playerPos.rotation;   //プレイヤーの回転角を取得
+            tf.rotation = ps.GetTransform().rotation;   //プレイヤーの回転角を取得
             Vector3 deff = Vector3.zero;        //ずれをゼロ
             rotBuff = rot;                              //Buffにrotを代入
 
@@ -109,18 +108,18 @@ public class PlayerCameraScript : MonoBehaviour
             //////////////////////////
 
 
-            deff = FollowPlayer(playerPos.eulerAngles, rot);                                                                                                       //角度と設定した距離からずれを算出
-            tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z); //プレイヤーの座標にずれを加算してトランスフォームに代入
+            deff = FollowPlayer(ps.GetTransform().eulerAngles, rot);                                                                                                       //角度と設定した距離からずれを算出
+            tf.position = new Vector3(ps.GetTransform().position.x - deff.x, ps.GetTransform().position.y - deff.y + 3, ps.GetTransform().position.z - deff.z); //プレイヤーの座標にずれを加算してトランスフォームに代入
 
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     //カメラが発射台にあるプレイヤーの後ろに追従する
-    public void FollowPlayerInSet()
+    public void FollowPlayerInSet(in PlayerScript ps)
     {
-        tf.rotation = playerPos.rotation;                                                                                                                               //プレイヤーの回転角を取得
+        tf.rotation = ps.GetTransform().rotation;                                                                                                                               //プレイヤーの回転角を取得
         Vector3 deff = Vector3.zero;
-        deff = FollowPlayer(playerPos.eulerAngles,0);                                                                                                           //角度と設定した距離からずれを算出
-        tf.position = new Vector3(playerPos.position.x - deff.x, playerPos.position.y - deff.y + 3, playerPos.position.z - deff.z);  //プレイヤーの座標にずれを加算してトランスフォームに代入
+        deff = FollowPlayer(ps.GetTransform().eulerAngles,0);                                                                                                           //角度と設定した距離からずれを算出
+        tf.position = new Vector3(ps.GetTransform() .position.x - deff.x, ps.GetTransform().position.y - deff.y + 3, ps.GetTransform().position.z - deff.z);  //プレイヤーの座標にずれを加算してトランスフォームに代入
         rot = 0;
     }
     //追従中のカメラの位置出す
@@ -151,10 +150,10 @@ public class PlayerCameraScript : MonoBehaviour
         Fade();                          //フェード管理
     }
     //プレイヤーがターゲット以外で爆発したときのカメラワーク
-    public void MissExplodeCamera()
+    public void MissExplodeCamera(in Vector3 playerPos)
     {
         cameraRot = transform.localEulerAngles;                  //トランスフォームの値をvector3へ移動
-        tf.position = ec.MissExplodeCamera(ref cameraRot);  //爆発エフェクト
+        tf.position = ec.MissExplodeCamera(ref cameraRot,in playerPos);  //爆発エフェクト
         tf.localEulerAngles = cameraRot;                              //算出した値をトランスフォームに代入
     }
     //プレイヤーがターゲットにぶつかったとのカメラワーク
@@ -209,12 +208,7 @@ public class PlayerCameraScript : MonoBehaviour
     //プレイヤーのトランスフォーム取得用プレイヤースクリプトも取得
     public void SetPlayer(in Transform tf,in PlayerScript ps)
     {
-        playerPos = tf;
-        if (sc == null)
-        {
-            sc = GetComponent<ShaderController>();
-        }
-        sc.SetPlayer(ps);
+        ps.SetTransform(tf);
     }
     //MovieFade取得用
     public void SetMF(in MovieFade mf)

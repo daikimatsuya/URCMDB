@@ -1006,6 +1006,7 @@ MonoBehaviour:
   - Drone
   - MissileAircraft
   - Rail
+  - Flak
 --- !u!1 &7038058958946336389
 GameObject:
   m_ObjectHideFlags: 0

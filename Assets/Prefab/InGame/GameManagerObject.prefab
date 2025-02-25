@@ -278,6 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4320082708551101943}
   - component: {fileID: 4320082708551101942}
+  - component: {fileID: 830508550687790484}
   - component: {fileID: 6098841261237397159}
   m_Layer: 0
   m_Name: GameManagerObject
@@ -320,14 +321,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58768f9212e13074ab0e25972def1129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7870347104334944388, guid: 77c5b027360415942bf41ce3ba2cc146, type: 3}
-  fadeObjectPrefab: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
-  playerMissile: 3
-  PMS: 0
   stage: 
   title: Title
   breakTime: 2
-  respawnTimer: 3
+--- !u!114 &830508550687790484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320082708551101941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78ae44e803a07d458ceeb04971bc3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 7870347104334944388, guid: 77c5b027360415942bf41ce3ba2cc146, type: 3}
+  missileCount: 3
+  respawnTimer: 4
+  fadeObjectPrefab: {fileID: 3037135361329186883, guid: 782486e45bca1c141bb5e53c1a254eb1, type: 3}
+  explodePrefab: {fileID: 5106377284683811499, guid: 63e70589b9508c541bff922d90dc105f, type: 3}
+  maxBlurIntensity: 0.258
+  boostedBlurIntensity: 0.077
+  accelelatedBlurIntensity: 0.0365
+  blurIntensityBrake: 0.0021
 --- !u!114 &6098841261237397159
 MonoBehaviour:
   m_ObjectHideFlags: 0

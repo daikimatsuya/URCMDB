@@ -191,7 +191,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3536103835060491500}
   - component: {fileID: 1531376186115613977}
-  - component: {fileID: 5335780075296582319}
   - component: {fileID: 2914198514719080994}
   - component: {fileID: 3536103835060491499}
   - component: {fileID: 3536103835060491498}
@@ -239,26 +238,6 @@ MonoBehaviour:
   movieCanvas: {fileID: 5518903822528575276}
   watarEffect: {fileID: 6804460003852796837}
   drownPos: -100
---- !u!114 &5335780075296582319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3536103835060491497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0057f9a4c29da454883cadd2fabce010, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerPos: {x: 0, y: 0, z: 0}
-  directionX: 50
-  distance: 40000
-  rotateSpeed: 0.3
-  hitCameraPos: {x: 0, y: 0, z: 0}
-  hitCameraRot: {x: 0, y: 0, z: 0}
-  clearCameraPos: {x: 0, y: 0, z: 0}
-  clearCameraRot: {x: 0, y: 0, z: 0}
 --- !u!114 &2914198514719080994
 MonoBehaviour:
   m_ObjectHideFlags: 0

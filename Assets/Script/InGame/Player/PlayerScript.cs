@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject boostEffect;
     [SerializeField] private GameObject explode;
+    [SerializeField] private GameObject redEffect;
     [SerializeField] private float speedBuff;
     [SerializeField] private float firstSpeed;
     [SerializeField] private float playerSpeed;
@@ -31,12 +32,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float rowlingSpeedY;
     [SerializeField] private float fixRowling;
     [SerializeField] private float speedCut;
-    [SerializeField, Range(0f, 0.3f)] private float maxBlurIntensity;
-    private float blurIntnsity;
-    [SerializeField, Range(0f, 0.2f)] private float boostedBlurIntensity;
-    [SerializeField, Range(0f, 0.1f)] private float accelelatedBlurIntensity;
-    private float minBlurIntnsity;
-    [SerializeField, Range(0f, 0.1f)] private float blurIntensityBrake;
     [SerializeField] private float firePosZ;
     [SerializeField] private Vector3 fireSize;
     [SerializeField] private float correctionRowring;
@@ -45,6 +40,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float speedUpRingTuner;
     [SerializeField] private float boostBrakeTuner;
     [SerializeField] private float speedUpRingBrakeTuner;
+    [SerializeField] private float redBoostTime;
+    private float redBoostTimeBuff;
+    [SerializeField] private float redBoostSpeed;
 
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
@@ -55,9 +53,9 @@ public class PlayerScript : MonoBehaviour
     private bool isControl;
     private float ringSpeed;
     private bool PMS;
-    private bool quickMove;
+    [SerializeField] private bool redBustFlag;
+    private float redBuff;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
-
 
     //プレイヤー管理関数
     public void PlayerController(in bool isPose)
@@ -78,7 +76,7 @@ public class PlayerScript : MonoBehaviour
             Move();                           //移動
             CountDown();                  //生存時間管理
             EffectController();            //演出管理
-            BlurIntnsityController();   //加速表現ブラー管理
+            redEffect.SetActive(redBustFlag);
 
         }//////////////////////////////////////////////////////////////////////////
         else
@@ -118,90 +116,46 @@ public class PlayerScript : MonoBehaviour
 
         if (isControl) //プレイヤーを操作できる//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
+            Vector2 speed;
             if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)||Input.GetAxis("LeftTrigger")==1)
             {
-                quickMove = true;
+                speed = new Vector2(rowlingSpeedX, rowlingSpeedY);
             }
             else
             {
-                quickMove= false;
+                speed = new Vector2(rowlingSpeedX/speedCut, rowlingSpeedY/speedCut);
             }
-            if(!quickMove) //回転速度半減/////////////////////
+
+            //操作でプレイヤーの角度加算///////////////////////////////////////////////////
+
+            //コントローラー操作/////////////////////
+            float axisY = Input.GetAxis("LeftStickY");
+            rowlingBuff.x = speed.y * axisY;
+
+            float axisX = Input.GetAxis("LeftStickX");
+            rowlingBuff.y = speed.x * axisX;
+            //////////////////////////////////////////
+
+            //キーボード操作//////////////////////////
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
-                //操作でプレイヤーの角度加算///////////////////////////////////////////////////
-
-                //コントローラー操作/////////////////////
-
-                float axisY = Input.GetAxis("LeftStickY");
-                rowlingBuff.x = (rowlingSpeedY / speedCut) * axisY;
-
-                float axisX = Input.GetAxis("LeftStickX");
-                rowlingBuff.y = (rowlingSpeedX / speedCut) * axisX;
-
-                //////////////////////////////////////////
-
-                //キーボード操作////////////////////////////
-                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-                {
-                    rowlingBuff.x = -(rowlingSpeedY/speedCut);
-                }
-                if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-                {
-                    rowlingBuff.x = rowlingSpeedY/speedCut;
-                }
-                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                {
-                    rowlingBuff.y = -(rowlingSpeedX/speedCut);
-                }
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                {
-                    rowlingBuff.y = rowlingSpeedX/speedCut;
-                }
-                /////////////////////////////////////////////
-
-
-
-
-                /////////////////////////////////////////////////////////////////////////////////
-
-            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            else
-            {
-                //操作でプレイヤーの角度加算///////////////////////////////////////////////////
-
-                //コントローラー操作/////////////////////
-
-                float axisY = Input.GetAxis("LeftStickY");
-                rowlingBuff.x = rowlingSpeedY * axisY;
-
-                float axisX = Input.GetAxis("LeftStickX");
-                rowlingBuff.y = rowlingSpeedX * axisX;
-
-                //////////////////////////////////////////
-
-                //キーボード操作//////////////////////////
-                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-                {
-                    rowlingBuff.x = -rowlingSpeedY;
-                }
-                if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-                {
-                    rowlingBuff.x = rowlingSpeedY;
-                }
-                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                {
-                    rowlingBuff.y = -rowlingSpeedX;
-                }
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                {
-                    rowlingBuff.y = rowlingSpeedX;
-                }
-                ///////////////////////////////////////////
-
-
-
-                /////////////////////////////////////////////////////////////////////////////////
+                rowlingBuff.x = -speed.y;
             }
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            {
+                rowlingBuff.x = speed.y;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                rowlingBuff.y = -speed.x;
+            }
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                rowlingBuff.y = speed.x;
+            }
+            ///////////////////////////////////////////
+
+            ////////////////////////////////////////////////////////////////////////////////
 
             rowling += rowlingBuff;
 
@@ -296,55 +250,74 @@ public class PlayerScript : MonoBehaviour
     //加減速処理
     private void Acceleration()
     {
-        if (isFire) //移動中////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (!isFire) //移動中////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-            if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
-            {
-                accelelateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
-                CreateBoostEffect();                                                            //加速時演出生成
-                blurIntnsity = maxBlurIntensity;                                           //加速演出ブラーに値を代入
 
-            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            return;
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
+        {           
+            accelelateSpeed = (burst + playerSpeed / playerBoostTuner)+redBuff;   //加速分算出
+            CreateBoostEffect();                                                                           //加速時演出生成
+
+            if (redBustFlag)
+            {
+                TimeCountScript.SetTime(ref redBoostTimeBuff, redBoostTime);
+                redBustFlag = false;
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
             {
                 playerSpeed += accelerate;                         //基本速度に加算
-                minBlurIntnsity = accelelatedBlurIntensity;   //加速演出ブラーに値を代入
 
             }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if(boostSpeed > 0)  //一時加速がある間はブラーに値を入れる////////////////////////////
-            {
-                minBlurIntnsity = boostedBlurIntensity;
-            }//////////////////////////////////////////////////////////////////////////////////////////
-
-            else if (!Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")==0)
-            {
-                minBlurIntnsity = 0;
-            }
-
-            //一時加速減産//////////////////////////////////////////////
-            accelelateSpeed -= playerSpeed / boostBrakeTuner;
-            ringSpeed -= playerSpeed * speedUpRingBrakeTuner;
-            if (accelelateSpeed <= 0)
-            {
-                accelelateSpeed = 0;
-            }
-            if(ringSpeed <= 0)
-            {
-                ringSpeed = 0;
-            }
-            /////////////////////////////////////////////////////////////
             
+        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
+        if (Input.GetKey(KeyCode.Space)||Input.GetAxis("RightTrigger")!=0)    //基本速度加速/////////////////////////
+        {
+            playerSpeed += accelerate;  //基本速度に加算
+        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if(isControl)
+        //一時加速減産//////////////////////////////////////////////
+        accelelateSpeed -= playerSpeed / boostBrakeTuner;
+        ringSpeed -= playerSpeed * speedUpRingBrakeTuner;
+
+        if (accelelateSpeed <= 0)
+        {
+            accelelateSpeed = 0;
+        }
+        if(ringSpeed <= 0)
+        {
+            ringSpeed = 0;
+        }
+        /////////////////////////////////////////////////////////////
+        
+        if (!TimeCountScript.TimeCounter(ref redBoostTimeBuff))
+        {
+            accelelateSpeed +=playerSpeed * redBoostSpeed;
+            redBuff +=playerSpeed * redBoostSpeed;
+        }
+        else
+        {        
+            redBuff -= playerSpeed * redBoostSpeed; ;
+            if (redBuff < 0)
+            {
+                redBuff = 0;
+            }
+        }
+
+        boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
+        
+        if (isControl)
         {
             speedBuff = playerSpeed + boostSpeed;   //速度とブーストを加算
         }
+
     }
     //デバッグで速度調節する（後で消す
     private void SpeedControllDebager()
@@ -372,8 +345,6 @@ public class PlayerScript : MonoBehaviour
         if (playerHp <= 0)
         {
             lp.Bombed();                                        //発射台に操作を返す
-            GameObject _ = Instantiate(explode);    //爆発エフェクト生成
-            _.transform.position = tf.position;          //座標代入
             Destroy(this.gameObject);                     //プレイヤーオブジェクトを削除
         }
     }
@@ -425,20 +396,7 @@ public class PlayerScript : MonoBehaviour
 
         }
     }
-    //ブラー強度管理
-    private void BlurIntnsityController()
-    {
-        //速度演出用ブラーの強度を下げていく////
-        if (blurIntnsity > minBlurIntnsity)
-        {
-            blurIntnsity -= blurIntensityBrake;
-            if(blurIntnsity<minBlurIntnsity)
-            {
-                blurIntnsity = minBlurIntnsity;
-            }
-        }
-        ///////////////////////////////////////////
-    }
+
     //プレイヤーの角度を発射台に合わせる
     private void SetPreShootAngle()
     {
@@ -446,20 +404,22 @@ public class PlayerScript : MonoBehaviour
         tf.localEulerAngles = new Vector3(0, 180, 0);   //角度を初期化
     }
 
-
     #region　値受け渡し
-    public void SetFadeObject(in GameObject afs)
+    public float GetMaxRingBoost()
     {
-        this.activateFadeObject = afs;
+        return playerSpeed * speedUpRingTuner;
     }
-    public void SetLaunchpad(in LaunchPointScript lp)
+    public float GetRingBoost()
     {
-        this.lp = lp;
+        return ringSpeed;
     }
-
+    public float GetMaxBoost()
+    {
+        return (burst + playerSpeed / playerBoostTuner);
+    }
     public float GetPlayerAcce()
     {
-        return accelelateSpeed;
+        return boostSpeed;
     }
     public Vector3 GetPlayerSpeed()
     {
@@ -485,14 +445,24 @@ public class PlayerScript : MonoBehaviour
     {
         return isControl;
     }
-    public float GetBlurIntensity()
-    {
-        return blurIntnsity;
-    }
+
     public bool GetIsFire()
     {
         return isFire;
     }
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+    public void SetTransform(in Transform tf)
+    {
+        this.tf = tf;
+    }
+    public Vector3 GetPlayerPos()
+    {
+        return tf.position;
+    }
+
     #endregion
 
     public void OnCollisionEnter(Collision collision)
@@ -512,8 +482,14 @@ public class PlayerScript : MonoBehaviour
         {
             ringSpeed = playerSpeed * speedUpRingTuner;
             playerSpeed += playerSpeed * ringBust;
-            blurIntnsity = maxBlurIntensity;
             CreateBoostEffect();
+        }
+        if (other.CompareTag("SpeedUpRingRed"))
+        {
+            ringSpeed = playerSpeed * speedUpRingTuner ;
+            playerSpeed += playerSpeed * ringBust;
+            CreateBoostEffect();
+            redBustFlag = true;
         }
         if (other.CompareTag("Bullet"))
         {
@@ -537,12 +513,11 @@ public class PlayerScript : MonoBehaviour
     }
 
     //プレイヤー初期化
-    public void StartPlayer()
+    public void StartPlayer(in LaunchPointScript lp,in GameObject afs)
     {
-
+        this.lp = lp;
+        this.activateFadeObject = afs;
         TimeCountScript.SetTime(ref time, time);
-        blurIntnsity = 0.0f;
-
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
 
@@ -552,8 +527,12 @@ public class PlayerScript : MonoBehaviour
         isControl = false;
         ringSpeed = 0;
         tf.position = lp.GetPos();
+        redBustFlag = false;
         lp.SetStart(false);
         PMS = Usefull.PMSScript.GetPMS();
+        redBoostTimeBuff = 0;
+        redBustFlag = false;
+        redEffect.SetActive(false);
     }
 
 }

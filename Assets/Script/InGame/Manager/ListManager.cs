@@ -11,37 +11,45 @@ public class ListManager
     private FunListScript fls;
     private FlakListScript flakls;
     private DroneListScript dls;
+    private ExplodeEffectListScript eel;
+    private PlayerControllerScript pcs;
 
     //リスト更新
-    public void ListManagerController(in PlayerScript ps,in bool isPose)
+    public void ListManagerController(in bool isPose)
     {
-        mls.MonitorListController(in ps,in isPose);              //ゲーム内モニター管理
-        surls.SpeedUpRingListController(in ps, in isPose);   //スピードアップリング管理
+        mls.MonitorListController(in pcs,in isPose);              //ゲーム内モニター管理
+        surls.SpeedUpRingListController(in pcs, in isPose);   //スピードアップリング管理
         frls.RockFallListController(in isPose);                      //岩落とす奴管理
         fls.FunListController(in isPose);                             //ファン管理
         flakls.FlakListController(in isPose);                        //高角砲管理
         dls.DroneListController();                                     //ドローン管理
+        eel.ExplodeEffectListController(in pcs);                  //爆発エフェクト管理
     }
     //早期初期化
-    public void AwakeListManager()
+    public void AwakeListManager(in PlayerControllerScript pcs)
     {
-        mls=new MonitorListScript();
+        this.pcs = pcs;
+
+        mls=GameObject.FindObjectOfType<MonitorListScript>();
         mls.AwakeMonitorList();
 
-        surls =new SpeedUpRingListScript();
+        surls = GameObject.FindObjectOfType<SpeedUpRingListScript>();
         surls.AwakeSpeedUpRingList();
 
-        frls = new FallRockListScript();
+        frls = GameObject.FindObjectOfType<FallRockListScript>();
         frls.AwakeFallRockList();
 
-        fls = new FunListScript();
+        fls = GameObject.FindObjectOfType<FunListScript>();
         fls.AwakeFunList();
 
-        flakls = new FlakListScript();
+        flakls = GameObject.FindObjectOfType<FlakListScript>();
         flakls.AwakeFlakList();
 
-        dls = new DroneListScript();
+        dls = GameObject.FindObjectOfType<DroneListScript>();
         dls.AwakeDroneList();
+
+        eel=GameObject.FindObjectOfType<ExplodeEffectListScript>();
+        eel.AwakeExplodeEffectList();
     }
 
 }

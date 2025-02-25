@@ -5,7 +5,7 @@ using UnityEngine;
 //ファンをリストで管理する
 public class FunListScript : MonoBehaviour
 {
-    private List<FunScript> funList = new List<FunScript>();
+    private List<FunScript> funList;
 
     //ファンをリストで管理
     public void FunListController(in bool isPose)
@@ -26,12 +26,10 @@ public class FunListScript : MonoBehaviour
     //早期初期化
     public void AwakeFunList()
     {
-        int i = 0;
-        foreach (Transform children in GameObject.FindWithTag("FunList").transform)
+        funList = new List<FunScript>(FindObjectsOfType<FunScript>());
+        for (int i = 0; i < funList.Count; i++)
         {
-            funList.Add(children.GetChild(0).GetComponent<FunScript>());
             funList[i].StartFun();
-            i++;
         }
     }
 }
