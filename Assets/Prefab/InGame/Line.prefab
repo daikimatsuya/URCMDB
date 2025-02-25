@@ -48,7 +48,11 @@ MonoBehaviour:
   randPow: 0.001
   colorChangeTime: 0.05
   ignoreTags:
-  - Untagged
+  - Sensor
+  - SpeedUpRing
+  - SpeedUpRingRed
+  - SpeedUpRingRed
+  - stage
 --- !u!120 &2025208784463914876
 LineRenderer:
   m_ObjectHideFlags: 0
