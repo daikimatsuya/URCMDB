@@ -17,7 +17,7 @@ public class LineUIScript : MonoBehaviour
 
     [SerializeField] private float randPow;
     [SerializeField] private float colorChangeTime;
-    [SerializeField] string[] ignoreTags;
+    [SerializeField] string[] hitIgnoreTags;
 
     //予測線設置
     public void SetLine(Vector3 Pos,Vector3 targetLength,float time)
@@ -33,9 +33,9 @@ public class LineUIScript : MonoBehaviour
         if(Physics.Raycast(pos.position,Vector3.Normalize(targetLength),out hit, Vector3.Magnitude(targetLength)))  //レイキャストでプレイヤーと砲身の間に障害物があるかを確認////////////////
         {
             isShade = false;
-            for (int i = 0; i < ignoreTags.Length; i++)
+            for (int i = 0; i < hitIgnoreTags.Length; i++)
             {
-                if (hit.collider.CompareTag(ignoreTags[i]))
+                if (hit.collider.CompareTag(hitIgnoreTags[i]))
                 {
                     isShade= true;
                     return;
