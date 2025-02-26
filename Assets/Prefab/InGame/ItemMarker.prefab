@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerPosY: 0
   pretenseSize: 0.04
+  maxDisY: 687.9
+  maxPosY: 1.25
+  divide: 25
 --- !u!33 &8596963842128582655
 MeshFilter:
   m_ObjectHideFlags: 0

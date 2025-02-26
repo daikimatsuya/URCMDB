@@ -24,6 +24,7 @@ public class SpeedUpRingScript : MonoBehaviour
         if (!isGet)  //æ“¾‚³‚ê‚½‚ç‹@”\‚ğÁ‚·//////////
         {
             ms.AdjustmentSize();
+            ms.AdjustmentPos();
             return;
         }//////////////////////////////////////////////
 
@@ -46,7 +47,7 @@ public class SpeedUpRingScript : MonoBehaviour
         GameObject _ = Instantiate(marker);
         ms = _.GetComponent<MarkerScript>();
         _.transform.SetParent(this.transform);
-        ms.StartMarker(in pcs);
+        ms.StartMarker(in pcs, this.gameObject.transform);
         ms.transform.rotation=this.transform.rotation;
         ms.Move(tf.position);
 

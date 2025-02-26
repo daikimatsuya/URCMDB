@@ -26,6 +26,7 @@ public class FlakBulletScript : MonoBehaviour
         rb.velocity = speed;       //速度加算
         ms.Move(pos.position);  //マーカーアイコンを弾丸に追従させる
         ms.AdjustmentSize();
+        ms.AdjustmentPos();
     }
     //消去
     public void Delete()
@@ -38,7 +39,7 @@ public class FlakBulletScript : MonoBehaviour
     {
         GameObject _ = Instantiate(marker);         //マーカーアイコン生成
         ms = _.GetComponent<MarkerScript>();    //スクリプト取得
-        ms.StartMarker(in pcs);
+        ms.StartMarker(in pcs,this.gameObject.transform);
         ms.Move(pos.position);                              //追従させる
 
     }

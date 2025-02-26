@@ -10,9 +10,12 @@ public class MarkerScript : MonoBehaviour
 
     [SerializeField] private float markerPosY;
     [SerializeField] private float pretenseSize;
-    [SerializeField] private float maxY;
+    private float maxDisY;
+    private float maxPosY;
+    private float divide;
 
     private PlayerControllerScript pcs;
+    private Transform objectTransform;
 
 
     //ˆÚ“®‚³‚¹‚é
@@ -24,21 +27,45 @@ public class MarkerScript : MonoBehaviour
     //ƒTƒCƒY’²®
     public void AdjustmentSize()
     {
-        if (pcs.GetPlayer() != null)
+        if (pcs.GetPlayer() == null)
         {
-            Vector3 playerPos = pcs.GetPlayer().GetPlayerPos();
-            Vector3 playerDis = playerPos - tf.transform.position;
-            Vector2 playerDis2=new Vector2(playerDis.x, playerDis.z);
-            float disFloat = playerDis2.magnitude;
-
-            tf.transform.localScale = new Vector3( disFloat * pretenseSize, disFloat * pretenseSize,  disFloat * pretenseSize);
+            return;
         }
+
+        tf.transform.localScale = new Vector3(Distance() * pretenseSize, Distance() * pretenseSize, Distance() * pretenseSize);
+        
     }
-    public void StartMarker(in PlayerControllerScript pcs)
+    public void AdjustmentPos()
+    {
+        if (pcs.GetPlayer() == null)
+        {
+            return;
+        }
+
+        float playerDis = pcs.GetPlayer().GetPlayerPos().y - objectTransform.transform.position.y;
+        float t = (playerDis / maxDisY);
+        if (t >= 1)
+        {
+            t = 1f;
+        }
+        if (t < -1)
+        {
+            t = -1;
+        }
+        float dis = Distance()/divide;
+        float adjustmentPos = (dis *-t * maxPosY);
+
+        tf.transform.position = new Vector3(tf.position.x, markerPosY + adjustmentPos, tf.position.z);
+    }
+    
+    public void StartMarker(in PlayerControllerScript pcs,in Transform objectTransform)
     {
         tf = GetComponent<Transform>();
         this.pcs = pcs;
-
+        this.objectTransform = objectTransform;
+        divide = 25;
+        maxDisY = 688;
+        maxPosY = 1.25f;
     }
     public void SetActive(bool flag)
     {
@@ -49,5 +76,12 @@ public class MarkerScript : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-
+    private float Distance()
+    {
+        Vector3 playerPos = pcs.GetPlayer().GetPlayerPos();
+        Vector3 playerDis = playerPos - tf.transform.position;
+        Vector2 playerDis2 = new Vector2(playerDis.x, playerDis.z);
+        float disFloat = playerDis2.magnitude;
+        return disFloat; ;
+    }
 }

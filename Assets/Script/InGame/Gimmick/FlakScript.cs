@@ -79,6 +79,7 @@ public class FlakScript : MonoBehaviour
         barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);   //砲身を回転
         ///////////////////////////////////////////////////////////////////////////////////////////
         ms.AdjustmentSize();
+        ms.AdjustmentPos();
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
     }
 
@@ -167,7 +168,7 @@ public class FlakScript : MonoBehaviour
     {
         GameObject _ = Instantiate(marker);         //生成
         ms = _.GetComponent<MarkerScript>();    //コンポーネント取得
-        ms.StartMarker(in pcs);
+        ms.StartMarker(in pcs, this.gameObject.transform);
         ms.Move(pos.position);                              //位置代入
         _.transform.SetParent(this.transform);
     }
