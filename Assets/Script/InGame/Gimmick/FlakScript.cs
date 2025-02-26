@@ -30,7 +30,6 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private float setVoid;
     private float voidColorTime;
 
-
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
     private int intervalBuff;
