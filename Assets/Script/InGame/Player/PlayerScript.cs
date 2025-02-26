@@ -301,6 +301,8 @@ public class PlayerScript : MonoBehaviour
         {
             accelelateSpeed +=playerSpeed * redBoostSpeed;
             redBuff +=playerSpeed * redBoostSpeed;
+            CreateBoostEffect();
+            
         }
         else
         {        
