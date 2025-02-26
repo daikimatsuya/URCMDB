@@ -3408,6 +3408,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f9d12ae8e1870740a44a3dd92fb5298, type: 3}
+--- !u!1001 &1170544216
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1384495533}
+    m_Modifications:
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -68
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17159
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409696, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004350860084409697, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_Name
+      value: SpeedUpRingRed (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
 --- !u!1001 &1189854268
 PrefabInstance:
   m_ObjectHideFlags: 0
