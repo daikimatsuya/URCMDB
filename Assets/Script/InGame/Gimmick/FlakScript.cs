@@ -13,13 +13,10 @@ public class FlakScript : MonoBehaviour
     Transform linePos;
     LineUIScript lineScript;
 
-    private Transform playerPos;
-    private PlayerScript playerScript;
     private LineUIScript lineUI;
     private MarkerScript ms; 
 
     [SerializeField] private bool autShotSwitch;
-
     [SerializeField] private Transform body;
     [SerializeField] private Transform barrel;
     [SerializeField] private Transform bulletPoint;
@@ -33,18 +30,27 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private float setVoid;
     private float voidColorTime;
 
+
     private Vector3 playerDis;
     private Vector3 playerDisNormal;
     private int intervalBuff;
     List<FlakBulletScript> flakBulletList = new List<FlakBulletScript>();
+    private bool isAffective;
 
     //砲台の向きと射撃
-    public void Aim()
+    public void Aim(in PlayerScript ps)
     {
+        if (ps == null)
+        {
+            isAffective = false;
+            return;
+        }
         //偏差予測///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        playerDis=playerPos.position-barrel.position;                   //距離算出
+        Vector3 playerPos = ps.GetPlayerPos();
+        playerDis =playerPos-barrel.position;                   //距離算出
         lineUI.SetLine(barrel.position,playerDis,intervalBuff);       //予測線設定
-        Vector3 playerSpeed= playerScript.GetPlayerSpeed();      //プレイヤーの速度取得
+        Vector3 playerSpeed= ps.GetPlayerSpeed();      //プレイヤーの速度取得
+
 
         //解の公式を使用して値を算出///////////////////////////////////////////////////////
         float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);   
@@ -63,7 +69,7 @@ public class FlakScript : MonoBehaviour
         ///////////////////////////////////////////////////////////////////////////////////
 
         //速度計算///////////////////////////////////////////////////////////////////////////////////////////////////
-        playerDis = new Vector3((playerPos.position.x + (playerSpeed.x * t) - barrel.position.x), (playerPos.position.y + (playerSpeed.y * t) - barrel.position.y), (playerPos.position.z + (playerSpeed.z * t) - barrel.position.z));
+        playerDis = new Vector3((playerPos.x + (playerSpeed.x * t) - barrel.position.x), (playerPos.y + (playerSpeed.y * t) - barrel.position.y), (playerPos.z + (playerSpeed.z * t) - barrel.position.z));
         playerDisNormal = playerDis.normalized;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -77,14 +83,7 @@ public class FlakScript : MonoBehaviour
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
     }
 
-    //予測線を消す
-    public void LineUIDelete()
-    {
-        if (lineUI != null)
-        {
-            lineUI.Death(); //lineUIを削除
-        }
-    }
+
     //弾をリストで管理する
     public void BulletController(in bool isPose)
     {
@@ -116,7 +115,10 @@ public class FlakScript : MonoBehaviour
     {
         if (lineUI.GetShade())
         {
-            intervalBuff++;
+            if (intervalBuff < shotInterval * 60)
+            {
+                intervalBuff++;
+            }
             lineUI.SetVoid();
         }
         else
@@ -167,33 +169,45 @@ public class FlakScript : MonoBehaviour
         GameObject _ = Instantiate(marker);         //生成
         ms = _.GetComponent<MarkerScript>();    //コンポーネント取得
         ms.Move(pos.position);                              //位置代入
-     
+        _.transform.SetParent(this.transform);
+    }
+    //予測線生成
+    private void CreateLine()
+    {
+        GameObject _ = Instantiate(line);                              //予測線生成
+        lineUI = _.GetComponent<LineUIScript>();                //コンポーネント取得
+        lineUI.StartLine();                                                     //予測線初期化
+        _.transform.position = barrel.position;                        //位置を砲身に移動
+        _.transform.SetParent(this.transform);
     }
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            playerPos = other.transform;                                     //プレイヤーの位置取得
-            playerScript = other.GetComponent<PlayerScript>();  //コンポーネント取得
-            GameObject _ = Instantiate(line);                              //予測線生成
-            lineUI = _.GetComponent<LineUIScript>();                //コンポーネント取得
-            lineUI.StartLine();                                                     //予測線初期化
-            _.transform.position = barrel.position;                        //位置を砲身に移動
+
+            isAffective = true;
         }
     }
     public void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player")
         {
-            TimeCountScript.SetTime(ref intervalBuff, shotInterval);
-            playerPos = null;
+            isAffective = false;
+        }
+    }
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            isAffective=true;
         }
     }
 
     #region 値受け渡し
-    public Transform GetPlayerPos()
+
+    public bool GetIsAffective()
     {
-        return playerPos;
+        return isAffective;
     }
     #endregion
 
@@ -214,6 +228,7 @@ public class FlakScript : MonoBehaviour
         //////////
 
         CreateMarker();
+        CreateLine();
     }
 
 

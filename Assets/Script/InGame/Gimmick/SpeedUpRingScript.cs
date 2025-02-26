@@ -50,6 +50,7 @@ public class SpeedUpRingScript : MonoBehaviour
         GameObject _ = Instantiate(marker);
         ms = _.GetComponent<MarkerScript>();
         ms.Move(tf.position);
+        _.transform.SetParent(this.transform);
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -43,7 +43,7 @@ public class ListManager
         fls.AwakeFunList();
 
         flakls = GameObject.FindObjectOfType<FlakListScript>();
-        flakls.AwakeFlakList();
+        flakls.AwakeFlakList(in pcs);
 
         dls = GameObject.FindObjectOfType<DroneListScript>();
         dls.AwakeDroneList();

@@ -6,6 +6,7 @@ using UnityEngine;
 public class FlakListScript : MonoBehaviour
 {
     private List<FlakScript> flakList;
+    private PlayerControllerScript pcs;
 
     //高角砲一括管理
     public void FlakListController(in bool isPose)
@@ -20,14 +21,12 @@ public class FlakListScript : MonoBehaviour
         {
             if (!isPose)
             {
-                if (flakList[i].GetPlayerPos() == null)    //プレイヤーが射程内にいない////
+                if (flakList[i].GetIsAffective()==false)    //プレイヤーが射程内にいない////
                 {
                     flakList[i].SetTime();               //クールタイムリセット
-                    flakList[i].LineUIDelete();        //予測線を削除
-                    return;
                 }/////////////////////////////////////////////////////////////////////////////
 
-                flakList[i].Aim(); //プレイヤーを補足
+                flakList[i].Aim(pcs.GetPlayer()); //プレイヤーを補足
                 if (flakList[i].GetTime()) //クールタイム確認///
                 {
                     flakList[i].Shot();    //射撃
@@ -36,8 +35,9 @@ public class FlakListScript : MonoBehaviour
                 flakList[i].BulletController(in isPose);
         }
     }
-    public void AwakeFlakList()
+    public void AwakeFlakList(in PlayerControllerScript pcs)
     {
+        this.pcs = pcs;
         flakList = new List<FlakScript>(FindObjectsOfType<FlakScript>());
         for (int i = 0; i < flakList.Count; i++)
         {
