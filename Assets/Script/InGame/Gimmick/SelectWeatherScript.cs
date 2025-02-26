@@ -11,8 +11,6 @@ public class SelectWeatherScript : MonoBehaviour
     private int chanceOfRain;
     private bool isRain;
 
-
-
     PlayerCameraScript pcs;
     [SerializeField] private GameObject rain;
     [SerializeField] private int blankRain;
@@ -22,7 +20,6 @@ public class SelectWeatherScript : MonoBehaviour
     [SerializeField] private Color defaultSkyColor;
     [SerializeField] private Color defaultEquatorColor;
     [SerializeField] private Color defaultGroundColor;
-
 
     public Light Light { get; set; }
 
@@ -108,7 +105,7 @@ public class SelectWeatherScript : MonoBehaviour
     #region ’lŽó‚¯“n‚µ
     public int GetChanceOfRain()
     {
-        if (chanceOfRain != 0)
+        if (chanceOfRain <= 100)
         {
             return chanceOfRain;
         }

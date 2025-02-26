@@ -10,6 +10,7 @@ public class MarkerScript : MonoBehaviour
 
     [SerializeField] private float markerPosY;
     [SerializeField] private float pretenseSize;
+    [SerializeField] private float maxY;
 
     private PlayerControllerScript pcs;
 
@@ -27,7 +28,8 @@ public class MarkerScript : MonoBehaviour
         {
             Vector3 playerPos = pcs.GetPlayer().GetPlayerPos();
             Vector3 playerDis = playerPos - tf.transform.position;
-            float disFloat = playerDis.magnitude;
+            Vector2 playerDis2=new Vector2(playerDis.x, playerDis.z);
+            float disFloat = playerDis2.magnitude;
 
             tf.transform.localScale = new Vector3( disFloat * pretenseSize, disFloat * pretenseSize,  disFloat * pretenseSize);
         }

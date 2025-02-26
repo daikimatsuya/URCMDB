@@ -28,10 +28,7 @@ public class SpeedUpRingScript : MonoBehaviour
         }//////////////////////////////////////////////
 
         tf.localScale = new Vector3(0, 0, 0);   //サイズを０にする
-        if(ms!=null)
-        {
-            ms.SetActive(false);
-        }
+        ms.SetActive(false);
 
     }
     //再表示
@@ -40,10 +37,8 @@ public class SpeedUpRingScript : MonoBehaviour
         isGet = false;                                                      //取得フラグを消す
         tf.localScale = new Vector3(1, ringSize, ringSize); //サイズ初期化
         collider_.enabled = true;                                     //コライダーオン
-        if(ms==null)
-        {
-           ms.SetActive(true);
-        }        
+        ms.SetActive(true);
+               
     }
     //マーカー生成
     private void CreateMarker(in PlayerControllerScript pcs)
