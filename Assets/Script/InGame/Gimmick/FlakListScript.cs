@@ -29,7 +29,7 @@ public class FlakListScript : MonoBehaviour
                 flakList[i].Aim(pcs.GetPlayer()); //プレイヤーを補足
                 if (flakList[i].GetTime()) //クールタイム確認///
                 {
-                    flakList[i].Shot();    //射撃
+                    flakList[i].Shot(in pcs);    //射撃
                 }/////////////////////////////////////////////////
             }
                 flakList[i].BulletController(in isPose);

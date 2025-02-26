@@ -132,13 +132,13 @@ public class FlakScript : MonoBehaviour
         return false;
     }
     //弾丸発生処理
-    public void Shot()
+    public void Shot(in PlayerControllerScript pcs)
     {
         TimeCountScript.SetTime(ref intervalBuff, shotInterval);                                                                                                                 //クールタイムリセット
         Vector3 speed = new Vector3(playerDisNormal.x * bulletSpeed, playerDisNormal.y * bulletSpeed, playerDisNormal.z * bulletSpeed);   //弾丸の速度算出
         GameObject _=Instantiate(bullet);                                                                                                                                                //弾丸生成
         FlakBulletScript fb = _.GetComponent<FlakBulletScript>();                                                                                                             //コンポーネント取得
-        fb.StartFlakBullet(speed);                                                                                                                                                             //弾丸初期化
+        fb.StartFlakBullet(speed,pcs);                                                                                                                                                             //弾丸初期化
         _.transform.localPosition = new Vector3(bulletPoint.position.x, bulletPoint.position.y, bulletPoint.position.z);                                       //ポジションを代入
         _.transform.localEulerAngles = new Vector3(-barrel.localEulerAngles.x, body.localEulerAngles.z + 180, 0);                                        //角度を代入
         flakBulletList.Add(fb);                                                                                                                                                                  //弾丸をリストに追加
