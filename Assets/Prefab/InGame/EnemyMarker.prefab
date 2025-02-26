@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8556694843924679020}
+  - component: {fileID: -60832671360362033}
   - component: {fileID: 3530681433665217052}
   - component: {fileID: 3601071374070786927}
-  - component: {fileID: -60832671360362033}
   m_Layer: 6
   m_Name: EnemyMarker
   m_TagString: Untagged
@@ -34,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-60832671360362033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7506089732503652708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d477cf09c9b3054bbfa798decdfc797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerPosY: 0
+  pretenseSize: 0.0004
 --- !u!33 &3530681433665217052
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -84,16 +98,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-60832671360362033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7506089732503652708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d477cf09c9b3054bbfa798decdfc797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  markerPosY: 0

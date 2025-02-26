@@ -34,7 +34,7 @@ public class ListManager
         mls.AwakeMonitorList();
 
         surls = GameObject.FindObjectOfType<SpeedUpRingListScript>();
-        surls.AwakeSpeedUpRingList();
+        surls.AwakeSpeedUpRingList(in pcs);
 
         frls = GameObject.FindObjectOfType<FallRockListScript>();
         frls.AwakeFallRockList();

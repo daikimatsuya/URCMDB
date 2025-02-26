@@ -33,12 +33,12 @@ public class SpeedUpRingListScript : MonoBehaviour
     }
 
     //‘Šú‰Šú‰»
-    public void AwakeSpeedUpRingList()
+    public void AwakeSpeedUpRingList(in PlayerControllerScript pcs)
     {
         speedUpRingList = new List<SpeedUpRingScript>(FindObjectsOfType<SpeedUpRingScript>());
         for (int i = 0; i < speedUpRingList.Count; i++)
         {
-            speedUpRingList[i].StartSpeedUpRing();
+            speedUpRingList[i].StartSpeedUpRing(in pcs);
         }
     }
 }

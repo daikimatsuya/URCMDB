@@ -16,20 +16,21 @@ public class SpeedUpRingScript : MonoBehaviour
     private MarkerScript ms;
     CapsuleCollider  collider_;
     Transform tf;
-
+    private PlayerControllerScript pcs;
 
     //消す
     public void Off()
     {
         if (!isGet)  //取得されたら機能を消す//////////
         {
+            ms.AdjustmentSize();
             return;
         }//////////////////////////////////////////////
 
         tf.localScale = new Vector3(0, 0, 0);   //サイズを０にする
         if(ms!=null)
         {
-            ms.Delete();    //マーカー削除
+            ms.SetActive(false);
         }
 
     }
@@ -41,16 +42,19 @@ public class SpeedUpRingScript : MonoBehaviour
         collider_.enabled = true;                                     //コライダーオン
         if(ms==null)
         {
-            CreateMarker(); //マーカー生成
+           ms.SetActive(true);
         }        
     }
     //マーカー生成
-    private void CreateMarker()
+    private void CreateMarker(in PlayerControllerScript pcs)
     {
         GameObject _ = Instantiate(marker);
         ms = _.GetComponent<MarkerScript>();
-        ms.Move(tf.position);
         _.transform.SetParent(this.transform);
+        ms.StartMarker(in pcs);
+        ms.transform.rotation=this.transform.rotation;
+        ms.Move(tf.position);
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -61,14 +65,14 @@ public class SpeedUpRingScript : MonoBehaviour
         }
     }
     //初期化
-    public void StartSpeedUpRing()
+    public void StartSpeedUpRing(in PlayerControllerScript pcs)
     {
         tf = GetComponent<Transform>();
         collider_ = GetComponent<CapsuleCollider>();
         tf.localScale = new Vector3(1, ringSize, ringSize);
 
         isGet = false;
-        CreateMarker();
+        CreateMarker(in pcs);
     }
 
 }

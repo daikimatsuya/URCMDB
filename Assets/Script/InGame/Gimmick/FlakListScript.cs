@@ -41,7 +41,7 @@ public class FlakListScript : MonoBehaviour
         flakList = new List<FlakScript>(FindObjectsOfType<FlakScript>());
         for (int i = 0; i < flakList.Count; i++)
         {
-            flakList[i].StartFlak();
+            flakList[i].StartFlak(in pcs);
         }
     }
 }
