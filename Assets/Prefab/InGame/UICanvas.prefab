@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955f04e409512db488c629c510bea255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  additionalEffects: []
 --- !u!1 &735101723161504592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,6 +1987,7 @@ MonoBehaviour:
   gameOverUIInterval: 0.4
   tutorialUIScript: {fileID: 0}
   poseKeyUI: {fileID: 8656979928523627099}
+  AdditionalEffectsManagerScript: {fileID: 8491931662811766745}
 --- !u!1001 &436174275405967200
 PrefabInstance:
   m_ObjectHideFlags: 0

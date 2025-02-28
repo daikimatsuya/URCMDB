@@ -41,6 +41,7 @@ public class UIScript : MonoBehaviour
     private int gameOverUIIntervalBuff;
     [SerializeField] private TutorialUIScript tutorialUIScript;
     [SerializeField] private PoseMenuScript poseKeyUI;
+    [SerializeField] private AdditionalEffectsManagerScript AdditionalEffectsManagerScript;
 
 
     //‘Šú‚É‰Šú‰»
