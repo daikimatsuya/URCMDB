@@ -189,6 +189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedUpRingRed
       objectReference: {fileID: 0}
+    - target: {fileID: 7215570807412991432, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35af527fd29d0ea489c63188686b0ba1, type: 3}
 --- !u!4 &8046041372523826961 stripped
