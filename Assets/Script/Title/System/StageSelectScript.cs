@@ -7,7 +7,7 @@ using Usefull;
 //タイトルのステージ選択処理用
 public class StageSelectScript : MonoBehaviour
 {
-    [SerializeField] private int stageCount;
+    [SerializeField] private int baseCount;
     [SerializeField] private int maxStage;
     [SerializeField] private string[] stage;
     [SerializeField] private float stageSelectCoolTime;
@@ -15,6 +15,7 @@ public class StageSelectScript : MonoBehaviour
     [SerializeField] private float fadeTime;
     private int fadeTimeBuff;
 
+    private int stageCount;
     private bool rotateEnd;
     private int stageChangeCount;
     private bool fadeStart;
@@ -84,7 +85,7 @@ public class StageSelectScript : MonoBehaviour
     //ステージ選択リセット
     private void StageSelectReset()
     {
-        stageCount = 0;
+        stageCount = baseCount;
     }
  
     #region 値受け渡し
@@ -121,8 +122,8 @@ public class StageSelectScript : MonoBehaviour
     public void StartStageSelect()
     {
         ts = GetComponent<TitleScript>();
-        stageCount = 0;
-        stageChangeCount = 0;
+        stageCount = baseCount;
+        stageChangeCount = baseCount;
         rotateEnd = true;
         fadeTimeBuff = (int)(fadeTime * 60);
     }
