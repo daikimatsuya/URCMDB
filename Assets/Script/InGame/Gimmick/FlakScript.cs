@@ -64,7 +64,7 @@ public class FlakScript : MonoBehaviour
         float t1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
         float t2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
 
-        float t = new float[] { t1, t2 }.Where(t => t > 0).Max();
+        float t = new float[] { t1, t2 }.Where(t => t > 0).DefaultIfEmpty().Max();
         ///////////////////////////////////////////////////////////////////////////////////
 
         //ë¨ìxåvéZ///////////////////////////////////////////////////////////////////////////////////////////////////
