@@ -150,7 +150,7 @@ public class PlayerControllerScript : MonoBehaviour
             return;
         }
 
-        float buff = ps.GetPlayerAcce() / ps.GetMaxBoost();             //ブーストのブラー用の値算出
+        float buff = ps.GetPlayerBoost() / ps.GetMaxBoost();             //ブーストのブラー用の値算出
         float buff2 = 0;
         if (ps.GetMaxRingBoost() > epsilon)
         {

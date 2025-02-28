@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour
 
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
-    private float accelelateSpeed;
+    private float accelerateSpeed;
     private float boostSpeed;
 
     private bool isFire;
@@ -257,7 +257,7 @@ public class PlayerScript : MonoBehaviour
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
         {           
-            accelelateSpeed = (burst + playerSpeed / playerBoostTuner)+redBuff;   //加速分算出
+            accelerateSpeed = (burst + playerSpeed / playerBoostTuner)+redBuff;   //加速分算出
             CreateBoostEffect();                                                                           //加速時演出生成
 
             if (redBustFlag)
@@ -284,12 +284,12 @@ public class PlayerScript : MonoBehaviour
 
 
         //一時加速減産//////////////////////////////////////////////
-        accelelateSpeed -= playerSpeed / boostBrakeTuner;
+        accelerateSpeed -= playerSpeed / boostBrakeTuner;
         ringSpeed -= playerSpeed * speedUpRingBrakeTuner;
 
-        if (accelelateSpeed <= 0)
+        if (accelerateSpeed <= 0)
         {
-            accelelateSpeed = 0;
+            accelerateSpeed = 0;
         }
         if(ringSpeed <= 0)
         {
@@ -299,7 +299,7 @@ public class PlayerScript : MonoBehaviour
         
         if (!TimeCountScript.TimeCounter(ref redBoostTimeBuff))
         {
-            accelelateSpeed +=playerSpeed * redBoostSpeed;
+            accelerateSpeed +=playerSpeed * redBoostSpeed;
             redBuff +=playerSpeed * redBoostSpeed;
             CreateBoostEffect();
             
@@ -313,7 +313,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        boostSpeed = accelelateSpeed + ringSpeed;   //ブーストを合算
+        boostSpeed = accelerateSpeed + ringSpeed;   //ブーストを合算
         
         if (isControl)
         {
@@ -419,13 +419,17 @@ public class PlayerScript : MonoBehaviour
     {
         return (burst + playerSpeed / playerBoostTuner);
     }
-    public float GetPlayerAcce()
+    public float GetPlayerBoost()
     {
         return boostSpeed;
     }
     public Vector3 GetPlayerSpeed()
     {
         return playerMoveBuff;
+    }
+    public float GetAccelerate()
+    {
+        return accelerateSpeed;
     }
     public float GetPlayerSpeedBuffFloat()
     {

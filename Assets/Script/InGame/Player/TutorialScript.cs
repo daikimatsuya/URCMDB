@@ -138,7 +138,11 @@ public class TutorialScript : MonoBehaviour
     {
         if (!isConectController) //コントローラーが接続されていなかったらfalseを返す///////
         {
-            return false;
+            if(!Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.RightArrow)&& !Input.GetKey(KeyCode.UpArrow)&& !Input.GetKey(KeyCode.DownArrow)&& !Input.GetKey(KeyCode.A)&& !Input.GetKey(KeyCode.D)&& !Input.GetKey(KeyCode.W)&& !Input.GetKey(KeyCode.S))
+            {
+                return false;
+            }
+            return true;
         }/////////////////////////////////////////////////////////////////////////////////////
 
         if (Input.GetAxis("LeftStickX") == 0 && Input.GetAxis("LeftStickY") == 0)   //Lスティック入力が無かったらfalseを返す///
@@ -152,7 +156,7 @@ public class TutorialScript : MonoBehaviour
     //プレイヤーのブーストを確認
     public bool CheckPlayerBoost(in PlayerScript ps)
     {
-        float acceBuff = ps.GetPlayerAcce();
+        float acceBuff = ps.GetAccelerate();
 
         if(acceBuff>=1) //プレイヤーが自身でブーストしていたらtrueを返す////////
         {
@@ -175,7 +179,11 @@ public class TutorialScript : MonoBehaviour
     {
         if (!isConectController) //コントローラーが接続されていなかったらfalseを返す///////
         {
-            return false;
+            if (!Input.GetKey(KeyCode.Space))
+            {
+                return false;
+            }
+            return true;
         }/////////////////////////////////////////////////////////////////////////////////////
 
         if (Input.GetAxis("RightTrigger")==0)   //Rトリガーが押されていなかったらfalseを返す//
@@ -199,7 +207,11 @@ public class TutorialScript : MonoBehaviour
     {
         if(!isConectController) //コントローラーが接続されていなかったらfalseを返す///////
         {
-            return false;
+            if (!Input.GetKey(KeyCode.LeftShift)&&!Input.GetKey(KeyCode.RightShift))
+            {
+                return false;
+            }
+            return true;
         }/////////////////////////////////////////////////////////////////////////////////////
 
         if (Input.GetAxis("LeftTrigger") == 0)
