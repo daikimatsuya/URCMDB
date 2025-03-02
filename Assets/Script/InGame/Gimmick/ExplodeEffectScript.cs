@@ -14,7 +14,7 @@ public class ExplodeEffectScript : MonoBehaviour
     Transform tf;
 
     private float expantionSpeed;
-    private new Renderer[] renderer;
+    private  Renderer[] renderers;
     private float dissolve;
     private float edge;
     public void StartExplodeEffect()
@@ -24,7 +24,7 @@ public class ExplodeEffectScript : MonoBehaviour
         TimeCountScript.SetTime(ref expantionBuff, expantionTime);
 
         dissolve = 0;
-        renderer =GetComponentsInChildren<Renderer>();
+        renderers =GetComponentsInChildren<Renderer>();
 
     }
     public void SizeUp()
@@ -45,18 +45,18 @@ public class ExplodeEffectScript : MonoBehaviour
     {
         dissolve = 1-(expantionBuff / (expantionTime * 60));
         dissolve = dissolve * dissolve * dissolve;
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < renderers.Length; i++)
         {
-            renderer[i].material.SetFloat("_Dissolve", dissolve);
+            renderers[i].material.SetFloat("_Dissolve", dissolve);
         }
     }
     public void Edge()
     {
         edge = 1 - (expantionBuff / (expantionTime * 60));
         edge=edge*edge*edge;
-        for (int i = 0; i < renderer.Length; i++)
+        for (int i = 0; i < renderers.Length; i++)
         {
-            renderer[i].material.SetFloat("_Threshold", edge);
+            renderers[i].material.SetFloat("_Threshold", edge);
         }
     }
     public bool CountDown()
