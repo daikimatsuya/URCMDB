@@ -19,23 +19,14 @@ public class SceneChangeMissleActionScript : MonoBehaviour
 
     Transform tf;
     private Vector2 moveBuff;
-    private bool isShot;
-    //飛んでくミサイル管理
-    private void SCMAController()
-    {
-        if(ts == null)  //TitleScriptがnullだったら取得する/////
-        {
-            ts=sss.GetTitleScript();
-        }///////////////////////////////////////////////////////
 
-        if (ts.GetShootFlag())  //発射フラグがオンになったら発射する//
-        {
-            Shoot();
-        }////////////////////////////////////////////////////////////////
-    }
     //発射管理
-    public void Shoot()
+    public void Shoot(in bool shootFlag)
     {
+        if (!shootFlag)
+        {
+            return;
+        }
         if (tf.localPosition.z < targetPos) //設定座標に到達したら////////
         {
             //フラグをオンにする
@@ -54,11 +45,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         tf.localEulerAngles = new Vector3(tf.localEulerAngles.x+maxRotate, tf.localEulerAngles.y, tf.localEulerAngles.z);
         /////////////////////////////
     }
-    //発射フラグ受け渡し
-    public void SetShotFlag(bool flag)
-    {
-        isShot= flag;
-    }
+
 
     // Start is called before the first frame update
     public void StartSceneChandeMissleAnimation()
@@ -68,14 +55,5 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         tf = GetComponent<Transform>();
 
     }
-    void Start()
-    {
-        StartSceneChandeMissleAnimation();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        SCMAController();
-    }
 }

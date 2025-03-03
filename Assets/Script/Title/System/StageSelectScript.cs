@@ -19,41 +19,37 @@ public class StageSelectScript : MonoBehaviour
     private bool rotateEnd;
     private int stageChangeCount;
     private bool fadeStart;
+    private bool fadeEnd;
 
+    private StageRotationScript srs;
 
     //ステージセレクト管理
     public void SelectController(in bool canStageChange)
     {
-        if (canStageChange)
-        {
-            return;
-        }
+
         if (fadeTimeBuff <= 0)  //フェード時間が経過したらシーンを変える///
         {
-            ts.SceneChange();
+            fadeEnd = true;
         }////////////////////////////////////////////////////////////////////////
 
-        if (ts.GetStageSelectFlag())   //ステージ選択画面になったらステージ数をカウントする////////////
-        {
-            StageSelect();
-        }///////////////////////////////////////////////////////////////////////////////////////////////////
-
-        else
-        {
-            StageSelectReset(); //カウントしたステージ数をリセットする
-        }
-
-        ts.SetStage(stage[stageCount]); //カウントしたステージ数を代入
-
+        StageSelect(in canStageChange);
+        srs.Move(stageChangeCount, maxStage);
         if (fadeStart)
         {
             fadeTimeBuff--; //フェードが始まったらカウントダウン開始
         }
     }
+
     //選択ステージ数加算減算
-    private void StageSelect()
+    private void StageSelect(in bool canStageChange)
     {
-        if (rotateEnd)  //ステージの回転が終わっていたら////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (canStageChange)
+        {
+            StageSelectReset(); //カウントしたステージ数をリセットする
+            return;
+        }
+
+        if (srs.GetRotateEnd())  //ステージの回転が終わっていたら////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || (Input.GetAxis("LeftStickX") < 0 || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && coolTimeBuff <= 0)  //左向きのステージ切り替えキーを一回または一定時間以上押していたら///////////
             {
@@ -93,6 +89,10 @@ public class StageSelectScript : MonoBehaviour
     }
  
     #region 値受け渡し
+    public bool GetFadeEnd()
+    {
+        return fadeEnd;
+    }
     public void SetRotateEnd(bool flag)
     {
         rotateEnd = flag;
@@ -117,14 +117,26 @@ public class StageSelectScript : MonoBehaviour
     {
         fadeStart = flag;
     }
+
     #endregion
+
+    private void GetComponets()
+    {
+        srs = GameObject.FindWithTag("stage").GetComponent<StageRotationScript>();
+    }
+
     // Start is called before the first frame update
     public void StartStageSelect()
     {
+        GetComponets();
+
         stageCount = baseCount;
         stageChangeCount = baseCount;
         rotateEnd = true;
-        fadeTimeBuff = (int)(fadeTime * 60);
+        TimeCountScript.SetTime(ref fadeTimeBuff,fadeTime);
+        fadeEnd = false;
+
+        srs.StartStageRotation();
     }
 
 }

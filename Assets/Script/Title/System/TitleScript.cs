@@ -9,8 +9,10 @@ public class TitleScript : MonoBehaviour
 {
     private TitlegameScript ts;
     private StageSelectScript sss;
+    private SceneChangeAnimationScript scas;
+    private SceneChangeMissleActionScript scmas;
+    private TitleCamera tc;
 
-    private bool cameraMoveEnd;
     private bool isStageSelect;
     private bool isSceneChangeMode;
     private string stage;
@@ -37,6 +39,7 @@ public class TitleScript : MonoBehaviour
 
         if (!isStageSelect) //カメラの移動が終わるまでリターンさせる///////
         {
+            isStageSelect = tc.GetMoveEnd();
             return;
         }//////////////////////////////////////////////////////////////////////
 
@@ -92,46 +95,12 @@ public class TitleScript : MonoBehaviour
         SceneManager.LoadScene(stage);
     }
 
-    #region 値受け渡し用関数群
-    public bool GetShootFlag()
-    {
-        return isShoot;
-    }
-    public bool GetStageSelectFlag()
-    {
-        if (cameraMoveEnd && isCameraMove)
-        {
-            isStageSelect = true;
-        }
-        else
-        {
-            isStageSelect = false;
-        }
-        return isStageSelect;
-    }
+    #region 値受け渡し
 
-    public bool GetIsStageSelect()
-    {
-        return isCameraMove;
-    }
-    public void SetCameraMove(bool flag)
-    {
-        isCameraMove = flag;
-    }
     public bool GetIsSceneChangeModeFlag()
     {
         return isSceneChangeMode;
     }
-    public void SendMoveEnd(bool end)
-    {
-        cameraMoveEnd = end;
-    }
-
-    public void SetStage(string stage)
-    {
-        this.stage = stage;
-    }
-
     #endregion
 
     //タイトル管理
@@ -139,9 +108,13 @@ public class TitleScript : MonoBehaviour
     {
         Usefull.GetTriggerScript.AxisUpdate();              //トリガーの入力情報を更新
         Usefull.GetControllerScript.SearchController();  //コントローラーが接続されているかを確認
-        SetWeather();                                                //天候を操る
-        Shoot();                                                        //ステージに発射
+
+        SetWeather();                                                              //天候を操る
+        Shoot();                                                                      //ステージに発射
         sss.SelectController(in isShoot);                                    //ステージセレクト  
+        scas.UpDown(in isSceneChangeMode);                          //発射台の上下管理
+        scmas.Shoot(in isShoot);                                              //プレイヤー発射管理
+        tc.Move(isCameraMove);
     }
 
     //コンポーネント取得
@@ -151,13 +124,18 @@ public class TitleScript : MonoBehaviour
         Light = GameObject.FindWithTag("Light").GetComponent<Light>();
         Light.color = Color.white;
         sss = GetComponent<StageSelectScript>();
-
+        scas=GameObject.FindWithTag("LaunchBase").GetComponent<SceneChangeAnimationScript>();
+        scmas=GameObject.FindWithTag("titlePlayerModel").GetComponent<SceneChangeMissleActionScript>();
+        tc = GameObject.FindWithTag("MainCamera").GetComponent<TitleCamera>();
     }
     private void StartTitle()
     {
         Application.targetFrameRate = 60;
         GetComponets();
         sss.StartStageSelect();
+        scas.StartSceneChangeAnimation();
+        scmas.StartSceneChandeMissleAnimation();
+        tc.StartTitleCamera();
     }
     // Start is called before the first frame update
     void Start()

@@ -47,6 +47,7 @@ TagManager:
   - FlakList
   - SpeedUpRingRed
   - Flak
+  - titlePlayerModel
   layers:
   - Default
   - TransparentFX
