@@ -8,6 +8,7 @@ using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 public class TitleScript : MonoBehaviour
 {
     private TitlegameScript ts;
+    private StageSelectScript sss;
 
     private bool cameraMoveEnd;
     private bool isStageSelect;
@@ -20,14 +21,7 @@ public class TitleScript : MonoBehaviour
 
     public Light Light { get; set; }
 
-    //タイトル管理
-    private void TitleController()
-    {
-        Usefull.GetTriggerScript.AxisUpdate();              //トリガーの入力情報を更新
-        Usefull.GetControllerScript.SearchController();  //コントローラーが接続されているかを確認
-        SetWeather();                                                //天候を操る
-        Shoot();                                                        //ステージに発射
-    }
+
     //フラグ関連処理
     private void Shoot()
     {
@@ -139,12 +133,31 @@ public class TitleScript : MonoBehaviour
     }
 
     #endregion
-    private void StartTitle()
+
+    //タイトル管理
+    private void TitleController()
     {
-        Application.targetFrameRate = 60;
+        Usefull.GetTriggerScript.AxisUpdate();              //トリガーの入力情報を更新
+        Usefull.GetControllerScript.SearchController();  //コントローラーが接続されているかを確認
+        SetWeather();                                                //天候を操る
+        Shoot();                                                        //ステージに発射
+        sss.SelectController(in isShoot);                                    //ステージセレクト  
+    }
+
+    //コンポーネント取得
+    private void GetComponets()
+    {
         ts = GameObject.FindWithTag("miniManager").GetComponent<TitlegameScript>();
         Light = GameObject.FindWithTag("Light").GetComponent<Light>();
         Light.color = Color.white;
+        sss = GetComponent<StageSelectScript>();
+
+    }
+    private void StartTitle()
+    {
+        Application.targetFrameRate = 60;
+        GetComponets();
+        sss.StartStageSelect();
     }
     // Start is called before the first frame update
     void Start()

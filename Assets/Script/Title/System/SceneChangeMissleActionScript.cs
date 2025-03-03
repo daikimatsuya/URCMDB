@@ -15,9 +15,9 @@ public class SceneChangeMissleActionScript : MonoBehaviour
 
     private SceneChangeAnimationScript scas;
     private StageSelectScript sss;
-    private TitleScript ts;
-    Transform tf;
 
+
+    Transform tf;
     private Vector2 moveBuff;
     private bool isShot;
     //îÚÇÒÇ≈Ç≠É~ÉTÉCÉãä«óù
@@ -66,7 +66,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         scas = GameObject.FindWithTag("LaunchBase").GetComponent<SceneChangeAnimationScript>();
         sss = GameObject.FindWithTag("TitleManager").GetComponent<StageSelectScript>();
         tf = GetComponent<Transform>();
-        ts = sss.GetTitleScript();
+
     }
     void Start()
     {

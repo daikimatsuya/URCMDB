@@ -20,10 +20,14 @@ public class StageSelectScript : MonoBehaviour
     private int stageChangeCount;
     private bool fadeStart;
 
-    TitleScript ts;
+
     //ステージセレクト管理
-    private void SelectController()
+    public void SelectController(in bool canStageChange)
     {
+        if (canStageChange)
+        {
+            return;
+        }
         if (fadeTimeBuff <= 0)  //フェード時間が経過したらシーンを変える///
         {
             ts.SceneChange();
@@ -113,28 +117,14 @@ public class StageSelectScript : MonoBehaviour
     {
         fadeStart = flag;
     }
-    public TitleScript GetTitleScript()
-    {
-        return ts;
-    }
     #endregion
     // Start is called before the first frame update
     public void StartStageSelect()
     {
-        ts = GetComponent<TitleScript>();
         stageCount = baseCount;
         stageChangeCount = baseCount;
         rotateEnd = true;
         fadeTimeBuff = (int)(fadeTime * 60);
     }
-    void Start()
-    {
-        StartStageSelect();
-    }
 
-    // Update is called once per frame
-    void Update() 
-    {
-        SelectController();
-    }
 }
