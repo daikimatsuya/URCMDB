@@ -57,10 +57,8 @@ public class TitleScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
 
-            if (scas.GetEndDown())
-            {
                 isShoot = true;//ステージチェンジ演出開始
-            }
+
         }
 
     }
@@ -113,7 +111,7 @@ public class TitleScript : MonoBehaviour
         Shoot();                                                                      //ステージに発射
         sss.SelectController(tc.GetCanShot());                           //ステージセレクト  
         scas.UpDown(in isSceneChangeMode);                          //発射台の上下管理
-        scmas.Shoot(in isShoot);                                              //プレイヤー発射管理
+        scmas.Shoot(in isShoot,scas.GetEndDown());                                              //プレイヤー発射管理
         tc.CameraController(in isCanMoveCamera);
 
     }

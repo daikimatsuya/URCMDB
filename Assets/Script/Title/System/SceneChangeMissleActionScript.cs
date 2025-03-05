@@ -21,9 +21,9 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     private Vector2 moveBuff;
 
     //î≠éÀä«óù
-    public void Shoot(in bool shootFlag)
+    public void Shoot(in bool shootFlag,in bool upFlag)
     {
-        if (!shootFlag)
+        if (!shootFlag||!upFlag)
         {
             return;
         }

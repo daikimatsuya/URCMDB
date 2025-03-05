@@ -7389,7 +7389,7 @@ MonoBehaviour:
   missile: {fileID: 850343124}
   pad: {fileID: 1366111573}
   targetRot: 7
-  rotationTime: 0.05
+  rotationTime: 0.2
   missileMovepeed: 0
 --- !u!1 &796265496
 GameObject:
