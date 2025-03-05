@@ -86,6 +86,8 @@ public class StageSelectScript : MonoBehaviour
     private void StageSelectReset()
     {
         stageCount = baseCount;
+        stageChangeCount = baseCount;
+        srs.ResetRotate(stageChangeCount,maxStage);
     }
  
     #region ’lŽó‚¯“n‚µ

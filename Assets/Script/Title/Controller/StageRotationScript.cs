@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 //ステージセレクト画面でステージを回転させる
@@ -51,6 +52,10 @@ public class StageRotationScript : MonoBehaviour
     public bool GetRotateEnd()
     {
         return rotateEnd;
+    }
+    public void ResetRotate(int stageChangeCount, int maxStage)
+    {
+        rotateBuff =  (360 / (maxStage + 1)) * stageChangeCount; ;
     }
     #endregion
     public void StartStageRotation()
