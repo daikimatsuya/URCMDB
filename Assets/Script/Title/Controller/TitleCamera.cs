@@ -20,9 +20,8 @@ public class TitleCamera : MonoBehaviour
 
     public void CameraController(in bool isStageSelect)
     {
-        if (isStageSelect)
+        if (!isStageSelect)
         {
-            moveEnd = false;
             return;
         }
         FlagCheck();

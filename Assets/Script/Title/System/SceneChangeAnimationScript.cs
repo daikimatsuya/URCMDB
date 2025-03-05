@@ -15,12 +15,13 @@ public class SceneChangeAnimationScript : MonoBehaviour
     [SerializeField] private float missileMovepeed;
 
     private float padRotBuff;
-    private bool isShot;
     private bool isFadeStart;
+    private bool isEnd;
 
     //発射台を上下させる
     public void UpDown(in bool isDown)
     {
+        isEnd=false;
         if (isDown)  //上下移動フラグがオンの時//////////////////////////////////////////////////////////////////////////////////////
         {
             if (!TimeCountScript.TimeCounter(ref rotationTimeBuff))
@@ -28,6 +29,11 @@ public class SceneChangeAnimationScript : MonoBehaviour
                 padRotBuff += rotationSpeed;    //回転角に速度を足す
                 pad.transform.localEulerAngles = new Vector3(padRotBuff, pad.transform.localEulerAngles.y, pad.transform.localEulerAngles.z);   //トランスフォームに代入
             }
+            else
+            {
+                isEnd = true;
+            }
+     
         }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Z
         else   //上下移動フラグがオフの時
         {
@@ -43,14 +49,9 @@ public class SceneChangeAnimationScript : MonoBehaviour
     //フラグリセット
     private void ResetFlags()
     {
-        isShot = false;
         isFadeStart = false;
     }
     #region 値受け渡し
-    public bool GetIsShotFlag()
-    {
-        return isShot;
-    }
     public void SetStartFadeFlag(bool flag)
     {
         isFadeStart = flag;
@@ -59,13 +60,17 @@ public class SceneChangeAnimationScript : MonoBehaviour
     {
         return isFadeStart;
     }
+    public bool GetEndDown()
+    {
+        return isEnd;
+    }
     #endregion
     public void StartSceneChangeAnimation()
     {
         padRotBuff = pad.transform.localEulerAngles.x;
         rotationTimeBuff = (int)(rotationTime * 60);
         rotationSpeed = targetRot / rotationTimeBuff;
-
+        isEnd = false;
         ResetFlags();
     }
 

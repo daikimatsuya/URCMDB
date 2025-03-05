@@ -15,6 +15,7 @@ public class TitleScript : MonoBehaviour
 
     private bool isSceneChangeMode;
     private string stage;
+    private bool isCanMoveCamera;
     private bool isShoot;
 
     [SerializeField] private float betTime;
@@ -25,6 +26,10 @@ public class TitleScript : MonoBehaviour
     //フラグ関連処理
     private void Shoot()
     {
+        if (sss.GetFadeEnd())
+        {
+            ChangeStage();
+        }
         if (!tc.GetCanShot())
         {
             return;
@@ -36,25 +41,28 @@ public class TitleScript : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
             {
+                isCanMoveCamera = true;
                 ResetTitle();   //タイトルに戻る
                 return;
             }
             isSceneChangeMode = false;
+
             return;
         }////////////////////////////////////////////////////////////////////////////////////////
         else
         {
             isSceneChangeMode = true;
         }
+        isCanMoveCamera = false;
         if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
-            isShoot = true; //ステージチェンジ演出開始
+
+            if (scas.GetEndDown())
+            {
+                isShoot = true;//ステージチェンジ演出開始
+            }
         }
-        if (!sss.GetFadeEnd())
-        {
-            return;
-        }
-        ChangeStage();
+
     }
     //タイトル画面に戻す
     private void ResetTitle()
@@ -103,10 +111,11 @@ public class TitleScript : MonoBehaviour
 
         SetWeather();                                                              //天候を操る
         Shoot();                                                                      //ステージに発射
-        sss.SelectController(tc.GetCanShot());                                    //ステージセレクト  
+        sss.SelectController(tc.GetCanShot());                           //ステージセレクト  
         scas.UpDown(in isSceneChangeMode);                          //発射台の上下管理
         scmas.Shoot(in isShoot);                                              //プレイヤー発射管理
-        tc.CameraController(in isShoot);
+        tc.CameraController(in isCanMoveCamera);
+
     }
 
     //コンポーネント取得
@@ -128,6 +137,8 @@ public class TitleScript : MonoBehaviour
         scas.StartSceneChangeAnimation();
         scmas.StartSceneChandeMissleAnimation();
         tc.StartTitleCamera();
+
+        isCanMoveCamera = true;
     }
     // Start is called before the first frame update
     void Start()

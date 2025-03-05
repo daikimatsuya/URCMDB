@@ -7389,7 +7389,7 @@ MonoBehaviour:
   missile: {fileID: 850343124}
   pad: {fileID: 1366111573}
   targetRot: 7
-  rotationTime: 0.5
+  rotationTime: 0.05
   missileMovepeed: 0
 --- !u!1 &796265496
 GameObject:
@@ -16681,7 +16681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abf7731cd9dfdd43b2e2bd545c82ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCameraMove: 0
   betTime: 1
 --- !u!114 &2096328456
 MonoBehaviour:
