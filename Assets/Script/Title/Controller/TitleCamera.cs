@@ -16,13 +16,44 @@ public class TitleCamera : MonoBehaviour
     private float time;
     private bool moveEnd;
     private Vector3 firstPos;
+    private bool isCameraMove;
 
+    public void CameraController(in bool isStageSelect)
+    {
+        if (isStageSelect)
+        {
+            moveEnd = false;
+            return;
+        }
+        FlagCheck();
+        Move();
+        
+    }
+    public void FlagCheck()
+    {
+        if (!moveEnd) 
+        {
+            return;
+        }
+        if (!Input.GetKeyDown(KeyCode.Space) && !Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
+        {
+            return;
+        }
+        if (isCameraMove)
+        {
+            isCameraMove = false;
+        }
+        else
+        {
+            isCameraMove = true;
+        }
+    }
     //移動
-    public void Move(in bool isStageSelect)
+    public void Move()
     {
         Vector3 dis;
 
-        if (isStageSelect)  //ステージセレクトフラグがオンになると下に移動/////////////////////////////////////////////////////
+        if (isCameraMove)  //ステージセレクトフラグがオンになると下に移動/////////////////////////////////////////////////////
         {
             float x = 1 - Mathf.Pow(1 - (time / moveTime), 3);
             if (time < moveTime)
@@ -62,9 +93,13 @@ public class TitleCamera : MonoBehaviour
     }
 
     #region 値受け渡し
-    public bool GetMoveEnd()
+    public bool GetCanShot()
     {
-        return moveEnd;
+        if (moveEnd && isCameraMove)
+        {
+            return true;
+        }
+        return false;
     }
     #endregion
     // Start is called before the first frame update
@@ -73,6 +108,7 @@ public class TitleCamera : MonoBehaviour
         tf = GetComponent<Transform>();
         TimeCountScript.SetTime(ref moveTime, moveTime);
         firstPos = tf.position;
+        isCameraMove = false;
     }
 
 }

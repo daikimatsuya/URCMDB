@@ -13,12 +13,10 @@ public class TitleScript : MonoBehaviour
     private SceneChangeMissleActionScript scmas;
     private TitleCamera tc;
 
-    private bool isStageSelect;
     private bool isSceneChangeMode;
     private string stage;
     private bool isShoot;
 
-    [SerializeField] private bool isCameraMove;
     [SerializeField] private float betTime;
 
     public Light Light { get; set; }
@@ -27,21 +25,10 @@ public class TitleScript : MonoBehaviour
     //フラグ関連処理
     private void Shoot()
     {
-
-        if (!isCameraMove)  //ステージセレクトモードになってないときにボタンを押すとカメラが移動///
+        if (!tc.GetCanShot())
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
-            {
-                isCameraMove = true;
-            }
             return;
-        }////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        if (!isStageSelect) //カメラの移動が終わるまでリターンさせる///////
-        {
-            isStageSelect = tc.GetMoveEnd();
-            return;
-        }//////////////////////////////////////////////////////////////////////
+        }
 
         stage=sss.GetStage();
 
@@ -73,8 +60,6 @@ public class TitleScript : MonoBehaviour
     private void ResetTitle()
     {
         //ステージセレクトモード用のフラグを初期化
-        isCameraMove = false;
-        isStageSelect = false;
         isSceneChangeMode=false;
         ts.SetResetFlag(true);
         /////////////////////////////////////////////
@@ -118,10 +103,10 @@ public class TitleScript : MonoBehaviour
 
         SetWeather();                                                              //天候を操る
         Shoot();                                                                      //ステージに発射
-        sss.SelectController(in isShoot);                                    //ステージセレクト  
+        sss.SelectController(tc.GetCanShot());                                    //ステージセレクト  
         scas.UpDown(in isSceneChangeMode);                          //発射台の上下管理
         scmas.Shoot(in isShoot);                                              //プレイヤー発射管理
-        tc.Move(isCameraMove);
+        tc.CameraController(in isShoot);
     }
 
     //コンポーネント取得
