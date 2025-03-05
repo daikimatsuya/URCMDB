@@ -45,7 +45,7 @@ public class StageSelectScript : MonoBehaviour
     {
         if (canStageChange)
         {
-            StageSelectReset(); //カウントしたステージ数をリセットする
+           
             return;
         }
 
@@ -83,7 +83,7 @@ public class StageSelectScript : MonoBehaviour
 
     }
     //ステージ選択リセット
-    private void StageSelectReset()
+    public void StageSelectReset()
     {
         stageCount = baseCount;
         stageChangeCount = baseCount;

@@ -68,6 +68,7 @@ public class TitleScript : MonoBehaviour
         //ステージセレクトモード用のフラグを初期化
         isSceneChangeMode=false;
         ts.SetResetFlag(true);
+        sss.StageSelectReset();
         /////////////////////////////////////////////
     }
     //天気を人為的に変える
