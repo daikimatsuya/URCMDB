@@ -16,7 +16,6 @@ public class SceneChangeMissleActionScript : MonoBehaviour
     private SceneChangeAnimationScript scas;
     private StageSelectScript sss;
 
-
     Transform tf;
     private Vector2 moveBuff;
 

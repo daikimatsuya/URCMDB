@@ -57,7 +57,7 @@ public class TitleScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
 
-                isShoot = true;//ステージチェンジ演出開始
+            isShoot = true;//ステージチェンジ演出開始
 
         }
 
@@ -109,11 +109,20 @@ public class TitleScript : MonoBehaviour
 
         SetWeather();                                                              //天候を操る
         Shoot();                                                                      //ステージに発射
-        sss.SelectController(tc.GetCanShot());                           //ステージセレクト  
+        sss.SelectController(SelectFlag());                           //ステージセレクト  
         scas.UpDown(in isSceneChangeMode);                          //発射台の上下管理
         scmas.Shoot(in isShoot,scas.GetEndDown());                                              //プレイヤー発射管理
         tc.CameraController(in isCanMoveCamera);
 
+    }
+
+    private bool SelectFlag()
+    {
+        if (!tc.GetCanShot()||isShoot)
+        {
+            return true;
+        }
+        return false;
     }
 
     //コンポーネント取得

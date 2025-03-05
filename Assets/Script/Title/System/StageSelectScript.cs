@@ -43,7 +43,7 @@ public class StageSelectScript : MonoBehaviour
     //選択ステージ数加算減算
     private void StageSelect(in bool canStageChange)
     {
-        if (!canStageChange)
+        if (canStageChange)
         {
             StageSelectReset(); //カウントしたステージ数をリセットする
             return;
