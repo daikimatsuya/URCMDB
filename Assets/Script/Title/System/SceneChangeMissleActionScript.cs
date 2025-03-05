@@ -9,8 +9,6 @@ public class SceneChangeMissleActionScript : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxRotate;
-    [SerializeField] private float animationTime;
-    private int animationTimeBuff;
     [SerializeField] private float targetPos;
 
     private SceneChangeAnimationScript scas;
@@ -26,14 +24,13 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         {
             return;
         }
-        if (tf.localPosition.z < targetPos) //設定座標に到達したら////////
+
+        //目的地まで達したらフラグセット
+        if (tf.localPosition.z < targetPos) 
         {
-            //フラグをオンにする
             scas.SetStartFadeFlag(true);
             sss.SetFadeFlag(true);
-            /////////////////////
-            
-        }//////////////////////////////////////////////////////////////////
+        }
 
         //スピードを計算して代入する
         Vector3 anglesBuff = tf.eulerAngles;
@@ -45,8 +42,7 @@ public class SceneChangeMissleActionScript : MonoBehaviour
         /////////////////////////////
     }
 
-
-    // Start is called before the first frame update
+    //ミサイルアニメーション初期化
     public void StartSceneChandeMissleAnimation()
     {
         scas = GameObject.FindWithTag("LaunchBase").GetComponent<SceneChangeAnimationScript>();

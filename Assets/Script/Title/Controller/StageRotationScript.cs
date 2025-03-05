@@ -17,34 +17,37 @@ public class StageRotationScript : MonoBehaviour
     //ƒXƒe[ƒW”‚Å‰ñ“]
     public void Move(int stageChangeCount,int maxStage)
     {
-        float rot = (360 / (maxStage + 1)) * stageChangeCount;    //360“x‚ðƒXƒe[ƒW”‚Å•ªŠ„
+        float rot = (360 / (maxStage + 1)) * stageChangeCount;    //‘I‘ðƒXƒe[ƒW‚ÌŠp“xŽZo
 
-         if (rot > rotateBuff)  //–Ú•W‰ñ“]Šp‚æ‚è‚àŠp“x‚ª¬‚³‚¢‚Æ‚«///////////////
+        //–Ú•W‰ñ“]Šp‚æ‚è‚à¬‚³‚¢
+         if (rot > rotateBuff) 
          {
-             rotateEnd = false;
-             rotateBuff += rotateSpeed;      //‰ñ“]‚³‚¹‚é
-             if (rot < rotateBuff)  //‰ñ“]‚µ‚·‚¬‚½Žž///////////////////
+             rotateEnd = false;                    //‰ñ“]I—¹ƒtƒ‰ƒOƒIƒt
+             rotateBuff += rotateSpeed;      //‰ñ“]Šp‘‰Á
+
+            //–Ú•W‰ñ“]Šp“ž’B
+             if (rot <= rotateBuff)
              {
-                 rotateBuff = rot;
-                 rotateEnd = true;
-            }//////////////////////////////////////////////////////////
+                 rotateBuff = rot;      //’l‘ã“ü
+                 rotateEnd = true;    //‰ñ“]I—¹ƒtƒ‰ƒOƒIƒ“
+            }
 
-         }/////////////////////////////////////////////////////////////////////////
+         }
 
-         else if (rot < rotateBuff) //–Ú•W‰ñ“]Šp‚æ‚è‚àŠp“x‚ª‘å‚«‚¢‚Æ‚«////
+         //–Ú•W‰ñ“]Šp‚æ‚è‚à‘å‚«‚¢
+         else if (rot < rotateBuff)
          {
-             rotateEnd = false;
-            rotateBuff -= rotateSpeed;        //‰ñ“]‚³‚¹‚é
-            if (rot > rotateBuff) //‰ñ“]‚µ‚·‚¬‚½Žž///////////////////
+             rotateEnd = false;                    //‰ñ“]I—¹ƒtƒ‰ƒOƒIƒt
+            rotateBuff -= rotateSpeed;        //‰ñ“]ŠpŒ¸­
+
+            //–Ú•W‰ñ“]Šp“ž’B
+            if (rot >= rotateBuff)
             {
                  rotateBuff = rot;
                  rotateEnd = true;
             }
-         }//////////////////////////////////////////////////////////////////
-         else
-         {
-             rotateEnd = true;
          }
+         
          tf.localEulerAngles = new Vector3(0, rotateBuff, 0);   //‰ñ“]Šp‘ã“ü
 
     }

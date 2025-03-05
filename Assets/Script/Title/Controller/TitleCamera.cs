@@ -16,43 +16,48 @@ public class TitleCamera : MonoBehaviour
     private float time;
     private bool moveEnd;
     private Vector3 firstPos;
-    private bool isCameraMove;
+    private bool isMoveDown;
 
+    //タイトルカメラ挙動管理
     public void CameraController(in bool isStageSelect)
     {
         if (!isStageSelect)
         {
             return;
         }
-        FlagCheck();
-        Move();
+        FlagCheck();    //移動可能かを確認
+        Move();           //カメラ移動
         
     }
+
+    //移動可能フラグチェック
     public void FlagCheck()
     {
         if (!moveEnd) 
         {
-            return;
+            return; //移動中だったらリターン
         }
         if (!Input.GetKeyDown(KeyCode.Space) && !Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
         {
-            return;
+            return; //ボタンが押されていなかったらリターン
         }
-        if (isCameraMove)
+        if (isMoveDown)
         {
-            isCameraMove = false;
+            isMoveDown = false; //下から上に移動
         }
         else
         {
-            isCameraMove = true;
+            isMoveDown = true;  //上から下に移動
         }
     }
+
     //移動
     public void Move()
     {
         Vector3 dis;
 
-        if (isCameraMove)  //ステージセレクトフラグがオンになると下に移動/////////////////////////////////////////////////////
+        //下へ移動
+        if (isMoveDown)  
         {
             float x = 1 - Mathf.Pow(1 - (time / moveTime), 3);
             if (time < moveTime)
@@ -65,13 +70,14 @@ public class TitleCamera : MonoBehaviour
             }
             else
             {
-                tf.position = new Vector3(movePos.x, movePos.y,tf.position.z);  //座標を代入
-                moveEnd = true;                                                                    //moveEndフラグをtrue
+                tf.position = new Vector3(movePos.x, movePos.y,tf.position.z);           //座標を代入
+                moveEnd = true;                                                                             //moveEndフラグをtrue
 
             }                       
-        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
 
-        else　//ステージセレクトフラグがオフになると上に移動/////////////////////////////////////////////////////////
+        //上へ移動
+        else　
         {
             float x = Mathf.Pow((time / moveTime), 3);
             if (time>0)
@@ -84,30 +90,33 @@ public class TitleCamera : MonoBehaviour
             }
             else
             {
-                tf.position = new Vector3(firstPos.x, firstPos.y,tf.position.z);  //座標を代入
-                moveEnd = true;                                                               //moveEndフラグをtrue
+                tf.position = new Vector3(firstPos.x, firstPos.y,tf.position.z);               //座標を代入
+                moveEnd = true;                                                                            //moveEndフラグをtrue
 
             }
-        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
 
     #region 値受け渡し
+
+    //移動していいかのフラグチェック
     public bool GetCanShot()
     {
-        if (moveEnd && isCameraMove)
+        if (moveEnd && isMoveDown)
         {
             return true;
         }
         return false;
     }
     #endregion
-    // Start is called before the first frame update
+
+    //タイトルカメラ初期化
     public void StartTitleCamera()
     {
         tf = GetComponent<Transform>();
         TimeCountScript.SetTime(ref moveTime, moveTime);
         firstPos = tf.position;
-        isCameraMove = false;
+        isMoveDown = false;
     }
 
 }
