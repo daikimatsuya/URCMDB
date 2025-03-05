@@ -88,7 +88,7 @@ public class TitleScript : MonoBehaviour
         }
     }
     //シーンチェンジ
-    public void ChangeStage()
+    private void ChangeStage()
     {
         Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(stage);
