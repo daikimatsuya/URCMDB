@@ -43,6 +43,8 @@ public class TitleScript : MonoBehaviour
             return;
         }//////////////////////////////////////////////////////////////////////
 
+        stage=sss.GetStage();
+
         if (stage == "")    //選択されているステージがタイトルだったらタイトル画面に戻す////
         {
             if(Input.GetKeyDown(KeyCode.Space) || Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))
@@ -61,6 +63,11 @@ public class TitleScript : MonoBehaviour
         {
             isShoot = true; //ステージチェンジ演出開始
         }
+        if (!sss.GetFadeEnd())
+        {
+            return;
+        }
+        ChangeStage();
     }
     //タイトル画面に戻す
     private void ResetTitle()
@@ -89,7 +96,7 @@ public class TitleScript : MonoBehaviour
         }
     }
     //シーンチェンジ
-    public void SceneChange()
+    public void ChangeStage()
     {
         Usefull.GetTriggerScript.SetValue();
         SceneManager.LoadScene(stage);
