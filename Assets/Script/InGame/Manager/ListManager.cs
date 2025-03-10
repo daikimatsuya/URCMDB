@@ -13,6 +13,7 @@ public class ListManager
     private DroneListScript dls;
     private ExplodeEffectListScript eel;
     private PlayerControllerScript pcs;
+    private EMPbotListScript ebls;
 
     //リスト更新
     public void ListManagerController(in bool isPose)
@@ -50,6 +51,9 @@ public class ListManager
 
         eel=GameObject.FindObjectOfType<ExplodeEffectListScript>();
         eel.AwakeExplodeEffectList();
+
+        ebls = GameObject.FindObjectOfType<EMPbotListScript>();
+        ebls.AwakeEMPbotList();
     }
 
 }
