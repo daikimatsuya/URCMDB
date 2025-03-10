@@ -12,16 +12,17 @@ public class FallRockListScript : MonoBehaviour
 
         for (int i = 0; i < rockFallList.Count; i++)
         {
-            rockFallList[i].RockController(in isPause);
+            rockFallList[i].RockController(in isPause); //落とした岩を管理
 
             if (!isPause &&rockFallList[i].GetInterval())
             {
-                rockFallList[i].SpawnRock();
-                rockFallList[i].SetTime();
+                rockFallList[i].SpawnRock();    //岩を生成
+                rockFallList[i].SetTime();         //クールタイム設定
             }
 
         }
     }
+    //早期初期化
     public void AwakeFallRockList()
     {
         rockFallList = new List<RockFallScript>(FindObjectsOfType<RockFallScript>());

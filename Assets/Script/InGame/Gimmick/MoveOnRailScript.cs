@@ -74,7 +74,7 @@ public class MoveOnRailScript : MonoBehaviour
         anglesBuff.z *= -1;
         ///////////////
         
-        //角度から各方向への速度を算出///////////////////////////////////////////////////////////////////
+        //角度から各方向への速度を算出
         Vector3 velocity;
 
         //平面方向の速度を算出
@@ -88,7 +88,6 @@ public class MoveOnRailScript : MonoBehaviour
         velocity.y = moveSpeed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.z)) * -1;
         //////////////////////////////////
         
-        /////////////////////////////////////////////////////////////////////////////////////////////////////
 
         rb.velocity = velocity; //リジットボディに代入
     }
@@ -156,7 +155,6 @@ public class MoveOnRailScript : MonoBehaviour
         StartMoveOnRail();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();

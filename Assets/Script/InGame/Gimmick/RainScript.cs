@@ -25,7 +25,7 @@ public class RainScript : MonoBehaviour
     {
          this.cameraPos = cameraPos;  //À•W‘ã“ü
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         tf=GetComponent<Transform>();

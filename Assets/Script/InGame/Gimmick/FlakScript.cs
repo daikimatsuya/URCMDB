@@ -46,9 +46,9 @@ public class FlakScript : MonoBehaviour
         }
         //偏差予測///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Vector3 playerPos = ps.GetPlayerPos();
-        playerDis =playerPos-barrel.position;                   //距離算出
-        lineUI.SetLine(barrel.position,playerDis,intervalBuff);       //予測線設定
-        Vector3 playerSpeed= ps.GetPlayerSpeed();      //プレイヤーの速度取得
+        playerDis =playerPos-barrel.position;                           //距離算出
+        lineUI.SetLine(barrel.position,playerDis,intervalBuff);    //予測線設定
+        Vector3 playerSpeed= ps.GetPlayerSpeed();                 //プレイヤーの速度取得
 
 
         //解の公式を使用して値を算出///////////////////////////////////////////////////////
@@ -166,10 +166,10 @@ public class FlakScript : MonoBehaviour
     //マーカー生成
     private void CreateMarker(in PlayerControllerScript pcs)
     {
-        GameObject _ = Instantiate(marker);         //生成
-        ms = _.GetComponent<MarkerScript>();    //コンポーネント取得
-        ms.StartMarker(in pcs, this.gameObject.transform);
-        ms.Move(pos.position);                              //位置代入
+        GameObject _ = Instantiate(marker);                     //生成
+        ms = _.GetComponent<MarkerScript>();                //コンポーネント取得
+        ms.StartMarker(in pcs, this.gameObject.transform);//マーカー初期化
+        ms.Move(pos.position);                                          //位置代入
         _.transform.SetParent(this.transform);
     }
     //予測線生成

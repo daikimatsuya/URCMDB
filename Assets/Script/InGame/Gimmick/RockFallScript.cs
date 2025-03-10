@@ -64,21 +64,20 @@ public class RockFallScript : MonoBehaviour
     //岩をリストで管理
     public void RockController(in bool isPose)
     {
-        if (rockList == null)    //リストにオブジェクトが入ってなかったらリターン//////
+        if (rockList == null)    
         {
-            return;
-        }//////////////////////////////////////////////////////////////////////////////////
-
+            return;//リストにオブジェクトが入ってなかったらリターン
+        }
 
         for (int i = 0; i < rockList.Count;)
         {
-            
-            if (rockList[i].GetPos()<breakArea)  //破壊フラグがオンになっていたら
+            if (rockList[i].GetPos()<breakArea)  
             {
+                //岩が破壊位置についたら
                 rockList[i].BreakRock();         //オブジェクトを削除
                 rockList.Remove(rockList[i]); //リストから削除
 
-            }/////////////////////////////////////////////////////////////////////
+            }
             else
             {
                 rockList[i].Fall(fallSpeed,isPose);
