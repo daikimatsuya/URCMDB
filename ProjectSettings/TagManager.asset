@@ -48,6 +48,7 @@ TagManager:
   - SpeedUpRingRed
   - Flak
   - titlePlayerModel
+  - EMP
   layers:
   - Default
   - TransparentFX

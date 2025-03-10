@@ -37,10 +37,7 @@ public class ExplodeEffectScript : MonoBehaviour
     {
         tf.localEulerAngles += new Vector3(0, rotSpeed, 0);
     }
-    public void Transparency()
-    {
 
-    }
     public void Dissolve()
     {
         dissolve = 1-(expantionBuff / (expantionTime * 60));
@@ -67,4 +64,12 @@ public class ExplodeEffectScript : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+    #region ’lŽó‚¯“n‚µ
+    public void SetMaxSize(float maxSize)
+    {
+        this.maxSize=maxSize;
+    }
+    
+    #endregion
 }
