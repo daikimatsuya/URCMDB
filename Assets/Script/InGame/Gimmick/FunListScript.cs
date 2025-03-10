@@ -8,9 +8,9 @@ public class FunListScript : MonoBehaviour
     private List<FunScript> funList;
 
     //ファンをリストで管理
-    public void FunListController(in bool isPose)
+    public void FunListController(in bool isPause)
     {
-        if (isPose)
+        if (isPause)
         {
             return;
         }

@@ -16,9 +16,9 @@ public class FlakBulletScript : MonoBehaviour
     [SerializeField] private GameObject marker;
 
     //ˆÚ“®
-    public void Move(in bool isPose)
+    public void Move(in bool isPause)
     {
-        if(isPose)
+        if(isPause)
         {
             rb.velocity = Vector3.zero;
             return;

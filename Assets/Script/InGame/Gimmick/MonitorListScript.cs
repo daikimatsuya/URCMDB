@@ -7,9 +7,9 @@ public class MonitorListScript : MonoBehaviour
     private List<MonitorScript> monitorList;
 
     //ÉÇÉjÉ^Å[åQä«óù
-    public void MonitorListController(in PlayerControllerScript pcs,in bool isPose)
+    public void MonitorListController(in PlayerControllerScript pcs,in bool isPause)
     {
-        if (isPose)
+        if (isPause)
         {
             return;
         }

@@ -16,9 +16,9 @@ public class LaunchPointScript : MonoBehaviour
     private bool isStart;
 
     //”­Ë‘äŠÇ—ŠÖ”
-    public void LaunchPointController(in bool isPose)
+    public void LaunchPointController(in bool isPause)
     {
-        if(isPose)
+        if(isPause)
         {
             return;
         }

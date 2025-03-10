@@ -10,10 +10,10 @@ public class RockScript : MonoBehaviour
     Transform tf;
 
     //—‰ºˆ—
-    public void Fall(in float fallSpeed,in bool isPose)
+    public void Fall(in float fallSpeed,in bool isPause)
     {
         rb.velocity = Vector3.zero;
-        if (isPose)
+        if (isPause)
         {
             return;
         }

@@ -11,6 +11,9 @@ public class EMPScript : MonoBehaviour
     [SerializeField] private float explodeTime;
     private int explodeTimeBuff;
     [SerializeField] private float firstDissolveValue;
+    [SerializeField] private Vector3 chargeOffsetSpeed;
+
+    Rigidbody rb;
 
     public void Explode()
     {
@@ -20,9 +23,25 @@ public class EMPScript : MonoBehaviour
     {
 
     }
-    public void StartEMP()
+    public void Deploy()
+    {
+
+    }
+
+
+    public void StartEMP(in bool isDeploy)
     {
         ees=GetComponent<ExplodeEffectScript>();
         ees.StartExplodeEffect();
+        rb= GetComponent<Rigidbody>();
+        if (isDeploy) 
+        {
+            rb.mass = 3.0f;
+        }
+        else
+        {
+            rb.mass = 0.0f;
+        }
+
     }
 }

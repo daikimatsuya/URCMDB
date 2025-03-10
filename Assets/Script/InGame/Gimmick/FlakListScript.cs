@@ -9,7 +9,7 @@ public class FlakListScript : MonoBehaviour
     private PlayerControllerScript pcs;
 
     //高角砲一括管理
-    public void FlakListController(in bool isPose)
+    public void FlakListController(in bool isPause)
     {
         if (flakList == null)  //オブジェクトがなければリターン/////
         {
@@ -19,7 +19,7 @@ public class FlakListScript : MonoBehaviour
 
         for (int i = 0; i < flakList.Count; i++)
         {
-            if (!isPose)
+            if (!isPause)
             {
                 if (flakList[i].GetIsAffective()==false)    //プレイヤーが射程内にいない////
                 {
@@ -32,7 +32,7 @@ public class FlakListScript : MonoBehaviour
                     flakList[i].Shot(in pcs);    //射撃
                 }/////////////////////////////////////////////////
             }
-                flakList[i].BulletController(in isPose);
+                flakList[i].BulletController(in isPause);
         }
     }
     public void AwakeFlakList(in PlayerControllerScript pcs)
