@@ -19,26 +19,10 @@ public class EMPScript : MonoBehaviour
     private Vector2 offsetBuff;
     [SerializeField] private Vector2 tilling;
 
-
     Rigidbody rb;
 
-    //EMP管理
-    public void EMPController(in bool isDeploy)
-    {
-        if (isDeploy)
-        {
-            Deploy();
-            return;
-        }
-        if (Charge())
-        {
-            Explode(); 
-        }
-        
-    }
-
     //EMP爆発
-    private void Explode()
+    public void Explode()
     {
         ees.SizeUp();
         ees.Dissolve();
@@ -50,11 +34,11 @@ public class EMPScript : MonoBehaviour
     }
 
     //EMPチャージ
-    private bool Charge()
+    public bool Charge()
     {
         if (ees.CountDown())
         {
-            ees.SetTime((int)explodeTime);
+            ees.SetTime(explodeTime);
             ees.SetMaxSize(explodeSize);
             return true;
         }
@@ -66,7 +50,7 @@ public class EMPScript : MonoBehaviour
     }
 
     //EMP常時展開
-    private void Deploy()
+    public void Deploy()
     {
         ees.SizeUp();
         ees.CountDown();
@@ -75,6 +59,11 @@ public class EMPScript : MonoBehaviour
         ees.SetTillingOffset(tilling, offsetBuff);
     }
 
+    //オブジェクト削除
+    public void Break()
+    {
+        ees.Break();
+    }
     //初期化
     public void StartEMP(in bool isDeploy)
     {
@@ -91,7 +80,7 @@ public class EMPScript : MonoBehaviour
             TimeCountScript.SetTime(ref deployTime, deployTime);
 
             ees.SetMaxSize(deploySize);
-            ees.SetTime((int)deployTime);
+            ees.SetTime(deployTime);
         }
         else
         {
@@ -101,9 +90,10 @@ public class EMPScript : MonoBehaviour
             TimeCountScript.SetTime(ref explodeTime, explodeTime);
 
             ees.SetMaxSize(chargeSize);
-            ees.SetTime((int)chargeTime);
+            ees.SetTime(chargeTime);
         }
 
     }
+
 
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   deploySize: 30
   explodeTime: 0
   chargeTime: 0
-  deployTime: 0.5
+  deployTime: 4
   firstDissolveValue: 0
   offsetSpeed: {x: 0, y: 0.016}
   tilling: {x: 3, y: 3}

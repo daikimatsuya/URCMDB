@@ -28,11 +28,34 @@ public class EMPbotScript : MonoBehaviour
         emp.StartEMP(in isDeploy);
         empList.Add(emp);
     }
-    public void EMPController()
+    public void EMPController(in PlayerScript ps)
     {
-        for (int i = 0; i < empList.Count; i++)
+        if (ps == null)
         {
-            empList[i].EMPController(isDeploy);
+            for (int i = 0; i < empList.Count; i++)
+            {
+                empList[i].Break();
+                empList.RemoveAt(i);
+            }
+            return;
+        }
+        if (isDeploy && empList.Count == 0)
+        {
+            CreateEMP();
+        }
+        for (int i = 0; i < empList.Count;)
+        {
+            if (isDeploy)
+            {                
+                empList[i].Deploy();
+                i++;
+                return;
+            }
+            if (empList[i].Charge())
+            {
+                empList[i].Explode();
+            }
+            i++;
         }
     }
 

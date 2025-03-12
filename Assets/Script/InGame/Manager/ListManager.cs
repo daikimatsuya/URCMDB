@@ -25,7 +25,7 @@ public class ListManager
         flakls.FlakListController(in isPause);                        //高角砲管理
         dls.DroneListController();                                     //ドローン管理
         eel.ExplodeEffectListController(in pcs);                  //爆発エフェクト管理
-        ebls.EMPbotListController(in isPause);
+        ebls.EMPbotListController(in isPause, in pcs);
     }
     //早期初期化
     public void AwakeListManager(in PlayerControllerScript pcs)

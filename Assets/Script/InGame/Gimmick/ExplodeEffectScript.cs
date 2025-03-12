@@ -33,6 +33,7 @@ public class ExplodeEffectScript : MonoBehaviour
     //ƒTƒCƒY‚ð‘å‚«‚­‚·‚é
     public void SizeUp()
     {
+        expantionSpeed = 0;
         expantionSpeed = 1 - (expantionBuff / (expantionTime * 60));
         expantionSpeed = (1 - (float)Math.Pow(1 - expantionSpeed, 5) )* maxSize;
         tf.localScale = new Vector3(expantionSpeed, expantionSpeed, expantionSpeed);
@@ -82,10 +83,10 @@ public class ExplodeEffectScript : MonoBehaviour
     {
         this.maxSize=maxSize;
     }
-    public void SetTime(int time)
+    public void SetTime(float time)
     {
-        expantionBuff = time;
-        expantionTime = time;
+        expantionBuff = (int)time;
+        expantionTime = time / 60;
     }
     public void SetDissolve(float dissolve)
     {
