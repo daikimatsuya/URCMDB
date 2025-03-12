@@ -6,6 +6,8 @@ using Usefull;
 
 public class PlayerControllerScript : MonoBehaviour
 {
+
+
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private int missileCount;
     [SerializeField] private float respawnTimer;
@@ -18,6 +20,7 @@ public class PlayerControllerScript : MonoBehaviour
     [SerializeField, Range(0f, 0.1f)] private float accelelatedBlurIntensity;
     private float minBlurIntnsity;
     [SerializeField, Range(0f, 0.1f)] private float blurIntensityBrake;
+
 
     private PlayerScript ps;
 

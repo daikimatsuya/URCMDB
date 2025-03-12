@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour
 {
     Rigidbody rb;
     Transform tf;
+    PlayerHitEMPScript phes;
 
     private LaunchPointScript lp;
     private GameObject dust;
@@ -49,6 +50,7 @@ public class PlayerScript : MonoBehaviour
     private float accelerateSpeed;
     private float boostSpeed;
 
+    private bool EMPHit;
     private bool isFire;
     private bool isControl;
     private float ringSpeed;
@@ -67,16 +69,17 @@ public class PlayerScript : MonoBehaviour
         }
         if (activateFadeObject==null)    //発射できるようになったら//////////////////
         {
-            lp.SetStart(true);              //スタートフラグをオン
-            SpeedControllDebager();   //デバッグ用
-            Booooooomb();                //爆発処理
-            ChangePMS();                  //PMS管理
-            Operation();                     //プレイヤー操作
-            Acceleration();                 //加速管理
-            Move();                           //移動
-            CountDown();                  //生存時間管理
-            EffectController();            //演出管理
-            redEffect.SetActive(redBustFlag);
+            lp.SetStart(true);                          //スタートフラグをオン
+            SpeedControllDebager();               //デバッグ用
+            Booooooomb();                            //爆発処理
+            ChangePMS();                              //PMS管理
+            Operation();                                 //プレイヤー操作
+            Acceleration();                              //加速管理
+            Move();                                        //移動
+            CountDown();                               //生存時間管理
+            EffectController();                          //演出管理
+            redEffect.SetActive(redBustFlag);    //レッドブーストのエフェクト管理
+            phes.Dicrease(ref EMPHit);             //EMPの影響減少
 
         }//////////////////////////////////////////////////////////////////////////
         else
@@ -157,7 +160,7 @@ public class PlayerScript : MonoBehaviour
 
             ////////////////////////////////////////////////////////////////////////////////
 
-            rowling += rowlingBuff;
+            rowling += rowlingBuff * phes.EMPAfect();
 
             //X軸の回転が裏返らないように調整する
             if (rowling.x > 270)
@@ -509,6 +512,17 @@ public class PlayerScript : MonoBehaviour
         {
 
         }
+        if (other.CompareTag("EMP") && other.gameObject.layer == LayerMask.NameToLayer("TypeB"))
+        {
+            phes.HitEMPShock();
+        }
+    }
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("EMP") && other.gameObject.layer == LayerMask.NameToLayer("TypeA"))
+        {
+            phes.HitEMPZone(ref EMPHit);
+        }
     }
     public void OnTriggerExit(Collider other)
     {
@@ -526,6 +540,7 @@ public class PlayerScript : MonoBehaviour
         TimeCountScript.SetTime(ref time, time);
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
+        phes=GetComponent<PlayerHitEMPScript>();
 
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);

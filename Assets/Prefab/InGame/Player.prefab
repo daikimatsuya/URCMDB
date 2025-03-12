@@ -4822,6 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7870347104334944394}
   - component: {fileID: 7870347104334944390}
+  - component: {fileID: -3265062487088250774}
   - component: {fileID: 7870347104334944395}
   - component: {fileID: 7870347104334944392}
   - component: {fileID: 7870347104334944393}
@@ -4889,6 +4890,23 @@ MonoBehaviour:
   redBoostTime: 5
   redBoostSpeed: 0.02
   redBustFlag: 0
+--- !u!114 &-3265062487088250774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870347104334944388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1858bb6bfa73464c9518072c5f9e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  empLevel: 0
+  dicreaseEMP: 5
+  shockPower: 50
+  zonePower: 0.01
+  maxEMP: 100
 --- !u!33 &7870347104334944395
 MeshFilter:
   m_ObjectHideFlags: 0

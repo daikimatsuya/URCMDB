@@ -75,16 +75,17 @@ public class EMPScript : MonoBehaviour
 
         if (isDeploy) 
         {
-            rb.mass = 3.0f;
+            this.gameObject.layer = LayerMask.NameToLayer("TypeA");
 
             TimeCountScript.SetTime(ref deployTime, deployTime);
 
             ees.SetMaxSize(deploySize);
             ees.SetTime(deployTime);
+
         }
         else
         {
-            rb.mass = 0.0f;
+            this.gameObject.layer = LayerMask.NameToLayer("TypeB");
 
             TimeCountScript.SetTime(ref chargeTime, chargeTime);
             TimeCountScript.SetTime(ref explodeTime, explodeTime);
