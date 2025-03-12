@@ -14,7 +14,7 @@ public class EMPbotListScript : MonoBehaviour
         }
         for(int i = 0; i < empbotList.Count; i++)
         {
-
+            empbotList[i].EMPController();
         }
     }
 

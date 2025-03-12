@@ -82,17 +82,28 @@ public class ExplodeEffectScript : MonoBehaviour
     {
         this.maxSize=maxSize;
     }
-    
+    public void SetTime(int time)
+    {
+        expantionBuff = time;
+        expantionTime = time;
+    }
     public void SetDissolve(float dissolve)
     {
-        this.dissolve = dissolve;
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].material.SetFloat("_Dissolve", dissolve);
+        }
     }
-    public void SetOffset(Vector2 tilling,Vector2 offset)
+    public void SetTillingOffset(Vector2 tilling,Vector2 offset)
     {
         for (int i = 0; i < renderers.Length; i++)
         {
             renderers[i].material.SetVector("_MainTex_ST", new Vector4(tilling.x, tilling.y, offset.x, offset.y));
         }
+    }
+    public void SetRotationSpeed(float speed)
+    {
+        this.rotSpeed = speed;
     }
     #endregion
 }

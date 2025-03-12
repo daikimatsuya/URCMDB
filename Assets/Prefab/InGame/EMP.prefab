@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6043309475639568129}
   - component: {fileID: 120288684979544300}
-  - component: {fileID: 4923593725231405754}
   - component: {fileID: 7781825522147031257}
+  - component: {fileID: 4923593725231405754}
   - component: {fileID: -2332109943020564593}
   m_Layer: 0
   m_Name: EMP
@@ -50,22 +50,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chargeSize: 0
   explodeSize: 0
+  deploySize: 30
   explodeTime: 0
+  chargeTime: 0
+  deployTime: 0.5
   firstDissolveValue: 0
-  chargeOffsetSpeed: {x: 0, y: 0, z: 0}
---- !u!135 &4923593725231405754
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3176656653487963511}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  offsetSpeed: {x: 0, y: 0.016}
+  tilling: {x: 3, y: 3}
 --- !u!114 &7781825522147031257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +72,19 @@ MonoBehaviour:
   maxSize: 0
   expantionTime: 0
   rotSpeed: 0
+--- !u!135 &4923593725231405754
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176656653487963511}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-2332109943020564593
 Rigidbody:
   m_ObjectHideFlags: 0

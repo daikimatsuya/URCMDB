@@ -29,19 +29,21 @@ public class LineUIScript : MonoBehaviour
         line.SetPosition(0, new Vector3( targetLength.x+randX , targetLength.y+randY,targetLength.z + randZ));
         pos.position = Pos;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        if(Physics.Raycast(pos.position,Vector3.Normalize(targetLength),out hit, Vector3.Magnitude(targetLength)))  //レイキャストでプレイヤーと砲身の間に障害物があるかを確認////////////////
+
+        RaycastHit[] hits = Physics.RaycastAll(pos.position, Vector3.Normalize(targetLength), Vector3.Magnitude(targetLength));
+        isShade = false;
+        for (int hitNum = 0; hitNum < hits.Length; hitNum++)
         {
-            isShade = false;
-            for (int i = 0; i < hitIgnoreTags.Length; i++)
+            for (int tagNum = 0; tagNum < hitIgnoreTags.Length; tagNum++) 
             {
-                if (hit.collider.CompareTag(hitIgnoreTags[i]))
+                if (hits[hitNum].collider.CompareTag(hitIgnoreTags[tagNum]))
                 {
-                    isShade= true;
+                    isShade = true;
                     return;
                 }
             }
-        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
+
     }
 
     //予測線削除

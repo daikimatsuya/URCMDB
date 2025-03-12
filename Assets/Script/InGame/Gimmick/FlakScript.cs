@@ -10,8 +10,6 @@ using Usefull;
 public class FlakScript : MonoBehaviour
 {
     Transform pos;
-    Transform linePos;
-    LineUIScript lineScript;
 
     private LineUIScript lineUI;
     private MarkerScript ms; 
@@ -217,8 +215,6 @@ public class FlakScript : MonoBehaviour
     {
         //コンポーネント取得
         pos = GetComponent<Transform>();
-        linePos = line.GetComponent<Transform>();
-        lineScript = line.GetComponent<LineUIScript>();
         //////////////////////
 
         //時間設定

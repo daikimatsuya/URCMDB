@@ -13,11 +13,17 @@ public class EMPbotScript : MonoBehaviour
 
     private List<EMPScript> empList;
 
+    public void EMPbotController()
+    {
+
+    }
+
     public void CreateEMP()
     {
         GameObject _ = Instantiate(EMP);
         _.transform.SetParent(this.transform); 
         _.transform.localPosition = Vector3.zero;
+        _.transform.localEulerAngles = Vector3.zero;
         EMPScript emp = _.GetComponent<EMPScript>();
         emp.StartEMP(in isDeploy);
         empList.Add(emp);
@@ -26,26 +32,14 @@ public class EMPbotScript : MonoBehaviour
     {
         for (int i = 0; i < empList.Count; i++)
         {
-            empList[i].Explode();
+            empList[i].EMPController(isDeploy);
         }
     }
-    public void Charge()
-    {
-        for (int i = 0; i < empList.Count; i++)
-        {
-            empList[i].Charge();
-        }
-    }
-    public void Deploy()
-    {
-        for(int i = 0;i < empList.Count; i++)
-        {
-            empList[i].Deploy();
-        }
-    }
+
 
     public void StartEMPbot()
     {
         empList = new List<EMPScript>();
+        CreateEMP();
     }
 }
