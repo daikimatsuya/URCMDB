@@ -13,6 +13,9 @@ public class EMPbotScript : MonoBehaviour
     private float explodeTimeBuff;  
     [SerializeField] private GameObject EMP;
     [SerializeField] private bool isDeploy;
+    [SerializeField] private Vector2 tilling;
+    [SerializeField] private Vector2 offset;
+
 
     private List<EMPScript> empList;
 
@@ -41,6 +44,7 @@ public class EMPbotScript : MonoBehaviour
         EMPScript emp = _.GetComponent<EMPScript>();    //EMPスクリプト取得
         emp.StartEMP(in isDeploy);                                     //EMPスクリプトを初期化
         empList.Add(emp);                                                 //リストに追加
+        emp.SetTillingOffset(tilling, offset);                          //タイリングとオフセットをセット
         if (isDeploy)
         {
             return;

@@ -51,7 +51,7 @@ public class EMPScript : MonoBehaviour
         }
 
         ees.Rotation();
-        ees.SetTillingOffset(Vector2.one, Vector2.zero);
+        ees.SetTillingOffset(tilling, offsetBuff);
 
         return false;
     }
@@ -113,6 +113,11 @@ public class EMPScript : MonoBehaviour
     public bool GetBreakFlag()
     {
         return breakFlag;   
+    }
+    public void SetTillingOffset(Vector2 tilling, Vector2 offset)
+    {
+        this.tilling = tilling;
+        offsetBuff = offset;
     }
     #endregion
 }
