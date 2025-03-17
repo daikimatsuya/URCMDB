@@ -11,9 +11,6 @@ public class PlayerHitEMPScript : MonoBehaviour
     [SerializeField] private float shockPower;
     [SerializeField] private float zonePower;
     [SerializeField] private float maxEMP;
-    private bool isHit;
-    private int d = 0;
-    private int h = 0;
 
     //âeãøÇéÛÇØÇƒÇ¢ÇÈÇ©
     public int EMPAfect()
@@ -27,9 +24,8 @@ public class PlayerHitEMPScript : MonoBehaviour
     }
 
     //âeãøå∏è≠
-    public void Dicrease(ref bool isHit)
+    public void Dicrease(in bool isHit)
     {
-        d++;
         if (!isHit)
         {
             if (empLevel > maxEMP)
@@ -44,11 +40,8 @@ public class PlayerHitEMPScript : MonoBehaviour
                     empLevel = 0;
                 }
             }
-            isHit = false;
         }
-        else {
-            isHit = false;
-        }
+
     }
 
     //îgÇ…Ç†ÇΩÇÈ
@@ -57,13 +50,11 @@ public class PlayerHitEMPScript : MonoBehaviour
         empLevel += shockPower;
     }
     //ÉGÉäÉAÇ…ì¸ÇÈ
-    public void HitEMPZone(ref bool isHit)
+    public void HitEMPZone(in bool isHit)
     {
-        h++;
-        if (!isHit)
+        if (isHit)
         {
             empLevel += zonePower;
-            isHit = true;
         }
     }
     //èâä˙âª

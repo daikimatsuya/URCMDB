@@ -4903,9 +4903,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   empLevel: 0
-  dicreaseEMP: 5
+  dicreaseEMP: 0.5
   shockPower: 50
-  zonePower: 0.01
+  zonePower: 0.1
   maxEMP: 100
 --- !u!33 &7870347104334944395
 MeshFilter:

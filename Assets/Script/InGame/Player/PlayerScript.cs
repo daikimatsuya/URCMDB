@@ -79,7 +79,7 @@ public class PlayerScript : MonoBehaviour
             CountDown();                               //生存時間管理
             EffectController();                          //演出管理
             redEffect.SetActive(redBustFlag);    //レッドブーストのエフェクト管理
-            phes.Dicrease(ref EMPHit);             //EMPの影響減少
+            EMPControll();                               //EMP関係管理
 
         }//////////////////////////////////////////////////////////////////////////
         else
@@ -409,6 +409,13 @@ public class PlayerScript : MonoBehaviour
         tf.localEulerAngles = new Vector3(0, 180, 0);   //角度を初期化
     }
 
+    //EMP関係管理
+    private void EMPControll()
+    {
+        phes.Dicrease(in EMPHit);             //EMPの影響減少
+        phes.HitEMPZone(in EMPHit);        //EMPエリア値増加
+    }
+
     #region　値受け渡し
     public float GetMaxRingBoost()
     {
@@ -521,7 +528,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("EMP") && other.gameObject.layer == LayerMask.NameToLayer("TypeA"))
         {
-            phes.HitEMPZone(ref EMPHit);
+            EMPHit = true;
         }
     }
     public void OnTriggerExit(Collider other)
@@ -529,6 +536,10 @@ public class PlayerScript : MonoBehaviour
         if(other.CompareTag("stage"))
         {
 
+        }
+        if (other.CompareTag("EMP") && other.gameObject.layer == LayerMask.NameToLayer("TypeA"))
+        {
+            EMPHit = false;
         }
     }
 
