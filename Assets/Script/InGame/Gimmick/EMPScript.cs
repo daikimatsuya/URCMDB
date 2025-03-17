@@ -86,8 +86,6 @@ public class EMPScript : MonoBehaviour
         {
             this.gameObject.layer = LayerMask.NameToLayer("TypeA");
 
-            TimeCountScript.SetTime(ref deployTime, deployTime);
-
             ees.SetMaxSize(deploySize);
             ees.SetTime(deployTime);
 
@@ -104,9 +102,9 @@ public class EMPScript : MonoBehaviour
 
 
     #region ’lŽó‚¯“n‚µ
-    public void SetChargeTime(float chargeTimeBuff)
+    public void SetChargeTime(float chargeTime)
     {
-        ees.SetTime(chargeTimeBuff);
+        ees.SetTime(chargeTime);
     }
     public void SetExplodeTime(float explodeTime)
     {

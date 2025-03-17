@@ -85,8 +85,8 @@ public class ExplodeEffectScript : MonoBehaviour
     }
     public void SetTime(float time)
     {
-        expantionBuff = (int)time;
-        expantionTime = time / 60;
+       TimeCountScript.SetTime(ref  expantionBuff, time);
+        expantionTime = time;
     }
     public void SetDissolve(float dissolve)
     {

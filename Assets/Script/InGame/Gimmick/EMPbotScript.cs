@@ -45,7 +45,7 @@ public class EMPbotScript : MonoBehaviour
         {
             return;
         }
-        emp.SetChargeTime(chargeTimeBuff);
+        emp.SetChargeTime(chargeTime);
         emp.SetExplodeTime(explodeTime);
     }
 
