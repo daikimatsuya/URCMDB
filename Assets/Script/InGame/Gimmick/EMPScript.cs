@@ -11,8 +11,6 @@ public class EMPScript : MonoBehaviour
     [SerializeField] private float chargeSize;
     [SerializeField] private float explodeSize;
     [SerializeField] private float deploySize;
-    [SerializeField] private float explodeTime;
-    [SerializeField] private float chargeTime;
     [SerializeField] private float deployTime;
     [SerializeField] private float firstDissolveValue;
     [SerializeField] private Vector2 offsetSpeed;
@@ -20,6 +18,10 @@ public class EMPScript : MonoBehaviour
     [SerializeField] private Vector2 tilling;
 
     Rigidbody rb;
+
+    private float explodeTime;
+    private bool breakFlag;
+    private bool isCharge;
 
     //EMP爆発
     public void Explode()
@@ -29,22 +31,27 @@ public class EMPScript : MonoBehaviour
         ees.Edge();
         if (ees.CountDown())
         {
-            ees.Break();
+            breakFlag = true;
         }
     }
 
     //EMPチャージ
     public bool Charge()
     {
+        if (!isCharge)
+        {
+            return true;
+        }
         if (ees.CountDown())
         {
             ees.SetTime(explodeTime);
             ees.SetMaxSize(explodeSize);
+            isCharge = false;
             return true;
         }
 
         ees.Rotation();
-        ees.SetTillingOffset(Vector2.zero, Vector2.zero);
+        ees.SetTillingOffset(Vector2.one, Vector2.zero);
 
         return false;
     }
@@ -54,7 +61,6 @@ public class EMPScript : MonoBehaviour
     {
         ees.SizeUp();
         ees.CountDown();
-
         offsetBuff += offsetSpeed;
         ees.SetTillingOffset(tilling, offsetBuff);
     }
@@ -64,6 +70,7 @@ public class EMPScript : MonoBehaviour
     {
         ees.Break();
     }
+
     //初期化
     public void StartEMP(in bool isDeploy)
     {
@@ -72,6 +79,8 @@ public class EMPScript : MonoBehaviour
         rb= GetComponent<Rigidbody>();
 
         offsetBuff = Vector2.zero;
+        breakFlag = false;
+        isCharge = true;
 
         if (isDeploy) 
         {
@@ -87,14 +96,25 @@ public class EMPScript : MonoBehaviour
         {
             this.gameObject.layer = LayerMask.NameToLayer("TypeB");
 
-            TimeCountScript.SetTime(ref chargeTime, chargeTime);
-            TimeCountScript.SetTime(ref explodeTime, explodeTime);
-
             ees.SetMaxSize(chargeSize);
-            ees.SetTime(chargeTime);
+
         }
 
     }
 
 
+    #region 値受け渡し
+    public void SetChargeTime(float chargeTimeBuff)
+    {
+        ees.SetTime(chargeTimeBuff);
+    }
+    public void SetExplodeTime(float explodeTime)
+    {
+        this.explodeTime = explodeTime;
+    }
+    public bool GetBreakFlag()
+    {
+        return breakFlag;   
+    }
+    #endregion
 }

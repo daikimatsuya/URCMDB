@@ -325,6 +325,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5060576165409019721, guid: 37a36fa7658b6d647b17d5a781b96df8, type: 3}
       propertyPath: isDeploy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060576165409019721, guid: 37a36fa7658b6d647b17d5a781b96df8, type: 3}
+      propertyPath: chargeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060576165409019721, guid: 37a36fa7658b6d647b17d5a781b96df8, type: 3}
+      propertyPath: empInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060576165409019721, guid: 37a36fa7658b6d647b17d5a781b96df8, type: 3}
+      propertyPath: explodeTime
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5844188716129633986, guid: 37a36fa7658b6d647b17d5a781b96df8, type: 3}

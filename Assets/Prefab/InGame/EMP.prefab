@@ -48,11 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357f1b8ba498cf443bea6f95067ec53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeSize: 0
-  explodeSize: 0
+  chargeSize: 20
+  explodeSize: 50
   deploySize: 30
-  explodeTime: 0
-  chargeTime: 0
   deployTime: 4
   firstDissolveValue: 0
   offsetSpeed: {x: 0, y: 0.016}

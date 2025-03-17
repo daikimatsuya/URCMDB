@@ -6,7 +6,7 @@ public class EMPbotListScript : MonoBehaviour
 {
     private List<EMPbotScript> empbotList;
 
-
+    //EMPbotä«óù
     public void EMPbotListController(in bool isPause,in PlayerControllerScript pcs)
     {
         if (isPause)
@@ -15,15 +15,15 @@ public class EMPbotListScript : MonoBehaviour
         }
         for(int i = 0; i < empbotList.Count; i++)
         {
+            empbotList[i].EMPbotController();
             empbotList[i].EMPController(pcs.GetPlayer());
         }
     }
 
+    //EMPbotëÅä˙èâä˙âª
     public void AwakeEMPbotList()
     {
         empbotList = new List<EMPbotScript>(FindObjectsOfType<EMPbotScript>());
-
-
 
         for(int i = 0; i < empbotList.Count; i++)
         {
