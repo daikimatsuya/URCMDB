@@ -9,7 +9,6 @@ public class SpeedUpRingScript : MonoBehaviour
     [SerializeField] private float shrinkSpeed;
     [SerializeField] private float ringSize;
     [SerializeField] private float offsetTime;
-    [SerializeField] private GameObject marker;
     [SerializeField] private GameObject particle;
 
     private bool isGet;

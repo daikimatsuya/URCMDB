@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     Rigidbody rb;
     Transform tf;
     PlayerHitEMPScript phes;
+    RedBoostScript rbs;
 
     private LaunchPointScript lp;
     private GameObject dust;
@@ -41,9 +42,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float speedUpRingTuner;
     [SerializeField] private float boostBrakeTuner;
     [SerializeField] private float speedUpRingBrakeTuner;
-    [SerializeField] private float redBoostTime;
-    private float redBoostTimeBuff;
-    [SerializeField] private float redBoostSpeed;
 
     private Vector3 playerMove;
     private Vector3 playerMoveBuff;
@@ -56,7 +54,6 @@ public class PlayerScript : MonoBehaviour
     private float ringSpeed;
     private bool PMS;
     [SerializeField] private bool redBustFlag;
-    private float redBuff;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
     //プレイヤー管理関数
@@ -69,17 +66,17 @@ public class PlayerScript : MonoBehaviour
         }
         if (activateFadeObject==null)    //発射できるようになったら//////////////////
         {
-            lp.SetStart(true);                          //スタートフラグをオン
-            SpeedControllDebager();               //デバッグ用
-            Booooooomb();                            //爆発処理
-            ChangePMS();                              //PMS管理
-            Operation();                                 //プレイヤー操作
-            Acceleration();                              //加速管理
-            Move();                                        //移動
-            CountDown();                               //生存時間管理
-            EffectController();                          //演出管理
-            redEffect.SetActive(redBustFlag);    //レッドブーストのエフェクト管理
-            EMPControll();                               //EMP関係管理
+            lp.SetStart(true);                                                   //スタートフラグをオン
+            SpeedControllDebager();                                        //デバッグ用
+            Booooooomb();                                                     //爆発処理
+            ChangePMS();                                                       //PMS管理
+            Operation();                                                          //プレイヤー操作
+            Acceleration();                                                      //加速管理
+            Move();                                                                //移動
+            CountDown();                                                       //生存時間管理
+            EffectController();                                                 //演出管理
+            EMPControll();                                                      //EMP関係管理
+            rbs.RedBoostController(playerSpeed, redBustFlag); //レッドブースト管理
 
         }//////////////////////////////////////////////////////////////////////////
         else
@@ -259,13 +256,13 @@ public class PlayerScript : MonoBehaviour
             return;
         }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (Input.GetKeyDown(KeyCode.Space)||Usefull.GetTriggerScript.GetAxisDown("RightTrigger"))    //一時的なブースト//////////////////////////////
-        {           
-            accelerateSpeed = (burst + playerSpeed / playerBoostTuner)+redBuff;   //加速分算出
-            CreateBoostEffect();                                                                           //加速時演出生成
+        {
+            accelerateSpeed = burst + playerSpeed / playerBoostTuner;   //加速分算出
+            CreateBoostEffect();                                                                                                      //加速時演出生成
 
             if (redBustFlag)
             {
-                TimeCountScript.SetTime(ref redBoostTimeBuff, redBoostTime);
+                rbs.SetFlagOn();
                 redBustFlag = false;
             }
 
@@ -300,23 +297,8 @@ public class PlayerScript : MonoBehaviour
         }
         /////////////////////////////////////////////////////////////
         
-        if (!TimeCountScript.TimeCounter(ref redBoostTimeBuff))
-        {
-            accelerateSpeed +=playerSpeed * redBoostSpeed;
-            redBuff +=playerSpeed * redBoostSpeed;
-            CreateBoostEffect();
-            
-        }
-        else
-        {        
-            redBuff -= playerSpeed * redBoostSpeed; ;
-            if (redBuff < 0)
-            {
-                redBuff = 0;
-            }
-        }
 
-        boostSpeed = accelerateSpeed + ringSpeed;   //ブーストを合算
+        boostSpeed = accelerateSpeed + ringSpeed+rbs.GetRedBurstSpeed();   //ブーストを合算
         
         if (isControl)
         {
@@ -552,6 +534,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tf = GetComponent<Transform>();
         phes=GetComponent<PlayerHitEMPScript>();
+        rbs=GetComponent<RedBoostScript>();
 
         dust = GameObject.FindWithTag("PlayerDust");
         dust.SetActive(false);
@@ -562,9 +545,8 @@ public class PlayerScript : MonoBehaviour
         redBustFlag = false;
         lp.SetStart(false);
         PMS = Usefull.PMSScript.GetPMS();
-        redBoostTimeBuff = 0;
         redBustFlag = false;
-        redEffect.SetActive(false);
+        rbs.StartRedBoost();
     }
 
 }

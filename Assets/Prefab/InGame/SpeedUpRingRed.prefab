@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7004350860084409696}
   - component: {fileID: 7004350860084409630}
+  - component: {fileID: -6626960779589609129}
   - component: {fileID: 7004350860084409631}
   m_Layer: 0
   m_Name: SpeedUpRingRed
@@ -51,6 +52,20 @@ MonoBehaviour:
   offsetTime: 0.2
   marker: {fileID: 8266175863323519500, guid: 6bc388777247436469176c60f437341a, type: 3}
   particle: {fileID: 7215570807412991432}
+--- !u!114 &-6626960779589609129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7004350860084409697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3827e47c782b64493f4dd4258e174e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 8266175863323519500, guid: 6bc388777247436469176c60f437341a, type: 3}
+  markerSize: 0
 --- !u!136 &7004350860084409631
 CapsuleCollider:
   m_ObjectHideFlags: 0
