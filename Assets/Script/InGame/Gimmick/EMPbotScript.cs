@@ -15,7 +15,9 @@ public class EMPbotScript : MonoBehaviour
     [SerializeField] private bool isDeploy;
     [SerializeField] private Vector2 tilling;
     [SerializeField] private Vector2 offset;
-
+    [SerializeField] private float chargeSize;
+    [SerializeField] private float explodeSize;
+    [SerializeField] private float deploySize;
 
     private List<EMPScript> empList;
 
@@ -42,13 +44,16 @@ public class EMPbotScript : MonoBehaviour
         _.transform.localPosition = Vector3.zero;                  //位置のずれ修正
         _.transform.localEulerAngles = Vector3.zero;            //方向のずれ修正
         EMPScript emp = _.GetComponent<EMPScript>();    //EMPスクリプト取得
+        emp.SetSize(chargeSize, explodeSize, deploySize);   //サイズセット
         emp.StartEMP(in isDeploy);                                     //EMPスクリプトを初期化
         empList.Add(emp);                                                 //リストに追加
-        emp.SetTillingOffset(tilling, offset);                          //タイリングとオフセットをセット
+
+
         if (isDeploy)
         {
             return;
         }
+        emp.SetTillingOffset(tilling, offset);                          //タイリングとオフセットをセット
         emp.SetChargeTime(chargeTime);
         emp.SetExplodeTime(explodeTime);
     }

@@ -8,9 +8,7 @@ public class EMPScript : MonoBehaviour
 {
     private ExplodeEffectScript ees;
 
-    [SerializeField] private float chargeSize;
-    [SerializeField] private float explodeSize;
-    [SerializeField] private float deploySize;
+
     [SerializeField] private float deployTime;
     [SerializeField] private float firstDissolveValue;
     [SerializeField] private Vector2 offsetSpeed;
@@ -22,6 +20,15 @@ public class EMPScript : MonoBehaviour
     private float explodeTime;
     private bool breakFlag;
     private bool isCharge;
+    private float chargeSize;
+    private float explodeSize;
+    private float deploySize;
+
+    private void RotOffset()
+    {
+        offsetBuff += offsetSpeed;
+        ees.SetTillingOffset(tilling, offsetBuff);
+    }
 
     //EMP爆発
     public void Explode()
@@ -50,8 +57,9 @@ public class EMPScript : MonoBehaviour
             return true;
         }
 
+        ees.SizeUp();
         ees.Rotation();
-        ees.SetTillingOffset(tilling, offsetBuff);
+        RotOffset();
 
         return false;
     }
@@ -61,8 +69,7 @@ public class EMPScript : MonoBehaviour
     {
         ees.SizeUp();
         ees.CountDown();
-        offsetBuff += offsetSpeed;
-        ees.SetTillingOffset(tilling, offsetBuff);
+        RotOffset();
     }
 
     //オブジェクト削除
@@ -117,7 +124,13 @@ public class EMPScript : MonoBehaviour
     public void SetTillingOffset(Vector2 tilling, Vector2 offset)
     {
         this.tilling = tilling;
-        offsetBuff = offset;
+        offsetSpeed = offset;
+    }
+    public void SetSize(float chargeSize,float explodeSize,float deploySize)
+    {
+        this.chargeSize = chargeSize;
+        this.explodeSize = explodeSize;
+        this.deploySize = deploySize;
     }
     #endregion
 }

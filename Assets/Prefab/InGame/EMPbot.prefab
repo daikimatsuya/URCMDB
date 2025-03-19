@@ -143,10 +143,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcc6eaf535f62b49a6aff565930351c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  empInterval: 3
-  chargeTime: 1
+  empInterval: 6
+  chargeTime: 0.5
   explodeTime: 1
   EMP: {fileID: 3176656653487963511, guid: 76871139ddbd257429488169cdb331de, type: 3}
   isDeploy: 0
   tilling: {x: 3, y: 3}
   offset: {x: 0, y: 0}
+  chargeSize: 3
+  explodeSize: 60
+  deploySize: 60
