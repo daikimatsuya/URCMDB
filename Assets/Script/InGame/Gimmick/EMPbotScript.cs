@@ -25,8 +25,9 @@ public class EMPbotScript : MonoBehaviour
 
     public void EMPbotController()
     {
-        cms.Adjustment();
         cms.Move(this.transform);
+        cms.Adjustment();
+
         if (isDeploy)
         {
             return;

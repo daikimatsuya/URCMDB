@@ -460,7 +460,7 @@ public class PlayerScript : MonoBehaviour
     }
     public bool GetIsEMP()
     {
-        if (phes.EMPAfect() > 0)
+        if (phes.EMPAfect() < 0)
         {
             return true;
         }

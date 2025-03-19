@@ -41,7 +41,7 @@ public class UIScript : MonoBehaviour
     private int gameOverUIIntervalBuff;
     [SerializeField] private TutorialUIScript tutorialUIScript;
     [SerializeField] private PoseMenuScript poseKeyUI;
-    [SerializeField] private AdditionalEffectsManagerScript AdditionalEffectsManagerScript;
+    [SerializeField] private PlayerStateEffectControllerScript playerStateEffectControllerScript;
 
 
     //早期に初期化
@@ -74,6 +74,7 @@ public class UIScript : MonoBehaviour
         canSelect = false;
         CheckController();
         poseKeyUI.StartPoseMenu(in isControllerConect);
+        playerStateEffectControllerScript.StartPlayerStateEffectController(pcs);
     }
 
     //UI全般管理関数
@@ -88,12 +89,14 @@ public class UIScript : MonoBehaviour
             playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
             sensorUIScript.SensorUIController();                                                                                                         //センサーのUI表示
             TutorialUI(isControllerConect);                                                                                                                  //チュートリアルUIを動かす
+
         }
         PMSMode();                                                                                                                          //PMS表示
         IsGameOver(isPose);                                                                                                             //ゲームオーバーのUI表示
         TargetMarkerUI();                                                                                                                 //ターゲットマーカー表示
         ActiveChecker(isPose);                                                                                                          //ゲーム画面に表示するCanvasのフラグ管理
         poseKeyUI.ViewPoseMenu(in isControllerConect);                                                                    //ポーズメニューUI表示
+        playerStateEffectControllerScript.PlayerStateEffectController();                                                 //効果エフェクト管理
     }
     //プレイヤーが死んでいたら消す
     private void ActiveChecker(in bool isPose)
