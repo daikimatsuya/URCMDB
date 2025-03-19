@@ -35,6 +35,8 @@ public class MarkerScript : MonoBehaviour
         tf.transform.localScale = new Vector3(Distance() * pretenseSize, Distance() * pretenseSize, Distance() * pretenseSize);
         
     }
+
+    //y座標を補正
     public void AdjustmentPos()
     {
         if (pcs.GetPlayer() == null)
@@ -58,6 +60,7 @@ public class MarkerScript : MonoBehaviour
         tf.transform.position = new Vector3(tf.position.x, markerPosY + adjustmentPos, tf.position.z);
     }
     
+    //初期化
     public void StartMarker(in PlayerControllerScript pcs,in Transform objectTransform)
     {
         tf = GetComponent<Transform>();
@@ -67,6 +70,8 @@ public class MarkerScript : MonoBehaviour
         maxDisY = 688;
         maxPosY = 1.25f;
     }
+
+    //オンオフ切り替え
     public void SetActive(bool flag)
     {
         this.gameObject.SetActive(flag);
@@ -76,6 +81,7 @@ public class MarkerScript : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+    //距離算出
     private float Distance()
     {
         Vector3 playerPos = pcs.GetPlayer().GetPlayerPos();
@@ -83,5 +89,11 @@ public class MarkerScript : MonoBehaviour
         Vector2 playerDis2 = new Vector2(playerDis.x, playerDis.z);
         float disFloat = playerDis2.magnitude;
         return disFloat; ;
+    }
+
+    //補正サイズ変更
+    public void SetSize(float size)
+    {
+        pretenseSize = size;
     }
 }

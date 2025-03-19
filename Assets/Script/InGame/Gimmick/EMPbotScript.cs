@@ -19,10 +19,14 @@ public class EMPbotScript : MonoBehaviour
     [SerializeField] private float explodeSize;
     [SerializeField] private float deploySize;
 
+    private CreateMarkerScript cms;
+
     private List<EMPScript> empList;
 
     public void EMPbotController()
     {
+        cms.Adjustment();
+        cms.Move(this.transform);
         if (isDeploy)
         {
             return;
@@ -106,9 +110,13 @@ public class EMPbotScript : MonoBehaviour
     }
 
     //èâä˙âª
-    public void StartEMPbot()
+    public void StartEMPbot(in PlayerControllerScript pcs)
     {
         empList = new List<EMPScript>();
+        cms=GetComponent<CreateMarkerScript>();
+        cms.CreateMarker(this.transform, in pcs);
+        cms.SetMarkerSize();
+
         if (isDeploy)
         {
             return;

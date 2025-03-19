@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2481082778709352639}
   - component: {fileID: 5335751935834206956}
   - component: {fileID: 5739100897267919368}
+  - component: {fileID: 8293576572159706554}
   - component: {fileID: 4545860703227956663}
   m_Layer: 0
   m_Name: FlakBullet
@@ -113,7 +114,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deleteTime: 3
+--- !u!114 &8293576572159706554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408358433001188916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3827e47c782b64493f4dd4258e174e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   marker: {fileID: 7506089732503652708, guid: 2fc4c26d65e02874094e47c2d55fdb1b, type: 3}
+  markerSize: 0.02
 --- !u!54 &4545860703227956663
 Rigidbody:
   m_ObjectHideFlags: 0

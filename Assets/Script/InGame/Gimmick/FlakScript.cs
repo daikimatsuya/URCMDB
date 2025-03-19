@@ -9,10 +9,10 @@ using Usefull;
 //  砲台管理
 public class FlakScript : MonoBehaviour
 {
-    Transform pos;
+    Transform tf;
 
     private LineUIScript lineUI;
-    private MarkerScript ms; 
+    private CreateMarkerScript cms;
 
     [SerializeField] private bool autShotSwitch;
     [SerializeField] private Transform body;
@@ -20,7 +20,6 @@ public class FlakScript : MonoBehaviour
     [SerializeField] private Transform bulletPoint;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject line;
-    [SerializeField] private GameObject marker;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
     [SerializeField] private float range;
@@ -76,8 +75,7 @@ public class FlakScript : MonoBehaviour
         body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);                 //砲台のボディーを回転
         barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);   //砲身を回転
         ///////////////////////////////////////////////////////////////////////////////////////////
-        ms.AdjustmentSize();
-        ms.AdjustmentPos();
+        cms.Adjustment();
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
     }
 
@@ -161,15 +159,7 @@ public class FlakScript : MonoBehaviour
         //////////////////////////////////////////
     }
 
-    //マーカー生成
-    private void CreateMarker(in PlayerControllerScript pcs)
-    {
-        GameObject _ = Instantiate(marker);                     //生成
-        ms = _.GetComponent<MarkerScript>();                //コンポーネント取得
-        ms.StartMarker(in pcs, this.gameObject.transform);//マーカー初期化
-        ms.Move(pos.position);                                          //位置代入
-        _.transform.SetParent(this.transform);
-    }
+
     //予測線生成
     private void CreateLine()
     {
@@ -214,7 +204,8 @@ public class FlakScript : MonoBehaviour
     public void StartFlak(in PlayerControllerScript pcs) 
     {
         //コンポーネント取得
-        pos = GetComponent<Transform>();
+        tf = GetComponent<Transform>();
+        cms=GetComponent<CreateMarkerScript>();
         //////////////////////
 
         //時間設定
@@ -224,7 +215,7 @@ public class FlakScript : MonoBehaviour
         TimeCountScript.SetTime(ref setWarning, setWarning);
         //////////
 
-        CreateMarker(in pcs);
+        cms.CreateMarker(in tf,in pcs);
         CreateLine();
     }
 

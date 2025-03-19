@@ -10,10 +10,9 @@ public class FlakBulletScript : MonoBehaviour
     Transform pos;
 
     private Vector3 speed;
-    private MarkerScript ms;
+    private CreateMarkerScript cms;
 
     [SerializeField] private float deleteTime;
-    [SerializeField] private GameObject marker;
 
     //移動
     public void Move(in bool isPause)
@@ -24,33 +23,27 @@ public class FlakBulletScript : MonoBehaviour
             return;
         }
         rb.velocity = speed;       //速度加算
-        ms.Move(pos.position);  //マーカーアイコンを弾丸に追従させる
-        ms.AdjustmentSize();    //マーカーの大きさを調節する
-        ms.AdjustmentPos();     //マーカーの位置を調節する
+        cms.Move(in pos);         //マーカー移動
+        cms.Adjustment();        //マーカーサイズ補正
     }
     //消去
     public void Delete()
     {
-        ms.Delete();                        //マーカーアイコン削除
+        cms.Delete();                       //マーカーアイコン削除
         Destroy(this.gameObject);    //オブジェクト削除
     }
-    //マーカー生成
-    private void CreateMarker(in PlayerControllerScript pcs)
-    {
-        GameObject _ = Instantiate(marker);                     //マーカーアイコン生成
-        ms = _.GetComponent<MarkerScript>();                //スクリプト取得
-        ms.StartMarker(in pcs,this.gameObject.transform); //マーカーを初期化
-        ms.Move(pos.position);                                          //追従させる
 
-    }
     //初期化
     public void StartFlakBullet(Vector3 speed,in PlayerControllerScript pcs)
     {
         this.speed = speed;
         rb = GetComponent<Rigidbody>();
         pos = GetComponent<Transform>();
+        cms=GetComponent<CreateMarkerScript>();
+
         TimeCountScript.SetTime(ref deleteTime, deleteTime);
-        CreateMarker(in pcs);
+        cms.CreateMarker(in pos, in pcs);
+        cms.SetMarkerSize();
     }
 
     public bool GetDeleteFlag()

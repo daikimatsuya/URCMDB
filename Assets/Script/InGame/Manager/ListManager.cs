@@ -54,7 +54,7 @@ public class ListManager
         eel.AwakeExplodeEffectList();
 
         ebls = GameObject.FindObjectOfType<EMPbotListScript>();
-        ebls.AwakeEMPbotList();
+        ebls.AwakeEMPbotList(in pcs);
     }
 
 }

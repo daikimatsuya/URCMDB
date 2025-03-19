@@ -21,13 +21,13 @@ public class EMPbotListScript : MonoBehaviour
     }
 
     //EMPbot‘Šú‰Šú‰»
-    public void AwakeEMPbotList()
+    public void AwakeEMPbotList(in PlayerControllerScript pcs)
     {
         empbotList = new List<EMPbotScript>(FindObjectsOfType<EMPbotScript>());
 
         for(int i = 0; i < empbotList.Count; i++)
         {
-            empbotList[i].StartEMPbot();
+            empbotList[i].StartEMPbot(in pcs);
         }
     }
 }

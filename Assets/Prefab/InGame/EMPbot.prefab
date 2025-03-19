@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5844188716129633986}
   - component: {fileID: 5060576165409019721}
+  - component: {fileID: -4594005745906742576}
   m_Layer: 0
   m_Name: EMPbot
   m_TagString: EMPbot
@@ -153,3 +154,17 @@ MonoBehaviour:
   chargeSize: 3
   explodeSize: 60
   deploySize: 60
+--- !u!114 &-4594005745906742576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5844188716129633997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3827e47c782b64493f4dd4258e174e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 7506089732503652708, guid: 2fc4c26d65e02874094e47c2d55fdb1b, type: 3}
+  markerSize: 0.0015
