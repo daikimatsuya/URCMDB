@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //ラディアンブラーをかける
-public class ShaderController : MonoBehaviour
+public class RadialBlurController : MonoBehaviour
 {
     [SerializeField] private Shader radialBlur;
     [SerializeField,Range(0.0f,1.0f)] private float intensity;
@@ -32,6 +32,10 @@ public class ShaderController : MonoBehaviour
     //ブラーをかける
     private void OnRenderImage(RenderTexture source,  RenderTexture destination)
     {
+        if (material == null)
+        {
+            return;
+        }
         Graphics.Blit(source, destination, material);   //ブラーをかける
     }
 

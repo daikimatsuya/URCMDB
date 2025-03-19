@@ -14,7 +14,8 @@ public class SpeedUpRingScript : MonoBehaviour
 
     private bool isGet;
 
-    private MarkerScript ms;
+    private CreateMarkerScript cms;
+
     CapsuleCollider  collider_;
     Transform tf;
     private PlayerControllerScript pcs;
@@ -23,37 +24,27 @@ public class SpeedUpRingScript : MonoBehaviour
     //消す
     public void Off()
     {
-        if (!isGet)  //取得されたら機能を消す//////////
+        if (!isGet) //取得されていない時
         {
-            ms.AdjustmentSize();
-            ms.AdjustmentPos();
+            cms.Adjustment();
             return;
-        }//////////////////////////////////////////////
+        }
 
         tf.localScale = new Vector3(0, 0, 0);   //サイズを０にする
-        ms.SetActive(false);
+        cms.SetActive(false);
         particle.SetActive(false);
     }
+
     //再表示
     public void ON()
     {
         isGet = false;                                                      //取得フラグを消す
         tf.localScale = new Vector3(1, ringSize, ringSize); //サイズ初期化
         collider_.enabled = true;                                     //コライダーオン
-        ms.SetActive(true);
+        cms.SetActive(true);
         particle.SetActive(true);
     }
-    //マーカー生成
-    private void CreateMarker(in PlayerControllerScript pcs)
-    {
-        GameObject _ = Instantiate(marker);
-        ms = _.GetComponent<MarkerScript>();
-        _.transform.SetParent(this.transform);
-        ms.StartMarker(in pcs, this.gameObject.transform);
-        ms.transform.rotation=this.transform.rotation;
-        ms.Move(tf.position);
 
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -67,10 +58,11 @@ public class SpeedUpRingScript : MonoBehaviour
     {
         tf = GetComponent<Transform>();
         collider_ = GetComponent<CapsuleCollider>();
+        cms=GetComponent<CreateMarkerScript>();
         tf.localScale = new Vector3(1, ringSize, ringSize);
 
         isGet = false;
-        CreateMarker(in pcs);
+        cms.CreateMarker(in tf,in pcs);
     }
 
 }

@@ -16,7 +16,7 @@ public class PlayerCameraScript : MonoBehaviour
     private MovieCamera mc;
     private ExplodeCamera ec;
     private MovieFade mf;
-    private ShaderController sc;
+    private RadialBlurController rbc;
 
     [SerializeField] private float cameraDeff;
     [SerializeField] private float rotSpeed;
@@ -231,7 +231,7 @@ public class PlayerCameraScript : MonoBehaviour
         tf = GetComponent<Transform>();
         mc = GetComponent<MovieCamera>();
         ec = GetComponent<ExplodeCamera>();
-        sc = GetComponent<ShaderController>();
+        rbc = GetComponent<RadialBlurController>();
     }
 
 }

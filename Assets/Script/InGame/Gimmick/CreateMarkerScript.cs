@@ -39,8 +39,15 @@ public class CreateMarkerScript : MonoBehaviour
         ms.Delete();
     }
 
+    //マーカーの大きさをセット
     public void SetMarkerSize()
     {
         ms.SetSize(markerSize);
+    }
+
+    //オンオフ切り替え
+    public void SetActive(in bool flag)
+    {
+        ms.SetActive(flag);
     }
 }

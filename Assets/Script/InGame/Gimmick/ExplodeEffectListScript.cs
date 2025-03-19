@@ -10,7 +10,6 @@ public class ExplodeEffectListScript : MonoBehaviour
 
     public void ExplodeEffectListController(in PlayerControllerScript pcs)
     {
-
         CreatePlayerExplode(in pcs);
 
         if (pcs.GetPlayer() != null)

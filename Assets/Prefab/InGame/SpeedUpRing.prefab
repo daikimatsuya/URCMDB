@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8700296743689772404}
   - component: {fileID: 6036833331950874415}
   - component: {fileID: -9150015487423607835}
+  - component: {fileID: 4705646224575488594}
   m_Layer: 0
   m_Name: SpeedUpRing
   m_TagString: SpeedUpRing
@@ -149,6 +150,20 @@ MonoBehaviour:
   offsetTime: 0.2
   marker: {fileID: 8266175863323519500, guid: 6bc388777247436469176c60f437341a, type: 3}
   particle: {fileID: 8822198260681484686}
+--- !u!114 &4705646224575488594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661623078836420815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3827e47c782b64493f4dd4258e174e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 8266175863323519500, guid: 6bc388777247436469176c60f437341a, type: 3}
+  markerSize: 0
 --- !u!1 &8822198260681484686
 GameObject:
   m_ObjectHideFlags: 0

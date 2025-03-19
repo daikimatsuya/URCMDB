@@ -22,7 +22,7 @@ public class GameManagerScript : MonoBehaviour
     private ListManager lm;
     private Transform uiTransform;
     private PlayerControllerScript pcs;
-    private ShaderController sc;
+    private RadialBlurController rbc;
 
     private bool isPose;
 
@@ -40,7 +40,7 @@ public class GameManagerScript : MonoBehaviour
         InGameController(isPose);                                            //ゲームを動かす
         PoseChange();                                                             //ポーズ設定切り替え
 
-        sc.BlurController();                                                       //ラジカルブラー
+        rbc.BlurController();                                                       //ラジカルブラー
        
     }
     //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
@@ -56,8 +56,8 @@ public class GameManagerScript : MonoBehaviour
     }
     private void StartGameManager()
     {
-        sc.StartShaderController();
-        pcs.StartPlayerController(in lp, in uiTransform,in ts,in sc);
+        rbc.StartShaderController();
+        pcs.StartPlayerController(in lp, in uiTransform,in ts,in rbc);
         cm.StartCameraManager();
         cm.SetTarget(ts);
         us.StartUIScript(in pcs);
@@ -146,7 +146,7 @@ public class GameManagerScript : MonoBehaviour
         sws = GetComponent<SelectWeatherScript>();
         lm = new ListManager();
         pcs=GetComponent<PlayerControllerScript>();
-        sc = GameObject.FindWithTag("GameCamera").GetComponent<ShaderController>();
+        rbc = GameObject.FindWithTag("GameCamera").GetComponent<RadialBlurController>();
     }
 
     private void Awake()

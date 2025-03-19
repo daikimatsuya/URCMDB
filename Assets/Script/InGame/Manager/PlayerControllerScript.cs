@@ -32,16 +32,16 @@ public class PlayerControllerScript : MonoBehaviour
     Transform uiTransform;
     private Vector3 playerdeadPos;
     private TargetScript ts;
-    private ShaderController sc;
+    private RadialBlurController rbc;
 
     const float epsilon=0.000001f;
 
     //初期化
-    public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform,in TargetScript ts,in ShaderController sc)
+    public void StartPlayerController(in LaunchPointScript lp,in Transform uiTransform,in TargetScript ts,in RadialBlurController sc)
     {
         this.ts = ts;
         this.lp = lp;
-        this.sc = sc;
+        this.rbc = sc;
         this.uiTransform = uiTransform;
         playerSpawnFlag = true;
         PlayerSpawn(in this.lp,in this.uiTransform);
@@ -149,7 +149,7 @@ public class PlayerControllerScript : MonoBehaviour
         if (ps==null||!ps.GetIsFire())
         {
             blurIntnsity = 0;
-            sc.SetBlurIntensity(blurIntnsity);
+            rbc.SetBlurIntensity(blurIntnsity);
             return;
         }
 
@@ -195,7 +195,7 @@ public class PlayerControllerScript : MonoBehaviour
         {
             blurIntnsity = minBlurIntnsity;
         }
-        sc.SetBlurIntensity(blurIntnsity);          //ブラーの値を代入
+        rbc.SetBlurIntensity(blurIntnsity);          //ブラーの値を代入
     }
 
     #region 値受け渡し
