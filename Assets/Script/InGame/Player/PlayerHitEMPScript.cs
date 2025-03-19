@@ -6,25 +6,39 @@ using static SensorScript;
 //プレイヤーがEMPにあたった時の処理
 public class PlayerHitEMPScript : MonoBehaviour
 {
+    [SerializeField] private GameObject empEffect;
     [SerializeField] private float empLevel;
     [SerializeField] private float dicreaseEMP;
     [SerializeField] private float shockPower;
     [SerializeField] private float zonePower;
     [SerializeField] private float maxEMP;
 
+    //EMP関係管理
+    public void EMPAffectController(in bool EMPHit)
+    {
+        Dicrease(in EMPHit);        //EMPの影響減少
+        HitEMPZone(in EMPHit);   //EMPエリア値増加
+    }
     //影響を受けているか
     public int EMPAfect()
     {
-
         if(empLevel > 0)
         {
+            EMPAffect(true);
             return -1;
         }
+        EMPAffect(false);
         return 1;
     }
 
+    //EMP状態のエフェクトオンオフ切り替え
+    private void EMPAffect(in bool flag)
+    {
+        empEffect.SetActive(flag);
+    }
+
     //影響減少
-    public void Dicrease(in bool isHit)
+    private void Dicrease(in bool isHit)
     {
         if (!isHit)
         {
@@ -50,7 +64,7 @@ public class PlayerHitEMPScript : MonoBehaviour
         empLevel += shockPower;
     }
     //エリアに入る
-    public void HitEMPZone(in bool isHit)
+    private void HitEMPZone(in bool isHit)
     {
         if (isHit)
         {
@@ -61,5 +75,6 @@ public class PlayerHitEMPScript : MonoBehaviour
     public void StartPlayerHitEMP()
     {
         empLevel = 0;
+        EMPAffect(false);
     }
 }

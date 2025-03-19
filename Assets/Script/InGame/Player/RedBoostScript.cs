@@ -14,6 +14,7 @@ public class RedBoostScript : MonoBehaviour
     [SerializeField] private Vector3 firePos;
 
     private float redSpeedBuff;
+    private bool isBoost;
     private List<BoostEffectScript> redBoostEffectList = new List<BoostEffectScript>();
 
     //RedBoost管理
@@ -38,6 +39,7 @@ public class RedBoostScript : MonoBehaviour
         }
         else
         {
+            isBoost = false;
             redSpeedBuff -= playerSpeed * redBoostAcce; ;
             if (redSpeedBuff < 0)
             {
@@ -49,6 +51,7 @@ public class RedBoostScript : MonoBehaviour
     public void SetFlagOn()
     {
         TimeCountScript.SetTime(ref redBoostTimeBuff, redBoostTime);
+        isBoost=true;
     }
 
     //ブースト可能の時のエフェクトオンオフ切り替え
@@ -93,11 +96,17 @@ public class RedBoostScript : MonoBehaviour
     public void StartRedBoost()
     {
         redEffect.SetActive(false);
+        isBoost = false;
     }
+
     #region 値受け渡し
     public float GetRedBurstSpeed()
     {
         return redSpeedBuff;
+    }
+    public bool GetIsBoost()
+    {
+        return isBoost;
     }
     #endregion
 

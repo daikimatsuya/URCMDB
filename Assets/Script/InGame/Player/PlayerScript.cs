@@ -23,7 +23,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject boostEffect;
     [SerializeField] private GameObject explode;
-    [SerializeField] private GameObject redEffect;
     [SerializeField] private float speedBuff;
     [SerializeField] private float firstSpeed;
     [SerializeField] private float playerSpeed;
@@ -75,7 +74,7 @@ public class PlayerScript : MonoBehaviour
             Move();                                                                //ˆÚ“®
             CountDown();                                                       //¶‘¶ŽžŠÔŠÇ—
             EffectController();                                                 //‰‰oŠÇ—
-            EMPControll();                                                      //EMPŠÖŒWŠÇ—
+            phes.EMPAffectController(in EMPHit);                      //EMPŠÖŒWŠÇ—
             rbs.RedBoostController(playerSpeed, redBustFlag); //ƒŒƒbƒhƒu[ƒXƒgŠÇ—
 
         }//////////////////////////////////////////////////////////////////////////
@@ -391,12 +390,7 @@ public class PlayerScript : MonoBehaviour
         tf.localEulerAngles = new Vector3(0, 180, 0);   //Šp“x‚ð‰Šú‰»
     }
 
-    //EMPŠÖŒWŠÇ—
-    private void EMPControll()
-    {
-        phes.Dicrease(in EMPHit);             //EMP‚Ì‰e‹¿Œ¸­
-        phes.HitEMPZone(in EMPHit);        //EMPƒGƒŠƒA’l‘‰Á
-    }
+
 
     #region@’lŽó‚¯“n‚µ
     public float GetMaxRingBoost()
@@ -460,7 +454,18 @@ public class PlayerScript : MonoBehaviour
     {
         return tf.position;
     }
-
+    public bool GetIsRedBoost()
+    {
+        return rbs.GetIsBoost();
+    }
+    public bool GetIsEMP()
+    {
+        if (phes.EMPAfect() > 0)
+        {
+            return true;
+        }
+        return false;
+    }
     #endregion
 
     public void OnCollisionEnter(Collision collision)
@@ -547,6 +552,7 @@ public class PlayerScript : MonoBehaviour
         PMS = Usefull.PMSScript.GetPMS();
         redBustFlag = false;
         rbs.StartRedBoost();
+        phes.StartPlayerHitEMP();
     }
 
 }
