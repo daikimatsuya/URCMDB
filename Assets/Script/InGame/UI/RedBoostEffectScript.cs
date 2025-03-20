@@ -8,11 +8,7 @@ public class RedBoostEffectScript : MonoBehaviour
     [SerializeField] private GameObject redBoostEffect;
     public void RedBoostEffectController(in bool flag)
     {
-
-    }
-    private void On()
-    {
-        redBoostEffect.SetActive(true);
+        redBoostEffect.SetActive(flag);
     }
     public void Off()
     {

@@ -17,11 +17,12 @@ public class PlayerStateEffectControllerScript : MonoBehaviour
             return;
         }
         ees.EMPEffectController(pcs.GetPlayer().GetIsEMP());
+        rbes.RedBoostEffectController(pcs.GetPlayer().GetIsRedBoost());
     }
     private void AllOff()
     {
         ees.Off();
-        //rbes.Off();
+        rbes.Off();
     }
     public void StartPlayerStateEffectController(in PlayerControllerScript pcs)
     {
