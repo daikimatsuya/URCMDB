@@ -23,7 +23,7 @@ public class ActivationFadeScript : MonoBehaviour
     private float speedBuff;
 
     //演出の管理関数
-    private void ActivationFadeController()
+    public void ActivationFadeController()
     {
         if (start)
         {
@@ -47,7 +47,6 @@ public class ActivationFadeScript : MonoBehaviour
                 DeleteFade();
             }
         }
-        SetStart();//1フレーム遅らせる
     }
     //上に移動する奴を管理
     private void UpFade()
@@ -85,7 +84,7 @@ public class ActivationFadeScript : MonoBehaviour
         tf.localPosition = new Vector3(tf.localPosition.x, tf.localPosition.y + speedBuff, tf.localPosition.z);
     }
     //開始フラグをオンにする
-    private void SetStart()
+    public void SetStart()
     {
         start = true;
     }
@@ -110,13 +109,5 @@ public class ActivationFadeScript : MonoBehaviour
 
         TimeCountScript.SetTime(ref life, life);
     }
-    void Start()
-    {
-        StartActivationFade();
-    }
 
-    void Update()
-    {
-        ActivationFadeController();
-    }
 }

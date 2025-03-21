@@ -23,6 +23,7 @@ public class PlayerControllerScript : MonoBehaviour
 
 
     private PlayerScript ps;
+    private ActivationFadeControllerScript afcs;
 
     private GameObject player;
     private bool playerSpawnFlag;
@@ -55,6 +56,12 @@ public class PlayerControllerScript : MonoBehaviour
         BlurController();
         if (ps)
         {
+            if (afcs)
+            {               
+                afcs.ActivationFadeController();
+                afcs.SetStart();
+            }
+
             ps.PlayerController(in isPose);
             playerdeadPos=ps.GetPlayerPos();
 
@@ -106,6 +113,9 @@ public class PlayerControllerScript : MonoBehaviour
         __.transform.localScale = Vector3.one;                         //スケール修正
         __.transform.localPosition = Vector3.zero;                     //座標修正
         __.transform.localEulerAngles = new Vector3(0, 0, 0);   //角度修正
+        afcs = __.GetComponent<ActivationFadeControllerScript>();
+        afcs.StartActivationFadeController();
+
     }
     //プレイヤー生成
     private void CreatePlayer(in LaunchPointScript lp)
