@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randPow: 0.001
   colorChangeTime: 0.05
-  hitIgnoreTags:
+  hitTags:
   - Untagged
 --- !u!120 &2025208784463914876
 LineRenderer:
