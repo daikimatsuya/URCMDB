@@ -14,13 +14,9 @@ public class FunListScript : MonoBehaviour
         {
             return;
         }
-        if (funList == null)
-        {
-            return;
-        }
         for (int i = 0; i < funList.Count; i++)
         {
-            funList[i].RotateFun(); 
+            funList[i].RotateFun();     //ƒtƒ@ƒ“‚ð‰ñ‚·
         }
     }
     //‘Šú‰Šú‰»

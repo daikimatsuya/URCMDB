@@ -26,12 +26,13 @@ public class MoveOnRailScript : MonoBehaviour
     ComplementingRotationScript crs;
 
     //動かす
-    private void Move()
+    public void Move()
     {
-        if (rail == null)   //レールに乗ってなかったらreturnを返す/////
+        //レールに乗ってなかったらreturnを返す
+        if (rail == null)   
         {
             return;
-        }////////////////////////////////////////////////////////////////
+        }
 
         //レールに次の中継地があるかを確認
         next = knot + 1;
@@ -41,7 +42,6 @@ public class MoveOnRailScript : MonoBehaviour
             next = 0;
             rail = null;
         }
-        ////////////////////////////////////
         
         if (!moveEnd)
         {
@@ -55,8 +55,8 @@ public class MoveOnRailScript : MonoBehaviour
             {
                 SetPosAndRot();
             }
-            //////////////////////////////////////////////////
-        }      
+        }    
+        
     }
     //値代入する
     private void SetPosAndRot()
@@ -72,37 +72,32 @@ public class MoveOnRailScript : MonoBehaviour
         Vector3 anglesBuff = tf.eulerAngles;
         anglesBuff.y += 90;
         anglesBuff.z *= -1;
-        ///////////////
         
+
         //角度から各方向への速度を算出
         Vector3 velocity;
 
         //平面方向の速度を算出
         velocity.x = moveSpeed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.y));
         velocity.z = moveSpeed * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.y));
-        ///////////////////////
 
         //水平方向と垂直方向の速度を算出
         velocity.x = velocity.x * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.z));
         velocity.z = velocity.z * (float)Math.Cos(ToRadianScript.ToRadian(ref anglesBuff.z));
         velocity.y = moveSpeed * (float)Math.Sin(ToRadianScript.ToRadian(ref anglesBuff.z)) * -1;
-        //////////////////////////////////
         
-
         rb.velocity = velocity; //リジットボディに代入
     }
     //目標地点設定
     private Vector3 SetTargetPos(int next)
     {
-        Vector3 targetPos = rail.GetPosition(next) - tf.position;                                       //中継地点と現在の差を算出
+        Vector3 targetPos = rail.GetPosition(next) - tf.position;               //中継地点と現在の差を算出
 
         //角度を算出
         float horizontal = Mathf.Atan2(targetPos.normalized.x, targetPos.normalized.z) * Mathf.Rad2Deg;
         float vertical = Mathf.Atan2(Mathf.Sqrt(targetPos.normalized.x * targetPos.normalized.x + targetPos.normalized.z * targetPos.normalized.z), targetPos.normalized.y) * Mathf.Rad2Deg;
-        /////////////
 
         targetAngles = new Vector3(tf.eulerAngles.x , horizontal - 90 , -(vertical) + 90);  //角度を代入
-
         return targetPos;                                                                                              //座標の差を返す
     }
     //回転させる
@@ -112,7 +107,6 @@ public class MoveOnRailScript : MonoBehaviour
         rotBuff.x += ComplementingRotationScript.Rotate(rotSpeed,0, rotBuff.x);
         rotBuff.y += ComplementingRotationScript.Rotate(rotSpeed, targetAngles.y, rotBuff.y);
         rotBuff.z += ComplementingRotationScript.Rotate(rotSpeed, targetAngles.z, rotBuff.z);
-        /////////////////////////
 
         tf.eulerAngles = rotBuff;   //角度を代入
     }
@@ -150,13 +144,5 @@ public class MoveOnRailScript : MonoBehaviour
         moveEnd = false;
         rotBuff = tf.eulerAngles;
     }
-    void Start()
-    {
-        StartMoveOnRail();
-    }
 
-    void Update()
-    {
-        Move();
-    }
 }

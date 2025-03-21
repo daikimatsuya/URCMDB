@@ -21,13 +21,13 @@ public class MonitorScript : MonoBehaviour
     //リセットさせる
     public void ResetPos()
     {
-        rotateFlag = false;
+        rotateFlag = false;                                             //回転フラグオフ
         tf.eulerAngles = new Vector3(0, initialRotY, 0);    //角度初期化
     }
     //上下に動かす
     public void Move()
     {
-        //上下に動かす////////
+        //上下に動かす
         if (PosYBuff < -moveY)
         {
             PosYBuff = -moveY;
@@ -39,7 +39,6 @@ public class MonitorScript : MonoBehaviour
             moveSpeed *= -1;
         }
         PosYBuff += moveSpeed;
-        ////////////////////////
 
         tf.position = new Vector3(tf.position.x, initialPosY + PosYBuff, tf.position.z);  //トランスフォームに代入
         if (rotateFlag)

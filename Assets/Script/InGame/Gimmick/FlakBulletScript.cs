@@ -46,6 +46,7 @@ public class FlakBulletScript : MonoBehaviour
         cms.SetMarkerSize();
     }
 
+    //ŽžŠÔ‚É‚È‚Á‚½‚ç”j‰ó‚Å‚«‚é‚æ‚¤‚É
     public bool GetDeleteFlag()
     {
         return TimeCountScript.TimeCounter(ref deleteTime);

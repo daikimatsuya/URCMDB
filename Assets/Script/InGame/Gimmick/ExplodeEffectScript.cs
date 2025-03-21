@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Usefull;
 
+//爆風演出管理
 public class ExplodeEffectScript : MonoBehaviour
 {
     [SerializeField] float maxSize;
@@ -21,7 +22,6 @@ public class ExplodeEffectScript : MonoBehaviour
     //初期化
     public void StartExplodeEffect()
     {
-
         tf = GetComponent<Transform>();
         TimeCountScript.SetTime(ref expantionBuff, expantionTime);
 
@@ -34,9 +34,9 @@ public class ExplodeEffectScript : MonoBehaviour
     public void SizeUp()
     {
         expantionSpeed = 0;
-        expantionSpeed = 1 - (expantionBuff / (expantionTime * 60));
-        expantionSpeed = (1 - (float)Math.Pow(1 - expantionSpeed, 5) )* maxSize;
-        tf.localScale = new Vector3(expantionSpeed, expantionSpeed, expantionSpeed);
+        expantionSpeed = 1 - (expantionBuff / (expantionTime * 60));                                 //時間から速度算出
+        expantionSpeed = (1 - (float)Math.Pow(1 - expantionSpeed, 5) )* maxSize;               //イージングさせる
+        tf.localScale = new Vector3(expantionSpeed, expantionSpeed, expantionSpeed);        //値を代入
     }
 
     //回転させる
@@ -48,18 +48,23 @@ public class ExplodeEffectScript : MonoBehaviour
     //ディゾルブさせる
     public void Dissolve()
     {
-        dissolve = 1-(expantionBuff / (expantionTime * 60));
-        dissolve = dissolve * dissolve * dissolve;
+        dissolve = 1-(expantionBuff / (expantionTime * 60));        //時間から値算出
+        dissolve = dissolve * dissolve * dissolve;                           //イージングさせる
+
+        //レンダラーの数分値を代入
         for (int i = 0; i < renderers.Length; i++)
         {
             renderers[i].material.SetFloat("_Dissolve", dissolve);
         }
     }
+
     //端っこの色も時間で変える
     public void Edge()
     {
-        edge = 1 - (expantionBuff / (expantionTime * 60));
-        edge=edge*edge*edge;
+        edge = 1 - (expantionBuff / (expantionTime * 60));       //時間から値算出
+        edge =edge*edge*edge;                                              //イージングさせる
+
+        //レンダラーの数分値を代入
         for (int i = 0; i < renderers.Length; i++)
         {
             renderers[i].material.SetFloat("_Threshold", edge);

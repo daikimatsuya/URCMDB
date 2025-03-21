@@ -8,7 +8,6 @@ public class EMPScript : MonoBehaviour
 {
     private ExplodeEffectScript ees;
 
-
     [SerializeField] private float deployTime;
     [SerializeField] private float firstDissolveValue;
     [SerializeField] private Vector2 offsetSpeed;
@@ -24,18 +23,21 @@ public class EMPScript : MonoBehaviour
     private float explodeSize;
     private float deploySize;
 
+    //オフセットを足す
     private void RotOffset()
     {
-        offsetBuff += offsetSpeed;
-        ees.SetTillingOffset(tilling, offsetBuff);
+        offsetBuff += offsetSpeed;                  //速度分加算
+        ees.SetTillingOffset(tilling, offsetBuff); //反映させる
     }
 
     //EMP爆発
     public void Explode()
     {
-        ees.SizeUp();
-        ees.Dissolve();
-        ees.Edge();
+        ees.SizeUp();       //拡大
+        ees.Dissolve();     //ディゾルブさせる
+        ees.Edge();         //端のとこもディゾルブさせる
+
+        //時間で破壊フラグをオンにする
         if (ees.CountDown())
         {
             breakFlag = true;
@@ -45,21 +47,24 @@ public class EMPScript : MonoBehaviour
     //EMPチャージ
     public bool Charge()
     {
+        //チャージが終わってたらリターン
         if (!isCharge)
         {
             return true;
         }
+
+        //時間でチャージ終了して爆発に移行
         if (ees.CountDown())
         {
-            ees.SetTime(explodeTime);
-            ees.SetMaxSize(explodeSize);
-            isCharge = false;
+            ees.SetTime(explodeTime);        //爆発の時間をセット
+            ees.SetMaxSize(explodeSize);    //爆発の最大サイズセット
+            isCharge = false;                      //チャージのフラグをオフにする
             return true;
         }
 
-        ees.SizeUp();
-        ees.Rotation();
-        RotOffset();
+        ees.SizeUp();       //拡大
+        ees.Rotation();     //回転
+        RotOffset();          //オフセット代入
 
         return false;
     }
@@ -67,15 +72,15 @@ public class EMPScript : MonoBehaviour
     //EMP常時展開
     public void Deploy()
     {
-        ees.SizeUp();
-        ees.CountDown();
-        RotOffset();
+        ees.SizeUp();           //拡大
+        ees.CountDown();    //時間減少
+        RotOffset();             //オフセット代入
     }
 
     //オブジェクト削除
     public void Break()
     {
-        ees.Break();
+        ees.Break();    //削除
     }
 
     //初期化
@@ -92,7 +97,6 @@ public class EMPScript : MonoBehaviour
         if (isDeploy) 
         {
             this.gameObject.layer = LayerMask.NameToLayer("TypeA");
-
             ees.SetMaxSize(deploySize);
             ees.SetTime(deployTime);
 
@@ -100,13 +104,11 @@ public class EMPScript : MonoBehaviour
         else
         {
             this.gameObject.layer = LayerMask.NameToLayer("TypeB");
-
             ees.SetMaxSize(chargeSize);
 
         }
 
     }
-
 
     #region 値受け渡し
     public void SetChargeTime(float chargeTime)

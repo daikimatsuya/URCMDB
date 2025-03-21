@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Usefull;
 
+//EMPbotを管理する
 public class EMPbotScript : MonoBehaviour
 {
     [SerializeField] private float empInterval;
     private int intervalBuff;
     [SerializeField] private float chargeTime;
-    private float chargeTimeBuff;
-    [SerializeField] private float explodeTime;
-    private float explodeTimeBuff;  
+    [SerializeField] private float explodeTime; 
     [SerializeField] private GameObject EMP;
     [SerializeField] private bool isDeploy;
     [SerializeField] private Vector2 tilling;
@@ -23,10 +22,11 @@ public class EMPbotScript : MonoBehaviour
 
     private List<EMPScript> empList;
 
+    //EMP発生させるやつ管理
     public void EMPbotController()
     {
-        cms.Move(this.transform);
-        cms.Adjustment();
+        cms.Move(this.transform);       //マーカー追従
+        cms.Adjustment();                  //マーカー補正
 
         if (isDeploy)
         {
@@ -34,9 +34,8 @@ public class EMPbotScript : MonoBehaviour
         }
         if(TimeCountScript.TimeCounter(ref intervalBuff))
         {
-            CreateEMP();
-            TimeCountScript.SetTime(ref chargeTimeBuff, chargeTime);
-            TimeCountScript.SetTime(ref intervalBuff, empInterval);
+            CreateEMP();                                                                        //EMP生成
+            TimeCountScript.SetTime(ref intervalBuff, empInterval);          //インターバルリセット
         }
 
     }
@@ -58,9 +57,9 @@ public class EMPbotScript : MonoBehaviour
         {
             return;
         }
-        emp.SetTillingOffset(tilling, offset);                          //タイリングとオフセットをセット
-        emp.SetChargeTime(chargeTime);
-        emp.SetExplodeTime(explodeTime);
+        emp.SetTillingOffset(tilling, offset);             //タイリングとオフセットをセット
+        emp.SetChargeTime(chargeTime);              //チャージ時間セット
+        emp.SetExplodeTime(explodeTime);           //爆破時間セット
     }
 
     //EMP管理
@@ -68,38 +67,43 @@ public class EMPbotScript : MonoBehaviour
     {
         if (ps == null)
         {
+            //プレイヤーがいなかったらEMPを消す
             for (int i = 0; i < empList.Count; i++)
             {
-                empList[i].Break();
-                empList.RemoveAt(i);
+                empList[i].Break();                 //削除
+                empList.RemoveAt(i);            //リストから除外
             }
             return;
         }
 
+        //EMPを展開していなかったら展開させる
         if (isDeploy && empList.Count == 0)
         {
             CreateEMP();
         }
 
+        //EMPを動かす
         for (int i = 0; i < empList.Count;)
         {
             if (isDeploy)
             {                
-                empList[i].Deploy();
+                empList[i].Deploy();    //EMP展開
                 i++;
                 return;
             }
 
+            //チャージが終わったら爆破させる
             if (empList[i].Charge())
             {
                 empList[i].Explode();
 
             }
 
+            //EMPを消す
             if (empList[i].GetBreakFlag())
             {
-                empList[i].Break();
-                empList.RemoveAt(i);
+                empList[i].Break();         //削除
+                empList.RemoveAt(i);     //リストから除外
             }
             else
             {

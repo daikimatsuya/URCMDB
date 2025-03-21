@@ -11,32 +11,31 @@ public class LineUIScript : MonoBehaviour
 
     private int timeBuff;
     private bool red;
-    //private bool brock;
     private RaycastHit hit;
     private bool isShade;
 
     [SerializeField] private float randPow;
     [SerializeField] private float colorChangeTime;
-    [SerializeField] string[] hitIgnoreTags;
+    [SerializeField] string[] hitTags;
 
     //予測線設置
     public void SetLine(Vector3 Pos,Vector3 targetLength,float time)
     {
-        //照準があうまでブレさせる///////////////////////////////////////////////////////////////////////////////////////////
+        //照準があうまでブレさせる
         float randX = (Random.Range(-time * randPow, time * randPow));
         float randY = (Random.Range(-time * randPow, time * randPow));
         float randZ = (Random.Range(-time * randPow, time * randPow));
         line.SetPosition(0, new Vector3( targetLength.x+randX , targetLength.y+randY,targetLength.z + randZ));
         pos.position = Pos;
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //プレイヤーとの間に遮蔽物があるかを確認
         RaycastHit[] hits = Physics.RaycastAll(pos.position, Vector3.Normalize(targetLength), Vector3.Magnitude(targetLength));
         isShade = false;
         for (int hitNum = 0; hitNum < hits.Length; hitNum++)
         {
-            for (int tagNum = 0; tagNum < hitIgnoreTags.Length; tagNum++) 
+            for (int tagNum = 0; tagNum < hitTags.Length; tagNum++) 
             {
-                if (hits[hitNum].collider.CompareTag(hitIgnoreTags[tagNum]))
+                if (hits[hitNum].collider.CompareTag(hitTags[tagNum]))
                 {
                     isShade = true;
                     return;

@@ -14,17 +14,17 @@ public class ActivationFadeControllerScript : MonoBehaviour
     //初期化
     public void StartActivationFadeController()
     {
-        fades.Add(up.GetComponent<ActivationFadeScript>());
-        fades.Add (down.GetComponent<ActivationFadeScript>());
+        fades.Add(up.GetComponent<ActivationFadeScript>());               //upFade取得
+        fades.Add (down.GetComponent<ActivationFadeScript>());          //downFade取得
 
-        foreach(Transform children in delete.transform)
+        foreach(Transform children in delete.transform)                           //deleteFade群取得
         {
             fades.Add(children.GetComponent<ActivationFadeScript>());
         }
 
         for (int i = 0; i < fades.Count; i++)
         {
-            fades[i].StartActivationFade();
+            fades[i].StartActivationFade();                              //Fade群初期化
         }
     }
 
@@ -45,6 +45,7 @@ public class ActivationFadeControllerScript : MonoBehaviour
         }
     }
 
+    //演出開始フラグセット
     public void SetStart()
     {
         for (int i = 0; i < fades.Count;i++)

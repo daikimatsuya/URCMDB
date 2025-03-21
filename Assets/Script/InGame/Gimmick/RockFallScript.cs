@@ -13,7 +13,6 @@ public class RockFallScript : MonoBehaviour
     [SerializeField] private float fallSpeed;
     [Tooltip("x:最小値  y:最大値")] [SerializeField] private Vector2 rockSize;
 
-
     Transform tf;
 
     private int intervalBuff;
@@ -26,14 +25,17 @@ public class RockFallScript : MonoBehaviour
     {
         if (TimeCountScript.TimeCounter(ref intervalBuff)) 
         {
-            SpawnRock();    //岩生成
+            SpawnRock();    //時間で岩生成
         }
 
     }
+
+    //インターバル時間取得
     public bool GetInterval()
     {
         return TimeCountScript.TimeCounter(ref intervalBuff);
     }
+    //インターバルセット
     public void SetTime()
     {
         TimeCountScript.SetTime(ref intervalBuff, spawnInterval);
@@ -44,12 +46,11 @@ public class RockFallScript : MonoBehaviour
         spawnPos = tf.position; //現在地を代入
 
         //生成する範囲とサイズセット
-        float randX = Random.Range(0, spawnWidth.x);
-        float randY = Random.Range(0, spawnWidth.y);
-        randX -= spawnWidth.x / 2;
-        randY -= spawnWidth.y / 2;
+        float randX = Random.Range(0, spawnWidth.x);                            //X座標代入
+        float randY = Random.Range(0, spawnWidth.y);                            //Y座標代入
+        randX -= spawnWidth.x / 2;                                                         //ポジションを中心にする
+        randY -= spawnWidth.y / 2;                                                         //ポジションを中心にする
         float randScale=Random.Range(rockSize.x, rockSize.y);
-        //////////////////////////////
 
         GameObject _=Instantiate(rock);                                                                                                                                                                             //岩生成
         _.transform.position = new Vector3(spawnPos.x + randX, spawnPos.y, spawnPos.z + randY);                                                                                      //座標代入
@@ -64,11 +65,6 @@ public class RockFallScript : MonoBehaviour
     //岩をリストで管理
     public void RockController(in bool isPose)
     {
-        if (rockList == null)    
-        {
-            return;//リストにオブジェクトが入ってなかったらリターン
-        }
-
         for (int i = 0; i < rockList.Count;)
         {
             if (rockList[i].GetPos()<breakArea)  
@@ -80,7 +76,7 @@ public class RockFallScript : MonoBehaviour
             }
             else
             {
-                rockList[i].Fall(fallSpeed,isPose);
+                rockList[i].Fall(fallSpeed,isPose); //岩を落とす
                 i++;
             }
         }

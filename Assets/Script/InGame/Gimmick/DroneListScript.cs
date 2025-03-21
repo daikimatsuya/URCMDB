@@ -10,14 +10,13 @@ public class DroneListScript : MonoBehaviour
     //ドローンをリストで管理
     public void DroneListController()
     {
-
         if (droneList == null)
         {
             return;
         }
         for(int i = 0; i < droneList.Count; i++)
         {
-            droneList[i].Roll();
+            droneList[i].Roll();    //プロペラ回転
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using Usefull;
 
 //ミサイルを発射する飛行機を管理する
+//多分使わない
 public class MissieAircraftScript : MonoBehaviour
 {
     [SerializeField] private GameObject upperHatch;
@@ -23,91 +24,91 @@ public class MissieAircraftScript : MonoBehaviour
     private Vector3 moveSpeedUpper;
     private Vector3 moveSpeedLower;
 
-    //前方ハッチ開閉管理
-    private void HatchController()
-    {
-        HatchFlagController();
-        if(isEnd)   //移動完了していたreturnを返す///
-        {
-            return;
-        }//////////////////////////////////////////////
+    ////前方ハッチ開閉管理
+    //private void HatchController()
+    //{
+    //    HatchFlagController();
+    //    if(isEnd)   //移動完了していたreturnを返す///
+    //    {
+    //        return;
+    //    }//////////////////////////////////////////////
 
-        if(isOpen)  //ハッチを開く////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        {
-            upperHatchTF.localPosition = new Vector3(upperHatchTF.localPosition.x - moveSpeedUpper.x, upperHatchTF.localPosition.y - moveSpeedUpper.y, upperHatchTF.localPosition.z - moveSpeedUpper.z);
-            lowerHatchTF.localPosition = new Vector3(lowerHatchTF.localPosition.x - moveSpeedLower.x, lowerHatchTF.localPosition.y - moveSpeedLower.y, lowerHatchTF.localPosition.z - moveSpeedLower.z);
-        }/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //    if(isOpen)  //ハッチを開く////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //    {
+    //        upperHatchTF.localPosition = new Vector3(upperHatchTF.localPosition.x - moveSpeedUpper.x, upperHatchTF.localPosition.y - moveSpeedUpper.y, upperHatchTF.localPosition.z - moveSpeedUpper.z);
+    //        lowerHatchTF.localPosition = new Vector3(lowerHatchTF.localPosition.x - moveSpeedLower.x, lowerHatchTF.localPosition.y - moveSpeedLower.y, lowerHatchTF.localPosition.z - moveSpeedLower.z);
+    //    }/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        else   //ハッチを閉じる/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        {
-            upperHatchTF.localPosition = new Vector3(upperHatchTF.localPosition.x + moveSpeedUpper.x, upperHatchTF.localPosition.y + moveSpeedUpper.y, upperHatchTF.localPosition.z + moveSpeedUpper.z);
-            lowerHatchTF.localPosition = new Vector3(lowerHatchTF.localPosition.x + moveSpeedLower.x, lowerHatchTF.localPosition.y + moveSpeedLower.y, lowerHatchTF.localPosition.z + moveSpeedLower.z);
-        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //    else   //ハッチを閉じる/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //    {
+    //        upperHatchTF.localPosition = new Vector3(upperHatchTF.localPosition.x + moveSpeedUpper.x, upperHatchTF.localPosition.y + moveSpeedUpper.y, upperHatchTF.localPosition.z + moveSpeedUpper.z);
+    //        lowerHatchTF.localPosition = new Vector3(lowerHatchTF.localPosition.x + moveSpeedLower.x, lowerHatchTF.localPosition.y + moveSpeedLower.y, lowerHatchTF.localPosition.z + moveSpeedLower.z);
+    //    }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if (TimeCountScript.TimeCounter(ref moveTimeBuff))
-        {
-            TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
-            isEnd = true;
-        }
-    }
+    //    if (TimeCountScript.TimeCounter(ref moveTimeBuff))
+    //    {
+    //        TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
+    //        isEnd = true;
+    //    }
+    //}
 
-    //ハッチ開閉管理
-    private void HatchFlagController()
-    {
-        if (transform.Find("Player(Clone)"))
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SetFlag(true);
-            }
-        }
-    }
+    ////ハッチ開閉管理
+    //private void HatchFlagController()
+    //{
+    //    if (transform.Find("Player(Clone)"))
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Space))
+    //        {
+    //            SetFlag(true);
+    //        }
+    //    }
+    //}
 
-    //ハッチの開閉速度算出
-    private void SetSpeed()
-    {
-        //移動距離算出
-        Vector3 lowerPosBuff = initialPosLowerHatch - movePosLowerHatch;
-        Vector3 upperPosBuff = initialPosUpperHatch - movePosUpperHatch;
-        /////////////////
+    ////ハッチの開閉速度算出
+    //private void SetSpeed()
+    //{
+    //    //移動距離算出
+    //    Vector3 lowerPosBuff = initialPosLowerHatch - movePosLowerHatch;
+    //    Vector3 upperPosBuff = initialPosUpperHatch - movePosUpperHatch;
+    //    /////////////////
         
-        //分母を０にしない
-        if (moveTimeBuff == 0)
-        {
-            moveTimeBuff = 1;
-        }
-        //////////////////
+    //    //分母を０にしない
+    //    if (moveTimeBuff == 0)
+    //    {
+    //        moveTimeBuff = 1;
+    //    }
+    //    //////////////////
         
-        //速度代入
-        moveSpeedLower=new Vector3(lowerPosBuff.x/moveTimeBuff, lowerPosBuff.y/moveTimeBuff, lowerPosBuff.z/moveTimeBuff);
-        moveSpeedUpper=new Vector3(upperPosBuff.x/moveTimeBuff, upperPosBuff.y/moveTimeBuff, upperPosBuff.z/moveTimeBuff);
-        //////////
-    }
+    //    //速度代入
+    //    moveSpeedLower=new Vector3(lowerPosBuff.x/moveTimeBuff, lowerPosBuff.y/moveTimeBuff, lowerPosBuff.z/moveTimeBuff);
+    //    moveSpeedUpper=new Vector3(upperPosBuff.x/moveTimeBuff, upperPosBuff.y/moveTimeBuff, upperPosBuff.z/moveTimeBuff);
+    //    //////////
+    //}
 
-    //開閉フラグ管理
-    public void SetFlag(bool flag)
-    {
-        isOpen = flag;
-        TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
-        isEnd = false;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        upperHatchTF = upperHatch.GetComponent<Transform>();
-        lowerHatchTF = lowerHatch.GetComponent<Transform>();
-        initialPosUpperHatch=upperHatchTF.localPosition;
-        initialPosLowerHatch=lowerHatchTF.localPosition;
+    ////開閉フラグ管理
+    //public void SetFlag(bool flag)
+    //{
+    //    isOpen = flag;
+    //    TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
+    //    isEnd = false;
+    //}
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    upperHatchTF = upperHatch.GetComponent<Transform>();
+    //    lowerHatchTF = lowerHatch.GetComponent<Transform>();
+    //    initialPosUpperHatch=upperHatchTF.localPosition;
+    //    initialPosLowerHatch=lowerHatchTF.localPosition;
 
-        TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
-        SetSpeed();
-        isOpen = false;
-        isEnd = true;
-    }
+    //    TimeCountScript.SetTime(ref moveTimeBuff, moveTime);
+    //    SetSpeed();
+    //    isOpen = false;
+    //    isEnd = true;
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
-        HatchController();
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    HatchController();
+    //}
 }

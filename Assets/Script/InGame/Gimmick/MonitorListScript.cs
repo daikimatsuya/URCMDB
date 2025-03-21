@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//モニターをリストで管理
 public class MonitorListScript : MonoBehaviour
 {
     private List<MonitorScript> monitorList;
@@ -16,8 +17,10 @@ public class MonitorListScript : MonoBehaviour
 
         for(int i =0;i< monitorList.Count; i++)
         {
-            monitorList[i].Move();
+            monitorList[i].Move();      //移動させる
         }
+
+        //プレイヤーが死んだらリセット
         if(pcs.GetPlayer() != null)
         {
             return;

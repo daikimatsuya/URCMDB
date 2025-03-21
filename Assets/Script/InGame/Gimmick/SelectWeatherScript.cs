@@ -31,15 +31,17 @@ public class SelectWeatherScript : MonoBehaviour
             pcs = cm.GetPlayerCamera();                                     //コンポーネント取得
             chanceOfRain = WebAPIScript.GetIntChanceOfRain();   //降水確率取得
 
-            if (chanceOfRain == 255)    //取得できなかったら//////////////////
+            //取得できなかったら事前に設定した値を代入
+            if (chanceOfRain == 255)    
             {
-                chanceOfRain = blankRain;   //事前に設定した値を代入
-            }//////////////////////////////////////////////////////////////////////
+                chanceOfRain = blankRain; 
+            }
 
-            if (chanceOfRain >= UnityEngine.Random.Range(0, 100))   //ランダムで雨を降らせる///////
+            //ランダムで雨を降らせる
+            if (chanceOfRain >= UnityEngine.Random.Range(0, 100))   
             {
                 Rainy();    //雨にする
-            }/////////////////////////////////////////////////////////////////////////////////////////////////
+            }
             else
             {
                 Sunny();    //晴れにする
@@ -53,8 +55,7 @@ public class SelectWeatherScript : MonoBehaviour
     {
         Debug.Log("あめ");
         Debug.Log(chanceOfRain);
-
-        isRain = true;
+        isRain = true;                     //雨フラグオン
         CreateRain();                     //雨生成
         SetSkyBoxMaterialRain();    //スカイボックとライト変更
     }
@@ -63,7 +64,7 @@ public class SelectWeatherScript : MonoBehaviour
     {
         Debug.Log("はれ");
         Debug.Log(chanceOfRain);
-        isRain= false;
+        isRain= false;                       //雨フラグオフ
         SetSkyBoxMaterialSunny();   //スカイボックスとライト変更
     }
     //雨生成
@@ -99,7 +100,6 @@ public class SelectWeatherScript : MonoBehaviour
         UnityEngine.RenderSettings.ambientSkyColor = defaultSkyColor;
         UnityEngine.RenderSettings.ambientEquatorColor = defaultEquatorColor;
         UnityEngine.RenderSettings.ambientGroundColor = defaultGroundColor;
-        ////////////
     }
 
     #region 値受け渡し

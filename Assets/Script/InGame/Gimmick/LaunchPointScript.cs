@@ -24,30 +24,27 @@ public class LaunchPointScript : MonoBehaviour
         }
         if (isStart)
         {
-            if (isControll) //操作できるようになっていたら////
+           
+            if (isControll) 
             {
-                Move();
-            }//////////////////////////////////////////////////
+                Move();  //操作できるようになっていたら動かす
+            }
         }
     }
     //向きを変更
     private void Move()
     {
-        //入力で角度を加算///////////////////////////////////////////////////////////////////
-
+        //入力で角度を加算
         Vector2 rowlingBuff = Vector2.zero;
 
-        //コントローラー操作/////////////////////
-
+        //コントローラー操作
         float axisY = Input.GetAxis("LeftStickY");
         rowlingBuff.x = rowlingSpeedY  * -axisY;
 
         float axisX = Input.GetAxis("LeftStickX");
         rowlingBuff.y = rowlingSpeedX * axisX;
 
-        //////////////////////////////////////////
-
-        //キーボード操作//////////////////////////////////////////////////////////
+        //キーボード操作
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             rowlingBuff.x = rowlingSpeedY;
@@ -64,13 +61,10 @@ public class LaunchPointScript : MonoBehaviour
         {
             rowlingBuff.y = rowlingSpeedX;
         }
-        /////////////////////////////////////////////////////////////////////////
 
         rowling += rowlingBuff;
-
-        //////////////////////////////////////////////////////////////////////////////////////
         
-        //角度を補正///////////////////////////
+        //角度を補正
         if (rowling.y <= -maxRow.y)
         {
             rowling.y = -maxRow.y;
@@ -87,8 +81,7 @@ public class LaunchPointScript : MonoBehaviour
         {
             rowling.x = maxRow.x;
         }
-        ////////////////////////////////////////
-        
+
         tf.localEulerAngles = new Vector3(rowling.x, rowling.y,0);  //トランスフォームに代入
     }
     #region 値受け渡し
@@ -118,6 +111,8 @@ public class LaunchPointScript : MonoBehaviour
         return tf.transform;
     }
     #endregion
+
+    //早期初期化
     public void AwakeLaunchPoint()
     {
         tf = GetComponent<Transform>();

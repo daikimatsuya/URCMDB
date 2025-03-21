@@ -36,6 +36,7 @@ public class SensorScript : MonoBehaviour
     //外周のセンサーチェック
     private void SetSensorChildren(bool flag)
     {
+        //あたってたら対応したフラグをオンにする
         if(up)
         {
             hit.up = flag;
@@ -54,9 +55,11 @@ public class SensorScript : MonoBehaviour
         }
 
     }
+
     //内周のセンサーチェック
     private void SetSensor(bool flag)
     {
+        //あたってたら対応したフラグをオンにする
         if (up)
         {
             hit.up = flag;
@@ -77,13 +80,14 @@ public class SensorScript : MonoBehaviour
 
     public HIT GetHit()
     {
-        if (master) //マスターならフラグを管理//////////////////////////////
+        //マスターならフラグを管理
+        if (master) 
         {
             hit.up = oneBlelowScript[(int)Script.up].GetHit().up;
             hit.down = oneBlelowScript[(int)Script.down].GetHit().down;
             hit.right = oneBlelowScript[(int)Script.right].GetHit().right;
             hit.left = oneBlelowScript[(int)Script.left].GetHit().left;
-        }/////////////////////////////////////////////////////////////////////
+        }
         return hit; //マスター以外ならフラグを返す
     }
     //あたってもいいもののタグ取得用
@@ -93,12 +97,14 @@ public class SensorScript : MonoBehaviour
     }
     public HIT GetHitChild()
     {
-        if (children)   //子オブジェクトセンサーならフラグを返す///
+        //子オブジェクトセンサーならフラグを返す
+        if (children) 
         {
             return hit; 
-        }/////////////////////////////////////////////////////////////
+        }
 
-        if (master) //マスターならフラグを管理/////////////////////////////////////////
+        //マスターならフラグを管理
+        if (master) 
         {
             hitChild.up = oneBlelowScript[(int)Script.up].GetHitChild().up;
             hitChild.down= oneBlelowScript[(int)Script.down].GetHitChild().down;
@@ -106,18 +112,16 @@ public class SensorScript : MonoBehaviour
             hitChild.left= oneBlelowScript[(int)Script.left].GetHitChild().left;
 
             return hitChild;
-        }///////////////////////////////////////////////////////////////////////////////////
+        }
 
-        //フラグと子オブジェクトのフラグを返す/////
+        //フラグと子オブジェクトのフラグを返す
         hitChild = oneBlelowScript[0].GetHit();
         return hitChild;
-        //////////////////////////////////////////////
     }
-
 
     private void OnTriggerStay(Collider other)
     {
-        //あたってもいいものは無視する///////////////////////
+        //あたってもいいものは無視する
         for(int i=0;i< ignoreTags.Length; i++)
         {
             if (other.CompareTag(ignoreTags[i]))
@@ -125,7 +129,6 @@ public class SensorScript : MonoBehaviour
                 return;
             }
         }
-        ////////////////////////////////////////////////////////////
         
          if (master)
         {
@@ -139,7 +142,6 @@ public class SensorScript : MonoBehaviour
         SetSensor(true);
     }
 
-    // Start is called before the first frame update
     //初期化
     public void StartSensor()
     {
@@ -164,7 +166,7 @@ public class SensorScript : MonoBehaviour
         oneBlelowScript[(int)Script.down] = this.gameObject.transform.GetChild(1).gameObject.GetComponent<SensorScript>();
         oneBlelowScript[(int)Script.left] = this.gameObject.transform.GetChild(2).gameObject.GetComponent<SensorScript>();
         oneBlelowScript[(int)Script.right] = this.gameObject.transform.GetChild(3).gameObject.GetComponent<SensorScript>();
-        /////////////////////////////////////
+
     }
     void Start()
     {

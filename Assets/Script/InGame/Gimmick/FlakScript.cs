@@ -41,8 +41,8 @@ public class FlakScript : MonoBehaviour
             isAffective = false;
             return;
         }
-        //偏差予測///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        Vector3 playerPos = ps.GetPlayerPos();
+        //偏差予測
+        Vector3 playerPos = ps.GetPlayerPos();                        //プレイヤーの位置取得
         playerDis =playerPos-barrel.position;                           //距離算出
         lineUI.SetLine(barrel.position,playerDis,intervalBuff);    //予測線設定
         Vector3 playerSpeed= ps.GetPlayerSpeed();                 //プレイヤーの速度取得
@@ -62,21 +62,19 @@ public class FlakScript : MonoBehaviour
         float t2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
 
         float t = new float[] { t1, t2 }.Where(t => t > 0).DefaultIfEmpty().Max();
-        ///////////////////////////////////////////////////////////////////////////////////
 
-        //速度計算///////////////////////////////////////////////////////////////////////////////////////////////////
+        //方向算出
         playerDis = new Vector3((playerPos.x + (playerSpeed.x * t) - barrel.position.x), (playerPos.y + (playerSpeed.y * t) - barrel.position.y), (playerPos.z + (playerSpeed.z * t) - barrel.position.z));
         playerDisNormal = playerDis.normalized;
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        //速度から角度を算出//////////////////////////////////////////////////////////////////////
-        float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;
-        float vertical = Mathf.Atan2(Mathf.Sqrt( playerDisNormal.x*playerDisNormal.x + playerDisNormal.z*playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;
-        body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);                 //砲台のボディーを回転
-        barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);   //砲身を回転
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        cms.Adjustment();
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+        //方向から角度を算出
+        float horizontal = Mathf.Atan2(playerDisNormal.x, playerDisNormal.z) * Mathf.Rad2Deg;                                                                                                          //水平方向角度算出
+        float vertical = Mathf.Atan2(Mathf.Sqrt( playerDisNormal.x*playerDisNormal.x + playerDisNormal.z*playerDisNormal.z), playerDisNormal.y) * Mathf.Rad2Deg;    //垂直方向角度算出
+        body.localEulerAngles=new Vector3(body.localEulerAngles.x,body.localEulerAngles.y,horizontal+180);                                                                                      //砲台のボディーを回転
+        barrel.localEulerAngles = new Vector3((vertical*-1.0f)+90, barrel.localEulerAngles.y, barrel.localEulerAngles.z);                                                                        //砲身を回転
+
+        cms.Adjustment();      //マーカー補正
+   
     }
 
 

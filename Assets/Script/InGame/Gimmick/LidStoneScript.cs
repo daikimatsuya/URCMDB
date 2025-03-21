@@ -13,13 +13,14 @@ public class LidStoneScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            shortcut.SetActive(true);
-            detour.SetActive(false);
-            Destroy(this.gameObject);
+            shortcut.SetActive(true);       //ショートカットを表示
+            detour.SetActive(false);         //回り道非表示
+            Destroy(this.gameObject);    //削除
         }
     }
-    // Start is called before the first frame update
-    void Start()
+
+    //初期化
+    public void StartLibStone()
     {
         shortcut.SetActive(false);
     }

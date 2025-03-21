@@ -15,8 +15,8 @@ public class EMPbotListScript : MonoBehaviour
         }
         for(int i = 0; i < empbotList.Count; i++)
         {
-            empbotList[i].EMPbotController();
-            empbotList[i].EMPController(pcs.GetPlayer());
+            empbotList[i].EMPbotController();                       //EMP”­¶‚³‚¹‚é‚â‚ÂŠÇ—
+            empbotList[i].EMPController(pcs.GetPlayer());     //”­¶‚³‚¹‚½EMP‚ðŠÇ—
         }
     }
 

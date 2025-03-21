@@ -17,6 +17,7 @@ public class FunScript : MonoBehaviour
         tf.localEulerAngles = rotation;                                                            //トランスフォームに代入
     }
 
+    //初期化
     public void StartFun()
     {
         tf = GetComponent<Transform>();

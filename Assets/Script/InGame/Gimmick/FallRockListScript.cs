@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Šâ—‚Æ‚·‚â‚Â‚ğƒŠƒXƒg‚ÅŠÇ—
 public class FallRockListScript : MonoBehaviour
 {
     private List<RockFallScript> rockFallList;

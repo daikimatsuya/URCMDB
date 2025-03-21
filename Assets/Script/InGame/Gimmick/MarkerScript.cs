@@ -17,7 +17,6 @@ public class MarkerScript : MonoBehaviour
     private PlayerControllerScript pcs;
     private Transform objectTransform;
 
-
     //ˆÚ“®‚³‚¹‚é
     public void Move(Vector3 pos)
     {
