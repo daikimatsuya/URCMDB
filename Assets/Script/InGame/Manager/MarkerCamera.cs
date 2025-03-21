@@ -13,10 +13,16 @@ public class MarkerCamera : MonoBehaviour
     [SerializeField] private float pos;
 
     //MakerCamera管理
-    private void MarkerCameraController()
+    public void MarkerCameraController()
     {
         SearchPlayer(); //プレイヤー検索 
         Move();            //移動
+    }
+
+    //初期化
+    public void StartMarkerCamera()
+    {
+        tf = GetComponent<Transform>();
     }
     //カメラ移動
     private void Move()
@@ -30,21 +36,23 @@ public class MarkerCamera : MonoBehaviour
     //プレイヤー生存確認と取得
     private void SearchPlayer()
     {
-        if (playerPos == null)  //プレイヤーが取得できない時////////////////////////////////////////////////
+        //プレイヤーが取得できない時
+        if (playerPos == null)  
         {
-            if (GameObject.FindWithTag("Player"))   //プレイヤーオブジェクト検索/////
+            //プレイヤーオブジェクト検索
+            if (GameObject.FindWithTag("Player"))   
             {
                 player = GameObject.FindWithTag("Player");           //プレイヤーオブジェクト取得
                 playerPos = player.GetComponent<Transform>();   //コンポーネント取得
 
-            }///////////////////////////////////////////////////////////////////////////////
+            }
 
-        }////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-        tf = GetComponent<Transform>();
+        StartMarkerCamera();
     }
 
     // Update is called once per frame

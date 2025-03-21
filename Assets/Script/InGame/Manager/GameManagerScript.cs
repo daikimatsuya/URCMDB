@@ -36,14 +36,12 @@ public class GameManagerScript : MonoBehaviour
 
         SceneChanges();                                                          //シーン変更
         us.SetIsGameOver(pcs.GetGameOverFlag());                 //ゲームオーバーフラグ挿入
-
         InGameController(isPose);                                            //ゲームを動かす
         PoseChange();                                                             //ポーズ設定切り替え
-
-        rbc.BlurController();                                                       //ラジカルブラー
+        rbc.BlurController();                                                     //ラジカルブラー
        
     }
-    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
+    //早期初期化
     private void AwakeGameManger()
     {
         Application.targetFrameRate = 60;
@@ -54,6 +52,8 @@ public class GameManagerScript : MonoBehaviour
         us.AwakeUIScript();
         cm.AwakeCameraManager(in pcs);
     }
+
+    //初期化
     private void StartGameManager()
     {
         rbc.StartShaderController();
@@ -153,7 +153,7 @@ public class GameManagerScript : MonoBehaviour
     {
         AwakeGameManger();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         StartGameManager();

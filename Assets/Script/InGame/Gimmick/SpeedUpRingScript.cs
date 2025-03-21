@@ -11,27 +11,25 @@ public class SpeedUpRingScript : MonoBehaviour
     [SerializeField] private float offsetTime;
     [SerializeField] private GameObject particle;
 
-    private bool isGet;
-
     private CreateMarkerScript cms;
-
     CapsuleCollider  collider_;
     Transform tf;
     private PlayerControllerScript pcs;
 
+    private bool isGet;
 
     //消す
     public void Off()
     {
         if (!isGet) //取得されていない時
         {
-            cms.Adjustment();
+            cms.Adjustment();   //マーカー位置補正
             return;
         }
 
         tf.localScale = new Vector3(0, 0, 0);   //サイズを０にする
-        cms.SetActive(false);
-        particle.SetActive(false);
+        cms.SetActive(false);                         //マーカーオフ
+        particle.SetActive(false);                    //パーティクルオフ
     }
 
     //再表示
@@ -40,8 +38,8 @@ public class SpeedUpRingScript : MonoBehaviour
         isGet = false;                                                      //取得フラグを消す
         tf.localScale = new Vector3(1, ringSize, ringSize); //サイズ初期化
         collider_.enabled = true;                                     //コライダーオン
-        cms.SetActive(true);
-        particle.SetActive(true);
+        cms.SetActive(true);                                           //マーカーオン
+        particle.SetActive(true);                                      //パーティクルオン
     }
 
     private void OnTriggerEnter(Collider other)

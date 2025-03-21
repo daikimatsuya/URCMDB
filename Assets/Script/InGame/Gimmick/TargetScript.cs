@@ -102,6 +102,7 @@ public class TargetScript : MonoBehaviour
         }
     }
 
+    //‰Šú‰»
     public void StartTarget()
     {
         Usefull.TimeCountScript.SetTime(ref brokeTimeBuff, brokeTime);
