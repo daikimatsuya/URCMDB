@@ -6,14 +6,11 @@ using Usefull;
 
 public class ExplodeCamera : MonoBehaviour
 {
-
     [SerializeField] private float directionX;
     [SerializeField] private float distance;
     [SerializeField] private float rotateSpeed;
-
     [SerializeField] private Vector3 hitCameraPos;
     [SerializeField] private Vector3 hitCameraRot;
-
     [SerializeField] private Vector3 clearCameraPos;
     [SerializeField] private Vector3 clearCameraRot;
 
@@ -21,7 +18,7 @@ public class ExplodeCamera : MonoBehaviour
     //プレイヤーが壁とかで爆発したときのカメラの動き
     public Vector3 MissExplodeCamera(ref Vector3 rotation,in Vector3 playerPos)
     {
-        Rotation(rotation,in playerPos);                                                                         //回転させる
+        Rotation(rotation,in playerPos);                                                      //回転させる
         rotation = new Vector3(directionX, rotation.y + rotateSpeed, 0);      //必要な値だけ代入
         return pos;
     }

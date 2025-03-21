@@ -13,7 +13,6 @@ public class MovieCamera : MonoBehaviour
         [SerializeField] public Vector3 startRotation;
         [SerializeField] public Vector3 targetPosition;
         [SerializeField] public Vector3 targetRotation;
-
         [SerializeField] public float moveTime;
     }
 
@@ -24,8 +23,6 @@ public class MovieCamera : MonoBehaviour
     private int moveTimeBuff;
     [SerializeField] private float fadeoutTime;
 
-
-
     private bool ready;
     private bool isMove;
     private int number;
@@ -35,16 +32,16 @@ public class MovieCamera : MonoBehaviour
     private Vector3 rotRange;
     private Vector3 moveSpeed;
     private Vector3 RotSpeed;
-    private int shadelevel;
     private bool isSkip;
     private bool isEnd;
 
     Transform tf;
+
     //カメラを動かす関数
     public void CameraController()
     {
-        Move();    //移動演出
-        SetNext();  //次の座標を設定
+        Move();         //移動演出
+        SetNext();     //次の座標を設定
     }
     //移動させる関数
     private void Move()
@@ -54,7 +51,9 @@ public class MovieCamera : MonoBehaviour
             //演出スキップ
             isSkip = true;
         }
-        if (isMove) //演出させる/////////////////////////////////////////////////////
+
+        //演出させる
+        if (isMove) 
         {
             if (!TimeCountScript.TimeCounter(ref moveTimeBuff))
             {
@@ -62,7 +61,7 @@ public class MovieCamera : MonoBehaviour
                 posBuff += moveSpeed;
                 rotBuff += RotSpeed;
 
-                SetTransform();//ポジションとローテーションをトランスフォームに代入
+                SetTransform();     //ポジションとローテーションをトランスフォームに代入
             }
             else
             {
@@ -70,15 +69,16 @@ public class MovieCamera : MonoBehaviour
                 ready = false;
                 isMove = false;
             }
-        }////////////////////////////////////////////////////////////////////////////
+        }
 
     }
     //次に移動するために必要なものを準備する
     private void SetNext()
     {
-        if (!ready) //演出準備が出来ていない時////////////////////////////////////////////////////////////////////////////////
+        if (!ready) 
         {
-            if (knotNumber > number)    //設定した演出個数以内なら///////////////////////////////////////
+            //設定した演出個数以内
+            if (knotNumber > number)    
             {
                 //初期値と目標値を設定
                 posBuff = elements[number].startPosition;
@@ -86,7 +86,6 @@ public class MovieCamera : MonoBehaviour
 
                 targetPos = elements[number].targetPosition;
                 targetRot = elements[number].targetRotation;
-                ///////////////////////
 
                 //演出時間セット
                 TimeCountScript.SetTime(ref moveTimeBuff, elements[number].moveTime);
@@ -97,7 +96,6 @@ public class MovieCamera : MonoBehaviour
 
                 moveSpeed = posRange / moveTimeBuff;
                 RotSpeed = rotRange / moveTimeBuff;
-                /////////////
 
                 //フラグ類セット
                 number++;
@@ -105,15 +103,17 @@ public class MovieCamera : MonoBehaviour
                 isMove = true;
                 ////////////////
 
-            }///////////////////////////////////////////////////////////////////////////////////////////////
+            }
 
-            else   //設定した回数演出が終わった///
+            //設定した回数演出が終わった
+            else
             {
                 isEnd = true;   //演出終了フラグオン               
-            }//////////////////////////////////////
+            }
 
-        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
+    //座標類代入
     private void SetTransform()
     {
         tf.position = posBuff;
@@ -137,7 +137,8 @@ public class MovieCamera : MonoBehaviour
         return fadeoutTime;
     }
     #endregion
-    // Start is called before the first frame update
+
+    //初期化
     public void StartMovieCamera()
     {
         isSkip = false;
@@ -149,10 +150,6 @@ public class MovieCamera : MonoBehaviour
         isMove = true;
         isEnd = false;
         fadeoutTime *= 60;
-    }
-    void Start()
-    {
-        StartMovieCamera();
     }
 
 }

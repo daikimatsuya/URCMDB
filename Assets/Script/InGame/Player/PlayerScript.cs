@@ -15,10 +15,6 @@ public class PlayerScript : MonoBehaviour
     PlayerHitEMPScript phes;
     RedBoostScript rbs;
 
-    private LaunchPointScript lp;
-    private GameObject dust;
-    private GameObject activateFadeObject;
-
     [SerializeField] private float time;
     [SerializeField] private float playerHp;
     [SerializeField] private GameObject boostEffect;
@@ -46,7 +42,9 @@ public class PlayerScript : MonoBehaviour
     private Vector3 playerMoveBuff;
     private float accelerateSpeed;
     private float boostSpeed;
-
+    private LaunchPointScript lp;
+    private GameObject dust;
+    private GameObject activateFadeObject;
     private bool EMPHit;
     private bool isFire;
     private bool isControl;
@@ -389,8 +387,6 @@ public class PlayerScript : MonoBehaviour
         tf.position = lp.GetPos();                                 //ポジション取得
         tf.localEulerAngles = new Vector3(0, 180, 0);   //角度を初期化
     }
-
-
 
     #region　値受け渡し
     public float GetMaxRingBoost()

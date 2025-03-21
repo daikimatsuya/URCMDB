@@ -8,8 +8,6 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField] private float explodeEffectTime;
     private int explodeEffectTimeBuff;
-    [SerializeField] private float explodeFadeTime;
-    private int explodeFadeTimeBuff;
     [SerializeField] private GameObject movieCanvas;
     [SerializeField] private GameObject watarEffect;
     [SerializeField] private float drownPos;
@@ -30,67 +28,77 @@ public class CameraManager : MonoBehaviour
         ps = playerController.GetPlayer();
         mf.MovieFadeController();   //カメラのフェード
 
-        if (isPlayerDead )  //プレイヤーが爆発したか////////////////
+        //プレイヤーが爆発したか
+        if (isPlayerDead ) 
         {
             ExplodeCameraController(in ps);  //爆発時のカメラの動き
-        }//////////////////////////////////////////////////////////////
+        }
 
-
-        if (ps == null) //プレイヤーオブジェクトがない時///////
+        //プレイヤーオブジェクトがない
+        if (ps == null) 
         {
             isPlayerDead = true;   
             watarEffect.SetActive(false);   //水中のエフェクト停止
-        }/////////////////////////////////////////////////////////////
-
-        else   //プレイヤーオブジェクトがあるとき//////////////////////////////////////////////////////
-        {
-            SetWaterEffect();   //水中のカメラ演出管理
-            if (mf.GetEffectEnd())  //フェード演出が終わったら////////////////
-            {
-                isPlayerDead= false;
-
-                if (ps.GetControll())   //プレイヤーが操作できるとき////
-                {
-                    
-                    pcs.FollowPlayerInShoot(in isPose,in ps);  //プレイヤーを追従
-                }/////////////////////////////////////////////////////////////
-
-                else   //プレイヤーが発射台に固定されてる時///
-                {
-                    pcs.FollowPlayerInSet(in ps);
-                }////////////////////////////////////////////////
-
-            }///////////////////////////////////////////////////////////////////////
-
-            else   //フェード演出/////////////
-            {
-                pcs.MovieCut(); //ムービー中の演出
-            }/////////////////////////////////
-
-            CanvasActive(mf.GetEffectEnd());    //演出時のCanvas切り替え
+            return;
         }
+
+        SetWaterEffect();   //水中のカメラ演出管理
+
+        //フェード演出が終わったら
+        if (mf.GetEffectEnd())  
+        {
+            isPlayerDead = false;
+
+            //プレイヤーが操作できるとき
+            if (ps.GetControll())  
+            {
+                pcs.FollowPlayerInShoot(in isPose, in ps);  //プレイヤーを追従
+            }
+
+            //プレイヤーが発射台に固定されてる時
+            else
+            {
+                pcs.FollowPlayerInSet(in ps);   //プレイヤーを追従
+            }
+
+        }
+
+        //フェード演出
+        else
+        {
+            pcs.MovieCut(); //ムービー中の演出
+        }
+
+        CanvasActive(mf.GetEffectEnd());    //演出時のCanvas切り替え
+
     }
     //爆発時のカメラ
     private void ExplodeCameraController(in PlayerScript ps)
     {
+        //ターゲットがあるとき
         if (ts)
         {
-            isTargetBreak = ts.GetBreak();
+            isTargetBreak = ts.GetBreak();  //フラグ取得
         }
-        if (isTargetBreak) //目標が破壊されたとき////////////////////
-        {
-            pcs.ClearCamera();
-            return;
-        }///////////////////////////////////////////////////
 
-        if (ts.GetHit()) //目標にあたった時/////////////
+        //目標が破壊されたとき
+        if (isTargetBreak)
+        {
+            pcs.ClearCamera();      //クリア時の爆発エフェクトをさせる
+            return;
+        }
+
+        //目標にあたった時
+        if (ts.GetHit())
         {
 
-            pcs.HitExplodeCamera();
+            pcs.HitExplodeCamera(); //ターゲットにあたった爆発エフェクトをさせる
             return;
-        }///////////////////////////////////////////////
-        pcs.MissExplodeCamera(playerController.GetPlayerdeadPos());    
+        }
+
+        pcs.MissExplodeCamera(playerController.GetPlayerdeadPos());    //普通の爆発エフェクトをさせる
     }
+
     //水に入った時の演出管理
     private void SetWaterEffect()
     {
@@ -137,6 +145,8 @@ public class CameraManager : MonoBehaviour
     }
 
     #endregion
+
+    //早期初期化
     public void AwakeCameraManager(in PlayerControllerScript player)
     {
         GameObject _ = GameObject.FindWithTag("GameCamera");
@@ -146,7 +156,7 @@ public class CameraManager : MonoBehaviour
         mf = GetComponent<MovieFade>();
         playerController = player;
     }
-    //初期化がされてないときに他のスクリプトから呼び出されたときに初期化する
+    //初期化
     public void StartCameraManager()
     {
         mf.SetShadeLevel(1);

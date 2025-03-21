@@ -33,6 +33,7 @@ public class TutorialUIScript : MonoBehaviour
     private EmphasisTransformElement emphasisBuff;
 
     private TutorialScript ts;
+
     private bool conectController;
 
     //チュートリアルUI管理

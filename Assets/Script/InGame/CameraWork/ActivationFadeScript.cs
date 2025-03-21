@@ -18,10 +18,8 @@ public class ActivationFadeScript : MonoBehaviour
     [SerializeField]private float life;
     [SerializeField] private float playerMoveTime;
 
-
     Transform tf;
 
-    //private GameManagerScript gm;
     private float speedBuff;
 
     //‰‰o‚ÌŠÇ—ŠÖ”
@@ -117,7 +115,6 @@ public class ActivationFadeScript : MonoBehaviour
         StartActivationFade();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ActivationFadeController();
