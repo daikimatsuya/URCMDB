@@ -172,7 +172,6 @@ public class PlayerCameraScript : MonoBehaviour
         if (mc.GetEnd())   
         {
             mf.SetShadeLevel(3);    //フェードレベル設定
-
         }
 
         //ゲーム開始演出中

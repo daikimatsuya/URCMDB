@@ -6,8 +6,6 @@ using Usefull;
 
 public class PlayerControllerScript : MonoBehaviour
 {
-
-
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private int missileCount;
     [SerializeField] private float respawnTimer;
@@ -20,7 +18,6 @@ public class PlayerControllerScript : MonoBehaviour
     [SerializeField, Range(0f, 0.1f)] private float accelelatedBlurIntensity;
     private float minBlurIntnsity;
     [SerializeField, Range(0f, 0.1f)] private float blurIntensityBrake;
-
 
     private PlayerScript ps;
     private ActivationFadeControllerScript afcs;
@@ -59,7 +56,7 @@ public class PlayerControllerScript : MonoBehaviour
             if (afcs)
             {               
                 afcs.ActivationFadeController();
-                afcs.SetStart();
+
             }
 
             ps.PlayerController(in isPose);
@@ -206,6 +203,14 @@ public class PlayerControllerScript : MonoBehaviour
             blurIntnsity = minBlurIntnsity;
         }
         rbc.SetBlurIntensity(blurIntnsity);          //ブラーの値を代入
+    }
+
+    public void SetActivationFadeStart()
+    {
+        if (afcs != null)
+        {
+            afcs.SetStart();
+        }
     }
 
     #region 値受け渡し
