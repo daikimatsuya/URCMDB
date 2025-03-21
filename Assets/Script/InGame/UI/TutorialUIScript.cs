@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Usefull;
 
+//チュートリアル用UI表示管理
 public class TutorialUIScript : MonoBehaviour
 {
     private enum Tutorial: int
@@ -17,6 +20,7 @@ public class TutorialUIScript : MonoBehaviour
         finish
     }
 
+    [System.Serializable]
     public class EmphasisTransformElement
     {
         [SerializeField] public Vector3 pos;
@@ -33,8 +37,10 @@ public class TutorialUIScript : MonoBehaviour
     private EmphasisTransformElement emphasisBuff;
 
     private TutorialScript ts;
+    private new Transform transform;
 
     private bool conectController;
+    private EmphasisTransformElement initialTransform;
 
     //チュートリアルUI管理
     public void TutorialUIController(in PlayerScript ps,in bool isConect)
@@ -48,6 +54,43 @@ public class TutorialUIScript : MonoBehaviour
         {
             ResetTutorial();    //リセットフラグがオンになったらリセットさせる
         }
+    }
+
+    //強調表示から通常表示への遷移
+    private void EmphansisTransition()
+    {
+
+       
+    }
+
+    //強調表示の値初期化
+    private void SetEmphansis(in bool isConect)
+    {
+        if (isConect)
+        {
+            emphasisBuff = emphasis;
+            initialTransform = SetEmphansis(transform.position, transform.eulerAngles, transform.localScale, 0);
+            emphasisBuff = emphasis;
+            TimeCountScript.SetTime(ref emphasisBuff.time, emphasisBuff.time);
+            return;
+        }
+        emphasisBuff = emphasis;
+        initialTransform = SetEmphansis(transform.position, transform.eulerAngles, transform.localScale, 0);
+        emphasisBuff = emphasis;
+        TimeCountScript.SetTime(ref emphasisBuff.time, emphasisBuff.time);
+    }
+
+    //自作構造体に値を入れる
+    private EmphasisTransformElement SetEmphansis(Vector3 pos,Vector3 rot,Vector3 scale,float time)
+    {
+        EmphasisTransformElement buff = new EmphasisTransformElement();
+
+        buff.pos = pos;
+        buff.rot = rot;
+        buff.scale = scale;
+        buff.time = time;
+
+        return buff;
     }
 
     //起動するチュートリアルを選択
@@ -92,6 +135,7 @@ public class TutorialUIScript : MonoBehaviour
         completion.text = ts.GetCompletion() + "%";  //進行度の値変更
     }
 
+    //UIを表示
     private void ShowUI(in bool isConectController)
     {
         //コントローラー用
