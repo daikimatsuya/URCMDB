@@ -186,7 +186,7 @@ public class PlayerCameraScript : MonoBehaviour
                 if (mf.GetIsShade())   
                 {
                     mf.SetShadeLevel(3);    //フェードレベル設定
-                    mc.SetEnd();
+                    mc.SetEnd();                //終了フラグをオンにする
                 }
 
             }
