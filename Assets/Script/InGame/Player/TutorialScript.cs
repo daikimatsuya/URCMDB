@@ -23,14 +23,15 @@ public class TutorialScript : MonoBehaviour
         ResetAll(in ps);    //プレイヤーが死んだらリセット
         ResetTutorial();    //このチュートリアルが終わったら次に進む
 
-        if (CheckPlayerShot(in ps)) //プレイヤーが発射されていたらチュートリアルが進行////
+        //プレイヤーが発射されていたらチュートリアルが進行
+        if (CheckPlayerShot(in ps)) 
         {
             tutorialCompletion += shotTutorialCount;
             if(tutorialCompletion > maxCompletion)
             {
                 tutorialCompletion = maxCompletion;
             }
-        }//////////////////////////////////////////////////////////////////////////////////////
+        }
     }
     //ブースト時のチュートリアル管理
     public void BoostTutorial(in PlayerScript ps)
@@ -38,14 +39,15 @@ public class TutorialScript : MonoBehaviour
         ResetAll(in ps);    //プレイヤーが死んだらリセット
         ResetTutorial();    //このチュートリアルが終わったら次に進む
 
-        if (CheckPlayerBoost(in ps))    //プレイヤーがブーストしていたらチュートリアルが進行///
+        //プレイヤーがブーストしていたらチュートリアルが進行///
+        if (CheckPlayerBoost(in ps))    
         {
             tutorialCompletion += boostTutorialCount;
             if (tutorialCompletion > maxCompletion)
             {
                 tutorialCompletion = maxCompletion;
             }
-        }////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
     //操作時のチュートリアル管理
     public void ControlleTutorial(in PlayerScript ps, in bool isConectController)
@@ -53,14 +55,15 @@ public class TutorialScript : MonoBehaviour
         ResetAll(in ps);    //プレイヤーが死んだらリセット
         ResetTutorial();    //このチュートリアルが終わったら次に進む
 
-        if (CheckPlayerControlle(in ps, in isConectController)) //プレイヤーが操作されていたらチュートリアルが進行///
+        //プレイヤーが操作されていたらチュートリアルが進行///
+        if (CheckPlayerControlle(in ps, in isConectController)) 
         {
             tutorialCompletion += controlleTutorialCount;
             if (tutorialCompletion > maxCompletion)
             {
                 tutorialCompletion = maxCompletion;
             }
-        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }    
     //PMSのチュートリアル管理
     public void PMSTutorial(in PlayerScript ps)
@@ -68,14 +71,15 @@ public class TutorialScript : MonoBehaviour
         ResetAll(in ps);    //プレイヤーが死んだらリセット
         ResetTutorial();    //このチュートリアルが終わったら次に進む
 
-        if (CheckPMS())    //PMSがオンだったらチュートリアルが進行///
+        //PMSがオンだったらチュートリアルが進行
+        if (CheckPMS())    
         {
             tutorialCompletion += PMSTutorialCount;
             if (tutorialCompletion > maxCompletion)
             {
                 tutorialCompletion = maxCompletion;
             }
-        }////////////////////////////////////////////////////////////////
+        }
     }   
     //加速時のチュートリアル管理
     public void AcceTutorial(in PlayerScript ps, in bool isConectController)
@@ -83,14 +87,15 @@ public class TutorialScript : MonoBehaviour
         ResetAll(in ps);    //プレイヤーが死んだらリセット
         ResetTutorial();    //このチュートリアルが終わったら次に進む
 
-        if (CheckPlayerAcce(in ps, in isConectController))  //プレイヤーが加速していたらチュートリアルが進行///////////
+        //プレイヤーが加速していたらチュートリアルが進行
+        if (CheckPlayerAcce(in ps, in isConectController))  
         {
             tutorialCompletion += acceTutorialCount;
             if (tutorialCompletion > maxCompletion)
             {
                 tutorialCompletion = maxCompletion;
             }
-        }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
     //高速旋回時のチュートリアル管理
     public void QuickMoveTutorial(in PlayerScript ps,in bool isConectController)
@@ -98,36 +103,39 @@ public class TutorialScript : MonoBehaviour
         ResetAll(in ps);    //プレイヤーが死んだらリセット
         ResetTutorial();    //このチュートリアルが終わったら次に進む
 
-        if (CheckQuickMove(in ps, in isConectController)&&CheckPlayerControlle(in ps,in isConectController))    //プレイヤーが高速旋回していたらチュートリアルが進行////
+        //プレイヤーが高速旋回していたらチュートリアルが進行
+        if (CheckQuickMove(in ps, in isConectController)&&CheckPlayerControlle(in ps,in isConectController))    
         {
             tutorialCompletion += quickMoveTutorialCount;
             if (tutorialCompletion > maxCompletion)
             {
                 tutorialCompletion = maxCompletion;
             }
-        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
 
 
     //チュートリアルが完了したらリセットをかける
     private void ResetTutorial()
     {
-        if (tutorialCompletion >= maxCompletion)    //進行していたチュートリアルが終了したらリセットをかけて次のチュートリアルにする//
+        //進行していたチュートリアルが終了したらリセットをかけて次のチュートリアルにする
+        if (tutorialCompletion >= maxCompletion)    
         {
             tutorialCompletion = 0;
             tutorialNumber++;
-        }//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
     //プレイヤーが死んだら全部リセットさせる
     public void ResetAll(in PlayerScript ps)
     {
-        if (ps == null) //プレイヤーが無かったらリセットをかける//
+        //プレイヤーが無かったらリセットをかける
+        if (ps == null) 
         {
             isReset = true;
             tutorialNumber = 0;
             tutorialCompletion = 0;
             return;
-        }/////////////////////////////////////////////////////////////
+        }
 
         isReset = false;
     }
@@ -136,19 +144,21 @@ public class TutorialScript : MonoBehaviour
     //プレイヤーの角度を比較
     public bool CheckPlayerControlle(in PlayerScript ps,in bool isConectController)
     {
-        if (!isConectController) //コントローラーが接続されていなかったらfalseを返す///////
+        //キーボード入力がなかったらfalseを返す
+        if (!isConectController)
         {
             if(!Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.RightArrow)&& !Input.GetKey(KeyCode.UpArrow)&& !Input.GetKey(KeyCode.DownArrow)&& !Input.GetKey(KeyCode.A)&& !Input.GetKey(KeyCode.D)&& !Input.GetKey(KeyCode.W)&& !Input.GetKey(KeyCode.S))
             {
                 return false;
             }
             return true;
-        }/////////////////////////////////////////////////////////////////////////////////////
+        }
 
-        if (Input.GetAxis("LeftStickX") == 0 && Input.GetAxis("LeftStickY") == 0)   //Lスティック入力が無かったらfalseを返す///
+        //Lスティック入力が無かったらfalseを返す
+        if (Input.GetAxis("LeftStickX") == 0 && Input.GetAxis("LeftStickY") == 0)   
         {
             return false;
-        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
 
         return true;
     }
@@ -158,14 +168,15 @@ public class TutorialScript : MonoBehaviour
     {
         float acceBuff = ps.GetAccelerate();
 
-        if(acceBuff>=1) //プレイヤーが自身でブーストしていたらtrueを返す////////
+        //プレイヤーが自身でブーストしていたらtrueを返す
+        if (acceBuff>=1) 
         {
             return true;
         }
         else
         {
             return false;
-        }/////////////////////////////////////////////////////////////////////////////
+        }
     }
 
     //プレイヤーが射出されているのかを確認
@@ -177,19 +188,21 @@ public class TutorialScript : MonoBehaviour
     //プレイヤーの加速を確認
     public bool CheckPlayerAcce(in PlayerScript ps,in bool isConectController)
     {
-        if (!isConectController) //コントローラーが接続されていなかったらfalseを返す///////
+        //スペースが押されていなかったらfalseを返す
+        if (!isConectController)
         {
             if (!Input.GetKey(KeyCode.Space))
             {
                 return false;
             }
             return true;
-        }/////////////////////////////////////////////////////////////////////////////////////
+        }
 
-        if (Input.GetAxis("RightTrigger")==0)   //Rトリガーが押されていなかったらfalseを返す//
+        //Rトリガーが押されていなかったらfalseを返す
+        if (Input.GetAxis("RightTrigger")==0)   
         {
             return false;
-        }////////////////////////////////////////////////////////////////////////////////////////////
+        }
         
         return true;
         
@@ -205,15 +218,17 @@ public class TutorialScript : MonoBehaviour
     //プレイヤークイックムーブを確認
     public bool CheckQuickMove(in PlayerScript ps,in bool isConectController)
     {
-        if(!isConectController) //コントローラーが接続されていなかったらfalseを返す///////
+        //シフトが押されていなかったらfalseを返す
+        if (!isConectController) 
         {
             if (!Input.GetKey(KeyCode.LeftShift)&&!Input.GetKey(KeyCode.RightShift))
             {
                 return false;
             }
             return true;
-        }/////////////////////////////////////////////////////////////////////////////////////
+        }
 
+        //レフトトリガーが押されていなかったらfalseを返す
         if (Input.GetAxis("LeftTrigger") == 0)
         {
             return false;
