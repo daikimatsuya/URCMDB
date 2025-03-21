@@ -186,6 +186,7 @@ public class PlayerCameraScript : MonoBehaviour
                 if (mf.GetIsShade())   
                 {
                     mf.SetShadeLevel(3);    //フェードレベル設定
+                    mc.SetEnd();
                 }
 
             }
@@ -207,6 +208,14 @@ public class PlayerCameraScript : MonoBehaviour
     public void SetPlayer(in Transform tf,in PlayerScript ps)
     {
         ps.SetTransform(tf);
+    }
+    public bool GetFadeEnd()
+    {
+        if (mc.GetEnd())
+        {
+            return true;
+        }
+        return false;
     }
     public void SetMF(in MovieFade mf)
     {

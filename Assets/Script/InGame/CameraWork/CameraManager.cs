@@ -26,6 +26,7 @@ public class CameraManager : MonoBehaviour
     public  void CameraController(in bool isPose)
     {
         ps = playerController.GetPlayer();
+        playerController.SetActivationFadeStart(pcs.GetFadeEnd());
         mf.MovieFadeController();   //カメラのフェード
 
         //プレイヤーが爆発したか

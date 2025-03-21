@@ -205,15 +205,16 @@ public class PlayerControllerScript : MonoBehaviour
         rbc.SetBlurIntensity(blurIntnsity);          //ブラーの値を代入
     }
 
-    public void SetActivationFadeStart()
+
+
+    #region 値受け渡し
+    public void SetActivationFadeStart(in bool flag)
     {
-        if (afcs != null)
+        if (afcs != null && flag == true)
         {
             afcs.SetStart();
         }
     }
-
-    #region 値受け渡し
     public PlayerScript GetPlayer()
     {
         return ps;

@@ -124,6 +124,10 @@ public class MovieCamera : MonoBehaviour
     {
         return  isEnd;
     }
+    public void SetEnd()
+    {
+        isEnd = true;
+    }
     public bool GetSkip()
     {
         return isSkip;
