@@ -17,10 +17,20 @@ public class TutorialUIScript : MonoBehaviour
         finish
     }
 
+    public class EmphasisTransformElement
+    {
+        [SerializeField] public Vector3 pos;
+        [SerializeField] public Vector3 rot;
+        [SerializeField] public Vector3 scale;
+        [SerializeField] public float time;
+    }
+
     [SerializeField] private GameObject[] keyboard;
     [SerializeField] private GameObject[] controller;
     [SerializeField] private GameObject tutorialCompletion;
     private TextMeshProUGUI completion;
+    [SerializeField] private EmphasisTransformElement emphasis;
+    private EmphasisTransformElement emphasisBuff;
 
     private TutorialScript ts;
     private bool conectController;
@@ -33,10 +43,10 @@ public class TutorialUIScript : MonoBehaviour
         ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
 
-        if (ts.GetResetFlag())  //リセットフラグがオンになったらリセットさせる/////
+        if (ts.GetResetFlag())  
         {
-            ResetTutorial();
-        }///////////////////////////////////////////////////////////////////////////////
+            ResetTutorial();    //リセットフラグがオンになったらリセットさせる
+        }
     }
 
     //起動するチュートリアルを選択
@@ -45,31 +55,31 @@ public class TutorialUIScript : MonoBehaviour
         switch (ts.GetTutorialNum())
         {
             case (int)Tutorial.shot:
-                ts.ShotTutorial(in ps); //発射チュートリアル実行
+                ts.ShotTutorial(in ps);                                         //発射チュートリアル実行
                 break;
 
             case (int)Tutorial.controll:
-                ts.ControlleTutorial(in ps,conectController);   //操作チュートリアル進行
+                ts.ControlleTutorial(in ps,conectController);         //操作チュートリアル進行
                 break;
 
             case (int)Tutorial.boost:
-                ts.BoostTutorial(in ps);    //ブーストチュートリアル進行
+                ts.BoostTutorial(in ps);                                      //ブーストチュートリアル進行
                 break;
 
             case (int)Tutorial.quick:
-                ts.QuickMoveTutorial(in ps, conectController);  //高速旋回チュートリアル進行
+                ts.QuickMoveTutorial(in ps, conectController);    //高速旋回チュートリアル進行
                 break;
 
             case (int)Tutorial.acce:
-                ts.AcceTutorial(in ps, conectController);   //加速チュートリアル進行
+                ts.AcceTutorial(in ps, conectController);             //加速チュートリアル進行
                 break;
 
             case (int)Tutorial.pms:
-                ts.PMSTutorial(in ps);  //PMSチュートリアル進行
+                ts.PMSTutorial(in ps);                                      //PMSチュートリアル進行
                 break;
 
             case (int)Tutorial.finish:
-                ts.ResetAll(in ps); //チュートリアルが終了したらリセット
+                ts.ResetAll(in ps);                                           //チュートリアルが終了したらリセット
                 break;
         }
     }
@@ -81,62 +91,49 @@ public class TutorialUIScript : MonoBehaviour
         completion.text = ts.GetCompletion() + "%";  //進行度の値変更
     }
 
-   
     private void ShowUI(in bool isConectController)
     {
-        if(isConectController)  //コントローラーが接続されていたら////////////////////////////////////////////////////////////////////////////////////////////////
+        //コントローラー用
+        if (isConectController) 
         {
-
-            if (controller.Length == 0) //コントローラー用ＵＩ画像が準備されていなかったらリターンさせる/////
+            if (controller.Length == 0) 
             {
+                return;     //コントローラー用ＵＩ画像が準備されていなかったらリターンさせる
+            }
+            if(controller.Length <=ts.GetTutorialNum()) 
+            {
+                //チュートリアル用ＵＩ画像が足りなかったら範囲内の最後を表示
+                controller[controller.Length-1].SetActive(true);                        //最後のやつを表示
+                controller[controller.Length-2].SetActive(false);                       //最後の一つ前を非表示
                 return;
-            }////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if(controller.Length <=ts.GetTutorialNum()) //チュートリアル用ＵＩ画像が足りなかったら範囲内の最後を表示/////////
+            }
+            if(ts.GetTutorialNum() != 0) 
             {
-                controller[controller.Length-1].SetActive(true);    //最後のやつを表示
-                controller[controller.Length-2].SetActive(false);   //最後の一つ前を非表示
-                return;
-            }///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if(ts.GetTutorialNum() == 0)    //チュートリアル番号が０だったら一つ前を非表示にしない///
-            {
-                //controller[controller.Length-1].SetActive(false);
-            }////////////////////////////////////////////////////////////////////////////////////////////////
-            else
-            {
-                controller[ts.GetTutorialNum()-1].SetActive(false); //現在の一つ前のＵＩを非表示にする
+                controller[ts.GetTutorialNum() - 1].SetActive(false); //現在の一つ前のＵＩを非表示にする
             }
             controller[ts.GetTutorialNum()].SetActive(true);    //現在のＵＩを表示する
+        }
 
-        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        else　//コントローラーが接続されていなかったら//////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //キーボード用
+        else
         {
-
-            if (keyboard.Length == 0)   //キーボード用ＵＩ画像が準備されていなかったらリターンさせる/////
+            if (keyboard.Length == 0)   
             {
+                return;//キーボード用ＵＩ画像が準備されていなかったらリターンさせる/////
+            }
+            if (keyboard.Length <= ts.GetTutorialNum()) 
+            {
+                //チュートリアル用ＵＩ画像が足りなかったら範囲内の最後を表示
+                keyboard[keyboard.Length - 1].SetActive(true);                          //最後のやつを表示
+                keyboard[keyboard.Length - 2].SetActive(false);                         //最後の一つ前を非表示
                 return;
-            }/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if (keyboard.Length <= ts.GetTutorialNum()) //チュートリアル用ＵＩ画像が足りなかったら範囲内の最後を表示/////////
-            {
-                keyboard[keyboard.Length - 1].SetActive(true);
-                keyboard[keyboard.Length - 2].SetActive(false);
-                return;
-            }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if (ts.GetTutorialNum() == 0)   //チュートリアル番号が０だったら一つ前を非表示にしない///
-            {
-
-            }///////////////////////////////////////////////////////////////////////////////////////////////
-            else
+            }
+            if (ts.GetTutorialNum() != 0)   
             {
                 keyboard[ts.GetTutorialNum() - 1].SetActive(false); //現在の一つ前のＵＩを非表示にする
             }
             keyboard[ts.GetTutorialNum()].SetActive(true);    //現在のＵＩを表示する
-
-        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
     }
 
     //コントローラーの接続をチェック
@@ -145,15 +142,15 @@ public class TutorialUIScript : MonoBehaviour
         bool buff = conectController;
         conectController = isConect; //コントローラーの接続情報取得
 
-        if (buff != conectController)   //抜かれた瞬間と接続した瞬間に表示ＵＩをリセットする//////
-        {
-            ResetTutorial();
-        }//////////////////////////////////////////////////////////////////////////////////////////////
+        if (buff != conectController) 
+        {   
+            ResetTutorial();     //抜かれた瞬間と接続した瞬間に表示ＵＩをリセットする
+        }
     }
     //チュートリアル表示をリセットさせる
     private void ResetTutorial()
     {
-        //準備されているＵＩの数非表示を回す///////
+        //準備されているＵＩの数非表示を回す
         for (int i = 0; i < keyboard.Length; i++)
         {
             keyboard[i].SetActive(false);
@@ -162,9 +159,8 @@ public class TutorialUIScript : MonoBehaviour
         {
             controller[i].SetActive(false);
         }
-        /////////////////////////////////////////////
     }
-    // Start is called before the first frame update
+
     //早期初期化
     public void AwakeTutorialUI()
     {
@@ -173,6 +169,5 @@ public class TutorialUIScript : MonoBehaviour
         completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
         conectController = Usefull.GetControllerScript.GetIsConectic();
     }
-
 
 }
