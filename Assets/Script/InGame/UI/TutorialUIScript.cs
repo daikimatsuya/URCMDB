@@ -51,7 +51,7 @@ public class TutorialUIScript : MonoBehaviour
         CheckController(in isConect);              //コントローラーの接続を確認
         SelectTutorial(in ps);                          //UI用情報更新
         SetEmphasis();                                  //強調表示セット
-        EmphasisTransition(in ps);                         //強調表示を動かす
+        EmphasisTransition(in ps);                  //強調表示を動かす
         ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
 
