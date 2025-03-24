@@ -9,6 +9,7 @@ public class TutorialScript : MonoBehaviour
     private float tutorialCompletion = 0;
     private float maxCompletion = 100.0f;
     private bool isReset;
+    private bool nextSwitch=true;
 
     [SerializeField] private float shotTutorialCount;
     [SerializeField] private float boostTutorialCount;
@@ -123,6 +124,7 @@ public class TutorialScript : MonoBehaviour
         {
             tutorialCompletion = 0;
             tutorialNumber++;
+            nextSwitch = true;
         }
     }
     //プレイヤーが死んだら全部リセットさせる
@@ -253,6 +255,14 @@ public class TutorialScript : MonoBehaviour
     public bool GetResetFlag()
     {
         return isReset;
+    }
+    public bool GetNextSwitch()
+    {
+        return nextSwitch;
+    }
+    public void SetNextSwitch(bool flag)
+    {
+        nextSwitch = flag;
     }
     #endregion
 
