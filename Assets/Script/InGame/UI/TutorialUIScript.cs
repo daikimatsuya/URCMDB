@@ -29,12 +29,6 @@ public class TutorialUIScript : MonoBehaviour
         [SerializeField] public float time;
     }
 
-    public class DoubleVector3
-    {
-        public double x;
-        public double y;
-        public double z;
-    }
 
     [SerializeField] private GameObject[] keyboard;
     [SerializeField] private GameObject[] controller;
@@ -43,9 +37,9 @@ public class TutorialUIScript : MonoBehaviour
     [SerializeField] private EmphasisTransformElement emphasis;
     private EmphasisTransformElement emphasisBuff;
     [SerializeField] private RectTransform canvasTransform;
-    private DoubleVector3 initialPos;
-    private DoubleVector3 initialRot;
-    private DoubleVector3 initialScale;
+    private Vector3 initialPos;
+    private Vector3 initialRot;
+    private Vector3 initialScale;
 
     private TutorialScript ts;
 
