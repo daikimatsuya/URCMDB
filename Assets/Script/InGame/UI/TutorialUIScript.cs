@@ -29,7 +29,6 @@ public class TutorialUIScript : MonoBehaviour
         [SerializeField] public float time;
     }
 
-
     [SerializeField] private GameObject[] keyboard;
     [SerializeField] private GameObject[] controller;
     [SerializeField] private GameObject tutorialCompletion;
@@ -44,6 +43,7 @@ public class TutorialUIScript : MonoBehaviour
     private TutorialScript ts;
 
     private bool conectController;
+    private int q=10000;
 
     //チュートリアルUI管理
     public void TutorialUIController(in PlayerScript ps,in bool isConect)
@@ -73,9 +73,9 @@ public class TutorialUIScript : MonoBehaviour
         t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
 
 
-        canvasTransform.position = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
+        canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
         canvasTransform.localEulerAngles = initialRot + new Vector3(emphasisBuff.rot.x * t, emphasisBuff.rot.y * t, emphasisBuff.rot.z * t);
-        canvasTransform.localScale = initialScale + new Vector3(emphasisBuff.scale.x * t, emphasisBuff.scale.y * t, emphasisBuff.scale.z * t);
+        canvasTransform.localScale = initialScale/q + new Vector3(emphasisBuff.scale.x * t / q, emphasisBuff.scale.y * t / q, emphasisBuff.scale.z * t / q);
     }
 
     //強調表示の値初期化
@@ -219,16 +219,17 @@ public class TutorialUIScript : MonoBehaviour
         conectController = Usefull.GetControllerScript.GetIsConectic();
 
 
-        initialPos = new Vector3 (canvasTransform.position.x, canvasTransform.position.y, canvasTransform.position.z);
+        initialPos = new Vector3 (canvasTransform.localPosition.x, canvasTransform.localPosition.y, canvasTransform.localPosition.z);
         initialRot = new Vector3(canvasTransform.localEulerAngles.x, canvasTransform.localEulerAngles.y, canvasTransform.localEulerAngles.z);
-        initialScale = new Vector3(canvasTransform.localScale.x, canvasTransform.localScale.y, canvasTransform.localScale.z);
+        initialScale = new Vector3(canvasTransform.localScale.x * q, canvasTransform.localScale.y * q, canvasTransform.localScale.z * q);
 
         emphasisBuff = new EmphasisTransformElement();
 
+        TimeCountScript.SetTime(ref emphasis.time, emphasis.time);
 
         emphasis.pos = emphasis.pos - initialPos;
         emphasis.rot = emphasis.rot - initialRot;
-        emphasis.scale = emphasis.scale - initialScale;
+        emphasis.scale = emphasis.scale*q - initialScale;
 
         emphasis.pos = new Vector3(emphasis.pos.x / emphasis.time, emphasis.pos.y / emphasis.time, emphasis.pos.z / emphasis.time);
         emphasis.rot = new Vector3(emphasis.rot.x / emphasis.time, emphasis.rot.y / emphasis.time, emphasis.rot.z / emphasis.time);
