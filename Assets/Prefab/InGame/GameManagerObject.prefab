@@ -145,7 +145,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 4320082709853593003}
-  m_PlaneDistance: 4
+  m_PlaneDistance: 50
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -372,9 +372,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4320082708551101943}
     m_Modifications:
+    - target: {fileID: 1767151898222134027, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767151898222134027, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767151898222134027, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767151898222134027, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 39.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2743061662921544886, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.04
+      objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491497, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536103835060491499, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
+      propertyPath: far clip plane
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491500, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_RootOrder
@@ -545,6 +569,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4320082709853593003}
+    - target: {fileID: 8062726808318906542, guid: 934ed2a66df5f7145bcbfbbdb74bc14f, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8062726808318906543, guid: 934ed2a66df5f7145bcbfbbdb74bc14f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
