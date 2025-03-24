@@ -65,7 +65,7 @@ public class TutorialUIScript : MonoBehaviour
     //ã≠í≤ï\é¶Ç©ÇÁí èÌï\é¶Ç÷ÇÃëJà⁄
     private void EmphasisTransition(in PlayerScript ps)
     {
-        if (!ps)
+        if (!ps.GetIsCanShot())
         {
             return;
         }
@@ -75,7 +75,6 @@ public class TutorialUIScript : MonoBehaviour
         }
         float t = emphasisBuff.time / emphasis.time;
         t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
-
 
         canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
         canvasTransform.localEulerAngles = initialRot + new Vector3(emphasisBuff.rot.x * t, emphasisBuff.rot.y * t, emphasisBuff.rot.z * t);
@@ -214,16 +213,10 @@ public class TutorialUIScript : MonoBehaviour
         }
     }
 
-    //ëÅä˙èâä˙âª
-    public void AwakeTutorialUI()
+    //ã≠í≤ï\é¶èâä˙âª
+    private void StartEmphasis()
     {
-        ResetTutorial();
-        ts = GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
-        completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
-        conectController = Usefull.GetControllerScript.GetIsConectic();
-
-
-        initialPos = new Vector3 (canvasTransform.localPosition.x, canvasTransform.localPosition.y, canvasTransform.localPosition.z);
+        initialPos = new Vector3(canvasTransform.localPosition.x, canvasTransform.localPosition.y, canvasTransform.localPosition.z);
         initialRot = new Vector3(canvasTransform.localEulerAngles.x, canvasTransform.localEulerAngles.y, canvasTransform.localEulerAngles.z);
         initialScale = new Vector3(canvasTransform.localScale.x * q, canvasTransform.localScale.y * q, canvasTransform.localScale.z * q);
 
@@ -233,13 +226,31 @@ public class TutorialUIScript : MonoBehaviour
 
         emphasis.pos = emphasis.pos - initialPos;
         emphasis.rot = emphasis.rot - initialRot;
-        emphasis.scale = emphasis.scale*q - initialScale;
+        emphasis.scale = emphasis.scale * q - initialScale;
 
         emphasis.pos = new Vector3(emphasis.pos.x / emphasis.time, emphasis.pos.y / emphasis.time, emphasis.pos.z / emphasis.time);
         emphasis.rot = new Vector3(emphasis.rot.x / emphasis.time, emphasis.rot.y / emphasis.time, emphasis.rot.z / emphasis.time);
         emphasis.scale = new Vector3(emphasis.scale.x / emphasis.time, emphasis.scale.y / emphasis.time, emphasis.scale.z / emphasis.time);
 
+
+    }
+    //ëÅä˙èâä˙âª
+    public void AwakeTutorialUI()
+    {
+        ResetTutorial();
+        ts = GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
+        completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
+        conectController = Usefull.GetControllerScript.GetIsConectic();
+
+        StartEmphasis();
         SetEmphasis();
+
+        float t = emphasisBuff.time / emphasis.time;
+        t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
+
+        canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
+        canvasTransform.localEulerAngles = initialRot + new Vector3(emphasisBuff.rot.x * t, emphasisBuff.rot.y * t, emphasisBuff.rot.z * t);
+        canvasTransform.localScale = initialScale / q + new Vector3(emphasisBuff.scale.x * t / q, emphasisBuff.scale.y * t / q, emphasisBuff.scale.z * t / q);
     }
 
 }

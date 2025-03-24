@@ -51,6 +51,7 @@ public class PlayerScript : MonoBehaviour
     private float ringSpeed;
     private bool PMS;
     [SerializeField] private bool redBustFlag;
+    private bool isCanShot;
     private List<BoostEffectScript> boostEffectList = new List<BoostEffectScript>();
 
     //プレイヤー管理関数
@@ -74,11 +75,12 @@ public class PlayerScript : MonoBehaviour
             EffectController();                                                 //演出管理
             phes.EMPAffectController(in EMPHit);                      //EMP関係管理
             rbs.RedBoostController(playerSpeed, redBustFlag); //レッドブースト管理
-
+            isCanShot = true;
         }//////////////////////////////////////////////////////////////////////////
         else
         {
             SetPreShootAngle(); //発射前の角度調整
+            isCanShot = false;
         }
 
     }
@@ -461,6 +463,10 @@ public class PlayerScript : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public bool GetIsCanShot()
+    {
+        return isCanShot;
     }
     #endregion
 
