@@ -50,8 +50,8 @@ public class TutorialUIScript : MonoBehaviour
     {
         CheckController(in isConect);              //コントローラーの接続を確認
         SelectTutorial(in ps);                          //UI用情報更新
-        SetEmphasis();
-        EmphasisTransition();
+        SetEmphasis();                                  //強調表示セット
+        EmphasisTransition(in ps);                         //強調表示を動かす
         ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
 
@@ -63,8 +63,12 @@ public class TutorialUIScript : MonoBehaviour
     }
 
     //強調表示から通常表示への遷移
-    private void EmphasisTransition()
+    private void EmphasisTransition(in PlayerScript ps)
     {
+        if (!ps)
+        {
+            return;
+        }
         if(TimeCountScript.TimeCounter(ref emphasisBuff.time))
         {
             return;
