@@ -3062,8 +3062,8 @@ MonoBehaviour:
   emphasis:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0}
-    scale: {x: 0, y: 0, z: 0}
-    time: 2
+    scale: {x: 11, y: 11, z: 11}
+    time: 30
   canvasTransform: {fileID: 748484336}
 --- !u!1 &1385304096
 GameObject:
