@@ -50,11 +50,10 @@ public class TutorialUIScript : MonoBehaviour
     {
         CheckController(in isConect);              //コントローラーの接続を確認
         SelectTutorial(in ps);                          //UI用情報更新
-        SetEmphasis();
+        ResetEmphasisFlag();                        //emphasisリセット確認
         EmphasisTransition(in ps);                  //強調表示を動かす
         ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
-
 
         if (ts.GetResetFlag())  
         {
@@ -82,7 +81,7 @@ public class TutorialUIScript : MonoBehaviour
     }
 
     //強調表示の値初期化
-    private void SetEmphasis()
+    private void ResetEmphasisFlag()
     {
         if (!ts.GetNextSwitch())
         {
@@ -223,16 +222,12 @@ public class TutorialUIScript : MonoBehaviour
         emphasisBuff = new EmphasisTransformElement();
         TimeCountScript.SetTime(ref emphasis.time, emphasis.time);
 
-        SetEmphasis();
+        ResetEmphasisFlag();
         SetEmphasisTransformElement(emphasisBuff, emphasis);
 
         emphasisBuff.pos = emphasis.pos - initialPos;
         emphasisBuff.rot = emphasis.rot - initialRot;
         emphasisBuff.scale = emphasis.scale * q - initialScale;
-
-        //emphasisBuff.pos = new Vector3(emphasisBuff.pos.x / emphasisBuff.time, emphasisBuff.pos.y / emphasisBuff.time, emphasisBuff.pos.z / emphasisBuff.time);
-        //emphasisBuff.rot = new Vector3(emphasisBuff.rot.x / emphasisBuff.time, emphasisBuff.rot.y / emphasisBuff.time, emphasisBuff.rot.z / emphasisBuff.time);
-        //emphasisBuff.scale = new Vector3(emphasisBuff.scale.x / emphasisBuff.time, emphasisBuff.scale.y / emphasisBuff.time, emphasisBuff.scale.z / emphasisBuff.time);
 
         float t = emphasisBuff.time / emphasisBuff.time;
         t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
