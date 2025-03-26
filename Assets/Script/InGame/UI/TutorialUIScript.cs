@@ -50,7 +50,7 @@ public class TutorialUIScript : MonoBehaviour
     {
         CheckController(in isConect);              //コントローラーの接続を確認
         SelectTutorial(in ps);                          //UI用情報更新
-
+        ResetEmphasisFlag();
         EmphasisTransition(in ps);                  //強調表示を動かす
         ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
@@ -58,7 +58,6 @@ public class TutorialUIScript : MonoBehaviour
         if (ts.GetResetFlag())  
         {
             ResetTutorial();    //リセットフラグがオンになったらリセットさせる
-            ResetEmphasisFlag();
         }
     }
 
