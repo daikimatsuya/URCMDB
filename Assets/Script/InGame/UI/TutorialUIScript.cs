@@ -50,7 +50,7 @@ public class TutorialUIScript : MonoBehaviour
     {
         CheckController(in isConect);              //コントローラーの接続を確認
         SelectTutorial(in ps);                          //UI用情報更新
-        SetEmphasis();                                  //強調表示セット
+        SetEmphasis();
         EmphasisTransition(in ps);                  //強調表示を動かす
         ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
@@ -88,7 +88,7 @@ public class TutorialUIScript : MonoBehaviour
         {
             return;
         }
-        SetEmphasisTransformElement(emphasisBuff, emphasis);
+        emphasisBuff.time = emphasis.time;
         ts.SetNextSwitch(false);     
     }
 
@@ -221,26 +221,26 @@ public class TutorialUIScript : MonoBehaviour
         initialScale = new Vector3(canvasTransform.localScale.x * q, canvasTransform.localScale.y * q, canvasTransform.localScale.z * q);
 
         emphasisBuff = new EmphasisTransformElement();
-
         TimeCountScript.SetTime(ref emphasis.time, emphasis.time);
 
-        emphasis.pos = emphasis.pos - initialPos;
-        emphasis.rot = emphasis.rot - initialRot;
-        emphasis.scale = emphasis.scale * q - initialScale;
-
-        emphasis.pos = new Vector3(emphasis.pos.x / emphasis.time, emphasis.pos.y / emphasis.time, emphasis.pos.z / emphasis.time);
-        emphasis.rot = new Vector3(emphasis.rot.x / emphasis.time, emphasis.rot.y / emphasis.time, emphasis.rot.z / emphasis.time);
-        emphasis.scale = new Vector3(emphasis.scale.x / emphasis.time, emphasis.scale.y / emphasis.time, emphasis.scale.z / emphasis.time);
-
         SetEmphasis();
+        SetEmphasisTransformElement(emphasisBuff, emphasis);
 
-        float t = emphasisBuff.time / emphasis.time;
+        emphasisBuff.pos = emphasis.pos - initialPos;
+        emphasisBuff.rot = emphasis.rot - initialRot;
+        emphasisBuff.scale = emphasis.scale * q - initialScale;
+
+        //emphasisBuff.pos = new Vector3(emphasisBuff.pos.x / emphasisBuff.time, emphasisBuff.pos.y / emphasisBuff.time, emphasisBuff.pos.z / emphasisBuff.time);
+        //emphasisBuff.rot = new Vector3(emphasisBuff.rot.x / emphasisBuff.time, emphasisBuff.rot.y / emphasisBuff.time, emphasisBuff.rot.z / emphasisBuff.time);
+        //emphasisBuff.scale = new Vector3(emphasisBuff.scale.x / emphasisBuff.time, emphasisBuff.scale.y / emphasisBuff.time, emphasisBuff.scale.z / emphasisBuff.time);
+
+        float t = emphasisBuff.time / emphasisBuff.time;
         t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
-
         canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
         canvasTransform.localEulerAngles = initialRot + new Vector3(emphasisBuff.rot.x * t, emphasisBuff.rot.y * t, emphasisBuff.rot.z * t);
         canvasTransform.localScale = initialScale / q + new Vector3(emphasisBuff.scale.x * t / q, emphasisBuff.scale.y * t / q, emphasisBuff.scale.z * t / q);
     }
+
     //早期初期化
     public void AwakeTutorialUI()
     {

@@ -3056,10 +3056,10 @@ MonoBehaviour:
   - {fileID: 600911324}
   tutorialCompletion: {fileID: 377413655}
   emphasis:
-    pos: {x: 0, y: 0, z: 0}
-    rot: {x: 0, y: 0, z: 0}
-    scale: {x: 11, y: 11, z: 11}
-    time: 1
+    pos: {x: -0.38, y: 0, z: 0}
+    rot: {x: 0, y: 90, z: 0}
+    scale: {x: 0.01, y: 0.01, z: 1}
+    time: 5
   canvasTransform: {fileID: 748484336}
 --- !u!1 &1385304096
 GameObject:
