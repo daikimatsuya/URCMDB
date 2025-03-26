@@ -88,9 +88,10 @@ public class UIScript : MonoBehaviour
             YawUIController();                                                                                                                                    //プレイヤーのX軸の角度表示
             playerSpeedMeterScript.SetPlayerSpeed((int)ps.GetPlayerSpeedFloat(), (int)ps.GetPlayerSpeedBuffFloat());    //プレイヤーのスピードメーター表示
             sensorUIScript.SensorUIController();                                                                                                         //センサーのUI表示
-            TutorialUI(isControllerConect);                                                                                                                  //チュートリアルUIを動かす
+
 
         }
+        TutorialUI(isControllerConect);                                                                                                //チュートリアルUIを動かす
         PMSMode();                                                                                                                          //PMS表示
         IsGameOver(isPose);                                                                                                             //ゲームオーバーのUI表示
         TargetMarkerUI();                                                                                                                 //ターゲットマーカー表示

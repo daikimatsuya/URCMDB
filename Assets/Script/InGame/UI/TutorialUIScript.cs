@@ -232,7 +232,14 @@ public class TutorialUIScript : MonoBehaviour
         emphasis.rot = new Vector3(emphasis.rot.x / emphasis.time, emphasis.rot.y / emphasis.time, emphasis.rot.z / emphasis.time);
         emphasis.scale = new Vector3(emphasis.scale.x / emphasis.time, emphasis.scale.y / emphasis.time, emphasis.scale.z / emphasis.time);
 
+        SetEmphasis();
 
+        float t = emphasisBuff.time / emphasis.time;
+        t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
+
+        canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
+        canvasTransform.localEulerAngles = initialRot + new Vector3(emphasisBuff.rot.x * t, emphasisBuff.rot.y * t, emphasisBuff.rot.z * t);
+        canvasTransform.localScale = initialScale / q + new Vector3(emphasisBuff.scale.x * t / q, emphasisBuff.scale.y * t / q, emphasisBuff.scale.z * t / q);
     }
     //ëÅä˙èâä˙âª
     public void AwakeTutorialUI()
@@ -243,14 +250,7 @@ public class TutorialUIScript : MonoBehaviour
         conectController = Usefull.GetControllerScript.GetIsConectic();
 
         StartEmphasis();
-        SetEmphasis();
 
-        float t = emphasisBuff.time / emphasis.time;
-        t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
-
-        canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
-        canvasTransform.localEulerAngles = initialRot + new Vector3(emphasisBuff.rot.x * t, emphasisBuff.rot.y * t, emphasisBuff.rot.z * t);
-        canvasTransform.localScale = initialScale / q + new Vector3(emphasisBuff.scale.x * t / q, emphasisBuff.scale.y * t / q, emphasisBuff.scale.z * t / q);
     }
 
 }

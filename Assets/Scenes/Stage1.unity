@@ -1102,10 +1102,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 3240225490474262006, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.08
-      objectReference: {fileID: 0}
     - target: {fileID: 3747264466520394762, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -3063,7 +3059,7 @@ MonoBehaviour:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0}
     scale: {x: 11, y: 11, z: 11}
-    time: 30
+    time: 1
   canvasTransform: {fileID: 748484336}
 --- !u!1 &1385304096
 GameObject:

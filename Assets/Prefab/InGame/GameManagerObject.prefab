@@ -388,10 +388,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 39.56
       objectReference: {fileID: 0}
-    - target: {fileID: 2743061662921544886, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.04
-      objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491497, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_Name
       value: Main Camera
