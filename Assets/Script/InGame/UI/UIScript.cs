@@ -49,7 +49,7 @@ public class UIScript : MonoBehaviour
     {
         yawUItf = GameObject.FindWithTag("YawUI2").GetComponent<Transform>();
         pmsTex = pms.GetComponent<TextMeshProUGUI>();
-        markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
+        //markerCanvas = GameObject.FindWithTag("MarkerCanvas").GetComponent<RectTransform>();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         targetMarker = GameObject.FindWithTag("TargetMarker");
         gameOverUI = GameObject.FindWithTag("GameOverUI");
@@ -94,7 +94,6 @@ public class UIScript : MonoBehaviour
         TutorialUI(isControllerConect);                                                                                                //チュートリアルUIを動かす
         PMSMode();                                                                                                                          //PMS表示
         IsGameOver(isPose);                                                                                                             //ゲームオーバーのUI表示
-        TargetMarkerUI();                                                                                                                 //ターゲットマーカー表示
         ActiveChecker(isPose);                                                                                                          //ゲーム画面に表示するCanvasのフラグ管理
         poseKeyUI.ViewPoseMenu(in isControllerConect);                                                                    //ポーズメニューUI表示
         playerStateEffectControllerScript.PlayerStateEffectController();                                                 //効果エフェクト管理
@@ -104,7 +103,6 @@ public class UIScript : MonoBehaviour
     {
         if (ps==null||isPose)  //プレイヤーが死んでいるときに表示するUI///////////////////////
         {
-            targetMarker.SetActive(false);
             pms.SetActive(false);
             playerSpeedMeterScript.SetSpeedMeterActive(false);
             yawUI.SetActive(false);
@@ -116,11 +114,7 @@ public class UIScript : MonoBehaviour
         }///////////////////////////////////////////////////////////////////////////////////////////
 
         else   //プレイヤーが生きているときに表示するUI/////////////////////////////////////////
-        {
-            if(targetMarkerflag)
-            {
-                targetMarker.SetActive(true);
-            }     
+        { 
             pms.SetActive(true);
             playerSpeedMeterScript.SetSpeedMeterActive(true);
             yawUI.SetActive(true);
@@ -212,34 +206,6 @@ public class UIScript : MonoBehaviour
         }
     }
 
-    //ターゲットの位置をUIに表示
-    private void TargetMarkerUI()
-    {
-        if (!targetTransform)
-        {
-            return;
-        }
-        //マーカーの座標を算出
-        Vector2 pos;
-        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, targetTransform.position);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(markerCanvas, screenPos, mainCamera, out pos);
-        targetMarker.transform.localPosition = pos;
-        ///////////////////////
-        
-
-        //ターゲットがカメラの画角に収まっているときに表示させる
-        if (Vector3.Dot(mainCamera.transform.forward, (targetTransform.position - mainCamera.transform.position)) < 0)
-        {
-            targetMarkerflag = false;
-            targetMarker.SetActive(false);
-        }
-        else
-        {
-            targetMarkerflag = true;
-            targetMarker.SetActive(true);
-        }
-        ////////////////////////////////////////////////////////////
-    }
     private void CheckController()
     {
         isControllerConect=Usefull.GetControllerScript.GetIsConectic();
