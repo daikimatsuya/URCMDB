@@ -64,6 +64,10 @@ public class TutorialUIScript : MonoBehaviour
     //‹­’²•\¦‚©‚ç’Êí•\¦‚Ö‚Ì‘JˆÚ
     private void EmphasisTransition(in PlayerScript ps)
     {
+        if (ps == null)
+        {
+            return;
+        }
         if (!ps.GetIsCanShot())
         {
             return;
