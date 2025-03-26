@@ -50,7 +50,7 @@ public class TutorialUIScript : MonoBehaviour
     {
         CheckController(in isConect);              //コントローラーの接続を確認
         SelectTutorial(in ps);                          //UI用情報更新
-        ResetEmphasisFlag();
+        ResetEmphasisFlag();                         //emphasisフラグリセット
         EmphasisTransition(in ps);                  //強調表示を動かす
         ShowUI(conectController);                 //UI表示
         ShowCompletion(ts.GetResetFlag());  //チュートリアル進行度を表示
@@ -76,9 +76,12 @@ public class TutorialUIScript : MonoBehaviour
         {
             return;
         }
+
+        //t算出
         float t = emphasisBuff.time / emphasis.time;
         t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
 
+        //オブジェクトに値を代入
         canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
         canvasTransform.localEulerAngles = initialRot + new Vector3(emphasisBuff.rot.x * t, emphasisBuff.rot.y * t, emphasisBuff.rot.z * t);
         canvasTransform.localScale = initialScale/q + new Vector3(emphasisBuff.scale.x * t / q, emphasisBuff.scale.y * t / q, emphasisBuff.scale.z * t / q);
@@ -91,10 +94,11 @@ public class TutorialUIScript : MonoBehaviour
         {
             return;
         }
-        emphasisBuff.time = emphasis.time;
-        ts.SetNextSwitch(false);     
+        emphasisBuff.time = emphasis.time;      //時間をリセット
+        ts.SetNextSwitch(false);                        //フラグをオフにする
     }
 
+    //自作構造体代入用（そのままいれると値がリンクするため）
     private void SetEmphasisTransformElement(EmphasisTransformElement buff,EmphasisTransformElement emphasis)
     {
         buff.pos=emphasis.pos;
@@ -220,20 +224,22 @@ public class TutorialUIScript : MonoBehaviour
     //強調表示初期化
     private void StartEmphasis()
     {
+        //オブジェクトの初期値保存
         initialPos = new Vector3(canvasTransform.localPosition.x, canvasTransform.localPosition.y, canvasTransform.localPosition.z);
         initialRot = new Vector3(canvasTransform.localEulerAngles.x, canvasTransform.localEulerAngles.y, canvasTransform.localEulerAngles.z);
         initialScale = new Vector3(canvasTransform.localScale.x * q, canvasTransform.localScale.y * q, canvasTransform.localScale.z * q);
 
-        emphasisBuff = new EmphasisTransformElement();
-        TimeCountScript.SetTime(ref emphasis.time, emphasis.time);
+        emphasisBuff = new EmphasisTransformElement();                      //Buff初期化
+        TimeCountScript.SetTime(ref emphasis.time, emphasis.time);       //時間をフレームに変換
+        ResetEmphasisFlag();                                                                //フラグリセット
+        SetEmphasisTransformElement(emphasisBuff, emphasis);            //値をBuffに代入
 
-        ResetEmphasisFlag();
-        SetEmphasisTransformElement(emphasisBuff, emphasis);
-
+        //値を偏差に変換
         emphasisBuff.pos = emphasis.pos - initialPos;
         emphasisBuff.rot = emphasis.rot - initialRot;
         emphasisBuff.scale = emphasis.scale * q - initialScale;
 
+        //オブジェクトの位置を表示したい位置に変更
         float t = emphasisBuff.time / emphasisBuff.time;
         t = 1 - Mathf.Sqrt(1 - Mathf.Pow(t, 2));
         canvasTransform.localPosition = initialPos + new Vector3(emphasisBuff.pos.x * t, emphasisBuff.pos.y * t, emphasisBuff.pos.z * t);
@@ -248,7 +254,6 @@ public class TutorialUIScript : MonoBehaviour
         ts = GameObject.FindWithTag("GameController").GetComponent<TutorialScript>();
         completion = tutorialCompletion.GetComponent<TextMeshProUGUI>();
         conectController = Usefull.GetControllerScript.GetIsConectic();
-
         StartEmphasis();
 
     }
