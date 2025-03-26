@@ -13,8 +13,8 @@ public class TutorialUIScript : MonoBehaviour
     {
         shot,
         controll,
-        boost,
         quick,
+        boost,
         acce,
         pms,
         finish
