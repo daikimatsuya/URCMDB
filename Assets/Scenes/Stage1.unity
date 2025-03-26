@@ -3056,9 +3056,9 @@ MonoBehaviour:
   - {fileID: 600911324}
   tutorialCompletion: {fileID: 377413655}
   emphasis:
-    pos: {x: -0.38, y: 0, z: 0}
-    rot: {x: 0, y: 90, z: 0}
-    scale: {x: 0.01, y: 0.01, z: 1}
+    pos: {x: -18, y: -10, z: -20}
+    rot: {x: 0, y: 125, z: 0}
+    scale: {x: 0.075, y: 0.05, z: 1}
     time: 5
   canvasTransform: {fileID: 748484336}
 --- !u!1 &1385304096
