@@ -384,10 +384,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1767151898222134027, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 39.56
-      objectReference: {fileID: 0}
     - target: {fileID: 3536103835060491497, guid: 333ff64b5fb4c824092d30451746bd8a, type: 3}
       propertyPath: m_Name
       value: Main Camera

@@ -1154,10 +1154,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1324314132743981643, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.88
-      objectReference: {fileID: 0}
     - target: {fileID: 1709878088556506498, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: distance
       value: 10000
