@@ -220,10 +220,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 935657131721734, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 935658303525506, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
       propertyPath: m_Name
       value: SeaUrchin
@@ -331,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8323969841194719820, guid: a411dd5fd7af9d34098c6b7af6c29b0b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1043
+      value: -1484.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a411dd5fd7af9d34098c6b7af6c29b0b, type: 3}
