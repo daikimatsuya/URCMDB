@@ -118,6 +118,12 @@ public class MoveOnRailScript : MonoBehaviour
         moveEnd = false;    //ˆÚ“®ƒtƒ‰ƒO‰Šú‰»
     }
 
+    #region ’ló‚¯“n‚µ
+    public LineRenderer GetRail()
+    {
+        return rail;
+    }
+    #endregion
     private void OnTriggerEnter(Collider other)
     {
         if (!obtainVoluntarilyRail)
@@ -133,9 +139,9 @@ public class MoveOnRailScript : MonoBehaviour
     }
     
     //‰Šú‰»
-    public void StartMoveOnRail()
+    public void StartMoveOnRail(Rigidbody rb)
     {
-        rb = GetComponent<Rigidbody>();
+        this.rb = rb;
         tf = GetComponent<Transform>();
 
         rb.velocity = new Vector3(moveSpeed, 0, 0);

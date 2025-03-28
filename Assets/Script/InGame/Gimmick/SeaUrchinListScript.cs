@@ -11,11 +11,16 @@ public class SeaUrchinListScript : MonoBehaviour
     {
         if (isPause)
         {
+            for (int i = 0; i < seaUrchinList.Count; i++)
+            {
+                seaUrchinList[i].SetStop();
+            }
             return;
         }
         for (int i = 0; i < seaUrchinList.Count; i++)
         {
             seaUrchinList[i].Move();
+
         }
     }
 
