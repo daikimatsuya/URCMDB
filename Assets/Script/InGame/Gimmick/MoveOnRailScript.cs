@@ -23,7 +23,6 @@ public class MoveOnRailScript : MonoBehaviour
 
     Rigidbody rb;
     Transform tf;
-    ComplementingRotationScript crs;
 
     //“®‚©‚·
     public void Move()

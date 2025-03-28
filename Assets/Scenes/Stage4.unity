@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &814054044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2250225910903858087, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+  m_PrefabInstance: {fileID: 1945016436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &814054047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814054044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b10b142633eb2d4283ef87913c790e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1945016436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,6 +220,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 935657131721734, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 935658303525506, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
       propertyPath: m_Name
       value: SeaUrchin
@@ -213,15 +234,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935658303525509, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 353.05334
+      value: 251
       objectReference: {fileID: 0}
     - target: {fileID: 935658303525509, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 177.93422
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 935658303525509, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -881.95667
+      value: -1134
       objectReference: {fileID: 0}
     - target: {fileID: 935658303525509, guid: 08fd00bf2e97b9645850d1b784813071, type: 3}
       propertyPath: m_LocalRotation.w

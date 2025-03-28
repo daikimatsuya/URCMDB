@@ -14,6 +14,7 @@ public class ListManager
     private ExplodeEffectListScript eel;
     private PlayerControllerScript pcs;
     private EMPbotListScript ebls;
+    private MoveOnRailListScript morls;
 
     //リスト更新
     public void ListManagerController(in bool isPause)
@@ -26,7 +27,9 @@ public class ListManager
         dls.DroneListController();                                      //ドローン管理
         eel.ExplodeEffectListController(in pcs);                   //爆発エフェクト管理
         ebls.EMPbotListController(in isPause, in pcs);          //EMPbot管理
+        morls.MoveOnRailListController(in isPause);            //レールにそうオブジェクト管理
     }
+
     //早期初期化
     public void AwakeListManager(in PlayerControllerScript pcs)
     {
@@ -55,6 +58,9 @@ public class ListManager
 
         ebls = GameObject.FindObjectOfType<EMPbotListScript>();
         ebls.AwakeEMPbotList(in pcs);
+
+        morls=GameObject.FindObjectOfType<MoveOnRailListScript>();
+        morls.StartMoveOnRailList();
     }
 
 }
