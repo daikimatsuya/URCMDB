@@ -139,10 +139,11 @@ public class MoveOnRailScript : MonoBehaviour
     }
     
     //èâä˙âª
-    public void StartMoveOnRail(Rigidbody rb)
+    public void StartMoveOnRail(Rigidbody rb,Transform tf,float moveSpeed)
     {
         this.rb = rb;
-        tf = GetComponent<Transform>();
+        this.tf = tf;
+        this.moveSpeed = moveSpeed;
 
         rb.velocity = new Vector3(moveSpeed, 0, 0);
 

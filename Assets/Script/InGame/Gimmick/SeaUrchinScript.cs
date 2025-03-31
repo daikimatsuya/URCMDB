@@ -8,8 +8,10 @@ public class SeaUrchinScript : MonoBehaviour
     private MoveOnRailScript mors;
 
     Rigidbody rb;
+    Transform tf;
 
     [SerializeField] private LineRenderer rail;
+    [SerializeField] private float moveSpeed;
 
     //ˆÚ“®
     public void Move()
@@ -27,8 +29,9 @@ public class SeaUrchinScript : MonoBehaviour
     public void StartSeaUrchin()
     {
         rb = GetComponent<Rigidbody>();
+        tf = GetComponent<Transform>();
 
         mors = GetComponent<MoveOnRailScript>();
-        mors.StartMoveOnRail(rb);
+        mors.StartMoveOnRail(rb,tf,moveSpeed);
     }
 }
