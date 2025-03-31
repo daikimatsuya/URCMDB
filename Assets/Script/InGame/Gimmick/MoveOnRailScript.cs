@@ -17,7 +17,7 @@ public class MoveOnRailScript : MonoBehaviour
     private LineRenderer rail;
     private bool moveEnd;
     private int knot;
-    private int next;
+    //private int next;
     private Vector3 targetAngles;
     private Vector3 rotBuff;
 
@@ -34,18 +34,18 @@ public class MoveOnRailScript : MonoBehaviour
         }
 
         //レールに次の中継地があるかを確認
-        next = knot + 1;
-        if (rail.positionCount <= next)
+
+        if (rail.positionCount <= knot)
         {
             moveEnd = true;
-            next = 0;
+            //next = 0;
             rail = null;
         }
         
         if (!moveEnd)
         {
             //中継地点にたどり着いたら次の中継地点を目指す
-            if (moveSpeed > Vector3.Distance(rail.GetPosition(next), tf.position) * distansMagnification)
+            if (moveSpeed > Vector3.Distance(rail.GetPosition(knot), tf.position) * distansMagnification)
             {
                 SetPosAndRot();
                 knot++;
@@ -60,7 +60,7 @@ public class MoveOnRailScript : MonoBehaviour
     //値代入する
     private void SetPosAndRot()
     {
-        Vector3 targetPos = SetTargetPos(next); //目標地点座標設定
+        Vector3 targetPos = SetTargetPos(knot); //目標地点座標設定
         Rolling();                                              //回転させる
         Accelerate(targetPos);                           //加速
     }
