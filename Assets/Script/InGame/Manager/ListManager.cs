@@ -15,9 +15,10 @@ public class ListManager
     private PlayerControllerScript pcs;
     private EMPbotListScript ebls;
     private SeaUrchinListScript suls;
+    private AnglerFishListScript afls;
 
-    //リスト更新
-    public void ListManagerController(in bool isPause)
+    //インゲームのリスト更新
+    public void ListManagerControllerInGame(in bool isPause)
     {
         mls.MonitorListController(in pcs,in isPause);            //ゲーム内モニター管理
         surls.SpeedUpRingListController(in pcs, in isPause); //スピードアップリング管理
@@ -28,10 +29,18 @@ public class ListManager
         eel.ExplodeEffectListController(in pcs);                   //爆発エフェクト管理
         ebls.EMPbotListController(in isPause, in pcs);          //EMPbot管理
         suls.SeaUrchinListController(in isPause);                //うに管理
+        afls.AnglerFishListController(in isPause);                //アンコウ管理
     }
 
-    //早期初期化
-    public void AwakeListManager(in PlayerControllerScript pcs)
+    //タイトルのリスト更新
+    public void ListManagerControllerInTitle()
+    {
+
+    }
+
+
+    //早期初期化(インゲーム)
+    public void AwakeListManagerInGame(in PlayerControllerScript pcs)
     {
         this.pcs = pcs;
 
@@ -60,7 +69,16 @@ public class ListManager
         ebls.AwakeEMPbotList(in pcs);
 
         suls=GameObject.FindObjectOfType<SeaUrchinListScript>();
-        suls.StartSeaUrchinList();
+        suls.AwakeSeaUrchinList();
+
+        afls=GameObject.FindObjectOfType<AnglerFishListScript>();
+        afls.AwakeAnglerFishList(in pcs);
+    }
+
+    //早期初期化(タイトル)
+    public void AwakeListManagerInTitle()
+    {
+
     }
 
 }

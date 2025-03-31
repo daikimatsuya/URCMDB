@@ -11,6 +11,7 @@ public class SeaUrchinScript : MonoBehaviour
 
     [SerializeField] private LineRenderer rail;
 
+    //ˆÚ“®
     public void Move()
     {
         if (mors.GetRail()==null)

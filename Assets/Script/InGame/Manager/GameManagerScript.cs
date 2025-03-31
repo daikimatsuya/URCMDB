@@ -47,7 +47,7 @@ public class GameManagerScript : MonoBehaviour
         Application.targetFrameRate = 60;
         GetComponents();                                //コンポーネント群取得
         Usefull.PMSScript.SetPMS(false);
-        lm.AwakeListManager(in pcs);
+        lm.AwakeListManagerInGame(in pcs);
         lp.AwakeLaunchPoint();
         us.AwakeUIScript();
         cm.AwakeCameraManager(in pcs);
@@ -75,7 +75,7 @@ public class GameManagerScript : MonoBehaviour
     {
         pcs.PlayerCheck();                                                 //プレイヤーがゲームにいるかを確認
         us.UIController(isPose);                                         //UI管理
-        lm.ListManagerController(isPose);                           //リスト群管理
+        lm.ListManagerControllerInGame(isPose);               //リスト群管理
 
         if (ts != null)
         {
