@@ -17,7 +17,6 @@ public class MoveOnRailScript : MonoBehaviour
     private LineRenderer rail;
     private bool moveEnd;
     private int knot;
-    //private int next;
     private Vector3 targetAngles;
     private Vector3 rotBuff;
 
@@ -38,7 +37,6 @@ public class MoveOnRailScript : MonoBehaviour
         if (rail.positionCount <= knot)
         {
             moveEnd = true;
-            //next = 0;
             rail = null;
         }
         
