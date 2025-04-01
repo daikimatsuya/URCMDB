@@ -160,15 +160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1753047956768410096, guid: 42739333e3a13ff4a9166c9513a75614, type: 3}
       propertyPath: m_Positions.Array.data[3].z
-      value: -894
+      value: -928.88
       objectReference: {fileID: 0}
     - target: {fileID: 1753047956768410096, guid: 42739333e3a13ff4a9166c9513a75614, type: 3}
       propertyPath: m_Positions.Array.data[4].x
-      value: 100
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 1753047956768410096, guid: 42739333e3a13ff4a9166c9513a75614, type: 3}
       propertyPath: m_Positions.Array.data[4].z
-      value: -365.7
+      value: -592
       objectReference: {fileID: 0}
     - target: {fileID: 1753047956768410097, guid: 42739333e3a13ff4a9166c9513a75614, type: 3}
       propertyPath: m_RootOrder
