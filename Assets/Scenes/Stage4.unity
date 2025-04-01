@@ -432,6 +432,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1069122544779015115, guid: a3bc501daca642145a0462e302e67d60, type: 3}
+      propertyPath: rotateSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015116, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: rail
       value: 
@@ -455,6 +459,10 @@ PrefabInstance:
     - target: {fileID: 1069122544779015116, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: hitTags.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069122544779015117, guid: a3bc501daca642145a0462e302e67d60, type: 3}
+      propertyPath: rotSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015117, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: moveSpeed

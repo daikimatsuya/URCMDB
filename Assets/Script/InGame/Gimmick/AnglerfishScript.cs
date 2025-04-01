@@ -54,6 +54,7 @@ public class AnglerfishScript : MonoBehaviour
             mors.SetRail(rail);
         }
         mors.Move();
+        ccs.SetRot(tf.eulerAngles);
     }
 
     //ƒvƒŒƒCƒ„[’Ç]Ø‚è‘Ö‚¦
@@ -104,7 +105,6 @@ public class AnglerfishScript : MonoBehaviour
 
         if (horizontal > viewBuff || vertical> viewBuff)
         {
-
             return;
         }
 

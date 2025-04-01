@@ -65,7 +65,10 @@ public class ChaseControllerScript : MonoBehaviour
     }
 
     #region ’lŽó‚¯“n‚µ
-
+    public void SetRot(Vector3 rot)
+    {
+        Row = rot;
+    }
 
     #endregion
 
