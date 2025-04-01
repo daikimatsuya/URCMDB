@@ -394,15 +394,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.02536
+      value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -50.09494
+      value: 1.3999999
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -304.46613
+      value: -158
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalRotation.w
@@ -410,15 +410,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015114, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -443,6 +443,18 @@ PrefabInstance:
     - target: {fileID: 1069122544779015116, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: rotateSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069122544779015116, guid: a3bc501daca642145a0462e302e67d60, type: 3}
+      propertyPath: viewingAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069122544779015116, guid: a3bc501daca642145a0462e302e67d60, type: 3}
+      propertyPath: viewingLenge
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069122544779015116, guid: a3bc501daca642145a0462e302e67d60, type: 3}
+      propertyPath: hitTags.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1069122544779015117, guid: a3bc501daca642145a0462e302e67d60, type: 3}
       propertyPath: moveSpeed
