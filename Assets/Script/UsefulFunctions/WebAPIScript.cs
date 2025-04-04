@@ -142,11 +142,7 @@ namespace Usefull
             UnityWebRequest unityWebRequest = UnityWebRequest.Get(url); //URLæ‚©‚çî•ñ‚ğæ“¾
             yield return unityWebRequest.SendWebRequest();  //î•ñ‚ğæ“¾‚Å‚«‚é‚Ü‚Å‘Ò‚Â
 
-            if (unityWebRequest.result != UnityWebRequest.Result.Success)
-            {
-
-            }
-            else
+            if (unityWebRequest.result == UnityWebRequest.Result.Success)
             {
                 webJson = JsonUtility.FromJson<WebJson>(unityWebRequest.downloadHandler.text);  //î•ñ‚ğŠi”[
 
