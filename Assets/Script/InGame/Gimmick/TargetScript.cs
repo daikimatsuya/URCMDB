@@ -8,10 +8,10 @@ public class TargetScript : MonoBehaviour
 {
     [SerializeField] private float hp;
     private float maxHp;
-    [SerializeField] GameObject explode;
     [SerializeField] private float  explodeTime;
     [SerializeField] private float brokePercent;
     [SerializeField] private float brokeTime;
+    [SerializeField] private GameObject[] model;
     private int brokeTimeBuff;
     private int explodeTimeBuff;
 
@@ -36,10 +36,7 @@ public class TargetScript : MonoBehaviour
     {
         if(TimeCountScript.TimeCounter(ref explodeTimeBuff))
         {
-            GameObject _ = Instantiate(explode);                                    //爆発エフェクト生成
-            _.transform.position=this.transform.position;                          //座標代入
-            _.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);            //サイズ設定
-            TimeCountScript.SetTime(ref explodeTimeBuff, explodeTime);  //時間セット
+
         }
     }
     //ダメージ表現
@@ -61,9 +58,7 @@ public class TargetScript : MonoBehaviour
         }
         if(Usefull.TimeCountScript.TimeCounter(ref brokeTimeBuff))
         {
-            GameObject _ = Instantiate(explode);              //爆発エフェクト生成
-            _.transform.position = this.transform.position;  //座標代入
-            _.transform.localScale = new Vector3(5, 5, 5);  //サイズ設定
+
             Destroy(this.gameObject);                               //オブジェクト削除
         }
     }
