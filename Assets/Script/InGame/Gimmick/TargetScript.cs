@@ -11,7 +11,8 @@ public class TargetScript : MonoBehaviour
     [SerializeField] private float  explodeTime;
     [SerializeField] private float brokePercent;
     [SerializeField] private float brokeTime;
-    [SerializeField] private GameObject[] model;
+    [SerializeField] private GameObject model;
+    [SerializeField] private GameObject brokenModel;
     private int brokeTimeBuff;
     private int explodeTimeBuff;
 
@@ -39,16 +40,7 @@ public class TargetScript : MonoBehaviour
 
         }
     }
-    //ダメージ表現
-    private void ModelBroken()
-    {
-        //途中////////////////////////////////////////////
-        if (hp <= (maxHp / 100) * brokePercent)
-        {
 
-        }
-        //////////////////////////////////////////////////
-    }
     //消滅させる
     private void IsBreak()
     {
@@ -61,6 +53,12 @@ public class TargetScript : MonoBehaviour
 
             Destroy(this.gameObject);                               //オブジェクト削除
         }
+    }
+
+    private void Breakage()
+    {
+        model.SetActive(false);
+        brokenModel.SetActive(true);
     }
 
     #region 値受け渡し
@@ -88,11 +86,18 @@ public class TargetScript : MonoBehaviour
         {
             PlayerScript ps=collision.gameObject.GetComponent<PlayerScript>();
             hp-=(int)(ps.GetPlayerSpeedBuffFloat()/10);
-            ModelBroken();
+
             if (hp <= 0)
             {
                 isBreak = true;
+                return;
             }
+
+            if (hp / maxHp * 100 < brokePercent)
+            {
+                Breakage();
+            }
+
             isHit = true;
         }
     }

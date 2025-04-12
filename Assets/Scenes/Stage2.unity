@@ -2323,6 +2323,10 @@ PrefabInstance:
       propertyPath: hp
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8257298051307333086, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8707462317485032126, guid: 6e735135d2c888349aa6453c4f1f6947, type: 3}
       propertyPath: moveY
       value: 0

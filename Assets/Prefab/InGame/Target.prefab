@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6185916919636465419
 Transform:
   m_ObjectHideFlags: 0
@@ -133,11 +133,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   explodeTime: 3
-  brokePercent: 0
+  brokePercent: 50
   brokeTime: 2
-  model:
-  - {fileID: 8906002775282586059}
-  - {fileID: 5094208378551868299}
+  model: {fileID: 8906002775282586059}
+  brokenModel: {fileID: 5094208378551868299}
 --- !u!65 &4607315405247265060
 BoxCollider:
   m_ObjectHideFlags: 0
