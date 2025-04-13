@@ -324,6 +324,7 @@ MonoBehaviour:
   stage: 
   title: Title
   breakTime: 2
+  gravity: {x: 0, y: -400, z: 0}
 --- !u!114 &830508550687790484
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] private string title;
     [SerializeField] private float breakTime;
     private int breakTimeBuff;
+    [SerializeField] private Vector3 gravity;
 
     private Transform targetPos;
     private CameraManager cm;
@@ -45,6 +46,7 @@ public class GameManagerScript : MonoBehaviour
     private void AwakeGameManger()
     {
         Application.targetFrameRate = 60;
+        Physics.gravity = gravity;
         GetComponents();                                //コンポーネント群取得
         Usefull.PMSScript.SetPMS(false);
         lm.AwakeListManagerInGame(in pcs);

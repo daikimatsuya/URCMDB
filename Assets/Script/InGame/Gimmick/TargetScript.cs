@@ -39,7 +39,6 @@ public class TargetScript : MonoBehaviour
         }
         if(Usefull.TimeCountScript.TimeCounter(ref brokeTimeBuff))
         {
-
             GameObject _=Instantiate(fragments);
             _.transform.position=this.transform.position;
             Destroy(this.gameObject);                               //オブジェクト削除
