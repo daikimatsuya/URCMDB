@@ -27,18 +27,6 @@ public class TargetScript : MonoBehaviour
             return;
         }
         IsBreak();  //”j‰óŠÇ—
-        if (hp <= 0)
-        {
-            Explode();  //”š”­
-        }
-    }
-    //”š”­‚³‚¹‚é
-    private void Explode()
-    {
-        if(TimeCountScript.TimeCounter(ref explodeTimeBuff))
-        {
-
-        }
     }
 
     //Á–Å‚³‚¹‚é
