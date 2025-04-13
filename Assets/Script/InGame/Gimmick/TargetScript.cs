@@ -39,12 +39,17 @@ public class TargetScript : MonoBehaviour
         }
         if(Usefull.TimeCountScript.TimeCounter(ref brokeTimeBuff))
         {
-            GameObject _=Instantiate(fragments);
-            _.transform.position=this.transform.position;
+            CreateFragments();                                         //破片生成
             Destroy(this.gameObject);                               //オブジェクト削除
         }
     }
-
+    //破片生成
+    private void CreateFragments()
+    {
+        GameObject _ = Instantiate(fragments);
+        _.transform.position = this.transform.position;
+    }
+    //半壊モデルに差し替え
     private void Breakage()
     {
         model.SetActive(false);

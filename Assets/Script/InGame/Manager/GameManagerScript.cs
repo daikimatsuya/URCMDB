@@ -9,8 +9,6 @@ public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] private string stage;
     [SerializeField] private string title;
-    [SerializeField] private float breakTime;
-    private int breakTimeBuff;
     [SerializeField] private Vector3 gravity;
 
     private Transform targetPos;
@@ -66,7 +64,6 @@ public class GameManagerScript : MonoBehaviour
         us.SetTarget(in targetPos);
         sws.WeatherSetting(cm);
         us.SetWeatherScript(sws);
-        TimeCountScript.SetTime(ref breakTimeBuff, breakTime);
         ts.StartTarget();
         isPose = false;
 
