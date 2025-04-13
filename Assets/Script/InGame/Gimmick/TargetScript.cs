@@ -13,6 +13,7 @@ public class TargetScript : MonoBehaviour
     [SerializeField] private float brokeTime;
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject brokenModel;
+    [SerializeField] private GameObject fragments;
     private int brokeTimeBuff;
     private int explodeTimeBuff;
 
@@ -39,6 +40,8 @@ public class TargetScript : MonoBehaviour
         if(Usefull.TimeCountScript.TimeCounter(ref brokeTimeBuff))
         {
 
+            GameObject _=Instantiate(fragments);
+            _.transform.position=this.transform.position;
             Destroy(this.gameObject);                               //オブジェクト削除
         }
     }
@@ -75,15 +78,14 @@ public class TargetScript : MonoBehaviour
             PlayerScript ps=collision.gameObject.GetComponent<PlayerScript>();
             hp-=(int)(ps.GetPlayerSpeedBuffFloat()/10);
 
+            if (hp / maxHp * 100 < brokePercent)
+            {
+                Breakage();
+            }
             if (hp <= 0)
             {
                 isBreak = true;
                 return;
-            }
-
-            if (hp / maxHp * 100 < brokePercent)
-            {
-                Breakage();
             }
 
             isHit = true;

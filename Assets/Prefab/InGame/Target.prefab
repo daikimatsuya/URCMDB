@@ -137,6 +137,7 @@ MonoBehaviour:
   brokeTime: 2
   model: {fileID: 8906002775282586059}
   brokenModel: {fileID: 5094208378551868299}
+  fragments: {fileID: 2244200156021321833, guid: 4395a83d7e38a2444ab17b364fea207a, type: 3}
 --- !u!65 &4607315405247265060
 BoxCollider:
   m_ObjectHideFlags: 0
