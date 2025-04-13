@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class TargetDebrisScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Rigidbody[] rbs;
 
-    // Update is called once per frame
-    void Update()
+    public void StartTargetDebris()
     {
-        
+
     }
 }
