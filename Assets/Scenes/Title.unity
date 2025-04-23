@@ -17031,6 +17031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abf7731cd9dfdd43b2e2bd545c82ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testScene: test
   betTime: 1
 --- !u!114 &2096328456
 MonoBehaviour:
