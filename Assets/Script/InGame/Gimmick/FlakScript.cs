@@ -47,7 +47,6 @@ public class FlakScript : MonoBehaviour
         lineUI.SetLine(barrel.position,playerDis,intervalBuff);    //予測線設定
         Vector3 playerSpeed= ps.GetPlayerSpeed();                 //プレイヤーの速度取得
 
-
         //解の公式を使用して値を算出///////////////////////////////////////////////////////
         float a = Vector3.Dot(playerSpeed, playerSpeed) - (bulletSpeed*bulletSpeed);   
         float b = Vector3.Dot(playerDis, playerSpeed) * 2; 

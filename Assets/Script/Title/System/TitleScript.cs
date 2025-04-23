@@ -12,6 +12,7 @@ public class TitleScript : MonoBehaviour
     private SceneChangeAnimationScript scas;
     private SceneChangeMissleActionScript scmas;
     private TitleCamera tc;
+    [SerializeField] private string testScene;
 
     private string stage;
     private bool isCanMoveCamera;
@@ -78,6 +79,8 @@ public class TitleScript : MonoBehaviour
             Usefull.WebAPIScript.SetRial();
         }
     }
+
+
     //シーンチェンジ
     private void ChangeStage()
     {
@@ -100,6 +103,16 @@ public class TitleScript : MonoBehaviour
         scmas.Shoot(in isShoot,scas.GetEndDown());                 //プレイヤー発射管理
         tc.CameraController(in isCanMoveCamera);                    //カメラ移動管理
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ChangeTestScene();
+        }
+    }
+
+    //テストシーンへの移動　後々消す
+    private void ChangeTestScene()
+    {
+        SceneManager.LoadScene(testScene);
     }
 
     //発射アニメーション用フラグ

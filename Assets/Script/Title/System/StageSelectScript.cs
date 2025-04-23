@@ -10,6 +10,7 @@ public class StageSelectScript : MonoBehaviour
     [SerializeField] private int baseCount;
     [SerializeField] private int maxStage;
     [SerializeField] private string[] stage;
+
     [SerializeField] private float stageSelectCoolTime;
     [SerializeField] private int coolTimeBuff;
     [SerializeField] private float fadeTime;
@@ -90,6 +91,8 @@ public class StageSelectScript : MonoBehaviour
         srs.ResetRotate(stageChangeCount,maxStage);
     }
  
+
+
     #region ’lŽó‚¯“n‚µ
     public bool GetFadeEnd()
     {
