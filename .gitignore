@@ -71,4 +71,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
-chanceOfRain.Json
+git rm --cached chanseOfRain.Json
