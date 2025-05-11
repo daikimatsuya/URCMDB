@@ -50,6 +50,7 @@ TagManager:
   - titlePlayerModel
   - EMP
   - EMPbot
+  - Whirlpools
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,6 @@ public class MonitorScript : MonoBehaviour
     private bool rotateFlag=false;
 
     Transform tf;
-    RollingScript rs;
 
     //リセットさせる
     public void ResetPos()
@@ -43,7 +42,7 @@ public class MonitorScript : MonoBehaviour
         tf.position = new Vector3(tf.position.x, initialPosY + PosYBuff, tf.position.z);  //トランスフォームに代入
         if (rotateFlag)
         {
-            rs.Rolling(tf, rotateSpeed, "y");
+            RollingScript.Rolling(tf, rotateSpeed, "y");
         }
     }
 
@@ -53,7 +52,6 @@ public class MonitorScript : MonoBehaviour
         tf = GetComponent<Transform>();
         initialPosY = tf.position.y;
         initialRotY = tf.eulerAngles.y;
-        rs=new RollingScript();
     }
     private void OnTriggerEnter(Collider other)
     {

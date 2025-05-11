@@ -16,6 +16,7 @@ public class ListManager
     private EMPbotListScript ebls;
     private SeaUrchinListScript suls;
     private AnglerFishListScript afls;
+    private WhirlpoolsListScript wls;
 
     //インゲームのリスト更新
     public void ListManagerControllerInGame(in bool isPause)
@@ -30,6 +31,7 @@ public class ListManager
         ebls.EMPbotListController(in isPause, in pcs);          //EMPbot管理
         suls.SeaUrchinListController(in isPause);                //うに管理
         afls.AnglerFishListController(in isPause);                //アンコウ管理
+        wls.WhirlpoolsListController(in isPause);               //渦潮管理
     }
 
     //タイトルのリスト更新
@@ -73,6 +75,10 @@ public class ListManager
 
         afls=GameObject.FindObjectOfType<AnglerFishListScript>();
         afls.AwakeAnglerFishList(in pcs);
+
+        wls=GameObject.FindObjectOfType<WhirlpoolsListScript>();
+        wls.AwakeWhirlpoolsList();
+
     }
 
     //早期初期化(タイトル)
