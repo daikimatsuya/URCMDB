@@ -42,42 +42,42 @@ public class ListManager
 
 
     //ëÅä˙èâä˙âª(ÉCÉìÉQÅ[ÉÄ)
-    public void AwakeListManagerInGame(in PlayerControllerScript pcs)
+    public void StartListManagerInGame(in PlayerControllerScript pcs)
     {
         this.pcs = pcs;
 
         mls=GameObject.FindObjectOfType<MonitorListScript>();
-        mls.AwakeMonitorList();
+        mls.StartMonitorList();
 
         surls = GameObject.FindObjectOfType<SpeedUpRingListScript>();
-        surls.AwakeSpeedUpRingList(in pcs);
+        surls.StartSpeedUpRingList(in pcs);
 
         frls = GameObject.FindObjectOfType<FallRockListScript>();
-        frls.AwakeFallRockList();
+        frls.StartFallRockList();
 
         fls = GameObject.FindObjectOfType<FunListScript>();
-        fls.AwakeFunList();
+        fls.StartFunList();
 
         flakls = GameObject.FindObjectOfType<FlakListScript>();
-        flakls.AwakeFlakList(in pcs);
+        flakls.StartFlakList(in pcs);
 
         dls = GameObject.FindObjectOfType<DroneListScript>();
-        dls.AwakeDroneList();
+        dls.StartDroneList();
 
         eel=GameObject.FindObjectOfType<ExplodeEffectListScript>();
-        eel.AwakeExplodeEffectList();
+        eel.StartExplodeEffectList();
 
         ebls = GameObject.FindObjectOfType<EMPbotListScript>();
-        ebls.AwakeEMPbotList(in pcs);
+        ebls.StartEMPbotList(in pcs);
 
         suls=GameObject.FindObjectOfType<SeaUrchinListScript>();
-        suls.AwakeSeaUrchinList();
+        suls.StartSeaUrchinList();
 
         afls=GameObject.FindObjectOfType<AnglerFishListScript>();
-        afls.AwakeAnglerFishList(in pcs);
+        afls.StartAnglerFishList(in pcs);
 
         wls=GameObject.FindObjectOfType<WhirlpoolsListScript>();
-        wls.AwakeWhirlpoolsList();
+        wls.StartWhirlpoolsList();
 
     }
 

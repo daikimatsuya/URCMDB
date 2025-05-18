@@ -47,7 +47,7 @@ public class GameManagerScript : MonoBehaviour
         Physics.gravity = gravity;
         GetComponents();                                //コンポーネント群取得
         Usefull.PMSScript.SetPMS(false);
-        lm.AwakeListManagerInGame(in pcs);
+        //lm.AwakeListManagerInGame(in pcs);   //ギミック類初期化
         lp.AwakeLaunchPoint();
         us.AwakeUIScript();
         cm.AwakeCameraManager(in pcs);
@@ -65,6 +65,7 @@ public class GameManagerScript : MonoBehaviour
         sws.WeatherSetting(cm);
         us.SetWeatherScript(sws);
         ts.StartTarget();
+        lm.StartListManagerInGame(in pcs);
         isPose = false;
 
     }

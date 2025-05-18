@@ -31,7 +31,7 @@ public class MonitorListScript : MonoBehaviour
         }
     }
     //‘Šú‰Šú‰»
-    public void AwakeMonitorList()
+    public void StartMonitorList()
     {
 
         monitorList = new List<MonitorScript>(FindObjectsOfType<MonitorScript>());

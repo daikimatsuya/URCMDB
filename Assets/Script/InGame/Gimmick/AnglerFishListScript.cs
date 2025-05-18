@@ -18,7 +18,7 @@ public class AnglerFishListScript : MonoBehaviour
             anglerfishList[i].AnglerfishController();
         }
     }
-    public void AwakeAnglerFishList(in PlayerControllerScript pcs)
+    public void StartAnglerFishList(in PlayerControllerScript pcs)
     {
         this.pcs = pcs;
         anglerfishList = new List<AnglerfishScript>(FindObjectsOfType<AnglerfishScript>());

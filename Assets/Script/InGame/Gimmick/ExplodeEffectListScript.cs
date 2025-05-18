@@ -68,7 +68,7 @@ public class ExplodeEffectListScript : MonoBehaviour
     }
     
     //‘Šú‰Šú‰»
-    public void AwakeExplodeEffectList()
+    public void StartExplodeEffectList()
     {
         explodeEffectList = new List<ExplodeEffectScript>(FindObjectsOfType<ExplodeEffectScript>());
     }

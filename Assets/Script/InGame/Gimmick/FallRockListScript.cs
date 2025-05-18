@@ -24,7 +24,7 @@ public class FallRockListScript : MonoBehaviour
         }
     }
     //‘Šú‰Šú‰»
-    public void AwakeFallRockList()
+    public void StartFallRockList()
     {
         rockFallList = new List<RockFallScript>(FindObjectsOfType<RockFallScript>());
         for (int i = 0; i < rockFallList.Count; i++)

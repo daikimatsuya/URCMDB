@@ -25,7 +25,7 @@ public class SeaUrchinListScript : MonoBehaviour
     }
 
     //‰Šú‰»
-    public void AwakeSeaUrchinList()
+    public void StartSeaUrchinList()
     {
         seaUrchinList = new List<SeaUrchinScript>(FindObjectsOfType<SeaUrchinScript>());
 

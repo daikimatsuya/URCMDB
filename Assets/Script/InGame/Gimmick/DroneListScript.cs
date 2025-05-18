@@ -21,7 +21,7 @@ public class DroneListScript : MonoBehaviour
     }
 
     //‘Šú‰Šú‰»
-    public void AwakeDroneList()
+    public void StartDroneList()
     {
         droneList = new List<DroneScript>(FindObjectsOfType<DroneScript>());
         for (int i = 0; i < droneList.Count; i++)

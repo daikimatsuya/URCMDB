@@ -21,7 +21,7 @@ public class WhirlpoolsListScript : MonoBehaviour
     }
 
     //‰Šú‰»
-    public void AwakeWhirlpoolsList()
+    public void StartWhirlpoolsList()
     {
         whirlpoolsList = new List<WhirlpoolsScript>(FindObjectsOfType<WhirlpoolsScript>());
         for (int i = 0; i < whirlpoolsList.Count; i++)

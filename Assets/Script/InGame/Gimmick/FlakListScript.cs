@@ -37,7 +37,7 @@ public class FlakListScript : MonoBehaviour
     }
 
     //‘Šú‰Šú‰»
-    public void AwakeFlakList(in PlayerControllerScript pcs)
+    public void StartFlakList(in PlayerControllerScript pcs)
     {
         this.pcs = pcs;
         flakList = new List<FlakScript>(FindObjectsOfType<FlakScript>());

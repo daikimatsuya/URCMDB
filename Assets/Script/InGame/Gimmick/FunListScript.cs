@@ -20,7 +20,7 @@ public class FunListScript : MonoBehaviour
         }
     }
     //‘Šú‰Šú‰»
-    public void AwakeFunList()
+    public void StartFunList()
     {
         funList = new List<FunScript>(FindObjectsOfType<FunScript>());
         for (int i = 0; i < funList.Count; i++)
