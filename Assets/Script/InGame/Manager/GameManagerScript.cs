@@ -22,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
     private Transform uiTransform;
     private PlayerControllerScript pcs;
     private RadialBlurController rbc;
+    private GimmickSwitchListController gslc;
 
     private bool isPose;
 
@@ -47,7 +48,6 @@ public class GameManagerScript : MonoBehaviour
         Physics.gravity = gravity;
         GetComponents();                                //コンポーネント群取得
         Usefull.PMSScript.SetPMS(false);
-        //lm.AwakeListManagerInGame(in pcs);   //ギミック類初期化
         lp.AwakeLaunchPoint();
         us.AwakeUIScript();
         cm.AwakeCameraManager(in pcs);
@@ -65,6 +65,7 @@ public class GameManagerScript : MonoBehaviour
         sws.WeatherSetting(cm);
         us.SetWeatherScript(sws);
         ts.StartTarget();
+        gslc.StartGimmickSwitchList(sws.GetIsRain());
         lm.StartListManagerInGame(in pcs);
         isPose = false;
 
@@ -147,6 +148,7 @@ public class GameManagerScript : MonoBehaviour
         lm = new ListManager();
         pcs=GetComponent<PlayerControllerScript>();
         rbc = GameObject.FindWithTag("GameCamera").GetComponent<RadialBlurController>();
+        gslc=GetComponent<GimmickSwitchListController>();
     }
 
     private void Awake()
